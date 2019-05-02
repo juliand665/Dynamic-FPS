@@ -23,3 +23,7 @@ bin/
 # fabric
 
 run/
+
+# custom stuff
+
+decompiled/
