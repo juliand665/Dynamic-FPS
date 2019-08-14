@@ -1,16 +1,10 @@
-# Fabric Example Mod
+<p align="center">
+	<img width=256px src="GitHub/logo.png" />
+</p>
 
-## Setup
+# Dynamic FPS
 
-1. Edit build.gradle and mod.json to suit your needs.
-    * The "mixins" object can be removed from mod.json if you do not need to use mixins.
-    * Please replace all occurences of "modid" with your own mod ID - sometimes, a different string may also suffice.
-2. Run the following command:
+Dynamic FPS automatically reduces the speed at which minecraft renders when it's not focused (to 1 FPS) or hidden (no renders at all). It also fixes a bug in Vanilla Minecraft that makes it take much more performance in the background than it should.
 
-```
-./gradlew idea
-```
+Download in [the releases section](https://github.com/juliand665/Dynamic-FPS/releases) or on [CurseForge](https://www.curseforge.com/minecraft/mc-mods/dynamic-fps).
 
-## License
-
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
