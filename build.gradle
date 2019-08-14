@@ -14,7 +14,7 @@ minecraft {
 }
 
 repositories {
-    maven { url "https://maven.jamieswhiteshirt.com/libs-release/" }
+	maven { url "https://maven.jamieswhiteshirt.com/libs-release/" }
 }
 
 dependencies {
@@ -27,11 +27,11 @@ dependencies {
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitivity on them.
-    modCompile "com.jamieswhiteshirt:developer-mode:${project.developer_mode_version}"
-    modCompile "io.github.prospector:modmenu:${project.mod_menu_version}"
-    
-    // Nullability Annotations
-    implementation "com.google.code.findbugs:jsr305:${project.findbugs_version}"
+	modCompile "com.jamieswhiteshirt:developer-mode:${project.developer_mode_version}"
+	modCompile "io.github.prospector:modmenu:${project.mod_menu_version}"
+	
+	// Nullability Annotations
+	implementation "com.google.code.findbugs:jsr305:${project.findbugs_version}"
 }
 
 processResources {
