@@ -10,7 +10,8 @@
   ],
   "contact": {
     "homepage": "https://dapprgames.com/",
-    "sources": "https://github.com/juliand665/Dynamic-FPS"
+    "sources": "https://github.com/juliand665/Dynamic-FPS",
+    "issues": "https://github.com/juliand665/Dynamic-FPS/issues"
   },
 
   "license": "MIT",
