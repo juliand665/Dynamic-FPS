@@ -1,15 +1,20 @@
 package dynamicfps.mixin;
 
+import dynamicfps.DynamicFPSMod;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.SplashScreen;
+import net.minecraft.client.gui.screen.SplashScreen;
 import net.minecraft.client.render.GameRenderer;
+import net.minecraft.util.SystemUtil;
+import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.concurrent.locks.LockSupport;
+
 @Mixin(GameRenderer.class)
-public class DynamicFPSMixin {
+public class GameRendererMixin {
 	@Shadow
 	@Final
 	private MinecraftClient client;
@@ -17,13 +22,9 @@ public class DynamicFPSMixin {
 	/**
 	 Implements the mod's big feature.
 	 */
-	@Inject(at = @At("HEAD"), method = "render(FJZ)V", cancellable = true)
+	@Inject(at = @At("HEAD"), method = "render", cancellable = true)
 	private void onRender(CallbackInfo callbackInfo) {
-		boolean shouldRender = client.isWindowFocused() || !client.options.pauseOnLostFocus;
-		if (!shouldRender) {
-			try {
-				Thread.sleep(30); // forcibly slow down
-			} catch (InterruptedException ignored) {}
+		if (!DynamicFPSMod.checkForRender()) {
 			callbackInfo.cancel();
 		}
 	}
@@ -31,7 +32,7 @@ public class DynamicFPSMixin {
 	/**
 	 cancels world rendering under certain conditions
 	 */
-	@Inject(at = @At("HEAD"), method = "renderWorld(FJ)V", cancellable = true)
+	@Inject(at = @At("HEAD"), method = "renderWorld", cancellable = true)
 	private void onRenderWorld(CallbackInfo callbackInfo) {
 		if (client.getOverlay() instanceof SplashScreen) {
 			callbackInfo.cancel();
