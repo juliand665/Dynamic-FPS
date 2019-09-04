@@ -17,7 +17,7 @@
 	"license": "MIT",
 	"icon": "assets/dynamicfps/icon.png",
 
-	"environment": "*",
+	"environment": "client",
 	"entrypoints": {
 		"main": [
 			"dynamicfps.DynamicFPSMod"
