@@ -10,9 +10,10 @@ import java.util.concurrent.locks.LockSupport;
 public final class ThreadExecutorMixin {
 	/**
 	 * @author Julian Dunskus
+	 * @reason The vanilla version is simply broken, taking up way too many resources in the background.
 	 */
 	@Overwrite
-	public void method_20813() {
+	public void waitForTasks() {
 		// yield() here is a terrible idea
 		LockSupport.parkNanos("waiting for tasks", 500_000); // increased wait to 0.5 ms
 	}
