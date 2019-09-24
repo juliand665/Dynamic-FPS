@@ -6,6 +6,7 @@
   ],
   "client": [
     "GameRendererMixin",
+    "MinecraftClientMixin",
     "ThreadExecutorMixin"
   ],
   "injectors": {

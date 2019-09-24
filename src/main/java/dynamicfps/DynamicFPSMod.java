@@ -22,7 +22,7 @@ public class DynamicFPSMod implements ModInitializer {
 	 */
 	public static boolean checkForRender() {
 		MinecraftClient client = MinecraftClient.getInstance();
-		Window window = client.window;
+		Window window = ((WindowHolder) client).getWindow();
 		
 		long currentTime = SystemUtil.getMeasuringTimeMs();
 		
@@ -37,5 +37,12 @@ public class DynamicFPSMod implements ModInitializer {
 			LockSupport.parkNanos("waiting to render", 30_000_000); // 30 ms
 		}
 		return shouldRender;
+	}
+	
+	/**
+	 Compatibility interface to support both 1.14.x and 1.15.x
+	*/
+	public interface WindowHolder {
+		Window getWindow();
 	}
 }
