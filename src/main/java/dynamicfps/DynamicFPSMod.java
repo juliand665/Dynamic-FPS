@@ -12,8 +12,7 @@ public class DynamicFPSMod implements ModInitializer {
 	private static long lastRender;
 	
 	@Override
-	public void onInitialize() {
-	}
+	public void onInitialize() {}
 	
 	/**
 	 Determines whether the game should render anything at this time. If not, blocks for a short time.
@@ -39,9 +38,6 @@ public class DynamicFPSMod implements ModInitializer {
 		return shouldRender;
 	}
 	
-	/**
-	 Compatibility interface to support both 1.14.x and 1.15.x
-	*/
 	public interface WindowHolder {
 		Window getWindow();
 	}
