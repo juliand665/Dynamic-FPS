@@ -3,7 +3,7 @@ package dynamicfps;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.Window;
-import net.minecraft.util.SystemUtil;
+import net.minecraft.util.Util;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.concurrent.locks.LockSupport;
@@ -23,7 +23,7 @@ public class DynamicFPSMod implements ModInitializer {
 		MinecraftClient client = MinecraftClient.getInstance();
 		Window window = ((WindowHolder) client).getWindow();
 		
-		long currentTime = SystemUtil.getMeasuringTimeMs();
+		long currentTime = Util.getMeasuringTimeMs();
 		
 		boolean isVisible = GLFW.glfwGetWindowAttrib(window.getHandle(), GLFW.GLFW_VISIBLE) != 0;
 		boolean isFocusPaused = client.options.pauseOnLostFocus && !client.isWindowFocused();
