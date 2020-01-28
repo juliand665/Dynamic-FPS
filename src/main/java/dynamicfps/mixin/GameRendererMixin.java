@@ -22,7 +22,7 @@ public class GameRendererMixin {
 	 Implements the mod's big feature.
 	 */
 	@Inject(at = @At("HEAD"), method = "render", cancellable = true)
-	private void onRender(float tickDelta, long limitTime, boolean tick, CallbackInfo callbackInfo) {
+	private void onRender(CallbackInfo callbackInfo) {
 		if (!DynamicFPSMod.checkForRender()) {
 			callbackInfo.cancel();
 		}
@@ -32,7 +32,7 @@ public class GameRendererMixin {
 	 cancels world rendering under certain conditions
 	 */
 	@Inject(at = @At("HEAD"), method = "renderWorld", cancellable = true)
-	private void onRenderWorld(float tickDelta, long limitTime, MatrixStack matrix, CallbackInfo callbackInfo) {
+	private void onRenderWorld(CallbackInfo callbackInfo) {
 		if (client.getOverlay() instanceof SplashScreen) {
 			callbackInfo.cancel();
 		}
