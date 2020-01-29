@@ -9,8 +9,8 @@ import java.util.concurrent.locks.LockSupport;
 @Mixin(ThreadExecutor.class)
 public final class ThreadExecutorMixin {
 	/**
-	 * @author Julian Dunskus
-	 * @reason The vanilla version is simply broken, taking up way too many resources in the background.
+	 @author Julian Dunskus
+	 @reason The vanilla version is simply broken, taking up way too many resources in the background.
 	 */
 	@Overwrite
 	public void waitForTasks() {
