@@ -62,8 +62,7 @@ public class DynamicFPSMod implements ModInitializer {
 		long timeSinceLastRender = currentTime - lastRender;
 		
 		boolean isVisible = GLFW.glfwGetWindowAttrib(window.getHandle(), GLFW.GLFW_VISIBLE) != 0;
-		boolean isFocusPaused = client.options.pauseOnLostFocus && !client.isWindowFocused();
-		boolean shouldReduceFPS = isForcingLowFPS || isFocusPaused;
+		boolean shouldReduceFPS = isForcingLowFPS || !client.isWindowFocused();
 		
 		boolean shouldRender = isVisible && (!shouldReduceFPS || timeSinceLastRender > 1000);
 		if (shouldRender) {
