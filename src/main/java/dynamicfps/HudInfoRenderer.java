@@ -15,7 +15,7 @@ public final class HudInfoRenderer implements HudRenderCallback {
 			
 			String textToRender = I18n.translate("gui." + DynamicFPSMod.MOD_ID + ".hud.reducing");
 			int windowWidth = client.getWindow().getScaledWidth();
-			int stringWidth = textRenderer.getStringWidth(textToRender);
+			int stringWidth = textRenderer.getWidth(textToRender);
 			textRenderer.drawWithShadow(
 				matrixStack,
 				textToRender,
