@@ -30,10 +30,10 @@ public class DynamicFPSMod implements ModInitializer {
 		return isForcingLowFPS;
 	}
 	
-	private static FabricKeyBinding toggleKeyBinding = FabricKeyBinding.Builder.create(
+	private static final FabricKeyBinding toggleKeyBinding = FabricKeyBinding.Builder.create(
 		identifier("toggle"),
 		InputUtil.Type.KEYSYM,
-		InputUtil.UNKNOWN_KEYCODE.getKeyCode(),
+		InputUtil.UNKNOWN_KEY.getCode(),
 		"key.categories.misc"
 	).build();
 	
