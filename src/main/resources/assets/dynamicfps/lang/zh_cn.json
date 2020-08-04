@@ -1,0 +1,4 @@
+{
+  "key.dynamicfps.toggle": "强制降低 FPS",
+  "gui.dynamicfps.hud.reducing": "Dynamic FPS: 已将游戏帧率限制为 1 FPS"
+}
