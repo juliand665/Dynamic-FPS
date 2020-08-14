@@ -2,14 +2,13 @@ package dynamicfps;
 
 import dynamicfps.util.KeyBindingHandler;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.keybinding.FabricKeyBinding;
-import net.fabricmc.fabric.api.client.keybinding.KeyBindingRegistry;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.fabricmc.fabric.api.event.client.ClientTickCallback;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.client.util.Window;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import org.lwjgl.glfw.GLFW;
 
@@ -17,10 +16,6 @@ import java.util.concurrent.locks.LockSupport;
 
 public class DynamicFPSMod implements ModInitializer {
 	public static final String MOD_ID = "dynamicfps";
-	
-	public static Identifier identifier(String path) {
-		return new Identifier(MOD_ID, path);
-	}
 	
 	private static long lastRender;
 	
@@ -30,18 +25,18 @@ public class DynamicFPSMod implements ModInitializer {
 		return isForcingLowFPS;
 	}
 	
-	private static final FabricKeyBinding toggleKeyBinding = FabricKeyBinding.Builder.create(
-		identifier("toggle"),
+	private static final KeyBinding toggleKeyBinding = new KeyBinding(
+		"key." + MOD_ID + ".toggle",
 		InputUtil.Type.KEYSYM,
 		InputUtil.UNKNOWN_KEY.getCode(),
 		"key.categories.misc"
-	).build();
+	);
 	
 	@Override
 	public void onInitialize() {
-		KeyBindingRegistry.INSTANCE.register(toggleKeyBinding);
+		KeyBindingHelper.registerKeyBinding(toggleKeyBinding);
 		
-		ClientTickCallback.EVENT.register(new KeyBindingHandler(
+		ClientTickEvents.END_CLIENT_TICK.register(new KeyBindingHandler(
 			toggleKeyBinding,
 			() -> isForcingLowFPS = !isForcingLowFPS
 		));
