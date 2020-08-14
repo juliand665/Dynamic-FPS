@@ -21,6 +21,10 @@ public class DynamicFPSMod implements ModInitializer {
 	
 	private static boolean isForcingLowFPS = false;
 	
+	// we always render one last frame before actually reducing FPS, so the hud text shows up instantly when forcing low fps.
+	// additionally, this would enable mods which render differently while mc is inactive.
+	private static boolean hasRenderedLastFrame = false;
+	
 	public static boolean isForcingLowFPS() {
 		return isForcingLowFPS;
 	}
@@ -58,11 +62,18 @@ public class DynamicFPSMod implements ModInitializer {
 		
 		boolean isVisible = GLFW.glfwGetWindowAttrib(window.getHandle(), GLFW.GLFW_VISIBLE) != 0;
 		boolean shouldReduceFPS = isForcingLowFPS || !client.isWindowFocused();
+		if (!shouldReduceFPS && hasRenderedLastFrame) {
+			hasRenderedLastFrame = false;
+		}
 		
 		boolean shouldRender = isVisible && (!shouldReduceFPS || timeSinceLastRender > 1000);
 		if (shouldRender) {
 			lastRender = currentTime;
 		} else {
+			if (!hasRenderedLastFrame) {
+				hasRenderedLastFrame = true;
+				return true; // render one last frame before reducing, to make sure differences in this state show up instantly.
+			}
 			LockSupport.parkNanos("waiting to render", 30_000_000); // 30 ms
 		}
 		return shouldRender;
