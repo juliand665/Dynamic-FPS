@@ -1,4 +1,7 @@
 {
+  "title.dynamicfps.config": "Configure DynamicFPS",
+  "button.dynamicfps.enableunfocused": "Enable Unfocused",
+  "button.dynamicfps.unfocusedtarget": "Unfocused Framerate Target",
   "key.dynamicfps.toggle": "Force Reduced FPS",
   "gui.dynamicfps.hud.reducing": "Dynamic FPS: Forcing 1 FPS"
 }

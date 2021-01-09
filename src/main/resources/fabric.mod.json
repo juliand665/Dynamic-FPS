@@ -21,6 +21,9 @@
 	"entrypoints": {
 		"main": [
 			"dynamicfps.DynamicFPSMod"
+		],
+		"modmenu": [
+		  "dynamicfps.DynamicFPSModMenu"
 		]
 	},
 	"mixins": [
