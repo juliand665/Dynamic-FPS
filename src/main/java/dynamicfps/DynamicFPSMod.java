@@ -15,6 +15,8 @@ import org.lwjgl.glfw.GLFW;
 import javax.annotation.Nullable;
 import java.util.concurrent.locks.LockSupport;
 
+import static dynamicfps.util.Localization.translationKey;
+
 public class DynamicFPSMod implements ModInitializer {
 	public static final String MOD_ID = "dynamicfps";
 	
@@ -22,18 +24,25 @@ public class DynamicFPSMod implements ModInitializer {
 	
 	static DynamicFPSConfig config = null;
 	
-	private static boolean isForcingLowFPS = false;
-	
 	// we always render one last frame before actually reducing FPS, so the hud text shows up instantly when forcing low fps.
 	// additionally, this would enable mods which render differently while mc is inactive.
 	private static boolean hasRenderedLastFrame = false;
 	
-	public static boolean isForcingLowFPS() {
-		return isForcingLowFPS;
-	}
+	private static boolean isDisabled = false;
+	public static boolean isDisabled() { return isDisabled; }
 	
-	private static final KeyBinding toggleKeyBinding = new KeyBinding(
-		"key." + MOD_ID + ".toggle",
+	private static boolean isForcingLowFPS = false;
+	public static boolean isForcingLowFPS() { return isForcingLowFPS; }
+	
+	private static final KeyBinding toggleForcedKeyBinding = new KeyBinding(
+		translationKey("key", "toggle_forced"),
+		InputUtil.Type.KEYSYM,
+		InputUtil.UNKNOWN_KEY.getCode(),
+		"key.categories.misc"
+	);
+	
+	private static final KeyBinding toggleDisabledKeyBinding = new KeyBinding(
+		translationKey("key", "toggle_disabled"),
 		InputUtil.Type.KEYSYM,
 		InputUtil.UNKNOWN_KEY.getCode(),
 		"key.categories.misc"
@@ -43,11 +52,17 @@ public class DynamicFPSMod implements ModInitializer {
 	public void onInitialize() {
 		config = DynamicFPSConfig.load();
 		
-		KeyBindingHelper.registerKeyBinding(toggleKeyBinding);
+		KeyBindingHelper.registerKeyBinding(toggleForcedKeyBinding);
+		KeyBindingHelper.registerKeyBinding(toggleDisabledKeyBinding);
 		
 		ClientTickEvents.END_CLIENT_TICK.register(new KeyBindingHandler(
-			toggleKeyBinding,
+			toggleForcedKeyBinding,
 			() -> isForcingLowFPS = !isForcingLowFPS
+		));
+		
+		ClientTickEvents.END_CLIENT_TICK.register(new KeyBindingHandler(
+			toggleDisabledKeyBinding,
+			() -> isDisabled = !isDisabled
 		));
 		
 		HudRenderCallback.EVENT.register(new HudInfoRenderer());
@@ -59,6 +74,8 @@ public class DynamicFPSMod implements ModInitializer {
 	 @return whether or not the game should be rendered after this.
 	 */
 	public static boolean checkForRender() {
+		if (isDisabled) return true;
+		
 		long currentTime = Util.getMeasuringTimeMs();
 		long timeSinceLastRender = currentTime - lastRender;
 		

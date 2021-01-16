@@ -2,7 +2,8 @@
   "title.dynamicfps.config": "Configure Dynamic FPS",
   "button.dynamicfps.reduce_when_unfocused": "Reduce FPS when unfocused",
   "button.dynamicfps.unfocused_fps": "Unfocused FPS target",
-  "key.dynamicfps.toggle": "Force Reduced FPS",
-  "gui.dynamicfps.hud.reducing": "Dynamic FPS: Forcing 1 FPS"
   "button.dynamicfps.restore_when_hovered": "Restore FPS when hovered",
+  "key.dynamicfps.toggle_forced": "Force Reduced FPS",
+  "gui.dynamicfps.hud.reducing": "Dynamic FPS: Forcing 1 FPS",
+  "gui.dynamicfps.hud.disabled": "Dynamic FPS Disabled"
 }
