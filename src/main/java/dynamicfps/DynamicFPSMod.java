@@ -18,6 +18,8 @@ public class DynamicFPSMod implements ModInitializer {
 	public static final String MOD_ID = "dynamicfps";
 	
 	private static long lastRender;
+
+	static DynamicFPSConfig config = null;
 	
 	private static boolean isForcingLowFPS = false;
 	
@@ -38,6 +40,8 @@ public class DynamicFPSMod implements ModInitializer {
 	
 	@Override
 	public void onInitialize() {
+		config = DynamicFPSConfig.getConfig();
+
 		KeyBindingHelper.registerKeyBinding(toggleKeyBinding);
 		
 		ClientTickEvents.END_CLIENT_TICK.register(new KeyBindingHandler(
@@ -61,12 +65,12 @@ public class DynamicFPSMod implements ModInitializer {
 		long timeSinceLastRender = currentTime - lastRender;
 		
 		boolean isVisible = GLFW.glfwGetWindowAttrib(window.getHandle(), GLFW.GLFW_VISIBLE) != 0;
-		boolean shouldReduceFPS = isForcingLowFPS || !client.isWindowFocused();
+		boolean shouldReduceFPS = isForcingLowFPS || (!client.isWindowFocused()) && config.enableUnfocusedFps;
 		if (!shouldReduceFPS && hasRenderedLastFrame) {
 			hasRenderedLastFrame = false;
 		}
 		
-		boolean shouldRender = isVisible && (!shouldReduceFPS || timeSinceLastRender > 1000);
+		boolean shouldRender = isVisible && (!shouldReduceFPS || timeSinceLastRender > config.millisecondsTarget);
 		if (shouldRender) {
 			lastRender = currentTime;
 		} else {
@@ -74,7 +78,7 @@ public class DynamicFPSMod implements ModInitializer {
 				hasRenderedLastFrame = true;
 				return true; // render one last frame before reducing, to make sure differences in this state show up instantly.
 			}
-			LockSupport.parkNanos("waiting to render", 30_000_000); // 30 ms
+			LockSupport.parkNanos("waiting to render", 15_000_000); // 15 ms; reduced from the original 30 ms to allow ~60 FPS limit
 		}
 		return shouldRender;
 	}
