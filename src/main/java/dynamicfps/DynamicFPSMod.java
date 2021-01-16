@@ -113,6 +113,11 @@ public class DynamicFPSMod implements ModInitializer {
 		
 		if (isForcingLowFPS) return config.unfocusedFPS;
 		
+		if (config.restoreFPSWhenHovered) {
+			boolean isHovered = GLFW.glfwGetWindowAttrib(window.getHandle(), GLFW.GLFW_HOVERED) != 0;
+			if (isHovered) return null;
+		}
+		
 		if (config.reduceFPSWhenUnfocused && !client.isWindowFocused()) return config.unfocusedFPS;
 		
 		return null;

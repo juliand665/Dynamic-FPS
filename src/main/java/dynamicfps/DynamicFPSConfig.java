@@ -13,6 +13,8 @@ public final class DynamicFPSConfig {
 	public boolean reduceFPSWhenUnfocused = true;
 	/// The frame rate to target when unfocused (only applies if `enableUnfocusedFPS` is true)
 	public int unfocusedFPS = 1;
+	/// Whether or not to uncap FPS when hovered, even if it would otherwise be reduced
+	public boolean restoreFPSWhenHovered = true;
 	
 	private DynamicFPSConfig() {}
 	

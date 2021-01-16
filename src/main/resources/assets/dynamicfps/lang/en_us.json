@@ -4,4 +4,5 @@
   "button.dynamicfps.unfocused_fps": "Unfocused FPS target",
   "key.dynamicfps.toggle": "Force Reduced FPS",
   "gui.dynamicfps.hud.reducing": "Dynamic FPS: Forcing 1 FPS"
+  "button.dynamicfps.restore_when_hovered": "Restore FPS when hovered",
 }

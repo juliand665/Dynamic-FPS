@@ -39,6 +39,14 @@ public class DynamicFPSModMenu implements ModMenuApi {
 				)
 				.setSaveConsumer(value -> DynamicFPSMod.config.unfocusedFPS = value)
 				.build()
+			)
+			.addEntry(entryBuilder
+				.startBooleanToggle(
+					localized("button", "restore_when_hovered"),
+					DynamicFPSMod.config.restoreFPSWhenHovered
+				)
+				.setSaveConsumer(value -> DynamicFPSMod.config.restoreFPSWhenHovered = value)
+				.build()
 			);
 		
 		return builder.build();
