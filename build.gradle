@@ -15,6 +15,7 @@ minecraft {
 
 repositories {
 	maven { url "https://maven.jamieswhiteshirt.com/libs-release/" }
+	maven { url = "https://jitpack.io" }
 }
 
 dependencies {
@@ -40,6 +41,9 @@ dependencies {
 	// Using the TOML config format
    modImplementation("com.moandjiezana.toml:toml4j:${project.toml4j_version}")
    include "com.moandjiezana.toml:toml4j:${project.toml4j_version}"
+	modRuntime ("com.github.SuperCoder7979:databreaker:${databreaker_version}") {
+		exclude module: "fabric-loader"
+	}
 	
 	// Nullability Annotations
 	implementation "com.google.code.findbugs:jsr305:${project.findbugs_version}"
