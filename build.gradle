@@ -22,26 +22,24 @@ dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-
+	
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-
-	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
-	// You may need to force-disable transitivity on them.
-	//modCompile "io.github.prospector:modmenu:${project.mod_menu_version}"
-
+	
 	// Mod Menu, to add the hook for a config screen
-   modImplementation "io.github.prospector:modmenu:${project.modmenu_version}"
-
+	modImplementation "io.github.prospector:modmenu:${project.modmenu_version}"
+	
 	// Easy config screen setup library
 	modApi("me.shedaniel.cloth:config-2:${project.cloth_version}") {
-      exclude(group: "net.fabricmc.fabric-api")
-   }
-   include "me.shedaniel.cloth:config-2:${project.cloth_version}"
+		exclude(group: "net.fabricmc.fabric-api")
+	}
+	include "me.shedaniel.cloth:config-2:${project.cloth_version}"
 	// Using the TOML config format
-   modImplementation("com.moandjiezana.toml:toml4j:${project.toml4j_version}")
-   include "com.moandjiezana.toml:toml4j:${project.toml4j_version}"
-	modRuntime ("com.github.SuperCoder7979:databreaker:${databreaker_version}") {
+	modImplementation("com.moandjiezana.toml:toml4j:${project.toml4j_version}")
+	include "com.moandjiezana.toml:toml4j:${project.toml4j_version}"
+	
+	// Data Breaker makes the dev env start up much faster by breaking support for old worlds, which we don't care about anyway.
+	modRuntime("com.github.SuperCoder7979:databreaker:${databreaker_version}") {
 		exclude module: "fabric-loader"
 	}
 	
@@ -51,12 +49,12 @@ dependencies {
 
 processResources {
 	inputs.property "version", project.version
-
+	
 	from(sourceSets.main.resources.srcDirs) {
 		include "fabric.mod.json"
 		expand "version": project.version
 	}
-
+	
 	from(sourceSets.main.resources.srcDirs) {
 		exclude "fabric.mod.json"
 	}
@@ -94,7 +92,7 @@ publishing {
 			}
 		}
 	}
-
+	
 	// select the repositories you want to publish to
 	repositories {
 		// uncomment to publish to the local maven
