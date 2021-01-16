@@ -12,6 +12,7 @@ import net.minecraft.client.util.Window;
 import net.minecraft.util.Util;
 import org.lwjgl.glfw.GLFW;
 
+import javax.annotation.Nullable;
 import java.util.concurrent.locks.LockSupport;
 
 public class DynamicFPSMod implements ModInitializer {
@@ -58,36 +59,63 @@ public class DynamicFPSMod implements ModInitializer {
 	 @return whether or not the game should be rendered after this.
 	 */
 	public static boolean checkForRender() {
-		MinecraftClient client = MinecraftClient.getInstance();
-		Window window = ((WindowHolder) client).getWindow();
-		
 		long currentTime = Util.getMeasuringTimeMs();
 		long timeSinceLastRender = currentTime - lastRender;
 		
-		boolean isVisible = GLFW.glfwGetWindowAttrib(window.getHandle(), GLFW.GLFW_VISIBLE) != 0;
-		boolean shouldReduceFPS = isForcingLowFPS
-			|| config.reduceFPSWhenUnfocused && !client.isWindowFocused();
-		if (!shouldReduceFPS && hasRenderedLastFrame) {
+		if (!checkForRender(timeSinceLastRender)) return false;
+		
+		lastRender = currentTime;
+		return true;
+	}
+	
+	private static boolean checkForRender(long timeSinceLastRender) {
+		Integer fpsOverride = fpsOverride();
+		if (fpsOverride == null) {
 			hasRenderedLastFrame = false;
+			return true;
 		}
 		
-		boolean shouldNeverRender = !isVisible || config.unfocusedFPS == 0;
-		long unfocusedFrameTimeMillis = shouldNeverRender ? 1000 : 1000 / config.unfocusedFPS;
-		boolean shouldSkipRender = shouldNeverRender
-			|| shouldReduceFPS && timeSinceLastRender < unfocusedFrameTimeMillis;
-		if (shouldSkipRender) {
-			if (!hasRenderedLastFrame) {
-				hasRenderedLastFrame = true;
-				return true; // render one last frame before reducing, to make sure differences in this state show up instantly.
-			}
-			
-			// force minecraft to idle because otherwise we'll be busy checking for render again and again
-			long waitMillis = Math.min(unfocusedFrameTimeMillis, 30); // at most 30 ms before we check again so user doesn't have to wait long after tabbing back in
-			LockSupport.parkNanos("waiting to render", waitMillis * 1_000_000);
-		} else {
-			lastRender = currentTime;
+		if (!hasRenderedLastFrame) {
+			// render one last frame before reducing, to make sure differences in this state show up instantly.
+			hasRenderedLastFrame = true;
+			return true;
 		}
-		return !shouldSkipRender;
+		
+		if (fpsOverride == 0) {
+			idle(1000);
+			return false;
+		}
+		
+		long frameTime = 1000 / fpsOverride;
+		boolean shouldSkipRender = timeSinceLastRender < frameTime;
+		if (!shouldSkipRender) return true;
+		
+		idle(frameTime);
+		return false;
+	}
+	
+	/**
+	 force minecraft to idle because otherwise we'll be busy checking for render again and again
+	 */
+	private static void idle(long waitMillis) {
+		// cap at 30 ms before we check again so user doesn't have to wait long after tabbing back in
+		waitMillis = Math.min(waitMillis, 30);
+		LockSupport.parkNanos("waiting to render", waitMillis * 1_000_000);
+	}
+	
+	@Nullable
+	private static Integer fpsOverride() {
+		MinecraftClient client = MinecraftClient.getInstance();
+		Window window = ((WindowHolder) client).getWindow();
+		
+		boolean isVisible = GLFW.glfwGetWindowAttrib(window.getHandle(), GLFW.GLFW_VISIBLE) != 0;
+		if (!isVisible) return 0;
+		
+		if (isForcingLowFPS) return config.unfocusedFPS;
+		
+		if (config.reduceFPSWhenUnfocused && !client.isWindowFocused()) return config.unfocusedFPS;
+		
+		return null;
 	}
 	
 	public interface WindowHolder {

@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public final class DynamicFPSConfig {
 	private transient File file;
-	/// Toggle for whether to disable or enable the frame rate drop when unfocused
+	/// Whether to disable or enable the frame rate drop when unfocused
 	public boolean reduceFPSWhenUnfocused = true;
 	/// The frame rate to target when unfocused (only applies if `enableUnfocusedFPS` is true)
 	public int unfocusedFPS = 1;
