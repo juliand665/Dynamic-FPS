@@ -15,6 +15,7 @@ minecraft {
 
 repositories {
 	maven { url "https://maven.jamieswhiteshirt.com/libs-release/" }
+	maven { url = "https://jitpack.io" }
 }
 
 dependencies {
@@ -28,6 +29,9 @@ dependencies {
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitivity on them.
 	//modCompile "io.github.prospector:modmenu:${project.mod_menu_version}"
+	modRuntime ("com.github.SuperCoder7979:databreaker:${databreaker_version}") {
+		exclude module: "fabric-loader"
+	}
 	
 	// Nullability Annotations
 	implementation "com.google.code.findbugs:jsr305:${project.findbugs_version}"
