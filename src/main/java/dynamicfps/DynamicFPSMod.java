@@ -28,36 +28,24 @@ public class DynamicFPSMod implements ModInitializer {
 	private static boolean isForcingLowFPS = false;
 	public static boolean isForcingLowFPS() { return isForcingLowFPS; }
 	
-	private static final KeyBinding toggleForcedKeyBinding = new KeyBinding(
+	private static final KeyBindingHandler toggleForcedKeyBinding = new KeyBindingHandler(
 		translationKey("key", "toggle_forced"),
-		InputUtil.Type.KEYSYM,
-		InputUtil.UNKNOWN_KEY.getCode(),
-		"key.categories.misc"
+		"key.categories.misc",
+		() -> isForcingLowFPS = !isForcingLowFPS
 	);
 	
-	private static final KeyBinding toggleDisabledKeyBinding = new KeyBinding(
+	private static final KeyBindingHandler toggleDisabledKeyBinding = new KeyBindingHandler(
 		translationKey("key", "toggle_disabled"),
-		InputUtil.Type.KEYSYM,
-		InputUtil.UNKNOWN_KEY.getCode(),
-		"key.categories.misc"
+		"key.categories.misc",
+		() -> isDisabled = !isDisabled
 	);
 	
 	@Override
 	public void onInitialize() {
 		config = DynamicFPSConfig.load();
 		
-		KeyBindingHelper.registerKeyBinding(toggleForcedKeyBinding);
-		KeyBindingHelper.registerKeyBinding(toggleDisabledKeyBinding);
-		
-		ClientTickEvents.END_CLIENT_TICK.register(new KeyBindingHandler(
-			toggleForcedKeyBinding,
-			() -> isForcingLowFPS = !isForcingLowFPS
-		));
-		
-		ClientTickEvents.END_CLIENT_TICK.register(new KeyBindingHandler(
-			toggleDisabledKeyBinding,
-			() -> isDisabled = !isDisabled
-		));
+		toggleForcedKeyBinding.register();
+		toggleDisabledKeyBinding.register();
 		
 		HudRenderCallback.EVENT.register(new HudInfoRenderer());
 	}
