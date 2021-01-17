@@ -20,13 +20,7 @@ import static dynamicfps.util.Localization.translationKey;
 public class DynamicFPSMod implements ModInitializer {
 	public static final String MOD_ID = "dynamicfps";
 	
-	private static long lastRender;
-	
-	static DynamicFPSConfig config = null;
-	
-	// we always render one last frame before actually reducing FPS, so the hud text shows up instantly when forcing low fps.
-	// additionally, this would enable mods which render differently while mc is inactive.
-	private static boolean hasRenderedLastFrame = false;
+	public static DynamicFPSConfig config = null;
 	
 	private static boolean isDisabled = false;
 	public static boolean isDisabled() { return isDisabled; }
@@ -68,6 +62,7 @@ public class DynamicFPSMod implements ModInitializer {
 		HudRenderCallback.EVENT.register(new HudInfoRenderer());
 	}
 	
+	private static long lastRender;
 	/**
 	 Determines whether the game should render anything at this time. If not, blocks for a short time.
 	 
@@ -85,6 +80,9 @@ public class DynamicFPSMod implements ModInitializer {
 		return true;
 	}
 	
+	// we always render one last frame before actually reducing FPS, so the hud text shows up instantly when forcing low fps.
+	// additionally, this would enable mods which render differently while mc is inactive.
+	private static boolean hasRenderedLastFrame = false;
 	private static boolean checkForRender(long timeSinceLastRender) {
 		Integer fpsOverride = fpsOverride();
 		if (fpsOverride == null) {
