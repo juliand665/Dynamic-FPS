@@ -1,4 +1,4 @@
 {
-  "key.dynamicfps.toggle": "Azaltılmış FPS'yi Zorla",
+  "key.dynamicfps.toggle_forced": "Azaltılmış FPS'yi Zorla",
   "gui.dynamicfps.hud.reducing": "Dynamic FPS: 1 FPS'ye Zorlanıyor"
 }

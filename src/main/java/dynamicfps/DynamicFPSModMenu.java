@@ -17,15 +17,15 @@ public class DynamicFPSModMenu implements ModMenuApi {
 	private static Screen genConfig(Screen parent) {
 		ConfigBuilder builder = ConfigBuilder.create()
 			.setParentScreen(parent)
-			.setTitle(localized("title", "config"))
+			.setTitle(localized("config", "title"))
 			.setSavingRunnable(DynamicFPSMod.config::save);
 		ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 		
 		// general
-		builder.getOrCreateCategory(localized("category", "general"))
+		builder.getOrCreateCategory(localized("config", "category.general"))
 			.addEntry(entryBuilder
 				.startBooleanToggle(
-					localized("button", "reduce_when_unfocused"),
+					localized("config", "reduce_when_unfocused"),
 					DynamicFPSMod.config.reduceFPSWhenUnfocused
 				)
 				.setSaveConsumer(value -> DynamicFPSMod.config.reduceFPSWhenUnfocused = value)
@@ -33,7 +33,7 @@ public class DynamicFPSModMenu implements ModMenuApi {
 			)
 			.addEntry(entryBuilder
 				.startIntSlider(
-					localized("button", "unfocused_fps"),
+					localized("config", "unfocused_fps"),
 					DynamicFPSMod.config.unfocusedFPS,
 					0, 60
 				)
@@ -42,7 +42,7 @@ public class DynamicFPSModMenu implements ModMenuApi {
 			)
 			.addEntry(entryBuilder
 				.startBooleanToggle(
-					localized("button", "restore_when_hovered"),
+					localized("config", "restore_when_hovered"),
 					DynamicFPSMod.config.restoreFPSWhenHovered
 				)
 				.setSaveConsumer(value -> DynamicFPSMod.config.restoreFPSWhenHovered = value)
