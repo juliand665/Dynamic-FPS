@@ -32,6 +32,9 @@
 
 	"depends": {
 		"fabricloader": ">=0.4.0",
-		"fabric": "*"
+		"fabric-resource-loader-v0": "*",
+		"fabric-rendering-v1": "*",
+		"fabric-lifecycle-events-v1": "*",
+		"fabric-key-binding-api-v1": "*"
 	}
 }
