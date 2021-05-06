@@ -1,7 +1,7 @@
 {
   "config.dynamicfps.title": "Настройки Dynamic FPS",
   "config.dynamicfps.category.general": "Основные",
-  "config.dynamicfps.reduce_when_unfocused": "Уменьшать FPS, когда окно неактивно",
+  "config.dynamicfps.reduce_when_unfocused": "Уменьшать FPS при неактивном окне",
   "config.dynamicfps.unfocused_fps": "Значение FPS при неактивном окне",
   "config.dynamicfps.restore_when_hovered": "Восстанавливать FPS при наведении на окно",
   "key.dynamicfps.toggle_forced": "Принудительно снизить FPS",
