@@ -16,6 +16,7 @@ minecraft {
 repositories {
 	maven { url "https://maven.jamieswhiteshirt.com/libs-release/" }
 	maven { url = "https://jitpack.io" }
+	maven { url "https://maven.shedaniel.me/" }
 }
 
 dependencies {
@@ -33,10 +34,11 @@ dependencies {
 	modImplementation "io.github.prospector:modmenu:${project.modmenu_version}"
 	
 	// Easy config screen setup library
-	modApi("me.shedaniel.cloth:config-2:${project.cloth_version}") {
+	modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_version}") {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
-	include "me.shedaniel.cloth:config-2:${project.cloth_version}"
+	include "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_version}"
+	
 	// Using the TOML config format
 	modImplementation("com.moandjiezana.toml:toml4j:${project.toml4j_version}")
 	include "com.moandjiezana.toml:toml4j:${project.toml4j_version}"
