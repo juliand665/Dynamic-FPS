@@ -1,22 +1,20 @@
 plugins {
-	id 'fabric-loom' version '0.5-SNAPSHOT'
+	id 'fabric-loom' version '0.8-SNAPSHOT'
 	id 'maven-publish'
 }
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_16
+targetCompatibility = JavaVersion.VERSION_16
 
 archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
-minecraft {
-}
-
 repositories {
-	maven { url "https://maven.jamieswhiteshirt.com/libs-release/" }
+	maven { url = "https://maven.jamieswhiteshirt.com/libs-release/" }
 	maven { url = "https://jitpack.io" }
-	maven { url "https://maven.shedaniel.me/" }
+	maven { url = "https://maven.shedaniel.me/" }
+	maven { url = "https://maven.terraformersmc.com/releases/" }
 }
 
 dependencies {
@@ -31,7 +29,7 @@ dependencies {
 	modImplementation fabricApi.module('fabric-key-binding-api-v1', project.fabric_version)
 	
 	// Mod Menu, to add the hook for a config screen
-	modImplementation "io.github.prospector:modmenu:${project.modmenu_version}"
+	modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 	
 	// Easy config screen setup library
 	modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_version}") {
@@ -43,9 +41,9 @@ dependencies {
 	modImplementation("com.moandjiezana.toml:toml4j:${project.toml4j_version}")
 	include "com.moandjiezana.toml:toml4j:${project.toml4j_version}"
 	
-	// Data Breaker makes the dev env start up much faster by breaking support for old worlds, which we don't care about anyway.
-	modRuntime("com.github.SuperCoder7979:databreaker:${databreaker_version}") {
-		exclude module: "fabric-loader"
+	// Lazy DFU makes the dev env start up much faster by loading DataFixerUpper lazily, which would otherwise take a long time. We rarely need it anyway.
+	modRuntime("com.github.astei:lazydfu:${lazydfu_version}") {
+		exclude(module: "fabric-loader")
 	}
 	
 	// Nullability Annotations
@@ -54,34 +52,36 @@ dependencies {
 
 processResources {
 	inputs.property "version", project.version
-	
-	from(sourceSets.main.resources.srcDirs) {
-		include "fabric.mod.json"
+
+	filesMatching("fabric.mod.json") {
 		expand "version": project.version
 	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	// ensure that the encoding is set to UTF-8, no matter what the system default is
+	// this fixes some edge cases with special characters not displaying correctly
+	// see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
+	// If Javadoc is generated, this must be specified in that task too.
+	it.options.encoding = "UTF-8"
+
+	// Minecraft 1.17 (21w19a) upwards uses Java 16.
+	it.options.release = 16
 	
-	from(sourceSets.main.resources.srcDirs) {
-		exclude "fabric.mod.json"
-	}
+	it.options.compilerArgs += ["-Xlint:deprecation"]
 }
 
-// ensure that the encoding is set to UTF-8, no matter what the system default is
-// this fixes some edge cases with special characters not displaying correctly
-// see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
-tasks.withType(JavaCompile) {
-	options.encoding = "UTF-8"
-}
-
-// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-// if it is present.
-// If you remove this task, sources will not be generated.
-task sourcesJar(type: Jar, dependsOn: classes) {
-	classifier = "sources"
-	from sourceSets.main.allSource
+java {
+	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+	// if it is present.
+	// If you remove this line, sources will not be generated.
+	withSourcesJar()
 }
 
 jar {
-	from "LICENSE"
+	from("LICENSE") {
+		rename { "${it}_${project.archivesBaseName}"}
+	}
 }
 
 // configure the maven publication
@@ -89,7 +89,7 @@ publishing {
 	publications {
 		mavenJava(MavenPublication) {
 			// add all the jars that should be included when publishing to maven
-			artifact(jar) {
+			artifact(remapJar) {
 				builtBy remapJar
 			}
 			artifact(sourcesJar) {
@@ -97,10 +97,12 @@ publishing {
 			}
 		}
 	}
-	
-	// select the repositories you want to publish to
+
+	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
 	repositories {
-		// uncomment to publish to the local maven
-		// mavenLocal()
+		// Add repositories to publish to here.
+		// Notice: This block does NOT have the same function as the block in the top level.
+		// The repositories here will be used for publishing your artifact, not for
+		// retrieving dependencies.
 	}
 }
