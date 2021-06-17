@@ -9,12 +9,14 @@ import java.io.IOException;
 
 public final class DynamicFPSConfig {
 	private transient File file;
-	/// Whether to disable or enable the frame rate drop when unfocused
+	/// Whether to disable or enable the frame rate drop when unfocused.
 	public boolean reduceFPSWhenUnfocused = true;
-	/// The frame rate to target when unfocused (only applies if `enableUnfocusedFPS` is true)
+	/// The frame rate to target when unfocused (only applies if `enableUnfocusedFPS` is true).
 	public int unfocusedFPS = 1;
-	/// Whether or not to uncap FPS when hovered, even if it would otherwise be reduced
+	/// Whether or not to uncap FPS when hovered, even if it would otherwise be reduced.
 	public boolean restoreFPSWhenHovered = true;
+	/// Whether or not to trigger a garbage collector run whenever the game is unfocused.
+	public boolean runGCOnUnfocus = false;
 	
 	private DynamicFPSConfig() {}
 	

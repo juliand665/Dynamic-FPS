@@ -55,6 +55,8 @@ public class DynamicFPSMod implements ModInitializer {
 	public static boolean checkForRender() {
 		if (isDisabled) return true;
 		
+		checkForGC();
+		
 		long currentTime = Util.getMeasuringTimeMs();
 		long timeSinceLastRender = currentTime - lastRender;
 		
@@ -62,6 +64,18 @@ public class DynamicFPSMod implements ModInitializer {
 		
 		lastRender = currentTime;
 		return true;
+	}
+	
+	private static boolean hasTriggeredGC = false;
+	private static void checkForGC() {
+		if (!config.runGCOnUnfocus) return;
+		
+		if (MinecraftClient.getInstance().isWindowFocused()) {
+			hasTriggeredGC = false;
+		} else if (!hasTriggeredGC && hasRenderedLastFrame) {
+			hasTriggeredGC = true;
+			System.gc();
+		}
 	}
 	
 	// we always render one last frame before actually reducing FPS, so the hud text shows up instantly when forcing low fps.
