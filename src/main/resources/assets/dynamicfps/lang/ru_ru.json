@@ -1,7 +1,7 @@
 {
   "config.dynamicfps.title": "Настройки Dynamic FPS",
   "config.dynamicfps.category.general": "Основные",
-  "config.dynamicfps.reduce_when_unfocused": "Уменьшать FPS, когда игра в фоне",
+  "config.dynamicfps.reduce_when_unfocused": "Уменьшать FPS, когда окно в фоне",
   "config.dynamicfps.unfocused_fps": "Значение FPS в фоне",
   "config.dynamicfps.restore_when_hovered": "Восстанавливать FPS при наведении курсора на окно",
   "config.dynamicfps.run_gc_on_unfocus": "Запускать сборщик мусора при переходе в фон",
