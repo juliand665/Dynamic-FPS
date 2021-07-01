@@ -1,6 +1,7 @@
 package dynamicfps;
 
 import dynamicfps.util.KeyBindingHandler;
+import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
@@ -15,9 +16,7 @@ import static dynamicfps.util.Localization.translationKey;
 
 public class DynamicFPSMod implements ModInitializer {
 	public static final String MOD_ID = "dynamicfps";
-	
-	public static DynamicFPSConfig config = null;
-	
+
 	private static boolean isDisabled = false;
 	public static boolean isDisabled() { return isDisabled; }
 	
@@ -38,7 +37,7 @@ public class DynamicFPSMod implements ModInitializer {
 	
 	@Override
 	public void onInitialize() {
-		config = DynamicFPSConfig.load();
+		MidnightConfig.init(MOD_ID, DynamicFPSConfig.class);
 		
 		toggleForcedKeyBinding.register();
 		toggleDisabledKeyBinding.register();
@@ -68,7 +67,7 @@ public class DynamicFPSMod implements ModInitializer {
 	
 	private static boolean hasTriggeredGC = false;
 	private static void checkForGC() {
-		if (!config.runGCOnUnfocus) return;
+		if (!DynamicFPSConfig.isRunGCOnUnfocus()) return;
 		
 		if (MinecraftClient.getInstance().isWindowFocused()) {
 			hasTriggeredGC = false;
@@ -124,14 +123,14 @@ public class DynamicFPSMod implements ModInitializer {
 		boolean isVisible = GLFW.glfwGetWindowAttrib(window.getHandle(), GLFW.GLFW_VISIBLE) != 0;
 		if (!isVisible) return 0;
 		
-		if (isForcingLowFPS) return config.unfocusedFPS;
+		if (isForcingLowFPS) return DynamicFPSConfig.unfocusedFPS;
 		
-		if (config.restoreFPSWhenHovered) {
+		if (DynamicFPSConfig.isRestoreFPSWhenHovered()) {
 			boolean isHovered = GLFW.glfwGetWindowAttrib(window.getHandle(), GLFW.GLFW_HOVERED) != 0;
 			if (isHovered) return null;
 		}
 		
-		if (config.reduceFPSWhenUnfocused && !client.isWindowFocused()) return config.unfocusedFPS;
+		if (DynamicFPSConfig.isReduceFPSWhenUnfocused() && !client.isWindowFocused()) return DynamicFPSConfig.unfocusedFPS;
 		
 		return null;
 	}

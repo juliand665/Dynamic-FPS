@@ -11,9 +11,7 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
-	maven { url = "https://maven.jamieswhiteshirt.com/libs-release/" }
 	maven { url = "https://jitpack.io" }
-	maven { url = "https://maven.shedaniel.me/" }
 	maven { url = "https://maven.terraformersmc.com/releases/" }
 }
 
@@ -30,16 +28,6 @@ dependencies {
 	
 	// Mod Menu, to add the hook for a config screen
 	modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
-	
-	// Easy config screen setup library
-	modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_version}") {
-		exclude(group: "net.fabricmc.fabric-api")
-	}
-	include "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_version}"
-	
-	// Using the TOML config format
-	modImplementation("com.moandjiezana.toml:toml4j:${project.toml4j_version}")
-	include "com.moandjiezana.toml:toml4j:${project.toml4j_version}"
 	
 	// Lazy DFU makes the dev env start up much faster by loading DataFixerUpper lazily, which would otherwise take a long time. We rarely need it anyway.
 	modRuntime("com.github.astei:lazydfu:${lazydfu_version}") {
