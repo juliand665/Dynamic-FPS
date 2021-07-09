@@ -1,9 +1,8 @@
 {
-  "config.dynamicfps.title": "Dynamic FPS seadistus",
-  "config.dynamicfps.category.general": "Üldine",
-  "config.dynamicfps.reduce_when_unfocused": "Vähenda fookustamata aknas kaadrisagedust",
-  "config.dynamicfps.unfocused_fps": "Soovitud kaadrisagedus fookustamata aknas",
-  "config.dynamicfps.restore_when_hovered": "Taasta hõljumisel kaadrisagedus",
+  "dynamicfps.midnightconfig.title": "Dynamic FPS seadistus",
+  "dynamicfps.midnightconfig.reduceFPSWhenUnfocused": "Vähenda fookustamata aknas kaadrisagedust",
+  "dynamicfps.midnightconfig.unfocusedFPS": "Soovitud kaadrisagedus fookustamata aknas",
+  "dynamicfps.midnightconfig.restoreFPSWhenHovered": "Taasta hõljumisel kaadrisagedus",
   "key.dynamicfps.toggle_forced": "Sunni vähendatud ks (lüliti)",
   "key.dynamicfps.toggle_disabled": "Keela Dynamic FPS (lüliti)",
   "gui.dynamicfps.hud.reducing": "Dynamic FPS: sunnin vähendatud kaadrisagedust",
