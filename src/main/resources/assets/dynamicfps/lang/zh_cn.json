@@ -3,7 +3,7 @@
   "config.dynamicfps.category.general": "默认",
   "config.dynamicfps.reduce_when_unfocused": "丢失焦点时限制帧数",
   "config.dynamicfps.unfocused_fps": "帧数限制值",
-  "config.dynamicfps.restore_when_hovered": "窗口悬停恢复帧数",
+  "config.dynamicfps.restore_when_hovered": "窗口悬停时恢复帧数",
   "config.dynamicfps.run_gc_on_unfocus": "丢失焦点时回收内存",
   "key.dynamicfps.toggle_forced": "强制限制帧数",
   "key.dynamicfps.toggle_disabled": "动态帧数开关",
