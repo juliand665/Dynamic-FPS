@@ -1,11 +1,12 @@
 {
   "config.dynamicfps.title": "Dynamic FPS 配置",
-  "config.dynamicfps.category.general": "普通",
-  "config.dynamicfps.reduce_when_unfocused": "丢失焦点时降低FPS",
-  "config.dynamicfps.unfocused_fps": "帧率限制值",
-  "config.dynamicfps.restore_when_hovered": "窗口悬停恢复帧率",
-  "key.dynamicfps.toggle_forced": "强制降低 FPS (切换)",
-  "key.dynamicfps.toggle_disabled": "禁用动态 FPS (切换)",
-  "gui.dynamicfps.hud.reducing": "Dynamic FPS: 已强制降低 FPS",
+  "config.dynamicfps.category.general": "默认",
+  "config.dynamicfps.reduce_when_unfocused": "丢失焦点时限制帧数",
+  "config.dynamicfps.unfocused_fps": "帧数限制值",
+  "config.dynamicfps.restore_when_hovered": "窗口悬停时恢复帧数",
+  "config.dynamicfps.run_gc_on_unfocus": "丢失焦点时回收内存",
+  "key.dynamicfps.toggle_forced": "强制限制帧数",
+  "key.dynamicfps.toggle_disabled": "动态帧数开关",
+  "gui.dynamicfps.hud.reducing": "Dynamic FPS: 已强制限制帧数",
   "gui.dynamicfps.hud.disabled": "Dynamic FPS 已禁用"
 }
