@@ -139,4 +139,8 @@ public class DynamicFPSMod implements ModInitializer {
 	public interface WindowHolder {
 		Window getWindow();
 	}
+	
+	public interface SplashCompletedHolder {
+		boolean isReloadComplete();
+	}
 }

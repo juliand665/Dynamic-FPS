@@ -1,6 +1,7 @@
 package dynamicfps.mixin;
 
 import dynamicfps.DynamicFPSMod;
+import dynamicfps.DynamicFPSMod.SplashCompletedHolder;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.SplashScreen;
 import net.minecraft.client.render.GameRenderer;
@@ -31,7 +32,9 @@ public class GameRendererMixin {
 	@Inject(at = @At("HEAD"), method = "renderWorld", cancellable = true)
 	private void onRenderWorld(CallbackInfo callbackInfo) {
 		if (client.getOverlay() instanceof SplashScreen) {
-			callbackInfo.cancel();
+			if (!((SplashCompletedHolder)client.getOverlay()).isReloadComplete()) {
+				callbackInfo.cancel();
+			}
 		}
 	}
 }
