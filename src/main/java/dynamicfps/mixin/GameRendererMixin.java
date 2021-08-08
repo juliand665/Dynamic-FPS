@@ -1,8 +1,9 @@
 package dynamicfps.mixin;
 
 import dynamicfps.DynamicFPSMod;
-import dynamicfps.DynamicFPSMod.SplashCompletedHolder;
+import dynamicfps.DynamicFPSMod.SplashScreenAccessor;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.Overlay;
 import net.minecraft.client.gui.screen.SplashScreen;
 import net.minecraft.client.render.GameRenderer;
 import org.spongepowered.asm.mixin.*;
@@ -31,8 +32,10 @@ public class GameRendererMixin {
 	 */
 	@Inject(at = @At("HEAD"), method = "renderWorld", cancellable = true)
 	private void onRenderWorld(CallbackInfo callbackInfo) {
-		if (client.getOverlay() instanceof SplashScreen) {
-			if (!((SplashCompletedHolder)client.getOverlay()).isReloadComplete()) {
+		Overlay overlay = client.getOverlay();
+		if (overlay instanceof SplashScreen) {
+			SplashScreenAccessor splashScreen = (SplashScreenAccessor) overlay;
+			if (!splashScreen.isReloadComplete()) {
 				callbackInfo.cancel();
 			}
 		}
