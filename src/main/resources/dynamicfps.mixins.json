@@ -7,6 +7,7 @@
   "client": [
     "GameRendererMixin",
     "MinecraftClientMixin",
+    "SplashScreenMixin",
     "ThreadExecutorMixin"
   ],
   "injectors": {
