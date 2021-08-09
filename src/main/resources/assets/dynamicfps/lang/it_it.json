@@ -1,0 +1,12 @@
+{
+  "config.dynamicfps.title": "Configura Dynamic FPS",
+  "config.dynamicfps.category.general": "Generale",
+  "config.dynamicfps.reduce_when_unfocused": "Riduci FPS quando fuori fuoco",
+  "config.dynamicfps.unfocused_fps": "FPS quando fuori fuoco",
+  "config.dynamicfps.restore_when_hovered": "Ripristina gli FPS quando si passa il mouse",
+  "config.dynamicfps.run_gc_on_unfocus": "Run GC on unfocus",
+  "key.dynamicfps.toggle_forced": "Abilita/Disabilita Forza FPS ridotti",
+  "key.dynamicfps.toggle_disabled": "Abilita/Disabilita Dynamic FPS",
+  "gui.dynamicfps.hud.reducing": "Dynamic FPS: Riduzione forzata degli FPS",
+  "gui.dynamicfps.hud.disabled": "Dynamic FPS Disabilitato"
+}
