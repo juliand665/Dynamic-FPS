@@ -23,7 +23,7 @@
 			"dynamicfps.DynamicFPSMod"
 		],
 		"modmenu": [
-		  "dynamicfps.DynamicFPSModMenu"
+			"dynamicfps.ModMenuIntegration"
 		]
 	},
 	"mixins": [

@@ -1,20 +1,13 @@
 package dynamicfps;
 
-import com.terraformersmc.modmenu.api.ConfigScreenFactory;
-import com.terraformersmc.modmenu.api.ModMenuApi;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import net.minecraft.client.gui.screen.Screen;
 
 import static dynamicfps.util.Localization.localized;
 
-public class DynamicFPSModMenu implements ModMenuApi {
-	@Override
-	public ConfigScreenFactory<?> getModConfigScreenFactory() {
-		return DynamicFPSModMenu::genConfig;
-	}
-	
-	private static Screen genConfig(Screen parent) {
+public final class ClothConfigScreenFactory {
+	static Screen genConfig(Screen parent) {
 		ConfigBuilder builder = ConfigBuilder.create()
 			.setParentScreen(parent)
 			.setTitle(localized("config", "title"))
