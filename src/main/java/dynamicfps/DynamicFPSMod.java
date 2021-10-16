@@ -44,6 +44,7 @@ public class DynamicFPSMod implements ModInitializer {
 		toggleDisabledKeyBinding.register();
 		
 		HudRenderCallback.EVENT.register(new HudInfoRenderer());
+		FlawlessFrames.onClientInitialization();
 	}
 	
 	private static long lastRender;
@@ -53,7 +54,7 @@ public class DynamicFPSMod implements ModInitializer {
 	 @return whether or not the game should be rendered after this.
 	 */
 	public static boolean checkForRender() {
-		if (isDisabled) return true;
+		if (isDisabled || FlawlessFrames.isActive()) return true;
 		
 		checkForGC();
 		
