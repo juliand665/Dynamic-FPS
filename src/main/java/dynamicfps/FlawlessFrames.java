@@ -8,15 +8,15 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
+ <p>
  Implements the FREX Flawless Frames API to allow other mods to request all frames to be processed until requested to
- go back to normal operation, such as ReplayMod rendering a video.<p>
- 
+ go back to normal operation, such as ReplayMod rendering a video.
+ <p>
  See https://github.com/grondag/frex/pull/9
  */
 public class FlawlessFrames {
 	private static final Set<Object> ACTIVE = ConcurrentHashMap.newKeySet();
 	
-	@SuppressWarnings("unchecked") // Since we ask for Consumer.class, it's unchecked to pass a Consumer<Boolean> to it. But it's guaranteed to ask it by API
 	static void onClientInitialization() {
 		Function<String, Consumer<Boolean>> provider = name -> {
 			Object token = new Object();
@@ -28,6 +28,7 @@ public class FlawlessFrames {
 				}
 			};
 		};
+		//noinspection unchecked – Since we can't parameterize Consumer.class, it's unchecked to pass a Consumer<Boolean> as a raw Consumer. The API guarantees we only get what we expect though.
 		FabricLoader.getInstance()
 			.getEntrypoints("frex_flawless_frames", Consumer.class)
 			.forEach(api -> api.accept(provider));
