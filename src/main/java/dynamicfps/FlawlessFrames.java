@@ -1,18 +1,17 @@
 package dynamicfps;
 
+import net.fabricmc.loader.api.FabricLoader;
+
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import net.fabricmc.loader.api.FabricLoader;
-
 /**
- * Implements the FREX Flawless Frames API to allow other mods to request all frames to be processed until requested to
- * go back to normal operation, such as ReplayMod rendering a video.<p>
- * 
- * See https://github.com/grondag/frex/pull/9
- *
+ Implements the FREX Flawless Frames API to allow other mods to request all frames to be processed until requested to
+ go back to normal operation, such as ReplayMod rendering a video.<p>
+ 
+ See https://github.com/grondag/frex/pull/9
  */
 public class FlawlessFrames {
 	private static final Set<Object> ACTIVE = ConcurrentHashMap.newKeySet();
@@ -35,7 +34,7 @@ public class FlawlessFrames {
 	}
 	
 	/**
-	 * Returns whether one or more mods have requested Flawless Frames to be active, and therefore frames should not be skipped.
+	 Returns whether one or more mods have requested Flawless Frames to be active, and therefore frames should not be skipped.
 	 */
 	public static boolean isActive() {
 		return !ACTIVE.isEmpty();
