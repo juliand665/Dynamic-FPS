@@ -4,6 +4,7 @@
   "config.dynamicfps.reduce_when_unfocused": "Vähenda fookustamata aknas kaadrisagedust",
   "config.dynamicfps.unfocused_fps": "Soovitud kaadrisagedus fookustamata aknas",
   "config.dynamicfps.restore_when_hovered": "Taasta hõljumisel kaadrisagedus",
+  "config.dynamicfps.run_gc_on_unfocus": "Käivita fookuse kaotamisel mälukoristus (GC)",
   "key.dynamicfps.toggle_forced": "Sunni vähendatud ks (lüliti)",
   "key.dynamicfps.toggle_disabled": "Keela Dynamic FPS (lüliti)",
   "gui.dynamicfps.hud.reducing": "Dynamic FPS: sunnin vähendatud kaadrisagedust",
