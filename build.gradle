@@ -78,6 +78,9 @@ java {
 }
 
 jar {
+	exclude '**/*.psd'
+	exclude '**/*.afdesign'
+	
 	from("LICENSE") {
 		rename { "${it}_${project.archivesBaseName}"}
 	}
