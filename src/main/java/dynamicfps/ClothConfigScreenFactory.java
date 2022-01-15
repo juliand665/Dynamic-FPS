@@ -42,6 +42,24 @@ public final class ClothConfigScreenFactory {
 				.build()
 			)
 			.addEntry(entryBuilder
+				.startIntSlider(
+					localized("config", "unfocused_volume"),
+					(int) (DynamicFPSMod.config.unfocusedVolumeMultiplier * 100),
+					0, 100
+				)
+				.setSaveConsumer(value -> DynamicFPSMod.config.unfocusedVolumeMultiplier = value / 100f)
+				.build()
+			)
+			.addEntry(entryBuilder
+				.startIntSlider(
+					localized("config", "hidden_volume"),
+					(int) (DynamicFPSMod.config.hiddenVolumeMultiplier * 100),
+					0, 100
+				)
+				.setSaveConsumer(value -> DynamicFPSMod.config.hiddenVolumeMultiplier = value / 100f)
+				.build()
+			)
+			.addEntry(entryBuilder
 				.startBooleanToggle(
 					localized("config", "run_gc_on_unfocus"),
 					DynamicFPSMod.config.runGCOnUnfocus

@@ -5,6 +5,8 @@
   "config.dynamicfps.unfocused_fps": "Reduzierte FPS",
   "config.dynamicfps.restore_when_hovered": "FPS bei Hover maximieren",
   "config.dynamicfps.run_gc_on_unfocus": "GC beim inaktiv Werden auslösen",
+  "config.dynamicfps.unfocused_volume": "Lautstärke wenn inaktiv (%)",
+  "config.dynamicfps.hidden_volume": "Lautstärke wenn nicht sichtbar (%)",
   "key.dynamicfps.toggle_forced": "Reduzierte FPS forcieren (Toggle)",
   "key.dynamicfps.toggle_disabled": "Dynamic FPS deaktivieren (Toggle)",
   "gui.dynamicfps.hud.reducing": "Dynamic FPS: tiefe FPS forciert",

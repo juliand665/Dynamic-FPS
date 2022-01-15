@@ -5,6 +5,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.Window;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.Util;
 import org.lwjgl.glfw.GLFW;
 
@@ -47,16 +48,27 @@ public class DynamicFPSMod implements ModInitializer {
 		FlawlessFrames.onClientInitialization();
 	}
 	
+	private static MinecraftClient client;
+	private static Window window;
+	private static boolean isFocused, isVisible, isHovered;
 	private static long lastRender;
 	/**
 	 Determines whether the game should render anything at this time. If not, blocks for a short time.
 	 
-	 @return whether or not the game should be rendered after this.
+	 @return whether the game should be rendered after this.
 	 */
 	public static boolean checkForRender() {
 		if (isDisabled || FlawlessFrames.isActive()) return true;
 		
-		checkForGC();
+		if (client == null) {
+			client = MinecraftClient.getInstance();
+			window = client.getWindow();
+		}
+		isFocused = client.isWindowFocused();
+		isVisible = GLFW.glfwGetWindowAttrib(window.getHandle(), GLFW.GLFW_VISIBLE) != 0;
+		isHovered = GLFW.glfwGetWindowAttrib(window.getHandle(), GLFW.GLFW_HOVERED) != 0;
+		
+		checkForStateChanges();
 		
 		long currentTime = Util.getMeasuringTimeMs();
 		long timeSinceLastRender = currentTime - lastRender;
@@ -67,16 +79,63 @@ public class DynamicFPSMod implements ModInitializer {
 		return true;
 	}
 	
-	private static boolean hasTriggeredGC = false;
-	private static void checkForGC() {
-		if (!config.runGCOnUnfocus) return;
+	private static boolean wasFocused = true;
+	private static boolean wasVisible = true;
+	private static void checkForStateChanges() {
+		if (isFocused != wasFocused) {
+			wasFocused = isFocused;
+			if (isFocused) {
+				onFocus();
+			} else {
+				onUnfocus();
+			}
+		}
 		
-		if (MinecraftClient.getInstance().isWindowFocused()) {
-			hasTriggeredGC = false;
-		} else if (!hasTriggeredGC && hasRenderedLastFrame) {
-			hasTriggeredGC = true;
+		if (isVisible != wasVisible) {
+			wasVisible = isVisible;
+			if (isVisible) {
+				onAppear();
+			} else {
+				onDisappear();
+			}
+		}
+	}
+	
+	private static void onFocus() {
+		setVolumeMultiplier(1);
+	}
+	
+	private static void onUnfocus() {
+		if (isVisible) {
+			setVolumeMultiplier(config.unfocusedVolumeMultiplier);
+		}
+		
+		if (config.runGCOnUnfocus) {
 			System.gc();
 		}
+	}
+	
+	private static void onAppear() {
+		if (!isFocused) {
+			setVolumeMultiplier(config.unfocusedVolumeMultiplier);
+		}
+	}
+	
+	private static void onDisappear() {
+		setVolumeMultiplier(config.hiddenVolumeMultiplier);
+	}
+	
+	private static void setVolumeMultiplier(float multiplier) {
+		// setting the volume to 0 stops all sounds (including music), which we want to avoid if possible.
+		var clientWillPause = !isFocused && client.options.pauseOnLostFocus && client.currentScreen == null;
+		// if the client would pause anyway, we don't need to do anything because that will already pause all sounds.
+		if (multiplier == 0 && clientWillPause) return;
+		
+		var baseVolume = client.options.getSoundVolume(SoundCategory.MASTER);
+		client.getSoundManager().updateSoundVolume(
+			SoundCategory.MASTER,
+			baseVolume * multiplier
+		);
 	}
 	
 	// we always render one last frame before actually reducing FPS, so the hud text shows up instantly when forcing low fps.
@@ -119,26 +178,11 @@ public class DynamicFPSMod implements ModInitializer {
 	
 	@Nullable
 	private static Integer fpsOverride() {
-		MinecraftClient client = MinecraftClient.getInstance();
-		Window window = ((WindowHolder) client).getWindow();
-		
-		boolean isVisible = GLFW.glfwGetWindowAttrib(window.getHandle(), GLFW.GLFW_VISIBLE) != 0;
 		if (!isVisible) return 0;
-		
 		if (isForcingLowFPS) return config.unfocusedFPS;
-		
-		if (config.restoreFPSWhenHovered) {
-			boolean isHovered = GLFW.glfwGetWindowAttrib(window.getHandle(), GLFW.GLFW_HOVERED) != 0;
-			if (isHovered) return null;
-		}
-		
+		if (config.restoreFPSWhenHovered && isHovered) return null;
 		if (config.reduceFPSWhenUnfocused && !client.isWindowFocused()) return config.unfocusedFPS;
-		
 		return null;
-	}
-	
-	public interface WindowHolder {
-		Window getWindow();
 	}
 	
 	public interface SplashOverlayAccessor {

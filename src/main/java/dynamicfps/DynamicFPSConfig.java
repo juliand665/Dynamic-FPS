@@ -13,9 +13,13 @@ public final class DynamicFPSConfig {
 	public boolean reduceFPSWhenUnfocused = true;
 	/// The frame rate to target when unfocused (only applies if `enableUnfocusedFPS` is true).
 	public int unfocusedFPS = 1;
-	/// Whether or not to uncap FPS when hovered, even if it would otherwise be reduced.
+	/// Whether to uncap FPS when hovered, even if it would otherwise be reduced.
 	public boolean restoreFPSWhenHovered = true;
-	/// Whether or not to trigger a garbage collector run whenever the game is unfocused.
+	/// Volume multiplier when not focused.
+	public float unfocusedVolumeMultiplier = 0.25f;
+	/// Volume multiplier when not visible.
+	public float hiddenVolumeMultiplier = 0f;
+	/// Whether to trigger a garbage collector run whenever the game is unfocused.
 	public boolean runGCOnUnfocus = false;
 	
 	private DynamicFPSConfig() {}
