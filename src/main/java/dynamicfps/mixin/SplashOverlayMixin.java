@@ -1,12 +1,12 @@
 package dynamicfps.mixin;
 
-import dynamicfps.DynamicFPSMod.SplashScreenAccessor;
-import net.minecraft.client.gui.screen.SplashScreen;
+import dynamicfps.DynamicFPSMod.SplashOverlayAccessor;
+import net.minecraft.client.gui.screen.SplashOverlay;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(SplashScreen.class)
-public class SplashScreenMixin implements SplashScreenAccessor {
+@Mixin(SplashOverlay.class)
+public class SplashOverlayMixin implements SplashOverlayAccessor {
 	@Shadow
 	private long reloadCompleteTime;
 	

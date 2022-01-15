@@ -20,7 +20,7 @@ public final class HudInfoRenderer implements HudRenderCallback {
 	
 	private void drawCenteredText(MatrixStack matrices, Text text, float y) {
 		MinecraftClient client = MinecraftClient.getInstance();
-		TextRenderer textRenderer = client.inGameHud.getFontRenderer();
+		TextRenderer textRenderer = client.inGameHud.getTextRenderer();
 		
 		int windowWidth = client.getWindow().getScaledWidth();
 		int stringWidth = textRenderer.getWidth(text);

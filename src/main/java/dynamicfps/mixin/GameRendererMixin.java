@@ -1,10 +1,10 @@
 package dynamicfps.mixin;
 
 import dynamicfps.DynamicFPSMod;
-import dynamicfps.DynamicFPSMod.SplashScreenAccessor;
+import dynamicfps.DynamicFPSMod.SplashOverlayAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Overlay;
-import net.minecraft.client.gui.screen.SplashScreen;
+import net.minecraft.client.gui.screen.SplashOverlay;
 import net.minecraft.client.render.GameRenderer;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
@@ -33,8 +33,8 @@ public class GameRendererMixin {
 	@Inject(at = @At("HEAD"), method = "renderWorld", cancellable = true)
 	private void onRenderWorld(CallbackInfo callbackInfo) {
 		Overlay overlay = client.getOverlay();
-		if (overlay instanceof SplashScreen) {
-			SplashScreenAccessor splashScreen = (SplashScreenAccessor) overlay;
+		if (overlay instanceof SplashOverlay) {
+			SplashOverlayAccessor splashScreen = (SplashOverlayAccessor) overlay;
 			if (!splashScreen.isReloadComplete()) {
 				callbackInfo.cancel();
 			}
