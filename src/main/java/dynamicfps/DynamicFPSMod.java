@@ -4,6 +4,7 @@ import dynamicfps.util.KeyBindingHandler;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.sound.SoundManager;
 import net.minecraft.client.util.Window;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.Util;
@@ -124,18 +125,30 @@ public class DynamicFPSMod implements ModInitializer {
 	private static void onDisappear() {
 		setVolumeMultiplier(config.hiddenVolumeMultiplier);
 	}
-	
+
 	private static void setVolumeMultiplier(float multiplier) {
+		SoundManager soundManager = client.getSoundManager();
+
 		// setting the volume to 0 stops all sounds (including music), which we want to avoid if possible.
-		var clientWillPause = !isFocused && client.options.pauseOnLostFocus && client.currentScreen == null;
-		// if the client would pause anyway, we don't need to do anything because that will already pause all sounds.
-		if (multiplier == 0 && clientWillPause) return;
-		
-		var baseVolume = client.options.getSoundVolume(SoundCategory.MASTER);
-		client.getSoundManager().updateSoundVolume(
-			SoundCategory.MASTER,
-			baseVolume * multiplier
-		);
+		if (multiplier == 0) {
+			var clientWillPause = !isFocused && client.options.pauseOnLostFocus && client.currentScreen == null;
+			// if the client would pause anyway, we don't need to do anything because that will already pause all sounds.
+			if (clientWillPause) return;
+
+			// otherwise, instead of setting volume to 0, we pause the sound manager ourselves.
+			soundManager.pauseAll();
+		} else {
+			// This should be a check for if the sound system is paused, but Minecraft only ever pauses it while the
+			// game is paused, so this is fine.
+			if (!client.isPaused()) {
+				soundManager.resumeAll();
+			}
+			var baseVolume = client.options.getSoundVolume(SoundCategory.MASTER);
+			soundManager.updateSoundVolume(
+					SoundCategory.MASTER,
+					baseVolume * multiplier
+			);
+		}
 	}
 	
 	// we always render one last frame before actually reducing FPS, so the hud text shows up instantly when forcing low fps.
