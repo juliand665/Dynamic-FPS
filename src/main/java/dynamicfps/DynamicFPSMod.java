@@ -4,7 +4,7 @@ import dynamicfps.util.KeyBindingHandler;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.util.Window;
+import com.mojang.blaze3d.glfw.Window;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.Util;
 import org.lwjgl.glfw.GLFW;
