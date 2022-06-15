@@ -6,7 +6,7 @@
 	"config.dynamicfps.restore_when_hovered": "視窗在最上層時恢復幀率",
 	"config.dynamicfps.run_gc_on_unfocus": "未聚焦時降低記憶體使用量",
 	"config.dynamicfps.unfocused_volume": "未聚焦時調節音量 (%)",
-	"config.dynamicfps.hidden_volume": "視窗不再背景時時調節音量 (%)",
+	"config.dynamicfps.hidden_volume": "視窗不再背景時調節音量 (%)",
 	"key.dynamicfps.toggle_forced": "強制限制幀率",
 	"key.dynamicfps.toggle_disabled": "動態幀率開關",
 	"gui.dynamicfps.hud.reducing": "動態幀率：已強制限制幀率",
