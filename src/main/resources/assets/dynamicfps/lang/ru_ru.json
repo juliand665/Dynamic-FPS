@@ -3,10 +3,12 @@
   "config.dynamicfps.category.general": "Основные",
   "config.dynamicfps.reduce_when_unfocused": "Уменьшать FPS, когда окно в фоне",
   "config.dynamicfps.unfocused_fps": "Значение FPS в фоне",
-  "config.dynamicfps.restore_when_hovered": "Восстанавливать FPS при наведении курсора на окно",
-  "config.dynamicfps.run_gc_on_unfocus": "Запускать сборщик мусора при переходе в фон",
+  "config.dynamicfps.restore_when_hovered": "Возвращать FPS при наведении курсора",
+  "config.dynamicfps.run_gc_on_unfocus": "Освобождать ОЗУ при переходе в фон",
+  "config.dynamicfps.unfocused_volume": "Звук в фоне (%)",
+  "config.dynamicfps.hidden_volume": "Звук в скрытом виде (%)",
   "key.dynamicfps.toggle_forced": "Принудительно снизить FPS",
-  "key.dynamicfps.toggle_disabled": "Переключить Dynamic FPS",
-  "gui.dynamicfps.hud.reducing": "Dynamic FPS: принудительное снижение FPS",
+  "key.dynamicfps.toggle_disabled": "Переключить ограничение FPS",
+  "gui.dynamicfps.hud.reducing": "Dynamic FPS: частота кадров принудительно ограничена",
   "gui.dynamicfps.hud.disabled": "Dynamic FPS отключён"
 }
