@@ -3,7 +3,7 @@
   "config.dynamicfps.category.general": "Основные",
   "config.dynamicfps.reduce_when_unfocused": "Уменьшать FPS, когда окно в фоне",
   "config.dynamicfps.unfocused_fps": "Значение FPS в фоне",
-  "config.dynamicfps.restore_when_hovered": "Возвращать FPS при наведении курсора",
+  "config.dynamicfps.restore_when_hovered": "Возвращать FPS наведением курсора",
   "config.dynamicfps.run_gc_on_unfocus": "Освобождать ОЗУ при переходе в фон",
   "config.dynamicfps.unfocused_volume": "Звук в фоне (%)",
   "config.dynamicfps.hidden_volume": "Звук в скрытом виде (%)",
