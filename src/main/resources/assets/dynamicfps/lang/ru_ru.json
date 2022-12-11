@@ -5,10 +5,13 @@
   "config.dynamicfps.unfocused_fps": "Значение FPS в фоне",
   "config.dynamicfps.restore_when_hovered": "Возвращать FPS наведением курсора",
   "config.dynamicfps.run_gc_on_unfocus": "Освобождать ОЗУ при переходе в фон",
-  "config.dynamicfps.unfocused_volume": "Звук в фоне (%)",
-  "config.dynamicfps.hidden_volume": "Звук в скрытом виде (%)",
+  "config.dynamicfps.unfocused_volume": "Громкость звука в фоне (%)",
+  "config.dynamicfps.hidden_volume": "Громкость звука в скрытом виде (%)",
   "key.dynamicfps.toggle_forced": "Принудительно снизить FPS",
   "key.dynamicfps.toggle_disabled": "Переключить ограничение FPS",
   "gui.dynamicfps.hud.reducing": "Dynamic FPS: частота кадров принудительно ограничена",
-  "gui.dynamicfps.hud.disabled": "Dynamic FPS отключён"
+  "gui.dynamicfps.hud.disabled": "Dynamic FPS отключён",
+
+  "modmenu.summaryTranslation.dynamicfps": "Автоматическое изменение FPS для снижения потребления вычислительных ресурсов в фоне.",
+  "modmenu.descriptionTranslation.dynamicfps": "DynamicFPS автоматически снижает частоту отображения кадров при сворачивании или скрытии Minecraft."
 }
