@@ -5,6 +5,8 @@
   "config.dynamicfps.unfocused_fps": "Valor da taxa de quadros em segundo plano",
   "config.dynamicfps.restore_when_hovered": "Retomar taxa de quadros ao passar o cursor do mouse",
   "config.dynamicfps.run_gc_on_unfocus": "Executar coletor de lixo (Java) em segundo plano",
+  "config.dynamicfps.unfocused_volume": "Volume quando fora de foco (%)",
+  "config.dynamicfps.hidden_volume": "Volume quando não visível (%)",
   "key.dynamicfps.toggle_forced": "Forçar redução da taxa de quadros (alternável)",
   "key.dynamicfps.toggle_disabled": "Desativar o Disable Dynamic (alternável)",
   "gui.dynamicfps.hud.reducing": "Dynamic FPS: forçando a redução da taxa de quadros",
