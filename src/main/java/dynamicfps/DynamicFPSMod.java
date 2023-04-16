@@ -78,7 +78,11 @@ public class DynamicFPSMod implements ModInitializer {
 		lastRender = currentTime;
 		return true;
 	}
-	
+
+	public static boolean shouldShowToasts() {
+		return isDisabled || FlawlessFrames.isActive() || fpsOverride() == null;
+	}
+
 	private static boolean wasFocused = true;
 	private static boolean wasVisible = true;
 	private static void checkForStateChanges() {
