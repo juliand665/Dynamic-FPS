@@ -38,7 +38,7 @@ public final class HudInfoRenderer implements HudRenderCallback {
 			drawContext.getVertexConsumers(),
 			TextLayerType.NORMAL,
 			0,
-			0xFFFFFF
+			255
 		);
 	}
 }
