@@ -6,6 +6,8 @@
   ],
   "client": [
     "GameRendererMixin",
+    "MinecraftClientMixin",
+    "ScreenMixin",
     "SplashOverlayMixin",
     "ThreadExecutorMixin",
     "ToastManagerMixin"

@@ -8,3 +8,7 @@ Dynamic FPS automatically reduces the speed at which minecraft renders when it's
 
 Download in [the releases section](https://github.com/juliand665/Dynamic-FPS/releases), on [Modrinth](https://modrinth.com/mod/dynamic-fps), or on [CurseForge](https://www.curseforge.com/minecraft/mc-mods/dynamic-fps).
 
+## Developer Info
+
+Dynamic FPS can optimize the game while a screen is actively obscuring the world.  
+To make use of this feature your screen must call [`renderDirtBackground`](# "Mojang Mappings") / [`renderBackgroundTexture`](# "Quilt Mappings / Yarn") during rendering.

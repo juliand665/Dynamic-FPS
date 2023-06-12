@@ -37,5 +37,12 @@
 		"fabric-rendering-v1": "*",
 		"fabric-lifecycle-events-v1": "*",
 		"fabric-key-binding-api-v1": "*"
+	},
+
+	"custom": {
+		"loom:injected_interfaces": {
+			"net/minecraft/class_437": ["dynamicfps/util/DynamicFPSScreen"],
+			"net/minecraft/class_425": ["dynamicfps/util/DynamicFPSSplashOverlay"]
+		}
 	}
 }
