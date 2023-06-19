@@ -188,8 +188,4 @@ public class DynamicFPSMod implements ModInitializer {
 		if (config.reduceFPSWhenUnfocused && !client.isWindowFocused()) return config.unfocusedFPS;
 		return null;
 	}
-	
-	public interface SplashOverlayAccessor {
-		boolean isReloadComplete();
-	}
 }

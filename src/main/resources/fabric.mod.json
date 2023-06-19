@@ -37,5 +37,47 @@
 		"fabric-rendering-v1": "*",
 		"fabric-lifecycle-events-v1": "*",
 		"fabric-key-binding-api-v1": "*"
+	},
+
+	"custom": {
+		"loom:injected_interfaces": {
+			"net/minecraft/class_437": ["dynamicfps/util/DynamicFPSScreen"],
+			"net/minecraft/class_425": ["dynamicfps/util/DynamicFPSSplashOverlay"]
+		},
+		"dynamic_fps": {
+			"optimized_screens": {
+				"enabled": [
+					"net.minecraft.class_445",
+					"net.minecraft.class_4189",
+					"net.minecraft.class_404",
+					"net.minecraft.class_6599",
+					"net.minecraft.class_426",
+					"net.minecraft.class_4288",
+					"net.minecraft.class_6777",
+					"net.minecraft.class_443",
+					"net.minecraft.class_446"
+				],
+				"disabled": [
+					"net.minecraft.class_434"
+				],
+				"_comment": {
+					"_": "Quilt Mapping names of the enabled / disabled screens. Not needed for mod screens.",
+					"enabled": {
+						"net.minecraft.class_445": "net.minecraft.client.gui.screen.CreditsScreen",
+						"net.minecraft.class_4189": "net.minecraft.client.gui.screen.option.AccessibilityOptionsScreen",
+						"net.minecraft.class_404": "net.minecraft.client.gui.screen.option.ChatOptionsScreen",
+						"net.minecraft.class_6599": "net.minecraft.client.gui.screen.option.KeyBindsScreen",
+						"net.minecraft.class_426": "net.minecraft.client.gui.screen.option.LanguageOptionsScreen",
+						"net.minecraft.class_4288": "net.minecraft.client.gui.screen.option.MouseOptionsScreen",
+						"net.minecraft.class_6777": "net.minecraft.client.gui.screen.option.OnlineOptionsScreen",
+						"net.minecraft.class_443": "net.minecraft.client.gui.screen.option.SoundOptionsScreen",
+						"net.minecraft.class_446": "net.minecraft.client.gui.screen.option.VideoOptionsScreen"
+					},
+					"disabled": {
+						"net.minecraft.class_434": "net.minecraft.client.gui.screen.DownloadingTerrainScreen"
+					}
+				}
+			}
+		}
 	}
 }

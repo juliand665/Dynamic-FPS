@@ -1,9 +1,7 @@
 package dynamicfps.mixin;
 
 import dynamicfps.DynamicFPSMod;
-import dynamicfps.DynamicFPSMod.SplashOverlayAccessor;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.Overlay;
 import net.minecraft.client.gui.screen.SplashOverlay;
 import net.minecraft.client.render.GameRenderer;
 import org.spongepowered.asm.mixin.*;
@@ -16,7 +14,7 @@ public class GameRendererMixin {
 	@Shadow
 	@Final
 	private MinecraftClient client;
-	
+
 	/**
 	 Implements the mod's big feature.
 	 */
@@ -26,18 +24,17 @@ public class GameRendererMixin {
 			callbackInfo.cancel();
 		}
 	}
-	
-	/**
-	 cancels world rendering under certain conditions
+
+	/*
+	 * Cancels rendering the world if a screen is covering the whole window or a splash overlay is present.
 	 */
+	@SuppressWarnings("squid:S1871") // Multiple conditions, same code
 	@Inject(at = @At("HEAD"), method = "renderWorld", cancellable = true)
 	private void onRenderWorld(CallbackInfo callbackInfo) {
-		Overlay overlay = client.getOverlay();
-		if (overlay instanceof SplashOverlay) {
-			SplashOverlayAccessor splashScreen = (SplashOverlayAccessor) overlay;
-			if (!splashScreen.isReloadComplete()) {
-				callbackInfo.cancel();
-			}
+		if (client.currentScreen != null && client.currentScreen.dynamicfps$rendersBackground()) {
+			callbackInfo.cancel();
+		} else if (client.getOverlay() instanceof SplashOverlay splashScreen && splashScreen.dynamicfps$isReloadComplete()) {
+			callbackInfo.cancel();
 		}
 	}
 }
