@@ -27,8 +27,13 @@ public class ScreenMixin implements DynamicFPSScreen {
 	private void onInit(CallbackInfo callbackInfo) {
 		String name = this.getClass().getName();
 
-		this.dynamicfps$canOptimize = ScreenOptimizationCompat.isOptedIn(name);
 		this.dynamicfps$hasOptedOut = ScreenOptimizationCompat.isOptedOut(name);
+
+		// Allow other mods to opt out on behalf of vanilla screens
+		// That Dynamic FPS forced to opt in via its own mod metadata.
+		if (!this.dynamicfps$hasOptedOut) {
+			this.dynamicfps$canOptimize = ScreenOptimizationCompat.isOptedIn(name);
+		}
 	}
 
 	@Inject(method = "renderBackgroundTexture", at = @At("HEAD"))
