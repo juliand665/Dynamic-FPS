@@ -4,9 +4,10 @@
 	"version": "${version}",
 
 	"name": "Dynamic FPS",
-	"description": "Dynamically adjusts FPS so minecraft doesn't hog resources in background.",
+	"description": "Dynamically adjusts FPS so Minecraft doesn't hog resources in background.",
 	"authors": [
-		"juliand665"
+		"juliand665",
+		"LostLuma"
 	],
 	"contact": {
 		"homepage": "https://dapprgames.com/mods/",
