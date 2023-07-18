@@ -65,7 +65,8 @@ public class DynamicFPSMod implements ModInitializer {
 			window = client.getWindow();
 		}
 		isFocused = client.isWindowFocused();
-		isVisible = GLFW.glfwGetWindowAttrib(window.getHandle(), GLFW.GLFW_VISIBLE) != 0;
+		isVisible = GLFW.glfwGetWindowAttrib(window.getHandle(), GLFW.GLFW_VISIBLE) != 0
+			&& GLFW.glfwGetWindowAttrib(window.getHandle(), GLFW.GLFW_ICONIFIED) == 0;
 		isHovered = GLFW.glfwGetWindowAttrib(window.getHandle(), GLFW.GLFW_HOVERED) != 0;
 		
 		checkForStateChanges();
