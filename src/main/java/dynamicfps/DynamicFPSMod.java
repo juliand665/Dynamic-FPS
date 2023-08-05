@@ -5,6 +5,9 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import com.mojang.blaze3d.glfw.Window;
+import net.minecraft.client.option.CloudRenderMode;
+import net.minecraft.client.option.GraphicsMode;
+import net.minecraft.client.option.ParticlesMode;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.Util;
 import org.lwjgl.glfw.GLFW;
@@ -16,9 +19,9 @@ import static dynamicfps.util.Localization.translationKey;
 
 public class DynamicFPSMod implements ModInitializer {
 	public static final String MOD_ID = "dynamicfps";
-	
+
 	public static DynamicFPSConfig config = null;
-	
+
 	private static boolean isDisabled = false;
 	public static boolean isDisabled() { return isDisabled; }
 
@@ -52,6 +55,11 @@ public class DynamicFPSMod implements ModInitializer {
 	private static Window window;
 	private static boolean isFocused, isVisible, isHovered;
 	private static long lastRender;
+	private static CloudRenderMode previousCloudRenderMode;
+	private static GraphicsMode previousGraphicsMode;
+	private static boolean previousSmoothLighting;
+	private static ParticlesMode previousParticlesMode;
+	private static boolean previousEntityShadows;
 	/**
 	 Determines whether the game should render anything at this time. If not, blocks for a short time.
 
@@ -107,9 +115,28 @@ public class DynamicFPSMod implements ModInitializer {
 
 	private static void onFocus() {
 		setVolumeMultiplier(1);
+		MinecraftClient.getInstance().options.getRenderClouds().set(previousCloudRenderMode);
+		MinecraftClient.getInstance().options.getGraphicsMode().set(previousGraphicsMode);
+		MinecraftClient.getInstance().options.getSmoothLighting().set(previousSmoothLighting);
+		MinecraftClient.getInstance().options.getParticles().set(previousParticlesMode);
+		MinecraftClient.getInstance().options.getEntityShadows().set(previousEntityShadows);
 	}
 
 	private static void onUnfocus() {
+		if(config.reduceGraphicsWhenUnfocused) {
+			previousCloudRenderMode = MinecraftClient.getInstance().options.getCloudRenderMode();
+			MinecraftClient.getInstance().options.getRenderClouds().set(CloudRenderMode.OFF);
+			previousGraphicsMode = MinecraftClient.getInstance().options.getGraphicsMode().get();
+			MinecraftClient.getInstance().options.getGraphicsMode().set(GraphicsMode.FAST);
+			previousSmoothLighting = MinecraftClient.getInstance().options.getSmoothLighting().get();
+			MinecraftClient.getInstance().options.getSmoothLighting().set(false);
+			previousParticlesMode = MinecraftClient.getInstance().options.getParticles().get();
+			MinecraftClient.getInstance().options.getParticles().set(ParticlesMode.MINIMAL);
+			previousEntityShadows = MinecraftClient.getInstance().options.getEntityShadows().get();
+			MinecraftClient.getInstance().options.getEntityShadows().set(false);
+		}
+
+
 		if (isVisible) {
 			setVolumeMultiplier(config.unfocusedVolumeMultiplier);
 		}
