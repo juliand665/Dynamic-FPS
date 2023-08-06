@@ -19,7 +19,7 @@ public final class DynamicFPSConfig {
 	public float unfocusedVolumeMultiplier = 0.25f;
 	/// Volume multiplier when not visible.
 	public float hiddenVolumeMultiplier = 0f;
-	public boolean reduceGraphicsWhenUnfocused = true;
+	public boolean reduceGraphicsWhenUnfocused = false;
 	/// Whether to trigger a garbage collector run whenever the game is unfocused.
 	public boolean runGCOnUnfocus = false;
 
