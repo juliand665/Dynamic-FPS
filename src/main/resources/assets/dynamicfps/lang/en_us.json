@@ -5,6 +5,7 @@
   "config.dynamicfps.unfocused_fps": "Unfocused FPS target",
   "config.dynamicfps.restore_when_hovered": "Restore FPS when hovered",
   "config.dynamicfps.turn_down_graphic_settings": "Turn down graphic setting when unfocused",
+  "config.dynamicfps.fully_turn_down_graphic_settings": "Fully Turns down graphic setting when unfocused. (Will cause the chunks to reload)",
   "config.dynamicfps.run_gc_on_unfocus": "Run GC on unfocus",
   "config.dynamicfps.unfocused_volume": "Volume when unfocused (%)",
   "config.dynamicfps.hidden_volume": "Volume when not visible (%)",

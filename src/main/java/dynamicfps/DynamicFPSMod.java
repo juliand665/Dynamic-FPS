@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import com.mojang.blaze3d.glfw.Window;
 import net.minecraft.client.option.CloudRenderMode;
+import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.option.GraphicsMode;
 import net.minecraft.client.option.ParticlesMode;
 import net.minecraft.sound.SoundCategory;
@@ -60,6 +61,7 @@ public class DynamicFPSMod implements ModInitializer {
 	private static boolean previousSmoothLighting;
 	private static ParticlesMode previousParticlesMode;
 	private static boolean previousEntityShadows;
+	private static double previousEntityDistance;
 	/**
 	 Determines whether the game should render anything at this time. If not, blocks for a short time.
 
@@ -115,25 +117,32 @@ public class DynamicFPSMod implements ModInitializer {
 
 	private static void onFocus() {
 		setVolumeMultiplier(1);
-		MinecraftClient.getInstance().options.getRenderClouds().set(previousCloudRenderMode);
-		MinecraftClient.getInstance().options.getGraphicsMode().set(previousGraphicsMode);
-		MinecraftClient.getInstance().options.getSmoothLighting().set(previousSmoothLighting);
-		MinecraftClient.getInstance().options.getParticles().set(previousParticlesMode);
-		MinecraftClient.getInstance().options.getEntityShadows().set(previousEntityShadows);
+		GameOptions gameOptions = MinecraftClient.getInstance().options;
+		gameOptions.getRenderClouds().set(previousCloudRenderMode);
+		gameOptions.getGraphicsMode().set(previousGraphicsMode);
+		gameOptions.getSmoothLighting().set(previousSmoothLighting);
+		gameOptions.getParticles().set(previousParticlesMode);
+		gameOptions.getEntityShadows().set(previousEntityShadows);
+		gameOptions.getEntityDistanceScaling().set(previousEntityDistance);
 	}
 
 	private static void onUnfocus() {
+		GameOptions gameOptions = MinecraftClient.getInstance().options;
+		if(config.fullyReduceGraphicsWhenUnfocused){
+			previousGraphicsMode = gameOptions.getGraphicsMode().get();
+			gameOptions.getGraphicsMode().set(GraphicsMode.FAST);
+			previousSmoothLighting = gameOptions.getSmoothLighting().get();
+			gameOptions.getSmoothLighting().set(false);
+		}
 		if(config.reduceGraphicsWhenUnfocused) {
-			previousCloudRenderMode = MinecraftClient.getInstance().options.getCloudRenderMode();
-			MinecraftClient.getInstance().options.getRenderClouds().set(CloudRenderMode.OFF);
-			previousGraphicsMode = MinecraftClient.getInstance().options.getGraphicsMode().get();
-			MinecraftClient.getInstance().options.getGraphicsMode().set(GraphicsMode.FAST);
-			previousSmoothLighting = MinecraftClient.getInstance().options.getSmoothLighting().get();
-			MinecraftClient.getInstance().options.getSmoothLighting().set(false);
-			previousParticlesMode = MinecraftClient.getInstance().options.getParticles().get();
-			MinecraftClient.getInstance().options.getParticles().set(ParticlesMode.MINIMAL);
-			previousEntityShadows = MinecraftClient.getInstance().options.getEntityShadows().get();
-			MinecraftClient.getInstance().options.getEntityShadows().set(false);
+			previousCloudRenderMode = gameOptions.getCloudRenderMode();
+			gameOptions.getRenderClouds().set(CloudRenderMode.OFF);
+			previousParticlesMode = gameOptions.getParticles().get();
+			gameOptions.getParticles().set(ParticlesMode.MINIMAL);
+			previousEntityShadows = gameOptions.getEntityShadows().get();
+			gameOptions.getEntityShadows().set(false);
+			previousEntityDistance = gameOptions.getEntityDistanceScaling().get();
+			gameOptions.getEntityDistanceScaling().set(0.5);
 		}
 
 

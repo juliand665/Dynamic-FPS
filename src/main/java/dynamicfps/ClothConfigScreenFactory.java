@@ -69,6 +69,14 @@ public final class ClothConfigScreenFactory {
 			)
 			.addEntry(entryBuilder
 				.startBooleanToggle(
+					localized("config", "fully_turn_down_graphic_settings"),
+					DynamicFPSMod.config.fullyReduceGraphicsWhenUnfocused
+				)
+				.setSaveConsumer(value -> DynamicFPSMod.config.fullyReduceGraphicsWhenUnfocused = value)
+				.build()
+			)
+			.addEntry(entryBuilder
+				.startBooleanToggle(
 					localized("config", "run_gc_on_unfocus"),
 					DynamicFPSMod.config.runGCOnUnfocus
 				)
