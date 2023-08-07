@@ -154,13 +154,12 @@ public class DynamicFPSMod implements ModInitializer {
 
 	private static void onUnfocus() {
 		GameOptions gameOptions = MinecraftClient.getInstance().options;
-		if(config.fullyReduceGraphicsWhenUnfocused){
+		if (config.fullyReduceGraphicsWhenUnfocused) {
 			reduceGraphicsFully(gameOptions);
 		}
-		if(config.reduceGraphicsWhenUnfocused) {
+		if (config.reduceGraphicsWhenUnfocused) {
 			reduceGraphics(gameOptions);
 		}
-
 
 		if (isVisible) {
 			setVolumeMultiplier(config.unfocusedVolumeMultiplier);
