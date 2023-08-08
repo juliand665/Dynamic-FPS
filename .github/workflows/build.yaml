@@ -37,7 +37,7 @@ jobs:
       - name: build
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: build
+          arguments: build --warning-mode=all
           cache-read-only: ${{ github.ref != 'refs/heads/main' }}
       - name: capture build artifacts
         if: ${{ runner.os == 'Linux' && matrix.java == '20' }} # Upload artifacts from one job, ignore the rest
