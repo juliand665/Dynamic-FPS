@@ -17,6 +17,7 @@ import java.util.function.Function;
 public class FlawlessFrames {
 	private static final Set<Object> ACTIVE = ConcurrentHashMap.newKeySet();
 
+	@SuppressWarnings("unchecked") // Unparameterized Consumer usage
 	static void onClientInitialization() {
 		Function<String, Consumer<Boolean>> provider = name -> {
 			Object token = new Object();
