@@ -16,7 +16,7 @@ import java.util.function.Function;
  */
 public class FlawlessFrames {
 	private static final Set<Object> ACTIVE = ConcurrentHashMap.newKeySet();
-	
+
 	static void onClientInitialization() {
 		Function<String, Consumer<Boolean>> provider = name -> {
 			Object token = new Object();
@@ -33,7 +33,7 @@ public class FlawlessFrames {
 			.getEntrypoints("frex_flawless_frames", Consumer.class)
 			.forEach(api -> api.accept(provider));
 	}
-	
+
 	/**
 	 Returns whether one or more mods have requested Flawless Frames to be active, and therefore frames should not be skipped.
 	 */

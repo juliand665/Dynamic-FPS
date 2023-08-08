@@ -21,15 +21,15 @@ public final class DynamicFPSConfig {
 	public float hiddenVolumeMultiplier = 0f;
 	/// Whether to trigger a garbage collector run whenever the game is unfocused.
 	public boolean runGCOnUnfocus = false;
-	
+
 	private DynamicFPSConfig() {}
-	
+
 	public static DynamicFPSConfig load() {
 		File file = new File(
 			FabricLoader.getInstance().getConfigDir().toString(),
 			DynamicFPSMod.MOD_ID + ".toml"
 		);
-		
+
 		DynamicFPSConfig config;
 		if (file.exists()) {
 			Toml configTOML = new Toml().read(file);
@@ -42,7 +42,7 @@ public final class DynamicFPSConfig {
 		}
 		return config;
 	}
-	
+
 	public void save() {
 		TomlWriter writer = new TomlWriter();
 		try {

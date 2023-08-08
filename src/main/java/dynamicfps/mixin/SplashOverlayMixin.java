@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Shadow;
 public class SplashOverlayMixin implements DynamicFPSSplashOverlay {
 	@Shadow
 	private long reloadCompleteTime;
-	
+
 	@Override
 	public boolean dynamicfps$isReloadComplete() {
 		return reloadCompleteTime > -1L;

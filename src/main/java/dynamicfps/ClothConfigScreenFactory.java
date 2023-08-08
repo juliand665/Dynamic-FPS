@@ -13,7 +13,7 @@ public final class ClothConfigScreenFactory {
 			.setTitle(localized("config", "title"))
 			.setSavingRunnable(DynamicFPSMod.config::save);
 		ConfigEntryBuilder entryBuilder = builder.entryBuilder();
-		
+
 		// general
 		builder.getOrCreateCategory(localized("config", "category.general"))
 			.addEntry(entryBuilder
@@ -67,7 +67,7 @@ public final class ClothConfigScreenFactory {
 				.setSaveConsumer(value -> DynamicFPSMod.config.runGCOnUnfocus = value)
 				.build()
 			);
-		
+
 		return builder.build();
 	}
 }

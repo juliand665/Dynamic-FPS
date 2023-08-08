@@ -10,7 +10,7 @@ public class ModMenuIntegration implements ModMenuApi {
 		if (FabricLoader.getInstance().isModLoaded("cloth-config2")) {
 			return ClothConfigScreenFactory::genConfig;
 		} else {
-			return (parent) -> null;
+			return parent -> null;
 		}
 	}
 }

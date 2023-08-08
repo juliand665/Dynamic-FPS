@@ -8,10 +8,10 @@ public final class Localization {
 	public static String translationKey(String domain, String path) {
 		return domain + "." + DynamicFPSMod.MOD_ID + "." + path;
 	}
-	
+
 	public static Text localized(String domain, String path, Object... args) {
 		return Text.translatable(translationKey(domain, path), args);
 	}
-	
+
 	private Localization() {}
 }
