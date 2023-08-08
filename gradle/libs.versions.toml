@@ -1,0 +1,31 @@
+[versions]
+minecraft = "1.20"
+
+quilt_loom = "1.3.2"
+quilt_mappings = "1.20+build.1"
+
+fabric_loader = "0.14.22"
+
+modmenu = "7.0.1"
+fabric_api = "0.83.0+1.20"
+
+toml4j = "0.7.2"
+cloth_config = "11.0.99"
+
+[libraries]
+minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
+quilt_mappings = { module = "org.quiltmc:quilt-mappings", version.ref = "quilt_mappings" }
+
+fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_loader" }
+
+modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
+fabric_api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric_api" }
+
+toml4j = { module = "com.moandjiezana.toml:toml4j", version.ref = "toml4j" }
+cloth_config = { module = "me.shedaniel.cloth:cloth-config-fabric", version.ref = "cloth_config" }
+
+[bundles]
+fabric_api = ["fabric_api"]
+
+[plugins]
+quilt_loom = { id = "org.quiltmc.loom", version.ref = "quilt_loom" }

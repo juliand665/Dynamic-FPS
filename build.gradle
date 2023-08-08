@@ -1,87 +1,60 @@
 plugins {
-	id 'fabric-loom' version '1.2.+'
 	id 'maven-publish'
-	id 'io.github.p03w.machete' version '2.0.0'
+	alias libs.plugins.quilt.loom
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
-
-archivesBaseName = project.archives_base_name
-version = project.mod_version
 group = project.maven_group
+version = "${generateVersion()}+minecraft-${libs.versions.minecraft.get()}"
+
+base {
+	archivesName = project.archives_base_name
+}
 
 repositories {
-	maven { url = "https://maven.jamieswhiteshirt.com/libs-release/" }
-	maven { url = "https://jitpack.io" }
-	maven { url = "https://maven.shedaniel.me/" }
-	maven { url = "https://maven.terraformersmc.com/releases/" }
-	maven { url = "https://maven.quiltmc.org/repository/release" }
+	maven { url = "https://maven.shedaniel.me/" } // cloth config
+	maven { url = "https://maven.terraformersmc.com/releases/" } // modmenu
 }
 
 dependencies {
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings(loom.layered {
-		mappings "org.quiltmc:quilt-mappings:${minecraft_version}+build.${project.quilt_mappings}:intermediary-v2"
-	})
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-	
-	// Fabric API. This is technically optional, but you probably want it anyway.
-	modImplementation fabricApi.module('fabric-resource-loader-v0', project.fabric_version)
-	modImplementation fabricApi.module('fabric-rendering-v1', project.fabric_version)
-	modImplementation fabricApi.module('fabric-lifecycle-events-v1', project.fabric_version)
-	modImplementation fabricApi.module('fabric-key-binding-api-v1', project.fabric_version)
-	
-	// Mod Menu, to add the hook for a config screen
-	modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
-	
-	// Easy config screen setup library
-	modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_version}") {
-		exclude(group: "net.fabricmc.fabric-api")
-	}
-	
-	// Using the TOML config format
-	modImplementation("com.moandjiezana.toml:toml4j:${project.toml4j_version}")
-	include "com.moandjiezana.toml:toml4j:${project.toml4j_version}"
-	
-	// Nullability Annotations
-	implementation "com.google.code.findbugs:jsr305:${project.findbugs_version}"
+	minecraft libs.minecraft
+	// mappings loom.officialMojangMappings()
+	mappings variantOf(libs.quilt.mappings) { classifier 'intermediary-v2' }
+
+	modImplementation libs.fabric.loader
+	modImplementation libs.bundles.fabric.api
+
+	modApi libs.modmenu
+	modApi libs.cloth.config
+
+	include libs.toml4j
+	modImplementation libs.toml4j
 }
 
 processResources {
-	inputs.property "version", project.version
+	inputs.property "version", generateVersion()
 
 	filesMatching("fabric.mod.json") {
-		expand "version": project.version
+		expand "version": generateVersion()
 	}
 }
 
+java {
+	withSourcesJar()
+
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
+}
+
 tasks.withType(JavaCompile).configureEach {
-	// ensure that the encoding is set to UTF-8, no matter what the system default is
-	// this fixes some edge cases with special characters not displaying correctly
-	// see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
-	// If Javadoc is generated, this must be specified in that task too.
+	it.options.release = 17
 	it.options.encoding = "UTF-8"
 
-	// Minecraft 1.18 upwards uses Java 17.
-	it.options.release = 17
-	
 	it.options.compilerArgs += ["-Xlint:deprecation"]
 }
 
-java {
-	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-	// if it is present.
-	// If you remove this line, sources will not be generated.
-	withSourcesJar()
-}
-
 jar {
-	exclude '**/*.psd'
-	exclude '**/*.afdesign'
-	
 	from("LICENSE") {
-		rename { "${it}_${project.archivesBaseName}"}
+		rename { "${it}-${project.archives_base_name}.txt"}
 	}
 }
 
@@ -89,13 +62,7 @@ jar {
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
-			// add all the jars that should be included when publishing to maven
-			artifact(remapJar) {
-				builtBy remapJar
-			}
-			artifact(sourcesJar) {
-				builtBy remapSourcesJar
-			}
+			from components.java
 		}
 	}
 
@@ -106,4 +73,10 @@ publishing {
 		// The repositories here will be used for publishing your artifact, not for
 		// retrieving dependencies.
 	}
+}
+
+def generateVersion() {
+	var version = project.mod_version;
+	// NOTE: To create a release jar run `./gradlew build -Prelease=true`
+	return project.hasProperty("release") ? version : version + "-alpha";
 }
