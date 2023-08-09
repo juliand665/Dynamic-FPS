@@ -5,12 +5,12 @@
   "mixins": [
   ],
   "client": [
-    "BlockableEventLoopMixin",
     "GameRendererMixin",
     "LoadingOverlayMixin",
     "MinecraftMixin",
     "ScreenMixin",
-    "ToastComponentMixin"
+    "ToastComponentMixin",
+    "bugfix.BlockableEventLoopMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,4 +1,4 @@
-package dynamicfps.mixin;
+package dynamicfps.mixin.bugfix;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
