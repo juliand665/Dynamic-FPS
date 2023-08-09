@@ -1,11 +1,11 @@
 package dynamicfps;
 
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.font.TextRenderer.TextLayerType;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.text.Text;
+import net.minecraft.client.gui.Font.DisplayMode;
+import net.minecraft.network.chat.Component;
 
 import static dynamicfps.util.Localization.localized;
 
@@ -21,22 +21,22 @@ public final class HudInfoRenderer implements HudRenderCallback {
 		}
 	}
 
-	private void drawCenteredText(GuiGraphics drawContext, Text text, float y) {
-		MinecraftClient client = MinecraftClient.getInstance();
-		TextRenderer textRenderer = client.inGameHud.getTextRenderer();
+	private void drawCenteredText(GuiGraphics drawContext, Component component, float y) {
+		Minecraft client = Minecraft.getInstance();
+		Font fontRenderer = client.gui.getFont();
 
-		int windowWidth = client.getWindow().getScaledWidth();
-		int stringWidth = textRenderer.getWidth(text);
+		int windowWidth = client.getWindow().getGuiScaledWidth();
+		int stringWidth = fontRenderer.width(component);
 
-		textRenderer.draw(
-			text,
+		fontRenderer.drawInBatch(
+			component,
 			(windowWidth - stringWidth) / 2f,
 			y,
 			0xFFFFFFFF,
 			true,
 			new Matrix4f(),
-			drawContext.getVertexConsumers(),
-			TextLayerType.NORMAL,
+			drawContext.bufferSource(),
+			DisplayMode.NORMAL,
 			0,
 			255
 		);

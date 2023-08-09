@@ -1,17 +1,18 @@
 package dynamicfps.mixin;
 
 import dynamicfps.util.DynamicFPSSplashOverlay;
-import net.minecraft.client.gui.screen.SplashOverlay;
+import net.minecraft.client.gui.screens.LoadingOverlay;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(SplashOverlay.class)
-public class SplashOverlayMixin implements DynamicFPSSplashOverlay {
+@Mixin(LoadingOverlay.class)
+public class LoadingOverlayMixin implements DynamicFPSSplashOverlay {
 	@Shadow
-	private long reloadCompleteTime;
+	private long fadeOutStart;
 
 	@Override
 	public boolean dynamicfps$isReloadComplete() {
-		return reloadCompleteTime > -1L;
+		return fadeOutStart > -1L;
 	}
 }

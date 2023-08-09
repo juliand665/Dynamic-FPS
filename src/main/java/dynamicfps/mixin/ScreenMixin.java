@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import dynamicfps.util.DynamicFPSScreen;
 import dynamicfps.util.ScreenOptimizationCompat;
-import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screens.Screen;
 
 @Mixin(Screen.class)
 public class ScreenMixin implements DynamicFPSScreen {
@@ -36,8 +36,8 @@ public class ScreenMixin implements DynamicFPSScreen {
 		}
 	}
 
-	@Inject(method = "renderBackgroundTexture", at = @At("HEAD"))
-	private void onRenderBackgroundTexture(CallbackInfo callbackInfo) {
+	@Inject(method = "renderDirtBackground", at = @At("HEAD"))
+	private void onRenderDirtBackground(CallbackInfo callbackInfo) {
 		if (!this.dynamicfps$hasOptedOut) {
 			this.dynamicfps$canOptimize = true; // Signal to apply optimizations on next frame
 		}

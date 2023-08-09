@@ -1,19 +1,20 @@
 package dynamicfps;
 
-import dynamicfps.util.KeyBindingHandler;
+import dynamicfps.util.KeyMappingHandler;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.minecraft.client.MinecraftClient;
-import com.mojang.blaze3d.glfw.Window;
-import net.minecraft.client.option.CloudRenderMode;
-import net.minecraft.client.option.GameOptions;
-import net.minecraft.client.option.GraphicsMode;
-import net.minecraft.client.option.ParticlesMode;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.util.Util;
+import net.minecraft.Util;
+import net.minecraft.client.CloudStatus;
+import net.minecraft.client.GraphicsStatus;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.Options;
+import net.minecraft.client.ParticleStatus;
+import net.minecraft.sounds.SoundSource;
 
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
+
+import com.mojang.blaze3d.platform.Window;
 
 import java.util.concurrent.locks.LockSupport;
 
@@ -30,13 +31,13 @@ public class DynamicFPSMod implements ModInitializer {
 	private static boolean isForcingLowFPS = false;
 	public static boolean isForcingLowFPS() { return isForcingLowFPS; }
 
-	private static final KeyBindingHandler toggleForcedKeyBinding = new KeyBindingHandler(
+	private static final KeyMappingHandler toggleForcedKeyBinding = new KeyMappingHandler(
 		translationKey("key", "toggle_forced"),
 		"key.categories.misc",
 		() -> isForcingLowFPS = !isForcingLowFPS
 	);
 
-	private static final KeyBindingHandler toggleDisabledKeyBinding = new KeyBindingHandler(
+	private static final KeyMappingHandler toggleDisabledKeyBinding = new KeyMappingHandler(
 		translationKey("key", "toggle_disabled"),
 		"key.categories.misc",
 		() -> isDisabled = !isDisabled
@@ -53,14 +54,14 @@ public class DynamicFPSMod implements ModInitializer {
 		FlawlessFrames.onClientInitialization();
 	}
 
-	private static MinecraftClient client;
+	private static Minecraft client;
 	private static Window window;
 	private static boolean isFocused, isVisible, isHovered;
 	private static long lastRender;
-	private static CloudRenderMode previousCloudRenderMode;
-	private static GraphicsMode previousGraphicsMode;
-	private static boolean previousSmoothLighting;
-	private static ParticlesMode previousParticlesMode;
+	private static CloudStatus previousCloudStatus;
+	private static GraphicsStatus previousGraphicsStatus;
+	private static boolean previousAmbientOcclusion;
+	private static ParticleStatus previousParticlesStatus;
 	private static boolean previousEntityShadows;
 	private static double previousEntityDistance;
 	/**
@@ -72,17 +73,17 @@ public class DynamicFPSMod implements ModInitializer {
 		if (isDisabled || FlawlessFrames.isActive()) return true;
 
 		if (client == null) {
-			client = MinecraftClient.getInstance();
+			client = Minecraft.getInstance();
 			window = client.getWindow();
 		}
-		isFocused = client.isWindowFocused();
-		isVisible = GLFW.glfwGetWindowAttrib(window.getHandle(), GLFW.GLFW_VISIBLE) != 0
-			&& GLFW.glfwGetWindowAttrib(window.getHandle(), GLFW.GLFW_ICONIFIED) == 0;
-		isHovered = GLFW.glfwGetWindowAttrib(window.getHandle(), GLFW.GLFW_HOVERED) != 0;
+		isFocused = client.isWindowActive();
+		isVisible = GLFW.glfwGetWindowAttrib(window.getWindow(), GLFW.GLFW_VISIBLE) != 0
+			&& GLFW.glfwGetWindowAttrib(window.getWindow(), GLFW.GLFW_ICONIFIED) == 0;
+		isHovered = GLFW.glfwGetWindowAttrib(window.getWindow(), GLFW.GLFW_HOVERED) != 0;
 
 		checkForStateChanges();
 
-		long currentTime = Util.getMeasuringTimeMs();
+		long currentTime = Util.getEpochMillis();
 		long timeSinceLastRender = currentTime - lastRender;
 
 		if (!checkForRender(timeSinceLastRender)) return false;
@@ -95,34 +96,34 @@ public class DynamicFPSMod implements ModInitializer {
 		return isDisabled || FlawlessFrames.isActive() || fpsOverride() == null;
 	}
 
-	public static void reduceGraphics(GameOptions gameOptions) {
-		previousCloudRenderMode = gameOptions.getCloudRenderMode();
-		gameOptions.getRenderClouds().set(CloudRenderMode.OFF);
-		previousParticlesMode = gameOptions.getParticles().get();
-		gameOptions.getParticles().set(ParticlesMode.MINIMAL);
-		previousEntityShadows = gameOptions.getEntityShadows().get();
-		gameOptions.getEntityShadows().set(false);
-		previousEntityDistance = gameOptions.getEntityDistanceScaling().get();
-		gameOptions.getEntityDistanceScaling().set(0.5);
+	public static void reduceGraphics(Options options) {
+		previousCloudStatus = options.cloudStatus().get();
+		options.cloudStatus().set(CloudStatus.OFF);
+		previousParticlesStatus = options.particles().get();
+		options.particles().set(ParticleStatus.MINIMAL);
+		previousEntityShadows = options.entityShadows().get();
+		options.entityShadows().set(false);
+		previousEntityDistance = options.entityDistanceScaling().get();
+		options.entityDistanceScaling().set(0.5);
 	}
 
-	public static void increaseGraphics(GameOptions gameOptions) {
-		gameOptions.getRenderClouds().set(previousCloudRenderMode);
-		gameOptions.getParticles().set(previousParticlesMode);
-		gameOptions.getEntityShadows().set(previousEntityShadows);
-		gameOptions.getEntityDistanceScaling().set(previousEntityDistance);
+	public static void increaseGraphics(Options options) {
+		options.cloudStatus().set(previousCloudStatus);
+		options.particles().set(previousParticlesStatus);
+		options.entityShadows().set(previousEntityShadows);
+		options.entityDistanceScaling().set(previousEntityDistance);
 	}
 
-	public static void reduceGraphicsFully(GameOptions gameOptions) {
-		previousGraphicsMode = gameOptions.getGraphicsMode().get();
-		gameOptions.getGraphicsMode().set(GraphicsMode.FAST);
-		previousSmoothLighting = gameOptions.getSmoothLighting().get();
-		gameOptions.getSmoothLighting().set(false);
+	public static void reduceGraphicsFully(Options options) {
+		previousGraphicsStatus = options.graphicsMode().get();
+		options.graphicsMode().set(GraphicsStatus.FAST);
+		previousAmbientOcclusion = options.ambientOcclusion().get();
+		options.ambientOcclusion().set(false);
 	}
 
-	public static void increaseGraphicsFully(GameOptions gameOptions) {
-		gameOptions.getGraphicsMode().set(previousGraphicsMode);
-		gameOptions.getSmoothLighting().set(previousSmoothLighting);
+	public static void increaseGraphicsFully(Options options) {
+		options.graphicsMode().set(previousGraphicsStatus);
+		options.ambientOcclusion().set(previousAmbientOcclusion);
 	}
 
 	private static boolean wasFocused = true;
@@ -149,22 +150,22 @@ public class DynamicFPSMod implements ModInitializer {
 
 	private static void onFocus() {
 		setVolumeMultiplier(1);
-		GameOptions gameOptions = MinecraftClient.getInstance().options;
+		Options options = Minecraft.getInstance().options;
 		if (config.fullyReduceGraphicsWhenUnfocused) {
-			increaseGraphicsFully(gameOptions);
+			increaseGraphicsFully(options);
 		}
 		if (config.reduceGraphicsWhenUnfocused) {
-			increaseGraphics(gameOptions);
+			increaseGraphics(options);
 		}
 	}
 
 	private static void onUnfocus() {
-		GameOptions gameOptions = MinecraftClient.getInstance().options;
+		Options options = Minecraft.getInstance().options;
 		if (config.fullyReduceGraphicsWhenUnfocused) {
-			reduceGraphicsFully(gameOptions);
+			reduceGraphicsFully(options);
 		}
 		if (config.reduceGraphicsWhenUnfocused) {
-			reduceGraphics(gameOptions);
+			reduceGraphics(options);
 		}
 
 		if (isVisible) {
@@ -188,13 +189,13 @@ public class DynamicFPSMod implements ModInitializer {
 
 	private static void setVolumeMultiplier(float multiplier) {
 		// setting the volume to 0 stops all sounds (including music), which we want to avoid if possible.
-		var clientWillPause = !isFocused && client.options.pauseOnLostFocus && client.currentScreen == null;
+		var clientWillPause = !isFocused && client.options.pauseOnLostFocus && client.screen == null;
 		// if the client would pause anyway, we don't need to do anything because that will already pause all sounds.
 		if (multiplier == 0 && clientWillPause) return;
 
-		var baseVolume = client.options.getSoundVolume(SoundCategory.MASTER);
-		client.getSoundManager().updateSoundVolume(
-			SoundCategory.MASTER,
+		var baseVolume = client.options.getSoundSourceVolume(SoundSource.MASTER);
+		client.getSoundManager().updateSourceVolume(
+			SoundSource.MASTER,
 			baseVolume * multiplier
 		);
 	}
@@ -242,7 +243,7 @@ public class DynamicFPSMod implements ModInitializer {
 		if (!isVisible) return 0;
 		if (isForcingLowFPS) return config.unfocusedFPS;
 		if (config.restoreFPSWhenHovered && isHovered) return null;
-		if (config.reduceFPSWhenUnfocused && !client.isWindowFocused()) return config.unfocusedFPS;
+		if (config.reduceFPSWhenUnfocused && !client.isWindowActive()) return config.unfocusedFPS;
 		return null;
 	}
 }

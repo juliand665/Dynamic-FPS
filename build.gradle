@@ -1,6 +1,6 @@
 plugins {
 	id 'maven-publish'
-	alias libs.plugins.quilt.loom
+	alias libs.plugins.fabric.loom
 }
 
 group = project.maven_group
@@ -17,8 +17,7 @@ repositories {
 
 dependencies {
 	minecraft libs.minecraft
-	// mappings loom.officialMojangMappings()
-	mappings variantOf(libs.quilt.mappings) { classifier 'intermediary-v2' }
+	mappings loom.officialMojangMappings()
 
 	modImplementation libs.fabric.loader
 	modImplementation libs.bundles.fabric.api
