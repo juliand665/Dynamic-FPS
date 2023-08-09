@@ -1,18 +1,18 @@
 {
-  "required": true,
-  "package": "dynamicfps.mixin",
-  "compatibilityLevel": "JAVA_17",
-  "mixins": [
-  ],
-  "client": [
-    "GameRendererMixin",
-    "LoadingOverlayMixin",
-    "MinecraftMixin",
-    "ScreenMixin",
-    "ToastComponentMixin",
-    "bugfix.BlockableEventLoopMixin"
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  }
+	"required": true,
+	"package": "dynamicfps.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [],
+	"client": [
+		"GameRendererMixin",
+		"LoadingOverlayMixin",
+		"MinecraftMixin",
+		"ScreenMixin",
+		"StatsScreenMixin",
+		"ToastComponentMixin",
+		"bugfix.BlockableEventLoopMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
 }
