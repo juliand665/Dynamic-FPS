@@ -13,7 +13,7 @@ public final class ClothConfigScreenFactory {
 			.setTitle(localized("config", "title"))
 			.setSavingRunnable(DynamicFPSMod.config::save);
 		ConfigEntryBuilder entryBuilder = builder.entryBuilder();
-		
+
 		// general
 		builder.getOrCreateCategory(localized("config", "category.general"))
 			.addEntry(entryBuilder
@@ -61,13 +61,29 @@ public final class ClothConfigScreenFactory {
 			)
 			.addEntry(entryBuilder
 				.startBooleanToggle(
+					localized("config", "turn_down_graphic_settings"),
+					DynamicFPSMod.config.reduceGraphicsWhenUnfocused
+				)
+				.setSaveConsumer(value -> DynamicFPSMod.config.reduceGraphicsWhenUnfocused = value)
+				.build()
+			)
+			.addEntry(entryBuilder
+				.startBooleanToggle(
+					localized("config", "fully_turn_down_graphic_settings"),
+					DynamicFPSMod.config.fullyReduceGraphicsWhenUnfocused
+				)
+				.setSaveConsumer(value -> DynamicFPSMod.config.fullyReduceGraphicsWhenUnfocused = value)
+				.build()
+			)
+			.addEntry(entryBuilder
+				.startBooleanToggle(
 					localized("config", "run_gc_on_unfocus"),
 					DynamicFPSMod.config.runGCOnUnfocus
 				)
 				.setSaveConsumer(value -> DynamicFPSMod.config.runGCOnUnfocus = value)
 				.build()
 			);
-		
+
 		return builder.build();
 	}
 }
