@@ -5,6 +5,10 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import com.mojang.blaze3d.glfw.Window;
+import net.minecraft.client.option.CloudRenderMode;
+import net.minecraft.client.option.GameOptions;
+import net.minecraft.client.option.GraphicsMode;
+import net.minecraft.client.option.ParticlesMode;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.Util;
 
@@ -53,6 +57,12 @@ public class DynamicFPSMod implements ModInitializer {
 	private static Window window;
 	private static boolean isFocused, isVisible, isHovered;
 	private static long lastRender;
+	private static CloudRenderMode previousCloudRenderMode;
+	private static GraphicsMode previousGraphicsMode;
+	private static boolean previousSmoothLighting;
+	private static ParticlesMode previousParticlesMode;
+	private static boolean previousEntityShadows;
+	private static double previousEntityDistance;
 	/**
 	 Determines whether the game should render anything at this time. If not, blocks for a short time.
 
@@ -85,6 +95,36 @@ public class DynamicFPSMod implements ModInitializer {
 		return isDisabled || FlawlessFrames.isActive() || fpsOverride() == null;
 	}
 
+	public static void reduceGraphics(GameOptions gameOptions) {
+		previousCloudRenderMode = gameOptions.getCloudRenderMode();
+		gameOptions.getRenderClouds().set(CloudRenderMode.OFF);
+		previousParticlesMode = gameOptions.getParticles().get();
+		gameOptions.getParticles().set(ParticlesMode.MINIMAL);
+		previousEntityShadows = gameOptions.getEntityShadows().get();
+		gameOptions.getEntityShadows().set(false);
+		previousEntityDistance = gameOptions.getEntityDistanceScaling().get();
+		gameOptions.getEntityDistanceScaling().set(0.5);
+	}
+
+	public static void increaseGraphics(GameOptions gameOptions) {
+		gameOptions.getRenderClouds().set(previousCloudRenderMode);
+		gameOptions.getParticles().set(previousParticlesMode);
+		gameOptions.getEntityShadows().set(previousEntityShadows);
+		gameOptions.getEntityDistanceScaling().set(previousEntityDistance);
+	}
+
+	public static void reduceGraphicsFully(GameOptions gameOptions) {
+		previousGraphicsMode = gameOptions.getGraphicsMode().get();
+		gameOptions.getGraphicsMode().set(GraphicsMode.FAST);
+		previousSmoothLighting = gameOptions.getSmoothLighting().get();
+		gameOptions.getSmoothLighting().set(false);
+	}
+
+	public static void increaseGraphicsFully(GameOptions gameOptions) {
+		gameOptions.getGraphicsMode().set(previousGraphicsMode);
+		gameOptions.getSmoothLighting().set(previousSmoothLighting);
+	}
+
 	private static boolean wasFocused = true;
 	private static boolean wasVisible = true;
 	private static void checkForStateChanges() {
@@ -109,9 +149,24 @@ public class DynamicFPSMod implements ModInitializer {
 
 	private static void onFocus() {
 		setVolumeMultiplier(1);
+		GameOptions gameOptions = MinecraftClient.getInstance().options;
+		if (config.fullyReduceGraphicsWhenUnfocused) {
+			increaseGraphicsFully(gameOptions);
+		}
+		if (config.reduceGraphicsWhenUnfocused) {
+			increaseGraphics(gameOptions);
+		}
 	}
 
 	private static void onUnfocus() {
+		GameOptions gameOptions = MinecraftClient.getInstance().options;
+		if (config.fullyReduceGraphicsWhenUnfocused) {
+			reduceGraphicsFully(gameOptions);
+		}
+		if (config.reduceGraphicsWhenUnfocused) {
+			reduceGraphics(gameOptions);
+		}
+
 		if (isVisible) {
 			setVolumeMultiplier(config.unfocusedVolumeMultiplier);
 		}
