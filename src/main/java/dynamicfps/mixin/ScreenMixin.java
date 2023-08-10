@@ -23,6 +23,11 @@ public class ScreenMixin implements DynamicFPSScreen {
 		return dynamicfps$canOptimize;
 	}
 
+	@Override
+	public void dynamicfps$setRendersBackground(boolean value) {
+		this.dynamicfps$canOptimize = value;
+	}
+
 	@Inject(method = "init", at = @At("HEAD"))
 	private void onInit(CallbackInfo callbackInfo) {
 		String name = this.getClass().getName();
