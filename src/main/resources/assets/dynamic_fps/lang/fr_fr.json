@@ -1,0 +1,14 @@
+{
+  "config.dynamic_fps.title": "Configuration de l'IPS Dynamique",
+  "config.dynamic_fps.category.general": "Général",
+  "config.dynamic_fps.reduce_when_unfocused": "Réduire l'IPS hors focus",
+  "config.dynamic_fps.unfocused_fps": "Limite d'IPS hors focus",
+  "config.dynamic_fps.restore_when_hovered": "Restaurer l'IPS au survol",
+  "config.dynamic_fps.run_gc_on_unfocus": "Lancer le GC à la perte de focus",
+  "config.dynamic_fps.unfocused_volume": "Volume hors focus (%)",
+  "config.dynamic_fps.hidden_volume": "Volume minimisé (%)",
+  "key.dynamic_fps.toggle_forced": "Forcer la réduction d'IPS",
+  "key.dynamic_fps.toggle_disabled": "Désactiver l'IPS Dynamique",
+  "gui.dynamic_fps.hud.reducing": "IPS Dynamique: Réduction d'IPS forcée",
+  "gui.dynamic_fps.hud.disabled": "IPS Dynamique désactivée"
+}

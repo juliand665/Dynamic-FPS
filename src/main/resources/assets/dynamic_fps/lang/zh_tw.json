@@ -1,0 +1,14 @@
+{
+    "config.dynamic_fps.title": "Dynamic FPS 設定",
+    "config.dynamic_fps.category.general": "一般",
+    "config.dynamic_fps.reduce_when_unfocused": "未聚焦時限制 FPS",
+    "config.dynamic_fps.unfocused_fps": "FPS 限制值",
+    "config.dynamic_fps.restore_when_hovered": "聚焦時恢復 FPS",
+    "config.dynamic_fps.run_gc_on_unfocus": "未聚焦時降低記憶體使用量",
+    "config.dynamic_fps.unfocused_volume": "未聚焦時的音量（%）",
+    "config.dynamic_fps.hidden_volume": "視窗隱藏時的音量（%）",
+    "key.dynamic_fps.toggle_forced": "強制限制 FPS（切換）",
+    "key.dynamic_fps.toggle_disabled": "停用 Dynamic FPS（切換）",
+    "gui.dynamic_fps.hud.reducing": "Dynamic FPS：強制限制 FPS",
+    "gui.dynamic_fps.hud.disabled": "已禁用 Dynamic FPS"
+}

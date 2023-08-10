@@ -1,0 +1,12 @@
+{
+  "config.dynamic_fps.title": "Dynamic FPS seadistus",
+  "config.dynamic_fps.category.general": "Üldine",
+  "config.dynamic_fps.reduce_when_unfocused": "Vähenda fookustamata aknas kaadrisagedust",
+  "config.dynamic_fps.unfocused_fps": "Soovitud kaadrisagedus fookustamata aknas",
+  "config.dynamic_fps.restore_when_hovered": "Taasta hõljumisel kaadrisagedus",
+  "config.dynamic_fps.run_gc_on_unfocus": "Käivita fookuse kaotamisel mälukoristus (GC)",
+  "key.dynamic_fps.toggle_forced": "Sunni vähendatud ks (lüliti)",
+  "key.dynamic_fps.toggle_disabled": "Keela Dynamic FPS (lüliti)",
+  "gui.dynamic_fps.hud.reducing": "Dynamic FPS: sunnin vähendatud kaadrisagedust",
+  "gui.dynamic_fps.hud.disabled": "Dynamic FPS keelatud"
+}

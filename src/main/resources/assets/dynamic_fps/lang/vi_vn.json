@@ -1,0 +1,14 @@
+{
+  "config.dynamic_fps.title": "Định cấu hình Dynamic FPS",
+  "config.dynamic_fps.category.general": "Chung",
+  "config.dynamic_fps.reduce_when_unfocused": "Giảm FPS khi không tập trung",
+  "config.dynamic_fps.unfocused_fps": "FPS mục tiêu khi không tập trung",
+  "config.dynamic_fps.restore_when_hovered": "Khôi phục FPS khi di chuột vào",
+  "config.dynamic_fps.run_gc_on_unfocus": "Chạy GC khi không tập trung",
+  "config.dynamic_fps.unfocused_volume": "Âm lượng khi không tập trung (%)",
+  "config.dynamic_fps.hidden_volume": "Âm lượng khi không hiển thị (%)",
+  "key.dynamic_fps.toggle_forced": "Buộc giảm FPS (Đổi)",
+  "key.dynamic_fps.toggle_disabled": "Vô hiệu hoá Dynamic FPS (Đổi)",
+  "gui.dynamic_fps.hud.reducing": "Dynamic FPS: Buộc giảm FPS",
+  "gui.dynamic_fps.hud.disabled": "Dynamic FPS đã bị vô hiệu hoá"
+}

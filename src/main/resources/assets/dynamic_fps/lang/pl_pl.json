@@ -1,0 +1,11 @@
+{
+  "config.dynamic_fps.title": "Skonfiguruj Dynamic FPS",
+  "config.dynamic_fps.category.general": "Ogólne",
+  "config.dynamic_fps.reduce_when_unfocused": "Obniż FPS gdy okno gry nie jest aktywne",
+  "config.dynamic_fps.unfocused_fps": "Maksymalne FPS",
+  "config.dynamic_fps.restore_when_hovered": "Przywróć FPS gdy mysz jest nad oknem",
+  "key.dynamic_fps.toggle_forced": "Wymuś obniżenie FPS (przełącznik)",
+  "key.dynamic_fps.toggle_disabled": "Wyłącz Dynamic FPS (przełącznik)",
+  "gui.dynamic_fps.hud.reducing": "Dynamic FPS: wymuszono obniżenie FPS",
+  "gui.dynamic_fps.hud.disabled": "Dynamic FPS wyłączone"
+}

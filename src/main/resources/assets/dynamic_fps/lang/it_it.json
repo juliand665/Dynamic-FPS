@@ -1,0 +1,14 @@
+{
+  "config.dynamic_fps.title": "Configura Dynamic FPS",
+  "config.dynamic_fps.category.general": "Generale",
+  "config.dynamic_fps.reduce_when_unfocused": "Riduci FPS quando la finestra di gioco non è in focus",
+  "config.dynamic_fps.unfocused_fps": "FPS quando la finestra di gioco è in focus",
+  "config.dynamic_fps.restore_when_hovered": "Ripristina gli FPS quando si passa sopra il mouse alla finestra di gioco",
+  "config.dynamic_fps.run_gc_on_unfocus": "Esegui il GC quando la finestra di gioco è fuori focus",
+  "config.dynamic_fps.unfocused_volume": "Volume quando la finestra di gioco è in focus (%)",
+  "config.dynamic_fps.hidden_volume": "Volume quando la finestra di gioco è fuori focus (%)",
+  "key.dynamic_fps.toggle_forced": "Abilita/Disabilita la riduzione forzata degli FPS",
+  "key.dynamic_fps.toggle_disabled": "Abilita/Disabilita Dynamic FPS",
+  "gui.dynamic_fps.hud.reducing": "Dynamic FPS: Riduzione forzata degli FPS",
+  "gui.dynamic_fps.hud.disabled": "Dynamic FPS Disabilitato"
+}
