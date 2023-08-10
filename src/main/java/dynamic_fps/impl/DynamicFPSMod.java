@@ -1,6 +1,6 @@
 package dynamic_fps.impl;
 
-import dynamic_fps.impl.compat.FlawlessFrames;
+import dynamic_fps.impl.compat.FREX;
 import dynamic_fps.impl.config.DynamicFPSConfig;
 import dynamic_fps.impl.util.KeyMappingHandler;
 import net.fabricmc.api.ClientModInitializer;
@@ -53,7 +53,6 @@ public class DynamicFPSMod implements ClientModInitializer {
 		toggleDisabledKeyBinding.register();
 
 		HudRenderCallback.EVENT.register(new HudInfoRenderer());
-		FlawlessFrames.onClientInitialization();
 	}
 
 	private static Minecraft client;
@@ -72,7 +71,7 @@ public class DynamicFPSMod implements ClientModInitializer {
 	 @return whether the game should be rendered after this.
 	 */
 	public static boolean checkForRender() {
-		if (isDisabled || FlawlessFrames.isActive()) return true;
+		if (isDisabled || FREX.isFlawlessFramesActive()) return true;
 
 		if (client == null) {
 			client = Minecraft.getInstance();
@@ -95,7 +94,7 @@ public class DynamicFPSMod implements ClientModInitializer {
 	}
 
 	public static boolean shouldShowToasts() {
-		return isDisabled || FlawlessFrames.isActive() || fpsOverride() == null;
+		return isDisabled || FREX.isFlawlessFramesActive() || fpsOverride() == null;
 	}
 
 	public static void reduceGraphics(Options options) {

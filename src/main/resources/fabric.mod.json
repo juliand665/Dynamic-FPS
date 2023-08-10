@@ -21,7 +21,8 @@
 	"environment": "client",
 	"entrypoints": {
 		"client": [
-			"dynamic_fps.impl.DynamicFPSMod"
+			"dynamic_fps.impl.DynamicFPSMod",
+			"dynamic_fps.impl.compat.FREX"
 		],
 		"modmenu": [
 			"dynamic_fps.impl.compat.ModMenu"
