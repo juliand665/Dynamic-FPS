@@ -3,7 +3,7 @@ package dynamic_fps.impl;
 import dynamic_fps.impl.compat.FlawlessFrames;
 import dynamic_fps.impl.config.DynamicFPSConfig;
 import dynamic_fps.impl.util.KeyMappingHandler;
-import net.fabricmc.api.ModInitializer;
+import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.Util;
 import net.minecraft.client.CloudStatus;
@@ -22,7 +22,7 @@ import java.util.concurrent.locks.LockSupport;
 
 import static dynamic_fps.impl.util.Localization.translationKey;
 
-public class DynamicFPSMod implements ModInitializer {
+public class DynamicFPSMod implements ClientModInitializer {
 	public static final String MOD_ID = "dynamic_fps";
 
 	public static DynamicFPSConfig config = null;
@@ -46,7 +46,7 @@ public class DynamicFPSMod implements ModInitializer {
 	);
 
 	@Override
-	public void onInitialize() {
+	public void onInitializeClient() {
 		config = DynamicFPSConfig.load();
 
 		toggleForcedKeyBinding.register();
@@ -152,7 +152,7 @@ public class DynamicFPSMod implements ModInitializer {
 
 	private static void onFocus() {
 		setVolumeMultiplier(1);
-		Options options = Minecraft.getInstance().options;
+		Options options = client.options;
 		if (config.fullyReduceGraphicsWhenUnfocused) {
 			increaseGraphicsFully(options);
 		}
@@ -162,7 +162,7 @@ public class DynamicFPSMod implements ModInitializer {
 	}
 
 	private static void onUnfocus() {
-		Options options = Minecraft.getInstance().options;
+		Options options = client.options;
 		if (config.fullyReduceGraphicsWhenUnfocused) {
 			reduceGraphicsFully(options);
 		}

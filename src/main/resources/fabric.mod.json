@@ -20,7 +20,7 @@
 
 	"environment": "client",
 	"entrypoints": {
-		"main": [
+		"client": [
 			"dynamic_fps.impl.DynamicFPSMod"
 		],
 		"modmenu": [
@@ -63,7 +63,7 @@
 				],
 				"_comment": {
 					"_0": "Mojang mapping names of the enabled / disabled screens.",
-					"_1": "Sorted by fully qualified name. Not needed for mod screens.",
+					"_1": "Sorted by fully qualified name. Translation not needed for mod screens.",
 					"enabled": {
 						"net.minecraft.class_4189": "net.minecraft.client.gui.screens.AccessibilityOptionsScreen",
 						"net.minecraft.class_404": "net.minecraft.client.gui.screens.ChatOptionsScreen",
