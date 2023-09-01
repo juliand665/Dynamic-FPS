@@ -5,6 +5,7 @@
 	"mixins": [],
 	"client": [
 		"GameRendererMixin",
+		"GuiMixin",
 		"LoadingOverlayMixin",
 		"MinecraftMixin",
 		"ScreenMixin",

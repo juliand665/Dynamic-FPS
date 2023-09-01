@@ -1,14 +1,8 @@
 {
-    "config.dynamic_fps.title": "动态帧率设定",
-    "config.dynamic_fps.category.general": "预设",
-    "config.dynamic_fps.reduce_when_unfocused": "丢失焦点时限制帧率",
-    "config.dynamic_fps.unfocused_fps": "帧率限制值",
-    "config.dynamic_fps.restore_when_hovered": "窗口悬停时恢复帧率",
-    "config.dynamic_fps.run_gc_on_unfocus": "丢失焦点时回收内存",
-    "config.dynamic_fps.unfocused_volume": "丢失焦点时调节音量 (%)",
-    "config.dynamic_fps.hidden_volume": "窗口不可见时调节音量 (%)",
-    "key.dynamic_fps.toggle_forced": "强制限制帧率",
-    "key.dynamic_fps.toggle_disabled": "动态帧率开关",
-    "gui.dynamic_fps.hud.reducing": "动态帧率: 已强制限制帧率",
-    "gui.dynamic_fps.hud.disabled": "动态帧率已禁用"
+	"config.dynamic_fps.title": "动态帧率设定",
+
+	"key.dynamic_fps.toggle_forced": "强制限制帧率",
+	"key.dynamic_fps.toggle_disabled": "动态帧率开关",
+	"gui.dynamic_fps.hud.reducing": "动态帧率: 已强制限制帧率",
+	"gui.dynamic_fps.hud.disabled": "动态帧率已禁用"
 }

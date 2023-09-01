@@ -1,14 +1,8 @@
 {
-  "config.dynamic_fps.title": "Dynamic FPS 구성",
-  "config.dynamic_fps.category.general": "일반",
-  "config.dynamic_fps.reduce_when_unfocused": "다른 프로그램을 사용중일 때 FPS 감소",
-  "config.dynamic_fps.unfocused_fps": "감소할 FPS 값",
-  "config.dynamic_fps.restore_when_hovered": "마우스가 창 위에 있을 때 FPS 복구",
-  "config.dynamic_fps.run_gc_on_unfocus": "다른 프로그램을 사용중일 때 GC 사용",
-  "config.dynamic_fps.unfocused_volume": "다른 프로그램을 사용중일 때 감소할 볼륨 (%)",
-  "config.dynamic_fps.hidden_volume": "최소화 되었을 때 감소할 볼륨 (%)",
-  "key.dynamic_fps.toggle_forced": "강제로 FPS 감소 (토글)",
-  "key.dynamic_fps.toggle_disabled": "Dynamic FPS 비활성화 (Toggle)",
-  "gui.dynamic_fps.hud.reducing": "Dynamic FPS: 강제로 FPS 감소중",
-  "gui.dynamic_fps.hud.disabled": "Dynamic FPS "
+	"config.dynamic_fps.title": "Dynamic FPS 구성",
+
+	"key.dynamic_fps.toggle_forced": "강제로 FPS 감소 (토글)",
+	"key.dynamic_fps.toggle_disabled": "Dynamic FPS 비활성화 (Toggle)",
+	"gui.dynamic_fps.hud.reducing": "Dynamic FPS: 강제로 FPS 감소중",
+	"gui.dynamic_fps.hud.disabled": "Dynamic FPS "
 }

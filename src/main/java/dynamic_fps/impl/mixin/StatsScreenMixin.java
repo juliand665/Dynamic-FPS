@@ -12,7 +12,6 @@ import net.minecraft.client.gui.screens.achievement.StatsScreen;
 public class StatsScreenMixin {
 	@Inject(method = "onStatsUpdated", at = @At("HEAD"))
 	private void onStatsUpdated(CallbackInfo callbackInfo) {
-		Screen screen = (Screen)(Object)this;
-		screen.dynamic_fps$setRendersBackground(true);
+		((Screen)(Object)this).dynamic_fps$setRendersBackground();
 	}
 }

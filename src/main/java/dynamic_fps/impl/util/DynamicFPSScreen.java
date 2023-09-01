@@ -5,7 +5,7 @@ public interface DynamicFPSScreen {
 		throw new RuntimeException("Dynamic FPS' Screen mixin was not applied.");
 	}
 
-	public default void dynamic_fps$setRendersBackground(boolean value) {
+	public default void dynamic_fps$setRendersBackground() {
 		throw new RuntimeException("Dynamic FPS' Screen mixin was not applied.");
 	}
 }

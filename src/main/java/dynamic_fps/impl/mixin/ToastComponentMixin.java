@@ -11,7 +11,7 @@ import net.minecraft.client.gui.components.toasts.ToastComponent;
 @Mixin(ToastComponent.class)
 public class ToastComponentMixin {
 	@Inject(method = "freeSlots", at = @At("HEAD"), cancellable = true)
-	private void onFreeSlots(CallbackInfoReturnable<Integer> callbackInfo) {
+	private void hasFreeSlots(CallbackInfoReturnable<Integer> callbackInfo) {
 		if (!DynamicFPSMod.shouldShowToasts()) {
 			callbackInfo.setReturnValue(0);
 		}

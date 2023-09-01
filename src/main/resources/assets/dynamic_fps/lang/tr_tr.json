@@ -1,16 +1,8 @@
 {
-  "config.dynamic_fps.title": "Dinamik FPS Ayarları",
-  "config.dynamic_fps.category.general": "Genel",
-  "config.dynamic_fps.reduce_when_unfocused": "Odak dışında iken FPS'yi azalt",
-  "config.dynamic_fps.unfocused_fps": "Odak dışında iken FPS hedefi",
-  "config.dynamic_fps.restore_when_hovered": "Pencerenin üzerine gelindiğinde FPS'yi geri yükle",
-  "config.dynamic_fps.turn_down_graphic_settings": "Odak dışında iken grafik ayarlarını düşür",
-  "config.dynamic_fps.fully_turn_down_graphic_settings": "Odak dışında iken tüm grafik ayarlarını düşür. (Yığınların yeniden yüklenmesini gerektirecek)",
-  "config.dynamic_fps.run_gc_on_unfocus": "Odak dışında iken GC'yi çalıştır",
-  "config.dynamic_fps.unfocused_volume": "Odak dışında iken ses düzeyi (%)",
-  "config.dynamic_fps.hidden_volume": "Pencere görünmezken ses düzeyi (%)",
-  "key.dynamic_fps.toggle_forced": "Zorla Azaltılmış FPS (Aç / kapat)",
-  "key.dynamic_fps.toggle_disabled": "Dinamik FPS'yi Devre Dışı Bırak (Aç / kapat)",
-  "gui.dynamic_fps.hud.reducing": "Dinamik FPS: Azaltılmış FPS Zorlanıyor",
-  "gui.dynamic_fps.hud.disabled": "Dinamik FPS Devre Dışı Bırakıldı"
+	"config.dynamic_fps.title": "Dinamik FPS Ayarları",
+
+	"key.dynamic_fps.toggle_forced": "Zorla Azaltılmış FPS (Aç / kapat)",
+	"key.dynamic_fps.toggle_disabled": "Dinamik FPS'yi Devre Dışı Bırak (Aç / kapat)",
+	"gui.dynamic_fps.hud.reducing": "Dinamik FPS: Azaltılmış FPS Zorlanıyor",
+	"gui.dynamic_fps.hud.disabled": "Dinamik FPS Devre Dışı Bırakıldı"
 }

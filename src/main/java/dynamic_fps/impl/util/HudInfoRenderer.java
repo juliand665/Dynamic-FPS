@@ -1,4 +1,4 @@
-package dynamic_fps.impl;
+package dynamic_fps.impl.util;
 
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.Minecraft;
@@ -10,6 +10,8 @@ import net.minecraft.network.chat.Component;
 import static dynamic_fps.impl.util.Localization.localized;
 
 import org.joml.Matrix4f;
+
+import dynamic_fps.impl.DynamicFPSMod;
 
 public final class HudInfoRenderer implements HudRenderCallback {
 	@Override

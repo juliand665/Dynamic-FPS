@@ -24,9 +24,6 @@ dependencies {
 
 	modApi libs.modmenu
 	modApi libs.cloth.config
-
-	include libs.toml4j
-	modImplementation libs.toml4j
 }
 
 processResources {

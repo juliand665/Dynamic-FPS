@@ -1,11 +1,8 @@
 {
-  "config.dynamic_fps.title": "Konfigurera Dynamic FPS",
-  "config.dynamic_fps.category.general": "Allmänt",
-  "config.dynamic_fps.reduce_when_unfocused": "Reducera FPS när ofukuserad",
-  "config.dynamic_fps.unfocused_fps": "Ufokuserat FPS-Mål",
-  "config.dynamic_fps.restore_when_hovered": "Återställ FPS när svävad",
-  "key.dynamic_fps.toggle_forced": "Tvinga Reducerad FPS (Växla)",
-  "key.dynamic_fps.toggle_disabled": "Inaktivera Dynamic FPS (Växla)",
-  "gui.dynamic_fps.hud.reducing": "Dynamic FPS: Tvingar Reducerad FPS",
-  "gui.dynamic_fps.hud.disabled": "Dynamic FPS Inaktiverad"
+	"config.dynamic_fps.title": "Konfigurera Dynamic FPS",
+
+	"key.dynamic_fps.toggle_forced": "Tvinga Reducerad FPS (Växla)",
+	"key.dynamic_fps.toggle_disabled": "Inaktivera Dynamic FPS (Växla)",
+	"gui.dynamic_fps.hud.reducing": "Dynamic FPS: Tvingar Reducerad FPS",
+	"gui.dynamic_fps.hud.disabled": "Dynamic FPS Inaktiverad"
 }

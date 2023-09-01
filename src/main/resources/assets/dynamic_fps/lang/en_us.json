@@ -1,16 +1,21 @@
 {
-  "config.dynamic_fps.title": "Configure Dynamic FPS",
-  "config.dynamic_fps.category.general": "General",
-  "config.dynamic_fps.reduce_when_unfocused": "Reduce FPS when unfocused",
-  "config.dynamic_fps.unfocused_fps": "Unfocused FPS target",
-  "config.dynamic_fps.restore_when_hovered": "Restore FPS when hovered",
-  "config.dynamic_fps.turn_down_graphic_settings": "Turn down graphic setting when unfocused",
-  "config.dynamic_fps.fully_turn_down_graphic_settings": "Fully Turns down graphic setting when unfocused. (Will cause the chunks to reload)",
-  "config.dynamic_fps.run_gc_on_unfocus": "Run GC on unfocus",
-  "config.dynamic_fps.unfocused_volume": "Volume when unfocused (%)",
-  "config.dynamic_fps.hidden_volume": "Volume when not visible (%)",
-  "key.dynamic_fps.toggle_forced": "Force Reduced FPS (Toggle)",
-  "key.dynamic_fps.toggle_disabled": "Disable Dynamic FPS (Toggle)",
-  "gui.dynamic_fps.hud.reducing": "Dynamic FPS: Forcing Reduced FPS",
-  "gui.dynamic_fps.hud.disabled": "Dynamic FPS Disabled"
+	"config.dynamic_fps.title": "Configure Dynamic FPS",
+
+	"config.dynamic_fps.category.hovered": "Hovered",
+	"config.dynamic_fps.category.unfocused": "Unfocused",
+	"config.dynamic_fps.category.invisible": "Invisible",
+
+	"config.dynamic_fps.frame_rate_target": "Frame Rate Target",
+	"config.dynamic_fps.frame_rate_target_description": "Set Frame Rate Target to -1 to disable reducing FPS.",
+	"config.dynamic_fps.volume_multiplier": "Volume Multiplier",
+	"config.dynamic_fps.graphics_state": "Graphics Options",
+	"config.dynamic_fps.show_toasts": "Show Toasts",
+	"config.dynamic_fps.run_garbage_collector": "Run Garbage Collector",
+
+	"key.dynamic_fps.toggle_forced": "Force Unfocused Mode (Toggle)",
+	"key.dynamic_fps.toggle_disabled": "Disable Dynamic FPS (Toggle)",
+	"gui.dynamic_fps.hud.reducing": "Dynamic FPS: Forcing Reduced FPS",
+	"gui.dynamic_fps.hud.disabled": "Dynamic FPS Disabled",
+
+	"modmenu.descriptionTranslation.dynamic_fps": "Dynamically adjusts FPS so Minecraft doesn't hog resources in background."
 }

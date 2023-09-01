@@ -13,6 +13,6 @@ public class LoadingOverlayMixin implements DynamicFPSSplashOverlay {
 
 	@Override
 	public boolean dynamic_fps$isReloadComplete() {
-		return fadeOutStart > -1L;
+		return this.fadeOutStart > -1L;
 	}
 }

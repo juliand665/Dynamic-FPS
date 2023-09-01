@@ -1,58 +1,104 @@
 package dynamic_fps.impl.config;
 
-import com.moandjiezana.toml.Toml;
-import com.moandjiezana.toml.TomlWriter;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
+import java.util.EnumMap;
+import java.util.Map;
+
+import com.google.gson.JsonParser;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.JsonOps;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import dynamic_fps.impl.DynamicFPSMod;
+import dynamic_fps.impl.GraphicsState;
+import dynamic_fps.impl.PowerState;
 import net.fabricmc.loader.api.FabricLoader;
 
-import java.io.File;
-import java.io.IOException;
-
 public final class DynamicFPSConfig {
-	private transient File file;
-	/// Whether to disable or enable the frame rate drop when unfocused.
-	public boolean reduceFPSWhenUnfocused = true;
-	/// The frame rate to target when unfocused (only applies if `enableUnfocusedFPS` is true).
-	public int unfocusedFPS = 1;
-	/// Whether to uncap FPS when hovered, even if it would otherwise be reduced.
-	public boolean restoreFPSWhenHovered = true;
-	/// Volume multiplier when not focused.
-	public float unfocusedVolumeMultiplier = 0.25f;
-	/// Volume multiplier when not visible.
-	public float hiddenVolumeMultiplier = 0f;
-	public boolean reduceGraphicsWhenUnfocused = false;
-	public boolean fullyReduceGraphicsWhenUnfocused = false;
-	/// Whether to trigger a garbage collector run whenever the game is unfocused.
-	public boolean runGCOnUnfocus = false;
+	private Map<PowerState, Config> configs;
 
-	private DynamicFPSConfig() {}
+	private static final Path PATH = FabricLoader.getInstance().getConfigDir().resolve(DynamicFPSMod.MOD_ID + ".json");
+	private static final Codec<Map<PowerState, Config>> STATES_CODEC = Codec.unboundedMap(PowerState.CODEC, Config.CODEC);
+
+	private static final Codec<DynamicFPSConfig> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+		STATES_CODEC.fieldOf("states").forGetter(DynamicFPSConfig::configs)
+	).apply(instance, DynamicFPSConfig::new));
+
+	private DynamicFPSConfig(Map<PowerState, Config> configs) {
+		this.configs = new EnumMap<>(configs);
+
+		for (var state : PowerState.values()) {
+			if (state.configurable) {
+				this.configs.computeIfAbsent(state, DynamicFPSConfig::getDefaultConfig);
+			}
+		}
+	}
+
+	public Config get(PowerState state) {
+		switch (state) {
+			case FOCUSED: {
+				return Config.ACTIVE;
+			}
+			case SUSPENDED: {
+				return Config.SUSPENDED;
+			}
+			default: {
+				return configs.get(state);
+			}
+		}
+	}
+
+	private Map<PowerState, Config> configs() {
+		return this.configs;
+	}
 
 	public static DynamicFPSConfig load() {
-		File file = new File(
-			FabricLoader.getInstance().getConfigDir().toString(),
-			DynamicFPSMod.MOD_ID + ".toml"
-		);
+		String data;
 
-		DynamicFPSConfig config;
-		if (file.exists()) {
-			Toml configTOML = new Toml().read(file);
-			config = configTOML.to(DynamicFPSConfig.class);
-			config.file = file;
-		} else {
-			config = new DynamicFPSConfig();
-			config.file = file;
-			config.save();
+		try {
+			data = Files.readString(PATH);
+		} catch (NoSuchFileException e) {
+			return new DynamicFPSConfig(new EnumMap<>(PowerState.class));
+		} catch (IOException e) {
+			throw new RuntimeException("Failed to load Dynamic FPS config.", e);
 		}
-		return config;
+
+		var root = JsonParser.parseString(data);
+		var parsed = CODEC.parse(JsonOps.INSTANCE, root);
+
+		return parsed.getOrThrow(false, RuntimeException::new);
 	}
 
 	public void save() {
-		TomlWriter writer = new TomlWriter();
+		var data = CODEC.encodeStart(JsonOps.INSTANCE, this);
+		var root = data.getOrThrow(false, RuntimeException::new);
+
 		try {
-			writer.write(this, file);
+			Files.writeString(PATH, root.toString(), StandardCharsets.UTF_8);
 		} catch (IOException e) {
-			e.printStackTrace();
+			// Cloth Config's automatic saving does not support catching exceptions
+			throw new RuntimeException("Failed to save Dynamic FPS config.", e);
+		}
+	}
+
+	public static Config getDefaultConfig(PowerState state) {
+		switch (state) {
+			case HOVERED: {
+				return new Config(60, 1.0f, GraphicsState.DEFAULT, true, false);
+			}
+			case UNFOCUSED: {
+				return new Config(1, 0.25f, GraphicsState.DEFAULT, false, false);
+			}
+			case INVISIBLE: {
+				return new Config(0, 0.0f, GraphicsState.DEFAULT, false, false);
+			}
+			default: {
+				throw new RuntimeException("Getting default configuration for unhandled power state " + state.toString());
+			}
 		}
 	}
 }
