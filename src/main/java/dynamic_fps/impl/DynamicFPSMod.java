@@ -6,6 +6,7 @@ import dynamic_fps.impl.config.DynamicFPSConfig;
 import dynamic_fps.impl.util.HudInfoRenderer;
 import dynamic_fps.impl.util.KeyMappingHandler;
 import dynamic_fps.impl.util.Logging;
+import dynamic_fps.impl.util.ModCompatibility;
 import dynamic_fps.impl.util.OptionsHolder;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
@@ -49,8 +50,7 @@ public class DynamicFPSMod implements ClientModInitializer {
 	// inactive.
 	private static boolean hasRenderedLastFrame = false;
 
-	// rrls removes the loading overlay entirely, so we can not apply our things
-	private static final boolean OVERLAY_OPTIMIZATION_ACTIVE = !FabricLoader.getInstance().isModLoaded("rrls");
+	private static final boolean OVERLAY_OPTIMIZATION_ACTIVE = !ModCompatibility.disableOverlayOptimization();
 
 	private static final KeyMappingHandler toggleForcedKeyBinding = new KeyMappingHandler(
 			translationKey("key", "toggle_forced"),
