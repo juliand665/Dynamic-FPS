@@ -38,10 +38,6 @@ public class ModCompatibility {
 		CvObject root;
 		ModMetadata data = mod.getMetadata();
 
-		if (data.getId().equals("rrls")) {
-			disableOverlayOptimization = true;
-		}
-
 		try {
 			root = data.getCustomValue("dynamic_fps").getAsObject();
 		} catch (ClassCastException | NullPointerException e) {
