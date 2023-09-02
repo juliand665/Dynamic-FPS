@@ -1,0 +1,8 @@
+{
+	"config.dynamic_fps.title": "Параметри Dynamic FPS",
+
+	"key.dynamic_fps.toggle_forced": "Примусово знижувати частоту кадрів (перемикання)",
+	"key.dynamic_fps.toggle_disabled": "Вимкнути Dynamic FPS (перемикання)",
+	"gui.dynamic_fps.hud.reducing": "Dynamic FPS: Увімкнено примусове зниження частоти кадрів",
+	"gui.dynamic_fps.hud.disabled": "Dynamic FPS вимкнено"
+}

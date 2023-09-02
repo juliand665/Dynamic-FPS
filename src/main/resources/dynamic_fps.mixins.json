@@ -1,0 +1,19 @@
+{
+	"required": true,
+	"package": "dynamic_fps.impl.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [],
+	"client": [
+		"GameRendererMixin",
+		"GuiMixin",
+		"LoadingOverlayMixin",
+		"MinecraftMixin",
+		"ScreenMixin",
+		"StatsScreenMixin",
+		"ToastComponentMixin",
+		"bugfix.BlockableEventLoopMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

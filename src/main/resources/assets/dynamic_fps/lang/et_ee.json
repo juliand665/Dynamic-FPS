@@ -1,0 +1,8 @@
+{
+	"config.dynamic_fps.title": "Dynamic FPS seadistus",
+
+	"key.dynamic_fps.toggle_forced": "Sunni vähendatud ks (lüliti)",
+	"key.dynamic_fps.toggle_disabled": "Keela Dynamic FPS (lüliti)",
+	"gui.dynamic_fps.hud.reducing": "Dynamic FPS: sunnin vähendatud kaadrisagedust",
+	"gui.dynamic_fps.hud.disabled": "Dynamic FPS keelatud"
+}

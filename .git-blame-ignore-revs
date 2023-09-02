@@ -1,2 +1,6 @@
 # Normalize whitespace via .editorconfig
 6e4757c0aa79fa1a64d556a9088d73cc967cdb0d
+
+# Renames package for the mod ID change,
+# Move all code to internal impl package
+db024e48db528898eb6782d810dba8a4c9ce38f1

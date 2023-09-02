@@ -1,0 +1,8 @@
+{
+    "config.dynamic_fps.title": "Dynamic FPS 設定",
+
+    "key.dynamic_fps.toggle_forced": "強制限制 FPS（切換）",
+    "key.dynamic_fps.toggle_disabled": "停用 Dynamic FPS（切換）",
+    "gui.dynamic_fps.hud.reducing": "Dynamic FPS：強制限制 FPS",
+    "gui.dynamic_fps.hud.disabled": "已禁用 Dynamic FPS"
+}

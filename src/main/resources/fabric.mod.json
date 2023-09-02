@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"id": "dynamicfps",
+	"id": "dynamic_fps",
 	"version": "${version}",
 
 	"name": "Dynamic FPS",
@@ -16,19 +16,20 @@
 	},
 
 	"license": "MIT",
-	"icon": "assets/dynamicfps/icon.png",
+	"icon": "assets/dynamic_fps/icon.png",
 
 	"environment": "client",
 	"entrypoints": {
-		"main": [
-			"dynamicfps.DynamicFPSMod"
+		"client": [
+			"dynamic_fps.impl.DynamicFPSMod",
+			"dynamic_fps.impl.compat.FREX"
 		],
 		"modmenu": [
-			"dynamicfps.ModMenuIntegration"
+			"dynamic_fps.impl.compat.ModMenu"
 		]
 	},
 	"mixins": [
-		"dynamicfps.mixins.json"
+		"dynamic_fps.mixins.json"
 	],
 
 	"depends": {
@@ -42,8 +43,8 @@
 
 	"custom": {
 		"loom:injected_interfaces": {
-			"net/minecraft/class_437": ["dynamicfps/util/DynamicFPSScreen"],
-			"net/minecraft/class_425": ["dynamicfps/util/DynamicFPSSplashOverlay"]
+			"net/minecraft/class_437": ["dynamic_fps/impl/util/DynamicFPSScreen"],
+			"net/minecraft/class_425": ["dynamic_fps/impl/util/DynamicFPSSplashOverlay"]
 		},
 		"dynamic_fps": {
 			"optimized_screens": {
@@ -63,7 +64,7 @@
 				],
 				"_comment": {
 					"_0": "Mojang mapping names of the enabled / disabled screens.",
-					"_1": "Sorted by fully qualified name. Not needed for mod screens.",
+					"_1": "Sorted by fully qualified name. Translation not needed for mod screens.",
 					"enabled": {
 						"net.minecraft.class_4189": "net.minecraft.client.gui.screens.AccessibilityOptionsScreen",
 						"net.minecraft.class_404": "net.minecraft.client.gui.screens.ChatOptionsScreen",

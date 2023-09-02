@@ -1,0 +1,11 @@
+{
+	"config.dynamic_fps.title": "Настройки Dynamic FPS",
+
+	"key.dynamic_fps.toggle_forced": "Принудительно снизить FPS",
+	"key.dynamic_fps.toggle_disabled": "Переключить ограничение FPS",
+	"gui.dynamic_fps.hud.reducing": "Dynamic FPS: частота кадров принудительно ограничена",
+	"gui.dynamic_fps.hud.disabled": "Dynamic FPS отключён",
+
+	"modmenu.summaryTranslation.dynamic_fps": "Автоматическое изменение FPS для снижения потребления вычислительных ресурсов в фоне.",
+	"modmenu.descriptionTranslation.dynamic_fps": "DynamicFPS автоматически снижает частоту отображения кадров при сворачивании или скрытии Minecraft."
+}

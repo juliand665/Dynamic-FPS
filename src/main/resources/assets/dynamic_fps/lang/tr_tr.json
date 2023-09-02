@@ -1,0 +1,8 @@
+{
+	"config.dynamic_fps.title": "Dinamik FPS Ayarları",
+
+	"key.dynamic_fps.toggle_forced": "Zorla Azaltılmış FPS (Aç / kapat)",
+	"key.dynamic_fps.toggle_disabled": "Dinamik FPS'yi Devre Dışı Bırak (Aç / kapat)",
+	"gui.dynamic_fps.hud.reducing": "Dinamik FPS: Azaltılmış FPS Zorlanıyor",
+	"gui.dynamic_fps.hud.disabled": "Dinamik FPS Devre Dışı Bırakıldı"
+}

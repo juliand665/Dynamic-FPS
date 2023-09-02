@@ -8,7 +8,6 @@ fabric_loader = "0.14.22"
 modmenu = "7.0.1"
 fabric_api = "0.83.0+1.20"
 
-toml4j = "0.7.2"
 cloth_config = "11.0.99"
 
 [libraries]
@@ -20,7 +19,6 @@ fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_l
 modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
 fabric_api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric_api" }
 
-toml4j = { module = "com.moandjiezana.toml:toml4j", version.ref = "toml4j" }
 cloth_config = { module = "me.shedaniel.cloth:cloth-config-fabric", version.ref = "cloth_config" }
 
 [bundles]
