@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import dynamic_fps.impl.util.DynamicFPSScreen;
-import dynamic_fps.impl.util.ScreenOptimizationCompat;
+import dynamic_fps.impl.util.ModCompatibility;
 import net.minecraft.client.gui.screens.Screen;
 
 @Mixin(Screen.class)
@@ -32,12 +32,12 @@ public class ScreenMixin implements DynamicFPSScreen {
 	private void onInit(CallbackInfo callbackInfo) {
 		String name = this.getClass().getName();
 
-		this.dynamic_fps$hasOptedOut = ScreenOptimizationCompat.isOptedOut(name);
+		this.dynamic_fps$hasOptedOut = ModCompatibility.isScreenOptedOut(name);
 
 		// Allow other mods to opt out on behalf of vanilla screens
 		// That Dynamic FPS forced to opt in via its own mod metadata.
 		if (!this.dynamic_fps$hasOptedOut) {
-			this.dynamic_fps$canOptimize = ScreenOptimizationCompat.isOptedIn(name);
+			this.dynamic_fps$canOptimize = ModCompatibility.isScreenOptedIn(name);
 		}
 	}
 
