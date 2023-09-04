@@ -233,6 +233,13 @@ public class DynamicFPSMod implements ClientModInitializer {
 			return frameRateTarget == -1;
 		}
 
+		// Minecraft is limited to 60,
+		// No need to cancel some frames.
+		// Fixes #107 (Xaero's World Map)
+		if (frameRateTarget == 60) {
+			return true;
+		}
+
 		// Render one more frame before
 		// Applying the custom frame rate
 		// So changes show up immediately
