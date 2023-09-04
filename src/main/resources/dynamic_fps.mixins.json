@@ -12,6 +12,7 @@
 		"ScreenMixin",
 		"StatsScreenMixin",
 		"ToastComponentMixin",
+		"WindowMixin",
 		"bugfix.BlockableEventLoopMixin"
 	],
 	"injectors": {
