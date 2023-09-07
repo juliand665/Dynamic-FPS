@@ -10,23 +10,23 @@ import dynamic_fps.impl.DynamicFPSMod;
 public class WindowObserver {
 	private final long window;
 
-	private boolean isFocused;
+	private boolean isFocused = true;
 	private final GLFWWindowFocusCallback previousFocusCallback;
 
-	private boolean isHovered;
+	private boolean isHovered = true;
 	private final GLFWCursorEnterCallback previousMouseCallback;
 
-	private boolean isIconified;
+	private boolean isIconified = false;
 	private final GLFWWindowIconifyCallback previousIconifyCallback;
 
 	public WindowObserver(long address) {
 		this.window = address;
 
-		previousFocusCallback = GLFW.glfwSetWindowFocusCallback(window, this::onFocusChanged);
-		previousMouseCallback = GLFW.glfwSetCursorEnterCallback(window, this::onMouseChanged);
+		previousFocusCallback = GLFW.glfwSetWindowFocusCallback(this.window, this::onFocusChanged);
+		previousMouseCallback = GLFW.glfwSetCursorEnterCallback(this.window, this::onMouseChanged);
 
 		// Vanilla doesn't use this (currently), other mods might register this callback though ...
-		previousIconifyCallback = GLFW.glfwSetWindowIconifyCallback(window, this::onIconifyChanged);
+		previousIconifyCallback = GLFW.glfwSetWindowIconifyCallback(this.window, this::onIconifyChanged);
 	}
 
 	private boolean isCurrentWindow(long address) {
@@ -38,7 +38,7 @@ public class WindowObserver {
 	}
 
 	private void onFocusChanged(long address, boolean focused) {
-		if (isCurrentWindow(address)) {
+		if (this.isCurrentWindow(address)) {
 			this.isFocused = focused;
 			DynamicFPSMod.onStatusChanged();
 		}
@@ -53,7 +53,7 @@ public class WindowObserver {
 	}
 
 	private void onMouseChanged(long address, boolean hovered) {
-		if (isCurrentWindow(address)) {
+		if (this.isCurrentWindow(address)) {
 			this.isHovered = hovered;
 			DynamicFPSMod.onStatusChanged();
 		}
@@ -68,7 +68,7 @@ public class WindowObserver {
 	}
 
 	private void onIconifyChanged(long address, boolean iconified) {
-		if (isCurrentWindow(address)) {
+		if (this.isCurrentWindow(address)) {
 			this.isIconified = iconified;
 			DynamicFPSMod.onStatusChanged();
 		}
