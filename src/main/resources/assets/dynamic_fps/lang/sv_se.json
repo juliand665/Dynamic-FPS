@@ -1,8 +1,21 @@
 {
 	"config.dynamic_fps.title": "Konfigurera Dynamic FPS",
 
+	"config.dynamic_fps.category.hovered": "Hovrande",
+	"config.dynamic_fps.category.unfocused": "Ofokuserad",
+	"config.dynamic_fps.category.invisible": "Osynlig",	
+
+	"config.dynamic_fps.frame_rate_target": "Bildfrekvensmål",
+	"config.dynamic_fps.frame_rate_target_description": "Ställ in bildfrekvensmålet till -1 för att stänga av bildfrekvens reducering.",
+	"config.dynamic_fps.volume_multiplier": "Volym Multiplikator",
+	"config.dynamic_fps.graphics_state": "Bildskärmsinställningar",
+	"config.dynamic_fps.show_toasts": "Visa Toasts",
+	"config.dynamic_fps.run_garbage_collector": "Starta GC",
+	
 	"key.dynamic_fps.toggle_forced": "Tvinga Reducerad FPS (Växla)",
 	"key.dynamic_fps.toggle_disabled": "Inaktivera Dynamic FPS (Växla)",
-	"gui.dynamic_fps.hud.reducing": "Dynamic FPS: Tvingar Reducerad FPS",
-	"gui.dynamic_fps.hud.disabled": "Dynamic FPS Inaktiverad"
+	"gui.dynamic_fps.hud.reducing": "Dynamic FPS: Tvingar Reducerad BPS",
+	"gui.dynamic_fps.hud.disabled": "Dynamic FPS Inaktiverad",
+
+	"modmenu.descriptionTranslation.dynamic_fps": "Dynamiskt justera BPS så att Minecraft inte äter upp resurser i bakgrunden."
 }
