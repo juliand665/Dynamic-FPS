@@ -8,6 +8,7 @@ import dynamic_fps.impl.util.KeyMappingHandler;
 import dynamic_fps.impl.util.Logging;
 import dynamic_fps.impl.util.ModCompatibility;
 import dynamic_fps.impl.util.OptionsHolder;
+import dynamic_fps.impl.util.WindowObserver;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.loader.api.FabricLoader;
@@ -15,10 +16,6 @@ import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.LoadingOverlay;
 import net.minecraft.sounds.SoundSource;
-
-import org.lwjgl.glfw.GLFW;
-
-import com.mojang.blaze3d.platform.Window;
 
 import static dynamic_fps.impl.util.Localization.translationKey;
 
@@ -39,8 +36,8 @@ public class DynamicFPSMod implements ClientModInitializer {
 	private static boolean isDisabled = false;
 	private static boolean isForcingLowFPS = false;
 
-	private static Window window;
 	private static Minecraft minecraft;
+	private static WindowObserver window;
 
 	private static long lastRender;
 
@@ -55,12 +52,18 @@ public class DynamicFPSMod implements ClientModInitializer {
 	private static final KeyMappingHandler toggleForcedKeyBinding = new KeyMappingHandler(
 			translationKey("key", "toggle_forced"),
 			"key.categories.misc",
-			() -> isForcingLowFPS = !isForcingLowFPS);
+			() -> {
+				isForcingLowFPS = !isForcingLowFPS;
+				onStatusChanged();
+			});
 
 	private static final KeyMappingHandler toggleDisabledKeyBinding = new KeyMappingHandler(
 			translationKey("key", "toggle_disabled"),
 			"key.categories.misc",
-			() -> isDisabled = !isDisabled);
+			() -> {
+				isDisabled = !isDisabled;
+				onStatusChanged();
+			});
 
 	@Override
 	public void onInitializeClient() {
@@ -74,17 +77,12 @@ public class DynamicFPSMod implements ClientModInitializer {
 
 	// Internal "API" for Dynamic FPS itself
 
-	public static void onNewFrame() {
-		if (window == null) {
-			minecraft = Minecraft.getInstance();
-			window = minecraft.getWindow();
-		}
-
-		checkForStateChanges();
-	}
-
 	public static boolean isDisabled() {
 		return isDisabled;
+	}
+
+	public static void onStatusChanged() {
+		checkForStateChanges();
 	}
 
 	public static PowerState powerState() {
@@ -93,6 +91,10 @@ public class DynamicFPSMod implements ClientModInitializer {
 
 	public static boolean isForcingLowFPS() {
 		return isForcingLowFPS;
+	}
+
+	public static void setWindow(long address) {
+		window = new WindowObserver(address);
 	}
 
 	public static boolean checkForRender() {
@@ -112,7 +114,7 @@ public class DynamicFPSMod implements ClientModInitializer {
 	}
 
 	public static boolean shouldShowToasts() {
-		return isDisabledInternal() || config.showToasts();
+		return config.showToasts();
 	}
 
 	public static boolean shouldShowLevels() {
@@ -170,30 +172,32 @@ public class DynamicFPSMod implements ClientModInitializer {
 	}
 
 	private static void checkForStateChanges() {
+		if (window == null) {
+			return;
+		}
+
+		if (minecraft == null) {
+			minecraft = Minecraft.getInstance();
+		}
+
 		PowerState current;
 
 		if (isDisabledInternal()) {
 			current = PowerState.FOCUSED;
 		} else if (isForcingLowFPS) {
 			current = PowerState.UNFOCUSED;
-		} else {
-			var isFocused = minecraft.isWindowActive();
-			var isHovered = GLFW.glfwGetWindowAttrib(window.getWindow(), GLFW.GLFW_HOVERED) != 0;
-			var isVisible = GLFW.glfwGetWindowAttrib(window.getWindow(), GLFW.GLFW_VISIBLE) != 0 && GLFW.glfwGetWindowAttrib(window.getWindow(), GLFW.GLFW_ICONIFIED) == 0;
-
-			if (isFocused) {
-				if (!isPauseScreenOpened()) {
-					current = PowerState.FOCUSED;
-				} else {
-					current = PowerState.SUSPENDED;
-				}
-			} else if (isHovered) {
-				current = PowerState.HOVERED;
-			} else if (isVisible) {
-				current = PowerState.UNFOCUSED;
+		} else if (window.isFocused()) {
+			if (!isPauseScreenOpened()) {
+				current = PowerState.FOCUSED;
 			} else {
-				current = PowerState.INVISIBLE;
+				current = PowerState.SUSPENDED;
 			}
+		} else if (window.isHovered()) {
+			current = PowerState.HOVERED;
+		} else if (!window.isIconified()) {
+			current = PowerState.UNFOCUSED;
+		} else {
+			current = PowerState.INVISIBLE;
 		}
 
 		if (state != current) {

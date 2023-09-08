@@ -10,8 +10,8 @@ import net.minecraft.client.Minecraft;
 
 @Mixin(Minecraft.class)
 public class MinecraftMixin {
-	@Inject(method = "runTick", at = @At("HEAD"))
-	private void onRunTick(CallbackInfo callbackInfo) {
-		DynamicFPSMod.onNewFrame();
+	@Inject(method = "setScreen", at = @At("TAIL"))
+	private void onSetScreen(CallbackInfo callbackInfo) {
+		DynamicFPSMod.onStatusChanged();
 	}
 }
