@@ -34,7 +34,7 @@ public enum PowerState {
 	INVISIBLE(true),
 
 	/*
-	 * Singleplayer game is paused by the user.
+	 * User is currently on the pause screen.
 	 */
 	SUSPENDED(false);
 

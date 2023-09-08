@@ -15,6 +15,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.LoadingOverlay;
+import net.minecraft.client.gui.screens.PauseScreen;
 import net.minecraft.sounds.SoundSource;
 
 import static dynamic_fps.impl.util.Localization.translationKey;
@@ -120,7 +121,6 @@ public class DynamicFPSMod implements ClientModInitializer {
 	public static boolean shouldShowLevels() {
 		return isDisabledInternal() || !(isLevelCoveredByScreen() || isLevelCoveredByOverlay());
 	}
-
 	public static boolean shouldReduceFramerate() {
 		return !isDisabledInternal() && (config.frameRateTarget() != -1 || isLevelCoveredByScreen());
 	}
@@ -132,7 +132,7 @@ public class DynamicFPSMod implements ClientModInitializer {
 	}
 
 	private static boolean isPauseScreenOpened() {
-		return minecraft.screen != null && minecraft.screen.isPauseScreen();
+		return minecraft.screen instanceof PauseScreen;
 	}
 
 	private static boolean isLevelCoveredByScreen() {
