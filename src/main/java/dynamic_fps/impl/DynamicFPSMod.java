@@ -24,11 +24,6 @@ public class DynamicFPSMod implements ClientModInitializer {
 	public static final String MOD_ID = "dynamic_fps";
 	public static final boolean DEBUG = FabricLoader.getInstance().isDevelopmentEnvironment();
 
-	// Target FPS for Minecraft menu screens
-	// Used as our synthetic idling frame rate
-	// And applied to other menu-type screens.
-	public static int MENU_FRAMERATE_LIMIT = 60;
-
 	private static Config config = Config.ACTIVE;
 	private static PowerState state = PowerState.FOCUSED;
 
@@ -120,9 +115,6 @@ public class DynamicFPSMod implements ClientModInitializer {
 
 	public static boolean shouldShowLevels() {
 		return isDisabledInternal() || !(isLevelCoveredByScreen() || isLevelCoveredByOverlay());
-	}
-	public static boolean shouldReduceFramerate() {
-		return !isDisabledInternal() && (config.frameRateTarget() != -1 || isLevelCoveredByScreen());
 	}
 
 	// Internal logic
@@ -235,13 +227,6 @@ public class DynamicFPSMod implements ClientModInitializer {
 		// -1 -> uncapped frame rate
 		if (frameRateTarget <= 0) {
 			return frameRateTarget == -1;
-		}
-
-		// Minecraft is limited to 60,
-		// No need to cancel some frames.
-		// Fixes #107 (Xaero's World Map)
-		if (frameRateTarget == 60) {
-			return true;
 		}
 
 		// Render one more frame before
