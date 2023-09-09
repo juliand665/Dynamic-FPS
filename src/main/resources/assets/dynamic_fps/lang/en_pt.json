@@ -1,0 +1,21 @@
+{
+	"config.dynamic_fps.title": "Dynamic FPS Code o' Conduct",
+
+	"config.dynamic_fps.category.hovered": "Makin' Chase",
+	"config.dynamic_fps.category.unfocused": "Unattended Ship",
+	"config.dynamic_fps.category.invisible": "Lost in Davy Jones' Locker",
+
+	"config.dynamic_fps.frame_rate_target": "Speed Limit Target",
+	"config.dynamic_fps.frame_rate_target_description": "Order Speed Limit Target t' be -1 knots to sail at full mast!",
+	"config.dynamic_fps.volume_multiplier": "Noise Multiplier",
+	"config.dynamic_fps.graphics_state": "Telescope Options",
+	"config.dynamic_fps.show_toasts": "Notify th' Captain",
+	"config.dynamic_fps.run_garbage_collector": "Order th' Ship Janitor to Clean Up",
+
+	"key.dynamic_fps.toggle_forced": "Lower th' Anchor (Switch)",
+	"key.dynamic_fps.toggle_disabled": "Dynamic FPS walk th' plank (Switch)",
+	"gui.dynamic_fps.hud.reducing": "Dynamic FPS: Lowerin' th' anchor",
+	"gui.dynamic_fps.hud.disabled": "Avast, be th' Dynamic FPS! Sailing at Full Mast",
+
+	"modmenu.descriptionTranslation.dynamic_fps": "Magically edits yer Ship's Speed so Minecraft doesn't steal yer booty when yer not lookin'."
+}
