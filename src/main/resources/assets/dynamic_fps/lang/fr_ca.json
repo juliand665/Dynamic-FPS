@@ -1,8 +1,21 @@
 {
-	"config.dynamic_fps.title": "Configuration de l'IPS Dynamique",
+	"config.dynamic_fps.title": "Configuration de Dynamic FPS",
 
-	"key.dynamic_fps.toggle_forced": "Forcer la réduction d'IPS",
-	"key.dynamic_fps.toggle_disabled": "Désactiver l'IPS Dynamique",
-	"gui.dynamic_fps.hud.reducing": "IPS Dynamique: Réduction d'IPS forcée",
-	"gui.dynamic_fps.hud.disabled": "IPS Dynamique désactivée"
+	"config.dynamic_fps.category.hovered": "Survolé",
+	"config.dynamic_fps.category.unfocused": "Non-focalisé",
+	"config.dynamic_fps.category.invisible": "Invisible",
+
+	"config.dynamic_fps.frame_rate_target": "Fréquence d'images ciblée",
+	"config.dynamic_fps.frame_rate_target_description": "Réglez la Fréquence d'images ciblée sur -1 pour désactiver la réduction du nombre d'images par seconde.",
+	"config.dynamic_fps.volume_multiplier": "Multiplicateur de volume",
+	"config.dynamic_fps.graphics_state": "Options graphiques",
+	"config.dynamic_fps.show_toasts": "Afficher les tutoriels",
+	"config.dynamic_fps.run_garbage_collector": "Activer le collecteur de déchets",
+
+	"key.dynamic_fps.toggle_forced": "Forcer le mode non-focalisé (Bascule)",
+	"key.dynamic_fps.toggle_disabled": "Désactiver Dynamic FPS (Bascule)",
+	"gui.dynamic_fps.hud.reducing": "Dynamic FPS force la réduction d'IPS",
+	"gui.dynamic_fps.hud.disabled": "Dynamic FPS est désactivé",
+
+	"modmenu.descriptionTranslation.dynamic_fps": "Ajuste dynamiquement les IPS afin que Minecraft ne monopolise pas les ressources en arrière-plan."
 }
