@@ -12,10 +12,11 @@
 	"config.dynamic_fps.show_toasts": "Показывать уведомления",
 	"config.dynamic_fps.run_garbage_collector": "Запускать сборщик мусора(освобождение ОЗУ)",
 
-	"key.dynamic_fps.toggle_forced": "Принудительное сворачивание (Вкл/Выкл)",
-	"key.dynamic_fps.toggle_disabled": "Выключить Dynamic FPS (Вкл/Выкл)",
-	"gui.dynamic_fps.hud.reducing": "Dynamic FPS: Принудительно снизить FPS",
-	"gui.dynamic_fps.hud.disabled": "Dynamic FPS Выключен",
+	"key.dynamic_fps.toggle_forced": "Принудительно снизить FPS",
+	"key.dynamic_fps.toggle_disabled": "Переключить ограничение FPS",
+	"gui.dynamic_fps.hud.reducing": "Dynamic FPS: частота кадров принудительно ограничена",
+	"gui.dynamic_fps.hud.disabled": "Dynamic FPS отключён",
 
-	"modmenu.descriptionTranslation.dynamic_fps": "Автоматически снижает частоту кадров при сворачивании или скрытии Minecraft."
+	"modmenu.descriptionTranslation.dynamic_fps": "Автоматически снижает частоту кадров при сворачивании или скрытии Minecraft.",
+	"modmenu.summaryTranslation.dynamic_fps": "Автоматическое изменение FPS для снижения потребления вычислительных ресурсов в фоне."
 }
