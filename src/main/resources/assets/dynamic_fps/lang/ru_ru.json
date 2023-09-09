@@ -3,7 +3,7 @@
 
 	"config.dynamic_fps.category.hovered": "Наведён",
 	"config.dynamic_fps.category.unfocused": "Расфокусирован",
-	"config.dynamic_fps.category.invisible": "Свернут",
+	"config.dynamic_fps.category.invisible": "Свёрнут",
 
 	"config.dynamic_fps.frame_rate_target": "Количество FPS",
 	"config.dynamic_fps.frame_rate_target_description": "Для отключения снижения FPS, установите значение -1 для параметра Количество FPS",
