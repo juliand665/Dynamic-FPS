@@ -1,22 +1,23 @@
 {
 	"config.dynamic_fps.title": "Настройки Dynamic FPS",
 
-	"config.dynamic_fps.category.hovered": "Перемещающееся",
-	"config.dynamic_fps.category.unfocused": "Свёрнутое",
-	"config.dynamic_fps.category.invisible": "Скрытое",
+	"config.dynamic_fps.category.hovered": "Наведён",
+	"config.dynamic_fps.category.unfocused": "Расфокусирован",
+	"config.dynamic_fps.category.invisible": "Свёрнут",
 
 	"config.dynamic_fps.frame_rate_target": "Количество FPS",
-	"config.dynamic_fps.frame_rate_target_description": "Установи значение на -1, если хочешь выключить снижение FPS",
-	"config.dynamic_fps.volume_multiplier": "Громкость",
+	"config.dynamic_fps.frame_rate_target_description": "Для отключения снижения FPS, установите значение -1 для параметра Количество FPS",
+	"config.dynamic_fps.volume_multiplier": "Процент громкости звуков",
 	"config.dynamic_fps.graphics_state": "Настройки графики",
 	"config.dynamic_fps.show_toasts": "Показывать уведомления",
 	"config.dynamic_fps.run_garbage_collector": "Запускать сборщик мусора(освобождение ОЗУ)",
 
 	"key.dynamic_fps.toggle_forced": "Принудительно снизить FPS",
-	"key.dynamic_fps.toggle_disabled": "Переключить ограничение FPS",
+	"key.dynamic_fps.toggle_disabled": "Отключить Dynamic FPS",
 	"gui.dynamic_fps.hud.reducing": "Dynamic FPS: частота кадров принудительно ограничена",
 	"gui.dynamic_fps.hud.disabled": "Dynamic FPS отключён",
 
 	"modmenu.descriptionTranslation.dynamic_fps": "Автоматически снижает частоту кадров при сворачивании или скрытии Minecraft.",
 	"modmenu.summaryTranslation.dynamic_fps": "Автоматическое изменение FPS для снижения потребления вычислительных ресурсов в фоне."
 }
+
