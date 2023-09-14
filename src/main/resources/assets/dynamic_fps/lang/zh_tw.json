@@ -1,8 +1,21 @@
 {
-    "config.dynamic_fps.title": "Dynamic FPS 設定",
+	"config.dynamic_fps.title": "設定 Dynamic FPS",
 
-    "key.dynamic_fps.toggle_forced": "強制限制 FPS（切換）",
-    "key.dynamic_fps.toggle_disabled": "停用 Dynamic FPS（切換）",
-    "gui.dynamic_fps.hud.reducing": "Dynamic FPS：強制限制 FPS",
-    "gui.dynamic_fps.hud.disabled": "已禁用 Dynamic FPS"
+	"config.dynamic_fps.category.hovered": "聚焦時",
+	"config.dynamic_fps.category.unfocused": "未聚焦時",
+	"config.dynamic_fps.category.invisible": "不可見時",
+
+	"config.dynamic_fps.frame_rate_target": "FPS 目標",
+	"config.dynamic_fps.frame_rate_target_description": "將 FPS 目標設為 -1 以停用限制 FPS。",
+	"config.dynamic_fps.volume_multiplier": "音量倍增器",
+	"config.dynamic_fps.graphics_state": "圖形選項",
+	"config.dynamic_fps.show_toasts": "顯示彈出提示框",
+	"config.dynamic_fps.run_garbage_collector": "使用垃圾回收器",
+
+	"key.dynamic_fps.toggle_forced": "強制未聚焦模式（切換）",
+	"key.dynamic_fps.toggle_disabled": "停用 Dynamic FPS（切換）",
+	"gui.dynamic_fps.hud.reducing": "Dynamic FPS：強制限制 FPS",
+	"gui.dynamic_fps.hud.disabled": "Dynamic FPS 已停用",
+
+	"modmenu.descriptionTranslation.dynamic_fps": "動態調整 FPS，使 Minecraft 在背景時不會占用很多資源。"
 }
