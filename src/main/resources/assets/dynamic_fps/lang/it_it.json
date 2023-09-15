@@ -1,8 +1,21 @@
 {
 	"config.dynamic_fps.title": "Configura Dynamic FPS",
 
-	"key.dynamic_fps.toggle_forced": "Abilita/Disabilita la riduzione forzata degli FPS",
-	"key.dynamic_fps.toggle_disabled": "Abilita/Disabilita Dynamic FPS",
-	"gui.dynamic_fps.hud.reducing": "Dynamic FPS: Riduzione forzata degli FPS",
-	"gui.dynamic_fps.hud.disabled": "Dynamic FPS Disabilitato"
+	"config.dynamic_fps.category.hovered": "Sopra il cursore",
+	"config.dynamic_fps.category.unfocused": "Non in primo piano",
+	"config.dynamic_fps.category.invisible": "Invisibile",
+
+	"config.dynamic_fps.frame_rate_target": "Obiettivo di frame rate",
+	"config.dynamic_fps.frame_rate_target_description": "Imposta l'obiettivo di frame rate a -1 per disabilitare la riduzione del FPS.",
+	"config.dynamic_fps.volume_multiplier": "Moltiplicatore volume",
+	"config.dynamic_fps.graphics_state": "Opzioni grafiche",
+	"config.dynamic_fps.show_toasts": "Mostra i toasts",
+	"config.dynamic_fps.run_garbage_collector": "Esegui Garbage Collector",
+
+	"key.dynamic_fps.toggle_forced": "Forza la modalità non in primo piano (Attiva/Disattiva)",
+	"key.dynamic_fps.toggle_disabled": "Disabilita Dynamic FPS (Attiva/Disattiva)",
+	"gui.dynamic_fps.hud.reducing": "Dynamic FPS: Riduzione forzata del FPS",
+	"gui.dynamic_fps.hud.disabled": "Dynamic FPS disabilitato",
+
+	"modmenu.descriptionTranslation.dynamic_fps": "Regola dinamicamente il FPS in modo che Minecraft non consumi risorse in background."
 }
