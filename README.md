@@ -4,7 +4,7 @@
 
 # Dynamic FPS
 
-Dynamic FPS can reduce the frame rate, volume, and pause [toasts](https://minecraft.fandom.com/wiki/Toasts) while Minecraft is not focused or hidden.  
+Dynamic FPS can reduce the frame rate, volume, and pause [toasts](https://minecraft.wiki/wiki/Toasts) while Minecraft is not focused or hidden.  
 In addition to this it also fixes a bug in vanilla Minecraft making it take too many resources in the background.
 
 Download on [GitHub Releases](https://github.com/juliand665/Dynamic-FPS/releases), [Modrinth](https://modrinth.com/mod/dynamic-fps), or [CurseForge](https://www.curseforge.com/minecraft/mc-mods/dynamic-fps).
@@ -15,8 +15,6 @@ Dynamic FPS will detect when the window is not focused, but instead either hover
 For each mode you can adjust the maximum FPS, master volume, toast visibility, and whether to invoke garbage collection.
 
 In addition to this Dynamic FPS also reduces background CPU usage and stops rendering the world while either the loading overlay is active or a screen is obscuring the world (e.g. when you're editing keybinds or in another screen that the mod detects as opaque).
-
-Other than that Dynamic FPS is kept very light-weight - no update checker, no telemetry, or anything else unneeded!
 
 ## Questions
 
