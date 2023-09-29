@@ -109,6 +109,10 @@ public class DynamicFPSMod implements ClientModInitializer {
 		return config.frameRateTarget();
 	}
 
+	public static float volumeMultiplier() {
+		return config.volumeMultiplier();
+	}
+
 	public static boolean shouldShowToasts() {
 		return config.showToasts();
 	}
@@ -200,23 +204,27 @@ public class DynamicFPSMod implements ClientModInitializer {
 		}
 	}
 
-	private static boolean willPauseSounds() {
-		return !minecraft.isWindowActive() && minecraft.options.pauseOnLostFocus && minecraft.screen == null;
-	}
-
 	private static void setVolumeMultiplier(float multiplier) {
-		// setting the volume to 0 stops all sounds (including music), which we want to
-		// avoid if possible.
-		// if the client would pause anyway, we don't need to do anything because that
-		// will already pause all sounds.
-		if (multiplier == 0 && willPauseSounds())
-			return;
+		// Set the sound engine to a new volume multiplier,
+		// Or instead pause it when the multiplier is zero.
 
-		var baseVolume = minecraft.options.getSoundSourceVolume(SoundSource.MASTER);
-		minecraft.getSoundManager().updateSourceVolume(
-			SoundSource.MASTER,
-			baseVolume * multiplier
-		);
+		// We can not set the sound engine to a zero volume
+		// Because it stops all actively playing sounds and
+		// Makes for a rather jarring experience when music
+		// Is stopped. Also fixes now-playing compatibility
+
+		var manager = minecraft.getSoundManager();
+
+		if (multiplier == 0) {
+			manager.pause();
+		} else {
+			manager.resume();
+
+			manager.updateSourceVolume(
+				SoundSource.MASTER,
+				minecraft.options.getSoundSourceVolume(SoundSource.MASTER) * multiplier
+			);
+		}
 	}
 
 	private static boolean checkForRender(long timeSinceLastRender) {
