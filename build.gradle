@@ -1,5 +1,5 @@
 plugins {
-	id 'maven-publish'
+	id "maven-publish"
 	alias libs.plugins.fabric.loom
 }
 
@@ -19,8 +19,8 @@ dependencies {
 	minecraft libs.minecraft
 	mappings loom.officialMojangMappings()
 
+	modImplementation libs.fabric.api
 	modImplementation libs.fabric.loader
-	modImplementation libs.bundles.fabric.api
 
 	modApi libs.modmenu
 	modApi libs.cloth.config
@@ -42,7 +42,7 @@ java {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 17
+	it.options.release.set(17)
 	it.options.encoding = "UTF-8"
 
 	it.options.compilerArgs += ["-Xlint:deprecation"]
