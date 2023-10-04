@@ -2,9 +2,13 @@ package dynamic_fps.impl.compat;
 
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 
 import static dynamic_fps.impl.util.Localization.localized;
+
+import java.util.Optional;
 
 import dynamic_fps.impl.DynamicFPSMod;
 import dynamic_fps.impl.GraphicsState;
@@ -30,17 +34,14 @@ public final class ClothConfig {
 
 			builder.getOrCreateCategory(
 				localized("config", "category." + state.toString().toLowerCase()))
-				.addEntry(
-					entryBuilder
-						.startTextDescription(
-							localized("config", "frame_rate_target_description")).build())
 				.addEntry(entryBuilder
 					.startIntSlider(
 						localized("config", "frame_rate_target"),
-						config.frameRateTarget(),
-						-1, 60)
-					.setDefaultValue(standard.frameRateTarget())
-					.setSaveConsumer(config::setFrameRateTarget)
+						fromConfigFpsTarget(config.frameRateTarget()),
+						0, 61)
+					.setDefaultValue(fromConfigFpsTarget(standard.frameRateTarget()))
+					.setSaveConsumer(value -> config.setFrameRateTarget(toConfigFpsTarget(value)))
+					.setTextGetter(ClothConfig::fpsTargetMessage)
 					.build())
 				.addEntry(entryBuilder
 					.startIntSlider(
@@ -49,6 +50,7 @@ public final class ClothConfig {
 						0, 100)
 					.setDefaultValue((int) (standard.volumeMultiplier() * 100))
 					.setSaveConsumer(value -> config.setVolumeMultiplier(value / 100f))
+					.setTextGetter(ClothConfig::volumeMultiplierMessage)
 					.build())
 				.addEntry(entryBuilder
 					.startEnumSelector(
@@ -57,6 +59,8 @@ public final class ClothConfig {
 						config.graphicsState())
 					.setDefaultValue(standard.graphicsState())
 					.setSaveConsumer(config::setGraphicsState)
+					.setEnumNameProvider(ClothConfig::graphicsStateMessage)
+					.setTooltipSupplier(ClothConfig::graphicsStateTooltip)
 					.build())
 				.addEntry(entryBuilder
 					.startBooleanToggle(
@@ -64,6 +68,7 @@ public final class ClothConfig {
 						config.showToasts())
 					.setDefaultValue(standard.showToasts())
 					.setSaveConsumer(config::setShowToasts)
+					.setTooltip(localized("config", "show_toasts_tooltip"))
 					.build())
 				.addEntry(entryBuilder
 					.startBooleanToggle(
@@ -71,9 +76,44 @@ public final class ClothConfig {
 						config.runGarbageCollector())
 					.setDefaultValue(standard.runGarbageCollector())
 					.setSaveConsumer(config::setRunGarbageCollector)
+					.setTooltip(localized("config", "run_garbage_collector_tooltip"))
 					.build());
 		}
 
 		return builder.build();
+	}
+
+	// Convert magic -1 number to 61 (and reverse)
+	// So the "unlocked" FPS value is on the right
+	private static int toConfigFpsTarget(int value) {
+		return value == 61 ? -1 : value;
+	}
+
+	private static int fromConfigFpsTarget(int value) {
+		return value == -1 ? 61 : value;
+	}
+
+	private static Component fpsTargetMessage(int value) {
+		if (toConfigFpsTarget(value) != -1) {
+			return Component.translatable("options.framerate", value);
+		} else {
+			return Component.translatable("options.framerateLimit.max");
+		}
+	}
+
+	private static Component volumeMultiplierMessage(int value) {
+		return Component.literal(Integer.toString(value) + "%");
+	}
+
+	private static Component graphicsStateMessage(Enum<GraphicsState> graphicsState) {
+		return localized("config", "graphics_state_" + graphicsState.toString());
+	}
+
+	private static Optional<Component[]> graphicsStateTooltip(GraphicsState graphicsState) {
+		if (!graphicsState.equals(GraphicsState.MINIMAL)) {
+			return Optional.empty();
+		}
+
+		return Optional.of(new Component[]{ localized("config", "graphics_state_minimal_tooltip").withStyle(ChatFormatting.RED) });
 	}
 }
