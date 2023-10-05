@@ -122,7 +122,18 @@ public final class ClothConfig {
 	}
 
 	private static Component graphicsStateMessage(Enum<GraphicsState> graphicsState) {
-		return localized("config", "graphics_state_" + graphicsState.toString());
+		String key;
+
+		if (graphicsState.equals(GraphicsState.DEFAULT)) {
+			key = "options.gamma.default";
+		} else if (graphicsState.equals(GraphicsState.MINIMAL)) {
+			key = "options.particles.minimal";
+		} else {
+			key = "options.particles.decreased";
+		}
+
+		return Component.translatable(key);
+		// return localized("config", "graphics_state_" + graphicsState.toString());
 	}
 
 	private static Optional<Component[]> graphicsStateTooltip(GraphicsState graphicsState) {
