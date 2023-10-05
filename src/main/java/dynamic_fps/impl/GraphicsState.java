@@ -29,7 +29,7 @@ public enum GraphicsState {
 	public static final Codec<GraphicsState> CODEC = new PrimitiveCodec<GraphicsState>() {
 		@Override
 		public <T> T write(DynamicOps<T> ops, GraphicsState value) {
-			return ops.createString(value.toString().toLowerCase(Locale.ROOT));
+			return ops.createString(value.toString());
 		}
 
 		@Override
@@ -43,4 +43,9 @@ public enum GraphicsState {
 			}
 		}
 	};
+
+	@Override
+	public String toString() {
+		return super.toString().toLowerCase(Locale.ROOT);
+	}
 }
