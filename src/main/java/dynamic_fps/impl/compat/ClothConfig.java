@@ -17,12 +17,12 @@ import dynamic_fps.impl.config.DynamicFPSConfig;
 
 public final class ClothConfig {
 	public static Screen genConfigScreen(Screen parent) {
-		ConfigBuilder builder = ConfigBuilder.create()
+		var builder = ConfigBuilder.create()
 			.setParentScreen(parent)
 			.setTitle(localized("config", "title"))
 			.setSavingRunnable(DynamicFPSMod.modConfig::save);
 
-		ConfigEntryBuilder entryBuilder = builder.entryBuilder();
+		var entryBuilder = builder.entryBuilder();
 
 		for (var state : PowerState.values()) {
 			if (!state.configurable) {
@@ -32,52 +32,68 @@ public final class ClothConfig {
 			var config = DynamicFPSMod.modConfig.get(state);
 			var standard = DynamicFPSConfig.getDefaultConfig(state);
 
-			builder.getOrCreateCategory(
-				localized("config", "category." + state.toString().toLowerCase()))
-				.addEntry(entryBuilder
-					.startIntSlider(
-						localized("config", "frame_rate_target"),
-						fromConfigFpsTarget(config.frameRateTarget()),
-						0, 61)
-					.setDefaultValue(fromConfigFpsTarget(standard.frameRateTarget()))
-					.setSaveConsumer(value -> config.setFrameRateTarget(toConfigFpsTarget(value)))
-					.setTextGetter(ClothConfig::fpsTargetMessage)
-					.build())
-				.addEntry(entryBuilder
-					.startIntSlider(
-						localized("config", "volume_multiplier"),
-						(int) (config.volumeMultiplier() * 100),
-						0, 100)
-					.setDefaultValue((int) (standard.volumeMultiplier() * 100))
-					.setSaveConsumer(value -> config.setVolumeMultiplier(value / 100f))
-					.setTextGetter(ClothConfig::volumeMultiplierMessage)
-					.build())
-				.addEntry(entryBuilder
-					.startEnumSelector(
-						localized("config", "graphics_state"),
-						GraphicsState.class,
-						config.graphicsState())
-					.setDefaultValue(standard.graphicsState())
-					.setSaveConsumer(config::setGraphicsState)
-					.setEnumNameProvider(ClothConfig::graphicsStateMessage)
-					.setTooltipSupplier(ClothConfig::graphicsStateTooltip)
-					.build())
-				.addEntry(entryBuilder
-					.startBooleanToggle(
-						localized("config", "show_toasts"),
-						config.showToasts())
-					.setDefaultValue(standard.showToasts())
-					.setSaveConsumer(config::setShowToasts)
-					.setTooltip(localized("config", "show_toasts_tooltip"))
-					.build())
-				.addEntry(entryBuilder
-					.startBooleanToggle(
-						localized("config", "run_garbage_collector"),
-						config.runGarbageCollector())
-					.setDefaultValue(standard.runGarbageCollector())
-					.setSaveConsumer(config::setRunGarbageCollector)
-					.setTooltip(localized("config", "run_garbage_collector_tooltip"))
-					.build());
+			var category = builder.getOrCreateCategory(
+				localized("config", "category." + state.toString().toLowerCase())
+			);
+
+			category.addEntry(
+				entryBuilder.startIntSlider(
+					localized("config", "frame_rate_target"),
+					fromConfigFpsTarget(config.frameRateTarget()),
+					0, 61
+				)
+				.setDefaultValue(fromConfigFpsTarget(standard.frameRateTarget()))
+				.setSaveConsumer(value -> config.setFrameRateTarget(toConfigFpsTarget(value)))
+				.setTextGetter(ClothConfig::fpsTargetMessage)
+				.build()
+			);
+
+			category.addEntry(
+				entryBuilder.startIntSlider(
+					localized("config", "volume_multiplier"),
+					(int) (config.volumeMultiplier() * 100),
+					0, 100
+				)
+				.setDefaultValue((int) (standard.volumeMultiplier() * 100))
+				.setSaveConsumer(value -> config.setVolumeMultiplier(value / 100f))
+				.setTextGetter(ClothConfig::volumeMultiplierMessage)
+				.build()
+			);
+
+			category.addEntry(
+				entryBuilder.startEnumSelector(
+					localized("config", "graphics_state"),
+					GraphicsState.class,
+					config.graphicsState()
+				)
+				.setDefaultValue(standard.graphicsState())
+				.setSaveConsumer(config::setGraphicsState)
+				.setEnumNameProvider(ClothConfig::graphicsStateMessage)
+				.setTooltipSupplier(ClothConfig::graphicsStateTooltip)
+				.build()
+			);
+
+			category.addEntry(
+				entryBuilder.startBooleanToggle(
+					localized("config", "show_toasts"),
+					config.showToasts()
+				)
+				.setDefaultValue(standard.showToasts())
+				.setSaveConsumer(config::setShowToasts)
+				.setTooltip(localized("config", "show_toasts_tooltip"))
+				.build()
+			);
+
+			category.addEntry(
+				entryBuilder.startBooleanToggle(
+					localized("config", "run_garbage_collector"),
+					config.runGarbageCollector()
+				)
+				.setDefaultValue(standard.runGarbageCollector())
+				.setSaveConsumer(config::setRunGarbageCollector)
+				.setTooltip(localized("config", "run_garbage_collector_tooltip"))
+				.build()
+			);
 		}
 
 		return builder.build();
