@@ -127,10 +127,6 @@ public class DynamicFPSMod implements ClientModInitializer {
 		return isDisabled || FREX.isFlawlessFramesActive();
 	}
 
-	private static boolean isPauseScreenOpened() {
-		return minecraft.screen instanceof PauseScreen;
-	}
-
 	private static boolean isLevelCoveredByScreen() {
 		return minecraft.screen != null && minecraft.screen.dynamic_fps$rendersBackground();
 	}
@@ -183,11 +179,7 @@ public class DynamicFPSMod implements ClientModInitializer {
 		} else if (isForcingLowFPS) {
 			current = PowerState.UNFOCUSED;
 		} else if (window.isFocused()) {
-			if (!isPauseScreenOpened()) {
-				current = PowerState.FOCUSED;
-			} else {
-				current = PowerState.SUSPENDED;
-			}
+			current = PowerState.FOCUSED;
 		} else if (window.isHovered()) {
 			current = PowerState.HOVERED;
 		} else if (!window.isIconified()) {

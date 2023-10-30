@@ -39,16 +39,10 @@ public final class DynamicFPSConfig {
 	}
 
 	public Config get(PowerState state) {
-		switch (state) {
-			case FOCUSED: {
-				return Config.ACTIVE;
-			}
-			case SUSPENDED: {
-				return Config.SUSPENDED;
-			}
-			default: {
-				return configs.get(state);
-			}
+		if (state == PowerState.FOCUSED) {
+			return Config.ACTIVE;
+		} else {
+			return configs.get(state);
 		}
 	}
 

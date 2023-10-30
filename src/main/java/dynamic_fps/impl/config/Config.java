@@ -21,7 +21,6 @@ public final class Config {
 	).apply(instance, Config::new));
 
 	public static final Config ACTIVE = new Config(-1, 1.0f, GraphicsState.DEFAULT, true, false);
-	public static final Config SUSPENDED = new Config(60, 1.0f, GraphicsState.DEFAULT, true, false);
 
 	public Config(int frameRateTarget, float volumeMultiplier, GraphicsState graphicsState, boolean showToasts, boolean runGarbageCollector) {
 		this.frameRateTarget = frameRateTarget;
