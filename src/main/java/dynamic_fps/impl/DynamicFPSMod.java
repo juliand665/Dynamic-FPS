@@ -176,6 +176,15 @@ public class DynamicFPSMod implements ClientModInitializer {
 			minecraft = Minecraft.getInstance();
 		}
 
+		if (minecraft.isSameThread()) {
+			checkForStateChanges0();
+		} else {
+			// Schedule check for the beginning of the next frame
+			minecraft.tell(DynamicFPSMod::checkForStateChanges0);
+		}
+	}
+
+	private static void checkForStateChanges0() {
 		PowerState current;
 
 		if (isDisabledInternal()) {
