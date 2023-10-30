@@ -31,12 +31,7 @@ public enum PowerState {
 	/*
 	 * Window minimized or otherwise hidden.
 	 */
-	INVISIBLE(true),
-
-	/*
-	 * User is currently on the pause screen.
-	 */
-	SUSPENDED(false);
+	INVISIBLE(true);
 
 	public final boolean configurable;
 
