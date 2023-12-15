@@ -1,30 +1,35 @@
 package dynamic_fps.impl.config;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import dynamic_fps.impl.GraphicsState;
+import dynamic_fps.impl.util.EnumCodec;
+import net.minecraft.sounds.SoundSource;
 
 public final class Config {
 	private int frameRateTarget;
-	private float volumeMultiplier;
+	private Map<SoundSource, Float> volumeMultipliers;
 	private GraphicsState graphicsState;
 	private boolean showToasts;
 	private boolean runGarbageCollector;
 
 	public static final Codec<Config> CODEC = RecordCodecBuilder.create(instance -> instance.group(
 		Codec.INT.fieldOf("frame_rate_target").forGetter(Config::frameRateTarget),
-		Codec.FLOAT.fieldOf("volume_multiplier").forGetter(Config::volumeMultiplier),
-		GraphicsState.CODEC.fieldOf("graphics_state").forGetter(Config::graphicsState),
+		Codec.unboundedMap(new EnumCodec<>(SoundSource.values()), Codec.FLOAT).fieldOf("volume_multipliers").forGetter(Config::volumeMultipliers),
+		new EnumCodec<>(GraphicsState.values()).fieldOf("graphics_state").forGetter(Config::graphicsState),
 		Codec.BOOL.fieldOf("show_toasts").forGetter(Config::showToasts),
 		Codec.BOOL.fieldOf("run_garbage_collector").forGetter(Config::runGarbageCollector)
 	).apply(instance, Config::new));
 
-	public static final Config ACTIVE = new Config(-1, 1.0f, GraphicsState.DEFAULT, true, false);
+	public static final Config ACTIVE = new Config(-1, new HashMap<>(), GraphicsState.DEFAULT, true, false);
 
-	public Config(int frameRateTarget, float volumeMultiplier, GraphicsState graphicsState, boolean showToasts, boolean runGarbageCollector) {
+	public Config(int frameRateTarget, Map<SoundSource, Float> volumeMultipliers, GraphicsState graphicsState, boolean showToasts, boolean runGarbageCollector) {
 		this.frameRateTarget = frameRateTarget;
-		this.volumeMultiplier = volumeMultiplier;
+		this.volumeMultipliers = new HashMap<>(volumeMultipliers); // Ensure the map is mutable
 		this.graphicsState = graphicsState;
 		this.showToasts = showToasts;
 		this.runGarbageCollector = runGarbageCollector;
@@ -38,12 +43,16 @@ public final class Config {
 		this.frameRateTarget = value;
 	}
 
-	public float volumeMultiplier() {
-		return this.volumeMultiplier;
+	public Map<SoundSource, Float> volumeMultipliers() {
+		return this.volumeMultipliers;
 	}
 
-	public void setVolumeMultiplier(float value) {
-		this.volumeMultiplier = value;
+	public float volumeMultiplier(SoundSource category) {
+		return this.volumeMultipliers.getOrDefault(category, 1.0f);
+	}
+
+	public void setVolumeMultiplier(SoundSource category, float value) {
+		this.volumeMultipliers.put(category, value);
 	}
 
 	public GraphicsState graphicsState() {

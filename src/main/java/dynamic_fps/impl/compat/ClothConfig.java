@@ -1,10 +1,10 @@
 package dynamic_fps.impl.compat;
 
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
-import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundSource;
 
 import static dynamic_fps.impl.util.Localization.localized;
 
@@ -48,17 +48,25 @@ public final class ClothConfig {
 				.build()
 			);
 
-			category.addEntry(
-				entryBuilder.startIntSlider(
-					localized("config", "volume_multiplier"),
-					(int) (config.volumeMultiplier() * 100),
-					0, 100
-				)
-				.setDefaultValue((int) (standard.volumeMultiplier() * 100))
-				.setSaveConsumer(value -> config.setVolumeMultiplier(value / 100f))
-				.setTextGetter(ClothConfig::volumeMultiplierMessage)
-				.build()
-			);
+			var volumes = entryBuilder.startSubCategory(localized("config", "volume_multiplier"));
+
+			for (var source : SoundSource.values()) {
+				var name = source.getName();
+
+				volumes.add(
+					entryBuilder.startIntSlider(
+						Component.translatable("soundCategory." + name),
+						(int) (config.volumeMultiplier(source) * 100),
+						0, 100
+					)
+					.setDefaultValue((int) (standard.volumeMultiplier(source) * 100))
+					.setSaveConsumer(value -> config.setVolumeMultiplier(source, value / 100f))
+					.setTextGetter(ClothConfig::volumeMultiplierMessage)
+					.build()
+				);
+			}
+
+			category.addEntry(volumes.build());
 
 			category.addEntry(
 				entryBuilder.startEnumSelector(

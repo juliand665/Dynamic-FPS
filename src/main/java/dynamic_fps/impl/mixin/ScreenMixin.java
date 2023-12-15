@@ -6,12 +6,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import dynamic_fps.impl.util.DynamicFPSScreen;
 import dynamic_fps.impl.util.ModCompatibility;
+import dynamic_fps.impl.util.duck.DuckScreen;
 import net.minecraft.client.gui.screens.Screen;
 
 @Mixin(Screen.class)
-public class ScreenMixin implements DynamicFPSScreen {
+public class ScreenMixin implements DuckScreen {
 	@Unique
 	private boolean dynamic_fps$canOptimize = false;
 
