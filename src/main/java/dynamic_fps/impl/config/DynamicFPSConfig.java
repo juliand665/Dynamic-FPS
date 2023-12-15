@@ -56,7 +56,9 @@ public final class DynamicFPSConfig {
 		try {
 			data = Files.readString(PATH);
 		} catch (NoSuchFileException e) {
-			return new DynamicFPSConfig(new EnumMap<>(PowerState.class));
+			var config = new DynamicFPSConfig(new EnumMap<>(PowerState.class));
+			config.save();
+			return config;
 		} catch (IOException e) {
 			throw new RuntimeException("Failed to load Dynamic FPS config.", e);
 		}

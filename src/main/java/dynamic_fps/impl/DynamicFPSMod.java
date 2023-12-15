@@ -62,8 +62,6 @@ public class DynamicFPSMod implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
-		modConfig.save(); // Force create file on disk
-
 		toggleForcedKeyBinding.register();
 		toggleDisabledKeyBinding.register();
 
