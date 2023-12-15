@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -21,7 +22,9 @@ import net.fabricmc.loader.api.FabricLoader;
 public final class DynamicFPSConfig {
 	private Map<PowerState, Config> configs;
 
-	private static final Path PATH = FabricLoader.getInstance().getConfigDir().resolve(DynamicFPSMod.MOD_ID + ".json");
+	private static final Path CONFIGS = FabricLoader.getInstance().getConfigDir();
+	private static final Path CONFIG_FILE = CONFIGS.resolve(DynamicFPSMod.MOD_ID + ".json");
+
 	private static final Codec<Map<PowerState, Config>> STATES_CODEC = Codec.unboundedMap(PowerState.CODEC, Config.CODEC);
 
 	private static final Codec<DynamicFPSConfig> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -54,7 +57,7 @@ public final class DynamicFPSConfig {
 		String data;
 
 		try {
-			data = Files.readString(PATH);
+			data = Files.readString(CONFIG_FILE);
 		} catch (NoSuchFileException e) {
 			var config = new DynamicFPSConfig(new EnumMap<>(PowerState.class));
 			config.save();
@@ -74,10 +77,14 @@ public final class DynamicFPSConfig {
 		var root = data.getOrThrow(false, RuntimeException::new);
 
 		try {
-			Files.writeString(PATH, root.toString(), StandardCharsets.UTF_8);
+			var temp = Files.createTempFile(CONFIGS, "dynamic_fps", ".json");
+			Files.writeString(temp, root.toString(), StandardCharsets.UTF_8);
+
+			Files.deleteIfExists(CONFIG_FILE);
+			Files.move(temp, CONFIG_FILE, StandardCopyOption.ATOMIC_MOVE);
 		} catch (IOException e) {
-			// Cloth Config's automatic saving does not support catching exceptions
-			throw new RuntimeException("Failed to save Dynamic FPS config.", e);
+			// Cloth Config's built-in saving does not support catching exceptions :(
+			throw new RuntimeException("Failed to save or modify Dynamic FPS config!", e);
 		}
 	}
 
