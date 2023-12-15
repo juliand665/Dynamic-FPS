@@ -15,7 +15,6 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.LoadingOverlay;
-import net.minecraft.client.gui.screens.PauseScreen;
 import net.minecraft.sounds.SoundSource;
 
 import static dynamic_fps.impl.util.Localization.translationKey;
