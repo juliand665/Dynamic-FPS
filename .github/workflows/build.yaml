@@ -8,7 +8,7 @@ jobs:
       matrix:
         java: [
           17,
-          20,
+          21,
         ]
         os: [
           ubuntu-22.04,
@@ -34,7 +34,7 @@ jobs:
           arguments: build --warning-mode=all
           cache-read-only: ${{ github.ref != 'refs/heads/main' }}
       - name: capture build artifacts
-        if: ${{ runner.os == 'Linux' && matrix.java == '20' }} # Upload artifacts from one job, ignore the rest
+        if: ${{ runner.os == 'Linux' && matrix.java == '21' }} # Upload artifacts from one job, ignore the rest
         uses: actions/upload-artifact@v3
         with:
           name: dynamic-fps-artifacts
