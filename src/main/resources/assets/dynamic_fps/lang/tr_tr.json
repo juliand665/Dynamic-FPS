@@ -2,9 +2,36 @@
 	"config.dynamic_fps.title": "Dinamik FPS Ayarları",
 
 	"config.dynamic_fps.category.general": "Genel",
+	"config.dynamic_fps.category.hovered": "Üzerinde Durulan",
+	"config.dynamic_fps.category.unfocused": "Odaklanmamış",
+	"config.dynamic_fps.category.abandoned": "Boşta",
+	"config.dynamic_fps.category.invisible": "Görünmez",
 
+	"config.dynamic_fps.disabled": "Devre Dışı",
+	"config.dynamic_fps.minutes": "%d Dakika",
+
+	"config.dynamic_fps.idle_time": "Boşta Geçen Süre",
+	"config.dynamic_fps.idle_time_tooltip": "Oyun odaklıyken giriş olmadan geçen dakikalar boyunca Dinamik FPS'nin Boşta durumunu etkinleştirmesi.",
+
+	"config.dynamic_fps.frame_rate_target": "Kare Hızı Hedefi",
+	"config.dynamic_fps.volume_multiplier": "Ses Çarpanı",
+
+	"config.dynamic_fps.graphics_state": "Grafik Seçenekleri",
+	"config.dynamic_fps.graphics_state_default": "Varsayılan",
+	"config.dynamic_fps.graphics_state_reduced": "Azaltılmış",
+	"config.dynamic_fps.graphics_state_minimal": "Minimal",
+	"config.dynamic_fps.graphics_state_minimal_tooltip": "Minimal grafikler dünyanın yeniden yüklenmesine neden olur!!",
+
+	"config.dynamic_fps.show_toasts": "Bilgi Pencerelerini Göster",
+	"config.dynamic_fps.show_toasts_tooltip": "Bilgi pencerelerini göstermeye devam edip etmemeye veya ertelemeye karar verir",
+
+	"config.dynamic_fps.run_garbage_collector": "Garbage Collector Çalıştır",
+	"config.dynamic_fps.run_garbage_collector_tooltip": "Bu duruma geçişte kullanılmayan belleği serbest bırak",
+	
 	"key.dynamic_fps.toggle_forced": "Zorla Azaltılmış FPS (Aç / kapat)",
 	"key.dynamic_fps.toggle_disabled": "Dinamik FPS'yi Devre Dışı Bırak (Aç / kapat)",
 	"gui.dynamic_fps.hud.reducing": "Dinamik FPS: Azaltılmış FPS Zorlanıyor",
-	"gui.dynamic_fps.hud.disabled": "Dinamik FPS Devre Dışı Bırakıldı"
+	"gui.dynamic_fps.hud.disabled": "Dinamik FPS Devre Dışı Bırakıldı",
+
+	"modmenu.descriptionTranslation.dynamic_fps": "Minecraft'in arka planda kaynakları tüketmemesi için FPS'yi dinamik olarak ayarlar."
 }
