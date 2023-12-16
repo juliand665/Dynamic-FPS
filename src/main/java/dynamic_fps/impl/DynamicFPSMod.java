@@ -106,8 +106,8 @@ public class DynamicFPSMod implements ClientModInitializer {
 		return config.frameRateTarget();
 	}
 
-	public static float volumeMultiplier() {
-		return config.volumeMultiplier();
+	public static float volumeMultiplier(SoundSource source) {
+		return config.volumeMultiplier(source);
 	}
 
 	public static boolean shouldShowToasts() {
@@ -147,8 +147,10 @@ public class DynamicFPSMod implements ClientModInitializer {
 			System.gc();
 		}
 
-		if (before.volumeMultiplier() != config.volumeMultiplier()) {
-			setVolumeMultiplier(config.volumeMultiplier());
+		for (var source : SoundSource.values()) {
+			if (before.volumeMultiplier(source) != config.volumeMultiplier(source)) {
+				minecraft.getSoundManager().dynamic_fps$updateVolume(source);
+			}
 		}
 
 		if (before.graphicsState() != config.graphicsState()) {
@@ -199,29 +201,6 @@ public class DynamicFPSMod implements ClientModInitializer {
 			state = current;
 
 			handleStateChange(previous, current);
-		}
-	}
-
-	private static void setVolumeMultiplier(float multiplier) {
-		// Set the sound engine to a new volume multiplier,
-		// Or instead pause it when the multiplier is zero.
-
-		// We can not set the sound engine to a zero volume
-		// Because it stops all actively playing sounds and
-		// Makes for a rather jarring experience when music
-		// Is stopped. Also fixes now-playing compatibility
-
-		var manager = minecraft.getSoundManager();
-
-		if (multiplier == 0) {
-			manager.pause();
-		} else {
-			manager.resume();
-
-			manager.updateSourceVolume(
-				SoundSource.MASTER,
-				minecraft.options.getSoundSourceVolume(SoundSource.MASTER) * multiplier
-			);
 		}
 	}
 
