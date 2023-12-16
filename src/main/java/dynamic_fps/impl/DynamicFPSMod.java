@@ -167,9 +167,7 @@ public class DynamicFPSMod implements ClientModInitializer {
 
 		tickEventRegistered = true;
 
-		// I assume world ticks only happen 20 times a second
-		// Instead of whatever amount of FPS we get at the moment?
-		ClientTickEvents.START_WORLD_TICK.register((minecraft) -> {
+		ClientTickEvents.START_CLIENT_TICK.register((minecraft) -> {
 			var idle = isIdle();
 
 			if (idle != wasIdle) {
