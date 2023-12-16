@@ -1,8 +1,10 @@
 {
 	"config.dynamic_fps.title": "Dynamic FPS Konfigurieren",
 
+	"config.dynamic_fps.category.general": "Allgemein",
 	"config.dynamic_fps.category.hovered": "Hover",
 	"config.dynamic_fps.category.unfocused": "Unfokussiert",
+	"config.dynamic_fps.category.abandoned": "Untätig",
 	"config.dynamic_fps.category.invisible": "Unsichtbar",
 
 	"config.dynamic_fps.frame_rate_target": "Zielbildrate",

@@ -1,9 +1,10 @@
 {
 	"config.dynamic_fps.title": "Konfigurera Dynamic FPS",
 
+	"config.dynamic_fps.category.general": "Allmänt",
 	"config.dynamic_fps.category.hovered": "Hovrande",
 	"config.dynamic_fps.category.unfocused": "Ofokuserad",
-	"config.dynamic_fps.category.invisible": "Osynlig",	
+	"config.dynamic_fps.category.invisible": "Osynlig",
 
 	"config.dynamic_fps.frame_rate_target": "Bildfrekvensmål",
 	"config.dynamic_fps.frame_rate_target_description": "Ställ in bildfrekvensmålet till -1 för att stänga av bildfrekvens reducering.",
@@ -11,7 +12,7 @@
 	"config.dynamic_fps.graphics_state": "Bildskärmsinställningar",
 	"config.dynamic_fps.show_toasts": "Visa Toasts",
 	"config.dynamic_fps.run_garbage_collector": "Starta GC",
-	
+
 	"key.dynamic_fps.toggle_forced": "Tvinga Reducerad FPS (Växla)",
 	"key.dynamic_fps.toggle_disabled": "Inaktivera Dynamic FPS (Växla)",
 	"gui.dynamic_fps.hud.reducing": "Dynamic FPS: Tvingar Reducerad BPS",

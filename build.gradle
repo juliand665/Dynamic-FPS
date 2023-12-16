@@ -26,6 +26,10 @@ dependencies {
 	modApi libs.cloth.config
 }
 
+loom {
+	accessWidenerPath = file("src/main/resources/dynamic_fps.accesswidener")
+}
+
 processResources {
 	inputs.property "version", generateVersion()
 

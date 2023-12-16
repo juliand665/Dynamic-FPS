@@ -25,6 +25,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.sounds.SoundSource;
 
 public final class DynamicFPSConfig {
+	private int idleTime; // Seconds
 	private Map<PowerState, Config> configs;
 
 	private static final Path CONFIGS = FabricLoader.getInstance().getConfigDir();
@@ -33,10 +34,12 @@ public final class DynamicFPSConfig {
 	private static final Codec<Map<PowerState, Config>> STATES_CODEC = Codec.unboundedMap(new EnumCodec<>(PowerState.values()), Config.CODEC);
 
 	private static final Codec<DynamicFPSConfig> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+		Codec.intRange(0, 30 * 60).fieldOf("idle_time").forGetter(DynamicFPSConfig::idleTime),
 		STATES_CODEC.fieldOf("states").forGetter(DynamicFPSConfig::configs)
 	).apply(instance, DynamicFPSConfig::new));
 
-	private DynamicFPSConfig(Map<PowerState, Config> configs) {
+	private DynamicFPSConfig(int abandonTime, Map<PowerState, Config> configs) {
+		this.idleTime = abandonTime;
 		this.configs = new EnumMap<>(configs);
 
 		for (var state : PowerState.values()) {
@@ -54,6 +57,14 @@ public final class DynamicFPSConfig {
 		}
 	}
 
+	public int idleTime() {
+		return this.idleTime;
+	}
+
+	public void setIdleTime(int value) {
+		this.idleTime = value;
+	}
+
 	private Map<PowerState, Config> configs() {
 		return this.configs;
 	}
@@ -64,7 +75,7 @@ public final class DynamicFPSConfig {
 		try {
 			data = Files.readString(CONFIG_FILE);
 		} catch (NoSuchFileException e) {
-			var config = new DynamicFPSConfig(new EnumMap<>(PowerState.class));
+			var config = new DynamicFPSConfig(0, new EnumMap<>(PowerState.class));
 			config.save();
 			return config;
 		} catch (IOException e) {
@@ -103,6 +114,9 @@ public final class DynamicFPSConfig {
 			case UNFOCUSED: {
 				return new Config(1, withMasterVolume(0.25f), GraphicsState.DEFAULT, false, false);
 			}
+			case ABANDONED: {
+				return new Config(10, withMasterVolume(1.0f), GraphicsState.DEFAULT, false, false);
+			}
 			case INVISIBLE: {
 				return new Config(0, withMasterVolume(0.0f), GraphicsState.DEFAULT, false, false);
 			}
@@ -119,7 +133,15 @@ public final class DynamicFPSConfig {
 	}
 
 	private static void upgradeConfig(JsonObject root) {
+		upgradeIdleTime(root);
 		upgradeVolumeMultiplier(root);
+	}
+
+	private static void upgradeIdleTime(JsonObject root) {
+		// Add idle_time field if it's missing
+		if (!root.has("idle_time")) {
+			root.addProperty("idle_time", 0);
+		}
 	}
 
 	private static void upgradeVolumeMultiplier(JsonObject root) {

@@ -6,22 +6,27 @@ package dynamic_fps.impl;
  * Power states are prioritized based on their order here, see DynamicFPSMod.checkForStateChanges for impl details.
  */
 public enum PowerState {
-	/*
+	/**
 	 * Window is currently focused.
 	 */
 	FOCUSED(false),
 
-	/*
+	/**
 	 * Mouse positioned over unfocused window.
 	 */
 	HOVERED(true),
 
-	/*
+	/**
 	 * Another application is focused.
 	 */
 	UNFOCUSED(true),
 
-	/*
+	/**
+	 * User hasn't sent input for some time.
+	 */
+	ABANDONED(true),
+
+	/**
 	 * Window minimized or otherwise hidden.
 	 */
 	INVISIBLE(true);

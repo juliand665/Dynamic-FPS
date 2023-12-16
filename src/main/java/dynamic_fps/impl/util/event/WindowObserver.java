@@ -1,4 +1,4 @@
-package dynamic_fps.impl.util;
+package dynamic_fps.impl.util.event;
 
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWCursorEnterCallback;
@@ -22,11 +22,11 @@ public class WindowObserver {
 	public WindowObserver(long address) {
 		this.window = address;
 
-		previousFocusCallback = GLFW.glfwSetWindowFocusCallback(this.window, this::onFocusChanged);
-		previousMouseCallback = GLFW.glfwSetCursorEnterCallback(this.window, this::onMouseChanged);
+		this.previousFocusCallback = GLFW.glfwSetWindowFocusCallback(this.window, this::onFocusChanged);
+		this.previousMouseCallback = GLFW.glfwSetCursorEnterCallback(this.window, this::onMouseChanged);
 
 		// Vanilla doesn't use this (currently), other mods might register this callback though ...
-		previousIconifyCallback = GLFW.glfwSetWindowIconifyCallback(this.window, this::onIconifyChanged);
+		this.previousIconifyCallback = GLFW.glfwSetWindowIconifyCallback(this.window, this::onIconifyChanged);
 	}
 
 	private boolean isCurrentWindow(long address) {
@@ -43,8 +43,8 @@ public class WindowObserver {
 			DynamicFPSMod.onStatusChanged();
 		}
 
-		if (previousFocusCallback != null) {
-			previousFocusCallback.invoke(address, focused);
+		if (this.previousFocusCallback != null) {
+			this.previousFocusCallback.invoke(address, focused);
 		}
 	}
 
@@ -58,8 +58,8 @@ public class WindowObserver {
 			DynamicFPSMod.onStatusChanged();
 		}
 
-		if (previousMouseCallback != null) {
-			previousMouseCallback.invoke(address, hovered);
+		if (this.previousMouseCallback != null) {
+			this.previousMouseCallback.invoke(address, hovered);
 		}
 	}
 
@@ -73,8 +73,8 @@ public class WindowObserver {
 			DynamicFPSMod.onStatusChanged();
 		}
 
-		if (previousIconifyCallback != null) {
-			previousIconifyCallback.invoke(address, iconified);
+		if (this.previousIconifyCallback != null) {
+			this.previousIconifyCallback.invoke(address, iconified);
 		}
 	}
 }

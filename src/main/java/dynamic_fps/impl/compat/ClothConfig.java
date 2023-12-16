@@ -20,9 +20,26 @@ public final class ClothConfig {
 		var builder = ConfigBuilder.create()
 			.setParentScreen(parent)
 			.setTitle(localized("config", "title"))
-			.setSavingRunnable(DynamicFPSMod.modConfig::save);
+			.setSavingRunnable(DynamicFPSMod::onConfigChanged);
 
 		var entryBuilder = builder.entryBuilder();
+
+		var general = builder.getOrCreateCategory(
+			localized("config", "category.general")
+		);
+
+		general.addEntry(
+			entryBuilder.startIntSlider(
+				localized("config", "idle_time"),
+				DynamicFPSMod.modConfig.idleTime() / 60,
+				0, 30
+			)
+			.setDefaultValue(0)
+			.setSaveConsumer(value -> DynamicFPSMod.modConfig.setIdleTime(value * 60))
+			.setTextGetter(ClothConfig::idleTimeMessage)
+			.setTooltip(localized("config", "idle_time_tooltip"))
+			.build()
+		);
 
 		for (var state : PowerState.values()) {
 			if (!state.configurable) {
@@ -105,6 +122,14 @@ public final class ClothConfig {
 		}
 
 		return builder.build();
+	}
+
+	private static Component idleTimeMessage(int value) {
+		if (value == 0) {
+			return localized("config", "disabled");
+		} else {
+			return localized("config", "minutes", value);
+		}
 	}
 
 	// Convert magic -1 number to 61 (and reverse)

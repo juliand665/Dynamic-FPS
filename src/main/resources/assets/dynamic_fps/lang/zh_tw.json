@@ -1,6 +1,7 @@
 {
 	"config.dynamic_fps.title": "設定 Dynamic FPS",
 
+	"config.dynamic_fps.category.general": "一般",
 	"config.dynamic_fps.category.hovered": "聚焦時",
 	"config.dynamic_fps.category.unfocused": "未聚焦時",
 	"config.dynamic_fps.category.invisible": "不可見時",

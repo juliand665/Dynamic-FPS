@@ -1,9 +1,17 @@
 {
 	"config.dynamic_fps.title": "Configure Dynamic FPS",
 
+	"config.dynamic_fps.category.general": "General",
 	"config.dynamic_fps.category.hovered": "Hovered",
 	"config.dynamic_fps.category.unfocused": "Unfocused",
+	"config.dynamic_fps.category.abandoned": "Idle",
 	"config.dynamic_fps.category.invisible": "Invisible",
+
+	"config.dynamic_fps.disabled": "Disabled",
+	"config.dynamic_fps.minutes": "%d Minute(s)",
+
+	"config.dynamic_fps.idle_time": "Idle time",
+	"config.dynamic_fps.idle_time_tooltip": "Minutes without input until Dynamic FPS activates the Idle state while the game is focused.",
 
 	"config.dynamic_fps.frame_rate_target": "Frame Rate Target",
 	"config.dynamic_fps.volume_multiplier": "Volume Multiplier",
