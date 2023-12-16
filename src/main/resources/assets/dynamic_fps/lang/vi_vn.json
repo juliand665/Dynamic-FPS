@@ -1,6 +1,8 @@
 {
 	"config.dynamic_fps.title": "Định cấu hình Dynamic FPS",
 
+	"config.dynamic_fps.category.general": "Chung",
+
 	"key.dynamic_fps.toggle_forced": "Buộc giảm FPS (Đổi)",
 	"key.dynamic_fps.toggle_disabled": "Vô hiệu hoá Dynamic FPS (Đổi)",
 	"gui.dynamic_fps.hud.reducing": "Dynamic FPS: Buộc giảm FPS",

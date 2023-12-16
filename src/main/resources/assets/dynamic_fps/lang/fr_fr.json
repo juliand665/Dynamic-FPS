@@ -1,6 +1,7 @@
 {
 	"config.dynamic_fps.title": "Configuration de Dynamic FPS",
 
+	"config.dynamic_fps.category.general": "Général",
 	"config.dynamic_fps.category.hovered": "Survolé",
 	"config.dynamic_fps.category.unfocused": "Non-focalisé",
 	"config.dynamic_fps.category.invisible": "Invisible",

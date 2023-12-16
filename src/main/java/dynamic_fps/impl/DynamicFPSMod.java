@@ -8,8 +8,10 @@ import dynamic_fps.impl.util.KeyMappingHandler;
 import dynamic_fps.impl.util.Logging;
 import dynamic_fps.impl.util.ModCompatibility;
 import dynamic_fps.impl.util.OptionsHolder;
-import dynamic_fps.impl.util.WindowObserver;
+import dynamic_fps.impl.util.event.InputObserver;
+import dynamic_fps.impl.util.event.WindowObserver;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.Util;
@@ -32,9 +34,14 @@ public class DynamicFPSMod implements ClientModInitializer {
 	private static boolean isForcingLowFPS = false;
 
 	private static Minecraft minecraft;
+
 	private static WindowObserver window;
+	private static InputObserver devices;
 
 	private static long lastRender;
+
+	private static boolean wasIdle = false;
+	private static boolean tickEventRegistered = false;
 
 	// we always render one last frame before actually reducing FPS, so the hud text
 	// shows up instantly when forcing low fps.
@@ -65,6 +72,7 @@ public class DynamicFPSMod implements ClientModInitializer {
 		toggleForcedKeyBinding.register();
 		toggleDisabledKeyBinding.register();
 
+		registerTickEvent();
 		HudRenderCallback.EVENT.register(new HudInfoRenderer());
 	}
 
@@ -78,6 +86,11 @@ public class DynamicFPSMod implements ClientModInitializer {
 		checkForStateChanges();
 	}
 
+	public static void onConfigChanged() {
+		modConfig.save();
+		registerTickEvent();
+	}
+
 	public static PowerState powerState() {
 		return state;
 	}
@@ -88,6 +101,7 @@ public class DynamicFPSMod implements ClientModInitializer {
 
 	public static void setWindow(long address) {
 		window = new WindowObserver(address);
+		devices = new InputObserver(address);
 	}
 
 	public static boolean checkForRender() {
@@ -128,8 +142,41 @@ public class DynamicFPSMod implements ClientModInitializer {
 		return minecraft.screen != null && minecraft.screen.dynamic_fps$rendersBackground();
 	}
 
+	private static boolean isIdle() {
+		var idleTime = modConfig.idleTime();
+
+		if (idleTime == 0) {
+			return false;
+		}
+
+		return (Util.getEpochMillis() - devices.lastActionTime()) >= idleTime * 1000;
+	}
+
 	private static boolean isLevelCoveredByOverlay() {
 		return OVERLAY_OPTIMIZATION_ACTIVE && minecraft.getOverlay() instanceof LoadingOverlay loadingOverlay && loadingOverlay.dynamic_fps$isReloadComplete();
+	}
+
+	private static void registerTickEvent() {
+		if (tickEventRegistered) {
+			return;
+		}
+
+		if (modConfig.idleTime() == -1) {
+			return;
+		}
+
+		tickEventRegistered = true;
+
+		// I assume world ticks only happen 20 times a second
+		// Instead of whatever amount of FPS we get at the moment?
+		ClientTickEvents.START_WORLD_TICK.register((minecraft) -> {
+			var idle = isIdle();
+
+			if (idle != wasIdle) {
+				wasIdle = idle;
+				onStatusChanged();
+			}
+		});
 	}
 
 	@SuppressWarnings("squid:S1215") // Garbage collector call
@@ -187,7 +234,11 @@ public class DynamicFPSMod implements ClientModInitializer {
 		} else if (isForcingLowFPS) {
 			current = PowerState.UNFOCUSED;
 		} else if (window.isFocused()) {
-			current = PowerState.FOCUSED;
+			if (!isIdle()) {
+				current = PowerState.FOCUSED;
+			} else {
+				current = PowerState.ABANDONED;
+			}
 		} else if (window.isHovered()) {
 			current = PowerState.HOVERED;
 		} else if (!window.isIconified()) {

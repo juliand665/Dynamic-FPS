@@ -1,6 +1,7 @@
 {
 	"config.dynamic_fps.title": "Dynamic FPS 动态帧率配置",
 
+	"config.dynamic_fps.category.general": "预设",
 	"config.dynamic_fps.category.hovered": "悬停",
 	"config.dynamic_fps.category.unfocused": "失焦",
 	"config.dynamic_fps.category.invisible": "不可见",

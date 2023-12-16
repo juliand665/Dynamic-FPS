@@ -1,6 +1,8 @@
 {
 	"config.dynamic_fps.title": "Dynamic FPS 구성",
 
+	"config.dynamic_fps.category.general": "일반",
+
 	"key.dynamic_fps.toggle_forced": "강제로 FPS 감소 (토글)",
 	"key.dynamic_fps.toggle_disabled": "Dynamic FPS 비활성화 (Toggle)",
 	"gui.dynamic_fps.hud.reducing": "Dynamic FPS: 강제로 FPS 감소중",

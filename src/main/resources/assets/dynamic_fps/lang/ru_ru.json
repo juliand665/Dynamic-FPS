@@ -1,6 +1,7 @@
 {
 	"config.dynamic_fps.title": "Настройки Dynamic FPS",
 
+	"config.dynamic_fps.category.general": "Основные",
 	"config.dynamic_fps.category.hovered": "Наведён",
 	"config.dynamic_fps.category.unfocused": "Расфокусирован",
 	"config.dynamic_fps.category.invisible": "Свёрнут",

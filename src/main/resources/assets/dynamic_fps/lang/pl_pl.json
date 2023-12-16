@@ -1,6 +1,8 @@
 {
 	"config.dynamic_fps.title": "Skonfiguruj Dynamic FPS",
 
+	"config.dynamic_fps.category.general": "Ogólne",
+
 	"key.dynamic_fps.toggle_forced": "Wymuś obniżenie FPS (przełącznik)",
 	"key.dynamic_fps.toggle_disabled": "Wyłącz Dynamic FPS (przełącznik)",
 	"gui.dynamic_fps.hud.reducing": "Dynamic FPS: wymuszono obniżenie FPS",
