@@ -15,6 +15,7 @@ import com.mojang.blaze3d.audio.Listener;
 
 import dynamic_fps.impl.DynamicFPSMod;
 import dynamic_fps.impl.util.duck.DuckSoundEngine;
+import net.minecraft.client.Options;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.ChannelAccess;
 import net.minecraft.client.sounds.SoundEngine;
@@ -22,6 +23,10 @@ import net.minecraft.sounds.SoundSource;
 
 @Mixin(SoundEngine.class)
 public class SoundEngineMixin implements DuckSoundEngine {
+	@Shadow
+	@Final
+	private Options options;
+
 	@Shadow
 	private boolean loaded;
 
@@ -97,10 +102,16 @@ public class SoundEngineMixin implements DuckSoundEngine {
 	/**
 	 * Applies the user's requested volume multiplier to any newly played sounds.
 	 */
-	@Inject(method = "getVolume", at = @At("RETURN"), cancellable = true)
+	@Inject(method = "getVolume", at = @At("HEAD"), cancellable = true)
 	private void getVolume(@Nullable SoundSource source, CallbackInfoReturnable<Float> callbackInfo) {
+		float base = 1.0f;
+
+		// Note: The original doesn't consider the user's setting when the source is MASTER
+		// In vanilla this doesn't matter because it's never called, but we use it when setting the gain
 		if (source != null) {
-			callbackInfo.setReturnValue(callbackInfo.getReturnValue() * DynamicFPSMod.volumeMultiplier(source));
+			base = this.options.getSoundSourceVolume(source);
 		}
+
+		callbackInfo.setReturnValue(base * DynamicFPSMod.volumeMultiplier(source));
 	}
 }
