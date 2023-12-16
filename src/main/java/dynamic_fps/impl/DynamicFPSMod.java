@@ -196,7 +196,7 @@ public class DynamicFPSMod implements ClientModInitializer {
 
 		for (var source : SoundSource.values()) {
 			if (before.volumeMultiplier(source) != config.volumeMultiplier(source)) {
-				minecraft.getSoundManager().dynamic_fps$updateVolume(source);
+				minecraft.getSoundManager().soundEngine.dynamic_fps$updateVolume(source);
 			}
 		}
 

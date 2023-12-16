@@ -46,8 +46,7 @@
 		"loom:injected_interfaces": {
 			"net/minecraft/class_437": ["dynamic_fps/impl/util/duck/DuckScreen"],
 			"net/minecraft/class_425": ["dynamic_fps/impl/util/duck/DuckSplashOverlay"],
-			"net/minecraft/class_1140": ["dynamic_fps/impl/util/duck/DuckSoundManager"],
-			"net/minecraft/class_1144": ["dynamic_fps/impl/util/duck/DuckSoundManager"]
+			"net/minecraft/class_1140": ["dynamic_fps/impl/util/duck/DuckSoundEngine"]
 		},
 		"dynamic_fps": {
 			"optimized_screens": {

@@ -14,14 +14,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import com.mojang.blaze3d.audio.Listener;
 
 import dynamic_fps.impl.DynamicFPSMod;
-import dynamic_fps.impl.util.duck.DuckSoundManager;
+import dynamic_fps.impl.util.duck.DuckSoundEngine;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.ChannelAccess;
 import net.minecraft.client.sounds.SoundEngine;
 import net.minecraft.sounds.SoundSource;
 
 @Mixin(SoundEngine.class)
-public class SoundEngineMixin implements DuckSoundManager {
+public class SoundEngineMixin implements DuckSoundEngine {
 	@Shadow
 	private boolean loaded;
 
