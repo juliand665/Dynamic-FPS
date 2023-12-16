@@ -4,14 +4,29 @@
 	"config.dynamic_fps.category.general": "Allmänt",
 	"config.dynamic_fps.category.hovered": "Hovrande",
 	"config.dynamic_fps.category.unfocused": "Ofokuserad",
+	"config.dynamic_fps.category.abandoned": "Inaktiv",
 	"config.dynamic_fps.category.invisible": "Osynlig",
 
+	"config.dynamic_fps.disabled": "Inaktiverad",
+	"config.dynamic_fps.minutes": "%d Minut(er)",
+
+	"config.dynamic_fps.idle_time": "Inaktivitetstid",
+	"config.dynamic_fps.idle_time_tooltip": "Minuter utan inmatning tills Dynamic FPS aktiverar Inaktivetesläget medans spelet är fokuserat.",
+
 	"config.dynamic_fps.frame_rate_target": "Bildfrekvensmål",
-	"config.dynamic_fps.frame_rate_target_description": "Ställ in bildfrekvensmålet till -1 för att stänga av bildfrekvens reducering.",
 	"config.dynamic_fps.volume_multiplier": "Volym Multiplikator",
+
 	"config.dynamic_fps.graphics_state": "Bildskärmsinställningar",
+	"config.dynamic_fps.graphics_state_default": "Standard",
+	"config.dynamic_fps.graphics_state_reduced": "Reducerad",
+	"config.dynamic_fps.graphics_state_minimal": "Minimalt",
+	"config.dynamic_fps.graphics_state_minimal_tooltip": "Minimal grafik orsakar att världen laddar om!",
+
 	"config.dynamic_fps.show_toasts": "Visa Toasts",
+	"config.dynamic_fps.show_toasts_tooltip": "Om du vill fortsätta visa eller fördröja Toast aviseringar",
+
 	"config.dynamic_fps.run_garbage_collector": "Starta GC",
+	"config.dynamic_fps.run_garbage_collector_tooltip": "Frigör oanvänt minne när du växlar till denna status",
 
 	"key.dynamic_fps.toggle_forced": "Tvinga Reducerad FPS (Växla)",
 	"key.dynamic_fps.toggle_disabled": "Inaktivera Dynamic FPS (Växla)",
