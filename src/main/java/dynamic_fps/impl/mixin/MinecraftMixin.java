@@ -23,8 +23,10 @@ public class MinecraftMixin {
 		DynamicFPSMod.setWindow(this.window.window);
 	}
 
+	/*
 	@Inject(method = "setScreen", at = @At("TAIL"))
 	private void onSetScreen(CallbackInfo callbackInfo) {
 		DynamicFPSMod.onStatusChanged();
 	}
+	*/
 }

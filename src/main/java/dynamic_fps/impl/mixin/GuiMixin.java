@@ -10,7 +10,7 @@ import net.minecraft.client.gui.Gui;
 
 @Mixin(Gui.class)
 public class GuiMixin {
-	/*
+	/**
 	 * Cancels rendering the GUI if a it is determined to currently not be visible.
 	 */
 	@Inject(at = @At("HEAD"), method = "render", cancellable = true)

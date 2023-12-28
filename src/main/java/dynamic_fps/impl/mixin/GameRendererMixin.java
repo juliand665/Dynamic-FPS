@@ -20,7 +20,7 @@ public class GameRendererMixin {
 		}
 	}
 
-	/*
+	/**
 	 * Cancels rendering the world if a it is determined to currently not be visible.
 	 */
 	@Inject(at = @At("HEAD"), method = { "renderLevel", "renderItemActivationAnimation" }, cancellable = true)
