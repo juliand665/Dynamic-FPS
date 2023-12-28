@@ -1,5 +1,7 @@
 [versions]
 minecraft = "1.20"
+
+mixinextras = "0.3.2"
 fabric_loader = "0.15.3"
 
 modmenu = "7.0.1"
@@ -9,6 +11,8 @@ cloth_config = "11.0.99"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
+
+mixinextras = { module = "io.github.llamalad7:mixinextras-fabric", version.ref = "mixinextras" }
 fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_loader" }
 
 modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }

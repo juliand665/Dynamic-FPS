@@ -9,8 +9,9 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.audio.Listener;
 
 import dynamic_fps.impl.DynamicFPSMod;
@@ -102,16 +103,14 @@ public class SoundEngineMixin implements DuckSoundEngine {
 	/**
 	 * Applies the user's requested volume multiplier to any newly played sounds.
 	 */
-	@Inject(method = "getVolume", at = @At("HEAD"), cancellable = true)
-	private void getVolume(@Nullable SoundSource source, CallbackInfoReturnable<Float> callbackInfo) {
-		float base = 1.0f;
-
+	@ModifyReturnValue(method = "getVolume", at = @At("RETURN"))
+	private float getVolume(float original, @Local @Nullable SoundSource source) {
 		// Note: The original doesn't consider the user's setting when the source is MASTER
 		// In vanilla this doesn't matter because it's never called, but we use it when setting the gain
-		if (source != null) {
-			base = this.options.getSoundSourceVolume(source);
+		if (SoundSource.MASTER.equals(source)) {
+			original = this.options.getSoundSourceVolume(source);
 		}
 
-		callbackInfo.setReturnValue(base * DynamicFPSMod.volumeMultiplier(source));
+		return original * DynamicFPSMod.volumeMultiplier(source);
 	}
 }

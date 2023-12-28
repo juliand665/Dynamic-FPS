@@ -22,6 +22,10 @@ dependencies {
 	modImplementation libs.fabric.api
 	modImplementation libs.fabric.loader
 
+	// Why do I need this on 0.15.x ..?
+	modImplementation libs.mixinextras
+	annotationProcessor libs.mixinextras
+
 	modApi libs.modmenu
 	modApi libs.cloth.config
 }
