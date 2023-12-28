@@ -1,9 +1,12 @@
 package dynamic_fps.impl.mixin;
 
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
 import dynamic_fps.impl.DynamicFPSMod;
 import net.minecraft.client.renderer.GameRenderer;
@@ -12,12 +15,13 @@ import net.minecraft.client.renderer.GameRenderer;
 public class GameRendererMixin {
 	/**
 	 * Implements the mod's big feature.
+	 *
+	 * Note: Inject after the pause on lost focus check,
+	 * This allows the feature to work even at zero FPS.
 	 */
-	@Inject(at = @At("HEAD"), method = "render", cancellable = true)
-	private void onRender(CallbackInfo callbackInfo) {
-		if (!DynamicFPSMod.checkForRender()) {
-			callbackInfo.cancel();
-		}
+	@ModifyExpressionValue(method = "render", at = @At(value = "FIELD", target = "Lnet/minecraft/client/Minecraft;noRender:Z", opcode = Opcodes.GETFIELD))
+	private boolean skipRendering(boolean original) {
+		return original || !DynamicFPSMod.checkForRender();
 	}
 
 	/**
