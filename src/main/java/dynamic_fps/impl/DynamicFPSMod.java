@@ -161,7 +161,7 @@ public class DynamicFPSMod implements ClientModInitializer {
 			return;
 		}
 
-		if (modConfig.idleTime() == -1) {
+		if (modConfig.idleTime() == 0) {
 			return;
 		}
 
