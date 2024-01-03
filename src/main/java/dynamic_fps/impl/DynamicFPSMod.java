@@ -21,6 +21,8 @@ import net.minecraft.sounds.SoundSource;
 
 import static dynamic_fps.impl.util.Localization.translationKey;
 
+import org.jetbrains.annotations.Nullable;
+
 public class DynamicFPSMod implements ClientModInitializer {
 	public static final String MOD_ID = "dynamic_fps";
 	public static final boolean DEBUG = FabricLoader.getInstance().isDevelopmentEnvironment();
@@ -35,13 +37,13 @@ public class DynamicFPSMod implements ClientModInitializer {
 
 	private static Minecraft minecraft;
 
-	private static WindowObserver window;
-	private static InputObserver devices;
+	private static @Nullable WindowObserver window;
+	private static @Nullable InputObserver devices;
 
 	private static long lastRender;
 
 	private static boolean wasIdle = false;
-	private static boolean tickEventRegistered = false;
+	private static boolean idleCheckRegistered = false;
 
 	// we always render one last frame before actually reducing FPS, so the hud text
 	// shows up instantly when forcing low fps.
@@ -72,7 +74,7 @@ public class DynamicFPSMod implements ClientModInitializer {
 		toggleForcedKeyBinding.register();
 		toggleDisabledKeyBinding.register();
 
-		registerTickEvent();
+		initializeIdleCheck();
 		HudRenderCallback.EVENT.register(new HudInfoRenderer());
 	}
 
@@ -88,7 +90,7 @@ public class DynamicFPSMod implements ClientModInitializer {
 
 	public static void onConfigChanged() {
 		modConfig.save();
-		registerTickEvent();
+		initializeIdleCheck();
 	}
 
 	public static PowerState powerState() {
@@ -101,7 +103,7 @@ public class DynamicFPSMod implements ClientModInitializer {
 
 	public static void setWindow(long address) {
 		window = new WindowObserver(address);
-		devices = new InputObserver(address);
+		initializeIdleCheck(); // Register input observer if wanted
 	}
 
 	public static boolean checkForRender() {
@@ -156,16 +158,20 @@ public class DynamicFPSMod implements ClientModInitializer {
 		return OVERLAY_OPTIMIZATION_ACTIVE && minecraft.getOverlay() instanceof LoadingOverlay loadingOverlay && loadingOverlay.dynamic_fps$isReloadComplete();
 	}
 
-	private static void registerTickEvent() {
-		if (tickEventRegistered) {
+	private static void initializeIdleCheck() {
+		if (idleCheckRegistered) {
 			return;
 		}
 
-		if (modConfig.idleTime() == 0) {
+		if (modConfig.idleTime() == 0 || window == null) {
 			return;
 		}
 
-		tickEventRegistered = true;
+		idleCheckRegistered = true;
+
+		// We only register the input observer and tick handler
+		// When it's used to run less unused code at all times.
+		devices = new InputObserver(window.address());
 
 		ClientTickEvents.START_CLIENT_TICK.register((minecraft) -> {
 			var idle = isIdle();
