@@ -8,7 +8,7 @@ import org.lwjgl.glfw.GLFWWindowIconifyCallback;
 import dynamic_fps.impl.DynamicFPSMod;
 
 public class WindowObserver {
-	private final long window;
+	private final long address;
 
 	private boolean isFocused = true;
 	private final GLFWWindowFocusCallback previousFocusCallback;
@@ -20,17 +20,21 @@ public class WindowObserver {
 	private final GLFWWindowIconifyCallback previousIconifyCallback;
 
 	public WindowObserver(long address) {
-		this.window = address;
+		this.address = address;
 
-		this.previousFocusCallback = GLFW.glfwSetWindowFocusCallback(this.window, this::onFocusChanged);
-		this.previousMouseCallback = GLFW.glfwSetCursorEnterCallback(this.window, this::onMouseChanged);
+		this.previousFocusCallback = GLFW.glfwSetWindowFocusCallback(this.address, this::onFocusChanged);
+		this.previousMouseCallback = GLFW.glfwSetCursorEnterCallback(this.address, this::onMouseChanged);
 
 		// Vanilla doesn't use this (currently), other mods might register this callback though ...
-		this.previousIconifyCallback = GLFW.glfwSetWindowIconifyCallback(this.window, this::onIconifyChanged);
+		this.previousIconifyCallback = GLFW.glfwSetWindowIconifyCallback(this.address, this::onIconifyChanged);
 	}
 
 	private boolean isCurrentWindow(long address) {
-		return address == this.window;
+		return address == this.address;
+	}
+
+	public long address() {
+		return this.address;
 	}
 
 	public boolean isFocused() {
