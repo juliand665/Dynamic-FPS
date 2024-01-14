@@ -23,4 +23,4 @@ cloth_config = { module = "me.shedaniel.cloth:cloth-config-fabric", version.ref 
 [bundles]
 
 [plugins]
-fabric_loom = { id = "fabric-loom", version = "1.4.5" }
+fabric_loom = { id = "fabric-loom", version = "1.5.5" }
