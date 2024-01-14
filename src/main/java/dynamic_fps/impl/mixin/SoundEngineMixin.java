@@ -40,11 +40,6 @@ public class SoundEngineMixin implements DuckSoundEngine {
 	private Map<SoundInstance, ChannelAccess.ChannelHandle> instanceToChannel;
 
 	@Shadow
-	private float getVolume(@Nullable SoundSource source) {
-		throw new RuntimeException("Failed to find SoundEngine#getVolume.");
-	}
-
-	@Shadow
 	private float calculateVolume(SoundInstance instance) {
 		throw new RuntimeException("Failed to find SoundEngine#calculateVolume.");
 	};
@@ -55,7 +50,8 @@ public class SoundEngineMixin implements DuckSoundEngine {
 		}
 
 		if (source.equals(SoundSource.MASTER)) {
-			this.listener.setGain(this.getVolume(source));
+			var volume = this.options.getSoundSourceVolume(source);
+			this.listener.setGain(this.adjustVolume(volume, source));
 			return;
 		}
 
@@ -65,7 +61,7 @@ public class SoundEngineMixin implements DuckSoundEngine {
 		var isMusic = source.equals(SoundSource.MUSIC) || source.equals(SoundSource.RECORDS);
 
 		this.instanceToChannel.forEach((instance, handle) -> {
-			float volume = this.calculateVolume((SoundInstance) instance);
+			float volume = this.calculateVolume(instance);
 
 			if (instance.getSource().equals(source)) {
 				handle.execute(channel -> {
@@ -105,12 +101,14 @@ public class SoundEngineMixin implements DuckSoundEngine {
 	 */
 	@ModifyReturnValue(method = "getVolume", at = @At("RETURN"))
 	private float getVolume(float original, @Local @Nullable SoundSource source) {
-		// Note: The original doesn't consider the user's setting when the source is MASTER
-		// In vanilla this doesn't matter because it's never called, but we use it when setting the gain
-		if (SoundSource.MASTER.equals(source)) {
-			original = this.options.getSoundSourceVolume(source);
+		return this.adjustVolume(original, source);
+	}
+
+	private float adjustVolume(float value, @Nullable SoundSource source) {
+		if (source == null) {
+			source = SoundSource.MASTER;
 		}
 
-		return original * DynamicFPSMod.volumeMultiplier(source);
+		return value * DynamicFPSMod.volumeMultiplier(source);
 	}
 }
