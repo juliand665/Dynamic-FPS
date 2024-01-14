@@ -35,7 +35,7 @@ public class DynamicFPSMod implements ClientModInitializer {
 	private static boolean isDisabled = false;
 	private static boolean isForcingLowFPS = false;
 
-	private static Minecraft minecraft;
+	private static final Minecraft minecraft = Minecraft.getInstance();
 
 	private static @Nullable WindowObserver window;
 	private static @Nullable InputObserver devices;
@@ -216,10 +216,6 @@ public class DynamicFPSMod implements ClientModInitializer {
 	private static void checkForStateChanges() {
 		if (window == null) {
 			return;
-		}
-
-		if (minecraft == null) {
-			minecraft = Minecraft.getInstance();
 		}
 
 		if (minecraft.isSameThread()) {
