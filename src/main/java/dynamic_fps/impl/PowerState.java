@@ -9,31 +9,33 @@ public enum PowerState {
 	/**
 	 * Window is currently focused.
 	 */
-	FOCUSED(false),
+	FOCUSED(false, true),
 
 	/**
 	 * Mouse positioned over unfocused window.
 	 */
-	HOVERED(true),
+	HOVERED(true, false),
 
 	/**
 	 * Another application is focused.
 	 */
-	UNFOCUSED(true),
+	UNFOCUSED(true, false),
 
 	/**
 	 * User hasn't sent input for some time.
 	 */
-	ABANDONED(true),
+	ABANDONED(true, true),
 
 	/**
 	 * Window minimized or otherwise hidden.
 	 */
-	INVISIBLE(true);
+	INVISIBLE(true, false);
 
 	public final boolean configurable;
+	public final boolean windowActive;
 
-	private PowerState(boolean configurable) {
+	private PowerState(boolean configurable, boolean windowActive) {
 		this.configurable = configurable;
+		this.windowActive = windowActive;
 	}
 }

@@ -1,6 +1,7 @@
 package dynamic_fps.impl;
 
 import dynamic_fps.impl.compat.FREX;
+import dynamic_fps.impl.compat.GLFW;
 import dynamic_fps.impl.config.Config;
 import dynamic_fps.impl.config.DynamicFPSConfig;
 import dynamic_fps.impl.util.HudInfoRenderer;
@@ -196,6 +197,18 @@ public class DynamicFPSMod implements ClientModInitializer {
 
 		if (config.runGarbageCollector()) {
 			System.gc();
+		}
+
+		if (GLFW.useHoverEventWorkaround()) {
+			if (!current.windowActive) {
+				minecraft.mouseHandler.releaseMouse();
+			} else {
+				// Grabbing the mouse only works while Minecraft
+				// Agrees that the window is focused. The mod is
+				// A little too fast for this, so we schedule it
+				// For the next client tick (before next frame).
+				minecraft.tell(minecraft.mouseHandler::grabMouse);
+			}
 		}
 
 		for (var source : SoundSource.values()) {
