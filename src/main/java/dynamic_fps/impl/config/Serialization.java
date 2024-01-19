@@ -28,6 +28,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.EnumMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class Serialization {
 	private static final Gson GSON = new GsonBuilder()
@@ -102,8 +103,8 @@ public class Serialization {
 			return;
 		}
 
-		for (String key : states.keySet()) {
-			JsonElement value = states.get(key);
+		for (Map.Entry<String, JsonElement> entry : states.entrySet()) {
+			JsonElement value = entry.getValue();
 
 			if (!value.isJsonObject()) {
 				continue;
