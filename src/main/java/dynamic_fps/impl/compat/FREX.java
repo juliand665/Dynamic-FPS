@@ -21,27 +21,6 @@ import dynamic_fps.impl.DynamicFPSMod;
 public final class FREX implements ClientModInitializer {
 	private static final Set<Object> ACTIVE = ConcurrentHashMap.newKeySet();
 
-	private static final class Listener implements Consumer<Boolean> {
-		private final String name;
-
-		private Listener(String name) {
-			this.name = name;
-		}
-
-		@Override
-		public void accept(Boolean enabled) {
-			if (enabled) {
-				ACTIVE.add(this.name);
-			} else {
-				ACTIVE.remove(this.name);
-			}
-
-			DynamicFPSMod.onStatusChanged();
-		}
-	}
-
-	public interface ListenerConsumer extends Consumer<Function<String, Consumer<Boolean>>> {}
-
 	/**
 	 * Returns whether one or more mods have requested Flawless Frames to be active,
 	 * and therefore frames should not be skipped.
@@ -51,7 +30,22 @@ public final class FREX implements ClientModInitializer {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public void onInitializeClient() {
-		FabricLoader.getInstance().getEntrypoints("frex_flawless_frames", ListenerConsumer.class).forEach(api -> api.accept(Listener::new));
+		Function<String, Consumer<Boolean>> provider = name -> {
+			Object token = new Object();
+
+			return active -> {
+				if (active) {
+					ACTIVE.add(token);
+				} else {
+					ACTIVE.remove(token);
+				}
+
+				DynamicFPSMod.onStatusChanged();
+			};
+		};
+
+		FabricLoader.getInstance().getEntrypoints("frex_flawless_frames", Consumer.class).forEach(api -> api.accept(provider));
 	}
 }
