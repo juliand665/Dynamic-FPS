@@ -3,27 +3,16 @@ package dynamic_fps.impl.config;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-
 import dynamic_fps.impl.GraphicsState;
-import dynamic_fps.impl.util.EnumCodec;
+import dynamic_fps.impl.PowerState;
 import net.minecraft.sounds.SoundSource;
 
 public final class Config {
 	private int frameRateTarget;
-	private Map<SoundSource, Float> volumeMultipliers;
+	private final Map<SoundSource, Float> volumeMultipliers;
 	private GraphicsState graphicsState;
 	private boolean showToasts;
 	private boolean runGarbageCollector;
-
-	public static final Codec<Config> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-		Codec.INT.fieldOf("frame_rate_target").forGetter(Config::frameRateTarget),
-		Codec.unboundedMap(new EnumCodec<>(SoundSource.values()), Codec.FLOAT).fieldOf("volume_multipliers").forGetter(Config::volumeMultipliers),
-		new EnumCodec<>(GraphicsState.values()).fieldOf("graphics_state").forGetter(Config::graphicsState),
-		Codec.BOOL.fieldOf("show_toasts").forGetter(Config::showToasts),
-		Codec.BOOL.fieldOf("run_garbage_collector").forGetter(Config::runGarbageCollector)
-	).apply(instance, Config::new));
 
 	public static final Config ACTIVE = new Config(-1, new HashMap<>(), GraphicsState.DEFAULT, true, false);
 
@@ -41,10 +30,6 @@ public final class Config {
 
 	public void setFrameRateTarget(int value) {
 		this.frameRateTarget = value;
-	}
-
-	public Map<SoundSource, Float> volumeMultipliers() {
-		return this.volumeMultipliers;
 	}
 
 	public float volumeMultiplier(SoundSource category) {
@@ -77,5 +62,31 @@ public final class Config {
 
 	public void setRunGarbageCollector(boolean value) {
 		this.runGarbageCollector = value;
+	}
+
+	public static Config getDefault(PowerState state) {
+		switch (state) {
+			case HOVERED: {
+				return new Config(60, withMasterVolume(1.0f), GraphicsState.DEFAULT, true, false);
+			}
+			case UNFOCUSED: {
+				return new Config(1, withMasterVolume(0.25f), GraphicsState.DEFAULT, false, false);
+			}
+			case ABANDONED: {
+				return new Config(10, withMasterVolume(1.0f), GraphicsState.DEFAULT, false, false);
+			}
+			case INVISIBLE: {
+				return new Config(0, withMasterVolume(0.0f), GraphicsState.DEFAULT, false, false);
+			}
+			default: {
+				throw new RuntimeException("Getting default configuration for unhandled power state " + state.toString());
+			}
+		}
+	}
+
+	private static Map<SoundSource, Float> withMasterVolume(float value) {
+		var volumes = new HashMap<SoundSource, Float>();
+		volumes.put(SoundSource.MASTER, value);
+		return volumes;
 	}
 }

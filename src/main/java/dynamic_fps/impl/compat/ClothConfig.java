@@ -1,5 +1,6 @@
 package dynamic_fps.impl.compat;
 
+import dynamic_fps.impl.config.Config;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
@@ -47,7 +48,7 @@ public final class ClothConfig {
 			}
 
 			var config = DynamicFPSMod.modConfig.get(state);
-			var standard = DynamicFPSConfig.getDefaultConfig(state);
+			var standard = Config.getDefault(state);
 
 			var category = builder.getOrCreateCategory(
 				localized("config", "category." + state.toString().toLowerCase())
