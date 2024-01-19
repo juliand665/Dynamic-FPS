@@ -45,20 +45,24 @@ processResources {
 java {
 	withSourcesJar()
 
-	sourceCompatibility = JavaVersion.VERSION_17
-	targetCompatibility = JavaVersion.VERSION_17
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release.set(17)
 	it.options.encoding = "UTF-8"
 
-	it.options.compilerArgs += ["-Xlint:deprecation"]
+	javaCompiler = javaToolchains.compilerFor {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+
+	it.options.compilerArgs += ["-Xlint:deprecation", "-Xlint:unchecked"]
 }
 
-jar {
-	from("LICENSE") {
-		rename { "${it}-${project.archives_base_name}.txt"}
+tasks.withType(org.gradle.jvm.tasks.Jar).configureEach {
+	it.from(".") {
+		include("LICENSE")
 	}
 }
 
