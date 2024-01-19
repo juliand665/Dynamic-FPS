@@ -2,6 +2,9 @@ package dynamic_fps.impl.compat;
 
 import dynamic_fps.impl.config.Config;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
+import me.shedaniel.clothconfig2.api.ConfigCategory;
+import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
+import me.shedaniel.clothconfig2.impl.builders.SubCategoryBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -14,18 +17,18 @@ import java.util.Optional;
 import dynamic_fps.impl.DynamicFPSMod;
 import dynamic_fps.impl.GraphicsState;
 import dynamic_fps.impl.PowerState;
-import dynamic_fps.impl.config.DynamicFPSConfig;
 
 public final class ClothConfig {
+	@SuppressWarnings("unchecked")
 	public static Screen genConfigScreen(Screen parent) {
-		var builder = ConfigBuilder.create()
+		ConfigBuilder builder = ConfigBuilder.create()
 			.setParentScreen(parent)
 			.setTitle(localized("config", "title"))
 			.setSavingRunnable(DynamicFPSMod::onConfigChanged);
 
-		var entryBuilder = builder.entryBuilder();
+		ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
-		var general = builder.getOrCreateCategory(
+		ConfigCategory general = builder.getOrCreateCategory(
 			localized("config", "category.general")
 		);
 
@@ -42,15 +45,15 @@ public final class ClothConfig {
 			.build()
 		);
 
-		for (var state : PowerState.values()) {
+		for (PowerState state : PowerState.values()) {
 			if (!state.configurable) {
 				continue;
 			}
 
-			var config = DynamicFPSMod.modConfig.get(state);
-			var standard = Config.getDefault(state);
+			Config config = DynamicFPSMod.modConfig.get(state);
+			Config standard = Config.getDefault(state);
 
-			var category = builder.getOrCreateCategory(
+			ConfigCategory category = builder.getOrCreateCategory(
 				localized("config", "category." + state.toString().toLowerCase())
 			);
 
@@ -66,10 +69,10 @@ public final class ClothConfig {
 				.build()
 			);
 
-			var volumes = entryBuilder.startSubCategory(localized("config", "volume_multiplier"));
+			SubCategoryBuilder volumes = entryBuilder.startSubCategory(localized("config", "volume_multiplier"));
 
-			for (var source : SoundSource.values()) {
-				var name = source.getName();
+			for (SoundSource source : SoundSource.values()) {
+				String name = source.getName();
 
 				volumes.add(
 					entryBuilder.startIntSlider(

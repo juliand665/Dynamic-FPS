@@ -146,7 +146,7 @@ public class DynamicFPSMod implements ClientModInitializer {
 	}
 
 	private static boolean isIdle() {
-		var idleTime = modConfig.idleTime();
+		int idleTime = modConfig.idleTime();
 
 		if (idleTime == 0) {
 			return false;
@@ -156,7 +156,7 @@ public class DynamicFPSMod implements ClientModInitializer {
 	}
 
 	private static boolean isLevelCoveredByOverlay() {
-		return OVERLAY_OPTIMIZATION_ACTIVE && minecraft.getOverlay() instanceof LoadingOverlay loadingOverlay && loadingOverlay.dynamic_fps$isReloadComplete();
+		return OVERLAY_OPTIMIZATION_ACTIVE && minecraft.getOverlay() instanceof LoadingOverlay && ((LoadingOverlay)minecraft.getOverlay()).dynamic_fps$isReloadComplete();
 	}
 
 	private static void initializeIdleCheck() {
@@ -175,7 +175,7 @@ public class DynamicFPSMod implements ClientModInitializer {
 		devices = new InputObserver(window.address());
 
 		ClientTickEvents.START_CLIENT_TICK.register((minecraft) -> {
-			var idle = isIdle();
+			boolean idle = isIdle();
 
 			if (idle != wasIdle) {
 				wasIdle = idle;
@@ -190,7 +190,7 @@ public class DynamicFPSMod implements ClientModInitializer {
 			Logging.getLogger().info("State changed from {} to {}.", previous, current);
 		}
 
-		var before = config;
+		Config before = config;
 		config = modConfig.get(current);
 
 		hasRenderedLastFrame = false; // Render next frame w/o delay
@@ -211,7 +211,7 @@ public class DynamicFPSMod implements ClientModInitializer {
 			}
 		}
 
-		for (var source : SoundSource.values()) {
+		for (SoundSource source : SoundSource.values()) {
 			if (before.volumeMultiplier(source) != config.volumeMultiplier(source)) {
 				minecraft.getSoundManager().soundEngine.dynamic_fps$updateVolume(source);
 			}
@@ -261,7 +261,7 @@ public class DynamicFPSMod implements ClientModInitializer {
 		}
 
 		if (state != current) {
-			var previous = state;
+			PowerState previous = state;
 			state = current;
 
 			handleStateChange(previous, current);

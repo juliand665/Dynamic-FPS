@@ -45,11 +45,11 @@ public class Serialization {
 	private static final Path CONFIG_FILE = CONFIGS.resolve(DynamicFPSMod.MOD_ID + ".json");
 
 	public static void save(DynamicFPSConfig config) {
-		var data = GSON.toJson(config);
+		String data = GSON.toJson(config);
 
 		try {
-			var temp = Files.createTempFile(CONFIGS, "dynamic_fps", ".json");
-			Files.writeString(temp, data, StandardCharsets.UTF_8);
+			Path temp = Files.createTempFile(CONFIGS, "dynamic_fps", ".json");
+			Files.write(temp, data.getBytes(StandardCharsets.UTF_8));
 
 			Files.deleteIfExists(CONFIG_FILE);
 			Files.move(temp, CONFIG_FILE, StandardCopyOption.ATOMIC_MOVE);
@@ -59,20 +59,21 @@ public class Serialization {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public static DynamicFPSConfig load() {
-		String data;
+		byte[] data;
 
 		try {
-			data = Files.readString(CONFIG_FILE);
+			data = Files.readAllBytes(CONFIG_FILE);
 		} catch (NoSuchFileException e) {
-			var config = new DynamicFPSConfig(0, new EnumMap<>(PowerState.class));
+			DynamicFPSConfig config = new DynamicFPSConfig(0, new EnumMap<>(PowerState.class));
 			config.save();
 			return config;
 		} catch (IOException e) {
 			throw new RuntimeException("Failed to load Dynamic FPS config.", e);
 		}
 
-		var root = new JsonParser().parseString(data);
+		JsonElement root = new JsonParser().parse(new String(data, StandardCharsets.UTF_8));
 
 		upgradeConfig((JsonObject) root);
 		return GSON.fromJson(root, DynamicFPSConfig.class); // Ignores regular constructor!
@@ -95,30 +96,32 @@ public class Serialization {
 		// Convert each old power state config
 		// - { "volume_multiplier": 0.0, ... }
 		// + { "volume_multipliers": { "master": 0.0 }, ... }
-		var states = getStatesAsObject(root);
+		JsonObject states = getStatesAsObject(root);
 
 		if (states == null) {
 			return;
 		}
 
-		for (var key : states.keySet()) {
-			var element = states.getAsJsonObject(key);
+		for (String key : states.keySet()) {
+			JsonElement value = states.get(key);
 
-			if (!element.isJsonObject()) {
+			if (!value.isJsonObject()) {
 				continue;
 			}
+
+			JsonObject element = value.getAsJsonObject();
 
 			if (!element.has("volume_multiplier")) {
 				continue;
 			}
 
-			var multiplier = element.get("volume_multiplier");
+			JsonElement multiplier = element.get("volume_multiplier");
 
 			if (!multiplier.isJsonPrimitive() || !((JsonPrimitive) multiplier).isNumber()) {
 				continue;
 			}
 
-			var multipliers = new JsonObject();
+			JsonObject multipliers = new JsonObject();
 			multipliers.add("master", multiplier);
 
 			element.add("volume_multipliers", multipliers);
@@ -127,7 +130,7 @@ public class Serialization {
 
 	private static void addAbandonedConfig(JsonObject root) {
 		// Add default config for abandoned power state
-		var states = getStatesAsObject(root);
+		JsonObject states = getStatesAsObject(root);
 
 		if (states == null) {
 			return;

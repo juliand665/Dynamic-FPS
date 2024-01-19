@@ -89,7 +89,7 @@ public final class Config {
 	}
 
 	private static Map<SoundSource, Float> withMasterVolume(float value) {
-		var volumes = new HashMap<SoundSource, Float>();
+		Map<SoundSource, Float> volumes = new HashMap<>();
 		volumes.put(SoundSource.MASTER, value);
 		return volumes;
 	}

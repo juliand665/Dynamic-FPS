@@ -15,7 +15,7 @@ public final class DynamicFPSConfig {
 		this.idleTime = abandonTime;
 		this.configs = new EnumMap<>(configs);
 
-		for (var state : PowerState.values()) {
+		for (PowerState state : PowerState.values()) {
 			if (state.configurable) {
 				this.configs.computeIfAbsent(state, Config::getDefault);
 			}

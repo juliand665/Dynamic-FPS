@@ -50,7 +50,7 @@ public class SoundEngineMixin implements DuckSoundEngine {
 		}
 
 		if (source.equals(SoundSource.MASTER)) {
-			var volume = this.options.getSoundSourceVolume(source);
+			float volume = this.options.getSoundSourceVolume(source);
 			this.listener.setGain(this.adjustVolume(volume, source));
 			return;
 		}
@@ -58,7 +58,7 @@ public class SoundEngineMixin implements DuckSoundEngine {
 		// When setting the volume to zero we pause music but cancel other types of sounds
 		// This results in a less jarring experience when quickly tabbing out and back in.
 		// Also fixes this compat bug: https://github.com/juliand665/Dynamic-FPS/issues/55
-		var isMusic = source.equals(SoundSource.MUSIC) || source.equals(SoundSource.RECORDS);
+		boolean isMusic = source.equals(SoundSource.MUSIC) || source.equals(SoundSource.RECORDS);
 
 		this.instanceToChannel.forEach((instance, handle) -> {
 			float volume = this.calculateVolume(instance);
@@ -88,8 +88,8 @@ public class SoundEngineMixin implements DuckSoundEngine {
 	 */
 	@Inject(method = { "play", "playDelayed" }, at = @At("HEAD"), cancellable = true)
 	private void play(SoundInstance instance, CallbackInfo callbackInfo) {
-		var master = DynamicFPSMod.volumeMultiplier(SoundSource.MASTER);
-		var source = DynamicFPSMod.volumeMultiplier(instance.getSource());
+		float master = DynamicFPSMod.volumeMultiplier(SoundSource.MASTER);
+		float source = DynamicFPSMod.volumeMultiplier(instance.getSource());
 
 		if (master == 0.0f || source == 0.0f) {
 			callbackInfo.cancel();

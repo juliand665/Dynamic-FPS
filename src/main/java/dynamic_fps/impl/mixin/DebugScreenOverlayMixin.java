@@ -21,7 +21,7 @@ public class DebugScreenOverlayMixin {
 	 */
 	@ModifyReturnValue(method = "getGameInformation", at = @At("RETURN"))
 	private List<String> getGameInformation(List<String> result) {
-		var status = DynamicFPSMod.powerState();
+		PowerState status = DynamicFPSMod.powerState();
 
 		if (status != PowerState.FOCUSED) {
 			int target = DynamicFPSMod.targetFrameRate();

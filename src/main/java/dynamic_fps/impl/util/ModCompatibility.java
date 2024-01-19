@@ -3,6 +3,7 @@ package dynamic_fps.impl.util;
 import java.util.HashSet;
 import java.util.Set;
 
+import net.fabricmc.loader.api.MappingResolver;
 import org.jetbrains.annotations.Nullable;
 
 import net.fabricmc.loader.api.FabricLoader;
@@ -61,13 +62,13 @@ public class ModCompatibility {
 			return;
 		}
 
-		var values = parent.getAsObject().get(type);
+		CustomValue values = parent.getAsObject().get(type);
 
 		if (values == null || values.getType() != CvType.ARRAY) {
 			return;
 		}
 
-		var resolver = FabricLoader.getInstance().getMappingResolver();
+		MappingResolver resolver = FabricLoader.getInstance().getMappingResolver();
 
 		values.getAsArray().forEach(value -> {
 			if (value.getType() == CvType.STRING) {
