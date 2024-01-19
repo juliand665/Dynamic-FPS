@@ -12,6 +12,7 @@ import net.minecraft.sounds.SoundSource;
 
 import static dynamic_fps.impl.util.Localization.localized;
 
+import java.util.Locale;
 import java.util.Optional;
 
 import dynamic_fps.impl.DynamicFPSMod;
@@ -159,18 +160,7 @@ public final class ClothConfig {
 	}
 
 	private static Component graphicsStateMessage(Enum<GraphicsState> graphicsState) {
-		String key;
-
-		if (graphicsState.equals(GraphicsState.DEFAULT)) {
-			key = "options.gamma.default";
-		} else if (graphicsState.equals(GraphicsState.MINIMAL)) {
-			key = "options.particles.minimal";
-		} else {
-			key = "options.particles.decreased";
-		}
-
-		return Component.translatable(key);
-		// return localized("config", "graphics_state_" + graphicsState.toString());
+		return localized("config", "graphics_state_" + graphicsState.toString().toLowerCase(Locale.ROOT));
 	}
 
 	private static Optional<Component[]> graphicsStateTooltip(GraphicsState graphicsState) {
