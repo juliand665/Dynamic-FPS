@@ -32,12 +32,16 @@ public final class Config {
 		this.frameRateTarget = value;
 	}
 
-	public float volumeMultiplier(SoundSource category) {
-		return this.volumeMultipliers.getOrDefault(category, 1.0f);
+	public float volumeMultiplier(SoundSource source) {
+		return this.volumeMultipliers.getOrDefault(source, 1.0f);
 	}
 
-	public void setVolumeMultiplier(SoundSource category, float value) {
-		this.volumeMultipliers.put(category, value);
+	public void setVolumeMultiplier(SoundSource source, float value) {
+		if (value != 1.0f) {
+			this.volumeMultipliers.put(source, value);
+		} else {
+			this.volumeMultipliers.remove(source); // Same as default value
+		}
 	}
 
 	public GraphicsState graphicsState() {
