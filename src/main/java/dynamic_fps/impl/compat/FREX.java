@@ -42,7 +42,7 @@ public final class FREX implements ClientModInitializer {
 					ACTIVE.remove(token);
 				}
 
-				DynamicFPSMod.onStatusChanged();
+				DynamicFPSMod.onStatusChanged(false);
 			};
 		};
 

@@ -41,14 +41,14 @@ public class InputObserver {
 		return this.lastAction;
 	}
 
-	private void updateTime() {
+	public void updateLastActionTime() {
 		this.lastAction = Util.getEpochMillis();
 	}
 
 	// Keyboard events
 
 	private void onKey(long address, int key, int scancode, int action, int mods) {
-		this.updateTime();
+		this.updateLastActionTime();
 
 		if (this.previousKeyCallback != null) {
 			this.previousKeyCallback.invoke(address, key, scancode, action, mods);
@@ -56,7 +56,7 @@ public class InputObserver {
 	}
 
 	private void onCharMods(long address, int codepoint, int mods) {
-		this.updateTime();
+		this.updateLastActionTime();
 
 		if (this.previousCharModsCallback != null) {
 			this.previousCharModsCallback.invoke(address, codepoint, mods);
@@ -66,7 +66,7 @@ public class InputObserver {
 	// Mouse events
 
 	private void onDrop(long address, int count, long names) {
-		this.updateTime();
+		this.updateLastActionTime();
 
 		if (this.previousDropCallback != null) {
 			this.previousDropCallback.invoke(address, count, names);
@@ -74,7 +74,7 @@ public class InputObserver {
 	}
 
 	private void onScroll(long address, double xoffset, double yoffset) {
-		this.updateTime();
+		this.updateLastActionTime();
 
 		if (this.previousScrollCallback != null) {
 			this.previousScrollCallback.invoke(address, xoffset, yoffset);
@@ -82,7 +82,7 @@ public class InputObserver {
 	}
 
 	private void onMove(long address, double x, double y) {
-		this.updateTime();
+		this.updateLastActionTime();
 
 		if (this.previousCursorPosCallback != null) {
 			this.previousCursorPosCallback.invoke(address, x, y);
@@ -90,7 +90,7 @@ public class InputObserver {
 	}
 
 	private void onPress(long address, int button, int action, int mods) {
-		this.updateTime();
+		this.updateLastActionTime();
 
 		if (this.previousMouseClickCallback != null) {
 			this.previousMouseClickCallback.invoke(address, button, action, mods);
