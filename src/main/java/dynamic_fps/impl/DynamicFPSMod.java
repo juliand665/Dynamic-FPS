@@ -59,7 +59,7 @@ public class DynamicFPSMod implements ClientModInitializer {
 			"key.categories.misc",
 			() -> {
 				isForcingLowFPS = !isForcingLowFPS;
-				onStatusChanged();
+				onStatusChanged(true);
 			});
 
 	private static final KeyMappingHandler toggleDisabledKeyBinding = new KeyMappingHandler(
@@ -67,7 +67,7 @@ public class DynamicFPSMod implements ClientModInitializer {
 			"key.categories.misc",
 			() -> {
 				isDisabled = !isDisabled;
-				onStatusChanged();
+				onStatusChanged(true);
 			});
 
 	@Override
@@ -85,13 +85,20 @@ public class DynamicFPSMod implements ClientModInitializer {
 		return isDisabled;
 	}
 
-	public static void onStatusChanged() {
-		checkForStateChanges();
-	}
-
 	public static void onConfigChanged() {
 		modConfig.save();
 		initializeIdleCheck();
+	}
+
+	public static void onStatusChanged(boolean userInitiated) {
+		// Reset idle timeout to ensure
+		// The game runs at full speed when
+		// Returning but not giving any input
+		if (userInitiated && devices != null) {
+			devices.updateLastActionTime();
+		}
+
+		checkForStateChanges();
 	}
 
 	public static PowerState powerState() {
@@ -179,7 +186,7 @@ public class DynamicFPSMod implements ClientModInitializer {
 
 			if (idle != wasIdle) {
 				wasIdle = idle;
-				onStatusChanged();
+				onStatusChanged(false);
 			}
 		});
 	}

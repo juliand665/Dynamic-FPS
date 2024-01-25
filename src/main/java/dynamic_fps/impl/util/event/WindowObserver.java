@@ -44,7 +44,7 @@ public class WindowObserver {
 	private void onFocusChanged(long address, boolean focused) {
 		if (this.isCurrentWindow(address)) {
 			this.isFocused = focused;
-			DynamicFPSMod.onStatusChanged();
+			DynamicFPSMod.onStatusChanged(true);
 		}
 
 		if (this.previousFocusCallback != null) {
@@ -59,7 +59,7 @@ public class WindowObserver {
 	private void onMouseChanged(long address, boolean hovered) {
 		if (this.isCurrentWindow(address)) {
 			this.isHovered = hovered;
-			DynamicFPSMod.onStatusChanged();
+			DynamicFPSMod.onStatusChanged(true);
 		}
 
 		if (this.previousMouseCallback != null) {
@@ -74,7 +74,7 @@ public class WindowObserver {
 	private void onIconifyChanged(long address, boolean iconified) {
 		if (this.isCurrentWindow(address)) {
 			this.isIconified = iconified;
-			DynamicFPSMod.onStatusChanged();
+			DynamicFPSMod.onStatusChanged(true);
 		}
 
 		if (this.previousIconifyCallback != null) {
