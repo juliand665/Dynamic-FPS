@@ -8,11 +8,15 @@ import dynamic_fps.impl.PowerState;
 
 public final class DynamicFPSConfig {
 	private int idleTime; // Seconds
+	private boolean uncapMenuFrameRate;
+
 	@SerializedName("states")
 	private final Map<PowerState, Config> configs;
 
-	DynamicFPSConfig(int abandonTime, Map<PowerState, Config> configs) {
+	DynamicFPSConfig(int abandonTime, boolean uncapMenuFrameRate, Map<PowerState, Config> configs) {
 		this.idleTime = abandonTime;
+		this.uncapMenuFrameRate = uncapMenuFrameRate;
+
 		this.configs = new EnumMap<>(configs);
 
 		for (PowerState state : PowerState.values()) {
@@ -36,6 +40,14 @@ public final class DynamicFPSConfig {
 
 	public void setIdleTime(int value) {
 		this.idleTime = value;
+	}
+
+	public boolean uncapMenuFrameRate() {
+		return this.uncapMenuFrameRate;
+	}
+
+	public void setUncapMenuFrameRate(boolean value) {
+		this.uncapMenuFrameRate = value;
 	}
 
 	private Map<PowerState, Config> configs() {

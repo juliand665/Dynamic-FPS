@@ -46,6 +46,17 @@ public final class ClothConfig {
 			.build()
 		);
 
+		general.addEntry(
+			entryBuilder.startBooleanToggle(
+				localized("config", "uncap_menu_frame_rate"),
+				DynamicFPSMod.modConfig.uncapMenuFrameRate()
+			)
+			.setDefaultValue(false)
+			.setSaveConsumer(DynamicFPSMod.modConfig::setUncapMenuFrameRate)
+			.setTooltip(localized("config", "uncap_menu_frame_rate_tooltip"))
+			.build()
+		);
+
 		for (PowerState state : PowerState.values()) {
 			if (!state.configurable) {
 				continue;

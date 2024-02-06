@@ -67,7 +67,7 @@ public class Serialization {
 		try {
 			data = Files.readAllBytes(CONFIG_FILE);
 		} catch (NoSuchFileException e) {
-			DynamicFPSConfig config = new DynamicFPSConfig(0, new EnumMap<>(PowerState.class));
+			DynamicFPSConfig config = new DynamicFPSConfig(0, false, new EnumMap<>(PowerState.class));
 			config.save();
 			return config;
 		} catch (IOException e) {
@@ -84,6 +84,7 @@ public class Serialization {
 		addIdleTime(root);
 		upgradeVolumeMultiplier(root);
 		addAbandonedConfig(root);
+		addUncapMenuFrameRate(root);
 	}
 
 	private static void addIdleTime(JsonObject root) {
@@ -142,6 +143,13 @@ public class Serialization {
 		}
 
 		states.add("abandoned", GSON.toJsonTree(Config.getDefault(PowerState.ABANDONED)));
+	}
+
+	private static void addUncapMenuFrameRate(JsonObject root) {
+		// Add uncap_menu_frame_rate field if it's missing
+		if (!root.has("uncap_menu_frame_rate")) {
+			root.addProperty("uncap_menu_frame_rate", false);
+		}
 	}
 
 	private static @Nullable JsonObject getStatesAsObject(JsonObject root) {
