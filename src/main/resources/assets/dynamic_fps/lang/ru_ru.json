@@ -13,6 +13,9 @@
 	"config.dynamic_fps.idle_time": "Время простоя",
 	"config.dynamic_fps.idle_time_tooltip": "Минут без ввода, пока Dynamic FPS не активирует режим простоя, пока игра находится в режиме фокуса.",
 
+	"config.dynamic_fps.uncap_menu_frame_rate": "Снять ограничение FPS в меню",
+	"config.dynamic_fps.uncap_menu_frame_rate_tooltip": "Снимает ограничение в 60 FPS в главном меню.",
+
 	"config.dynamic_fps.frame_rate_target": "Количество FPS",
 	"config.dynamic_fps.frame_rate_target_description": "Для отключения снижения FPS, установите значение -1 для параметра Количество FPS",
 	"config.dynamic_fps.volume_multiplier": "Процент громкости звуков",
