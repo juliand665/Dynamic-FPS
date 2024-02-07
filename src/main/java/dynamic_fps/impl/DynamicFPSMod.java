@@ -130,6 +130,10 @@ public class DynamicFPSMod implements ClientModInitializer {
 		return config.frameRateTarget();
 	}
 
+	public static boolean uncapMenuFrameRate() {
+		return modConfig.uncapMenuFrameRate();
+	}
+
 	public static float volumeMultiplier(SoundSource source) {
 		return config.volumeMultiplier(source);
 	}
