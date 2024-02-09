@@ -2,10 +2,10 @@
 	"config.dynamic_fps.title": "Skonfiguruj Dynamic FPS",
 
 	"config.dynamic_fps.category.general": "Ogólne",
-	"config.dynamic_fps.category.hovered": "Zawieszony",
+	"config.dynamic_fps.category.hovered": "Zawieszone",
 	"config.dynamic_fps.category.unfocused": "Bez koncentracji",
-	"config.dynamic_fps.category.abandoned": "Bezczynny",
-	"config.dynamic_fps.category.invisible": "Niewidzialny",
+	"config.dynamic_fps.category.abandoned": "Bezczynne",
+	"config.dynamic_fps.category.invisible": "Niewidzialne",
 
 	"config.dynamic_fps.disabled": "Wyłączony",
 	"config.dynamic_fps.minutes": "%d Minut(y)",
