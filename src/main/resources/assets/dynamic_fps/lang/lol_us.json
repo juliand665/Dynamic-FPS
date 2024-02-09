@@ -1,0 +1,41 @@
+{
+	"config.dynamic_fps.title": "Configure Dynamik MPS (meows/s)",
+
+	"config.dynamic_fps.category.general": "Generlol",
+	"config.dynamic_fps.category.hovered": "hoverd",
+	"config.dynamic_fps.category.unfocused": "distractd",
+	"config.dynamic_fps.category.abandoned": "away frum catboard",
+	"config.dynamic_fps.category.invisible": "inviz",
+
+	"config.dynamic_fps.disabled": "off.",
+	"config.dynamic_fps.minutes": "%d minit(z)",
+
+	"config.dynamic_fps.idle_time": "afc time",
+	"config.dynamic_fps.idle_time_tooltip": "minitz witowt playing befor Dynamik MPS activatez the away frum catboard mode while da game is focused.",
+
+	"config.dynamic_fps.uncap_menu_frame_rate": "Uncat Menu MPS",
+	"config.dynamic_fps.uncap_menu_frame_rate_tooltip": "No moar 60 FPS limit in the main menu!",
+
+	"config.dynamic_fps.frame_rate_target": "Meow Rate Target",
+	"config.dynamic_fps.volume_multiplier": "loudness",
+
+	"config.dynamic_fps.graphics_state": "Grefix Opshuns",
+	"config.dynamic_fps.graphics_state_default": "Regulr",
+	"config.dynamic_fps.graphics_state_reduced": "Redoosed",
+	"config.dynamic_fps.graphics_state_minimal": "low",
+	"config.dynamic_fps.graphics_state_minimal_tooltip": "low grefix causez da worl to reload!",
+
+	"config.dynamic_fps.show_toasts": "sho breadz",
+	"config.dynamic_fps.show_toasts_tooltip": "shoul keep dizplay or wait to sho bread notificationz??",
+
+	"config.dynamic_fps.run_garbage_collector": "Invoke Litter Collector",
+	"config.dynamic_fps.run_garbage_collector_tooltip": "Free up unused memoriez when swap to le state",
+
+	"key.dynamic_fps.toggle_forced": "force distractd mode (Toggle)",
+	"key.dynamic_fps.toggle_disabled": "turn off Dynamik MPS (Toggle)",
+	"gui.dynamic_fps.hud.reducing": "Dynamik MPS: forcin' redoosed mps",
+	"gui.dynamic_fps.hud.disabled": "Dynamik MPS turnd off",
+
+	"modmenu.nameTranslation.dynamic_fps": "Dynamik MPS",
+	"modmenu.descriptionTranslation.dynamic_fps": "Dynamikally adjusts mps (meows/s) so Minceraft doesn't eet all da resourcez in background."
+}
