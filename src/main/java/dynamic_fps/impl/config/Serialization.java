@@ -12,10 +12,10 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import dynamic_fps.impl.DynamicFPSMod;
+import dynamic_fps.impl.Constants;
 import dynamic_fps.impl.GraphicsState;
 import dynamic_fps.impl.PowerState;
-import net.fabricmc.loader.api.FabricLoader;
+import dynamic_fps.impl.service.Platform;
 import net.minecraft.sounds.SoundSource;
 import org.jetbrains.annotations.Nullable;
 
@@ -42,18 +42,19 @@ public class Serialization {
 		.registerTypeAdapter(GraphicsState.class, new GraphicsStateSerializer())
 		.create();
 
-	private static final Path CONFIGS = FabricLoader.getInstance().getConfigDir();
-	private static final Path CONFIG_FILE = CONFIGS.resolve(DynamicFPSMod.MOD_ID + ".json");
+	private static final String CONFIG_FILE = Constants.MOD_ID + ".json";
 
-	public static void save(DynamicFPSConfig config) {
-		String data = GSON.toJson(config);
+	public static void save(DynamicFPSConfig instance) {
+		String data = GSON.toJson(instance) + "\n";
+
+		Path cache = Platform.getInstance().getCacheDir();
+		Path config = Platform.getInstance().getConfigDir().resolve(CONFIG_FILE);
 
 		try {
-			Path temp = Files.createTempFile(CONFIGS, "dynamic_fps", ".json");
-			Files.write(temp, data.getBytes(StandardCharsets.UTF_8));
+			Path temp = Files.createTempFile(cache, "config", ".json");
 
-			Files.deleteIfExists(CONFIG_FILE);
-			Files.move(temp, CONFIG_FILE, StandardCopyOption.ATOMIC_MOVE);
+			Files.write(temp, data.getBytes(StandardCharsets.UTF_8));
+			Files.move(temp, config, StandardCopyOption.ATOMIC_MOVE);
 		} catch (IOException e) {
 			// Cloth Config's built-in saving does not support catching exceptions :(
 			throw new RuntimeException("Failed to save or modify Dynamic FPS config!", e);
@@ -63,13 +64,14 @@ public class Serialization {
 	@SuppressWarnings("deprecation")
 	public static DynamicFPSConfig load() {
 		byte[] data;
+		Path config = Platform.getInstance().getConfigDir().resolve(CONFIG_FILE);
 
 		try {
-			data = Files.readAllBytes(CONFIG_FILE);
+			data = Files.readAllBytes(config);
 		} catch (NoSuchFileException e) {
-			DynamicFPSConfig config = new DynamicFPSConfig(0, false, new EnumMap<>(PowerState.class));
-			config.save();
-			return config;
+			DynamicFPSConfig instance = new DynamicFPSConfig(0, false, new EnumMap<>(PowerState.class));
+			instance.save();
+			return instance;
 		} catch (IOException e) {
 			throw new RuntimeException("Failed to load Dynamic FPS config.", e);
 		}

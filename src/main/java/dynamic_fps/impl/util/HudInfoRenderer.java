@@ -1,6 +1,5 @@
 package dynamic_fps.impl.util;
 
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -13,22 +12,22 @@ import org.joml.Matrix4f;
 
 import dynamic_fps.impl.DynamicFPSMod;
 
-public final class HudInfoRenderer implements HudRenderCallback {
-	@Override
-	public void onHudRender(GuiGraphics drawContext, float tickDelta) {
+public final class HudInfoRenderer {
+	private static final Minecraft minecraft = Minecraft.getInstance();
+
+	public static void renderInfo(GuiGraphics guiGraphics) {
 		if (DynamicFPSMod.isDisabled()) {
-			drawCenteredText(drawContext, localized("gui", "hud.disabled"), 32);
+			drawCenteredText(guiGraphics, localized("gui", "hud.disabled"), 32);
 		} else if (DynamicFPSMod.isForcingLowFPS()) {
-			drawCenteredText(drawContext, localized("gui", "hud.reducing"), 32);
+			drawCenteredText(guiGraphics, localized("gui", "hud.reducing"), 32);
 		}
 	}
 
-	private void drawCenteredText(GuiGraphics drawContext, Component component, float y) {
-		Minecraft client = Minecraft.getInstance();
-		Font fontRenderer = client.gui.getFont();
+	private static void drawCenteredText(GuiGraphics guiGraphics, Component component, float y) {
+		Font fontRenderer = minecraft.gui.getFont();
 
-		int windowWidth = client.getWindow().getGuiScaledWidth();
 		int stringWidth = fontRenderer.width(component);
+		int windowWidth = minecraft.getWindow().getGuiScaledWidth();
 
 		fontRenderer.drawInBatch(
 			component,
@@ -37,7 +36,7 @@ public final class HudInfoRenderer implements HudRenderCallback {
 			0xFFFFFFFF,
 			true,
 			new Matrix4f(),
-			drawContext.bufferSource(),
+			guiGraphics.bufferSource(),
 			DisplayMode.NORMAL,
 			0,
 			255

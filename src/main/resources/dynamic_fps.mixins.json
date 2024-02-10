@@ -9,6 +9,7 @@
 		"GuiMixin",
 		"LoadingOverlayMixin",
 		"MinecraftMixin",
+		"OptionsMixin",
 		"ScreenMixin",
 		"SoundEngineMixin",
 		"StatsScreenMixin",

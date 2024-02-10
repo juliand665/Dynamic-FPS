@@ -1,45 +1,63 @@
 package dynamic_fps.impl.util;
 
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import com.google.common.collect.Lists;
+import dynamic_fps.impl.DynamicFPSMod;
+import dynamic_fps.impl.service.Platform;
 import net.minecraft.client.KeyMapping;
-import net.minecraft.client.Minecraft;
 
 import com.mojang.blaze3d.platform.InputConstants;
 
-public final class KeyMappingHandler implements ClientTickEvents.EndTick {
+import java.util.List;
+
+import static dynamic_fps.impl.util.Localization.translationKey;
+
+public final class KeyMappingHandler {
 	private final KeyMapping keyMapping;
 	private boolean isHoldingKey = false;
 	private final PressHandler pressHandler;
 
-	public KeyMappingHandler(String translationKey, String category, PressHandler pressHandler) {
-		this(translationKey, InputConstants.UNKNOWN.getValue(), category, pressHandler);
-	}
+	private static final KeyMappingHandler[] KEY_MAPPING_HANDLERS = {
+		new KeyMappingHandler(
+			translationKey("key", "toggle_forced"),
+			"key.categories.misc",
+			DynamicFPSMod::toggleForceLowFPS
+		),
+		new KeyMappingHandler(
+			translationKey("key", "toggle_disabled"),
+			"key.categories.misc",
+			DynamicFPSMod::toggleDisabled
+		)
+	};
 
-	public KeyMappingHandler(String translationKey, int defaultKeyCode, String category, PressHandler pressHandler) {
+	public KeyMappingHandler(String translationKey, String category, PressHandler pressHandler) {
 		this.keyMapping = new KeyMapping(
 			translationKey,
 			InputConstants.Type.KEYSYM,
-			defaultKeyCode,
+			InputConstants.UNKNOWN.getValue(),
 			category
 		);
 		this.pressHandler = pressHandler;
 	}
 
-	public void register() {
-		KeyBindingHelper.registerKeyBinding(keyMapping);
-		ClientTickEvents.END_CLIENT_TICK.register(this);
+	public static KeyMapping[] register(KeyMapping[] existing) {
+		List<KeyMapping> mappings = Lists.newArrayList(existing);
+
+		for (KeyMappingHandler handler : KEY_MAPPING_HANDLERS ) {
+			mappings.add(handler.keyMapping);
+			Platform.getInstance().registerStartTickEvent(handler::onStartTick);
+		}
+
+		return mappings.toArray(new KeyMapping[0]);
 	}
 
-	@Override
-	public final void onEndTick(Minecraft e) {
-		if (keyMapping.isDown()) {
-			if (!isHoldingKey) {
-				pressHandler.handlePress();
+	public void onStartTick() {
+		if (this.keyMapping.isDown()) {
+			if (!this.isHoldingKey) {
+				this.pressHandler.handlePress();
 			}
-			isHoldingKey = true;
+			this.isHoldingKey = true;
 		} else {
-			isHoldingKey = false;
+			this.isHoldingKey = false;
 		}
 	}
 

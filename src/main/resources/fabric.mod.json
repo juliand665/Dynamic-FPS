@@ -21,7 +21,6 @@
 	"environment": "client",
 	"entrypoints": {
 		"client": [
-			"dynamic_fps.impl.DynamicFPSMod",
 			"dynamic_fps.impl.compat.FREX"
 		],
 		"modmenu": [
@@ -38,9 +37,7 @@
 		"mixinextras": ">=0.3.2",
 		"fabricloader": ">=0.15.0",
 		"fabric-resource-loader-v0": "*",
-		"fabric-rendering-v1": "*",
-		"fabric-lifecycle-events-v1": "*",
-		"fabric-key-binding-api-v1": "*"
+		"fabric-lifecycle-events-v1": "*"
 	},
 
 	"custom": {

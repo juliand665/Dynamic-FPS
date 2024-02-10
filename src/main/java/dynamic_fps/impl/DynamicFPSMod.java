@@ -4,30 +4,20 @@ import dynamic_fps.impl.compat.FREX;
 import dynamic_fps.impl.compat.GLFW;
 import dynamic_fps.impl.config.Config;
 import dynamic_fps.impl.config.DynamicFPSConfig;
-import dynamic_fps.impl.util.HudInfoRenderer;
-import dynamic_fps.impl.util.KeyMappingHandler;
 import dynamic_fps.impl.util.Logging;
 import dynamic_fps.impl.util.ModCompatibility;
 import dynamic_fps.impl.util.OptionsHolder;
 import dynamic_fps.impl.util.event.InputObserver;
 import dynamic_fps.impl.util.event.WindowObserver;
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.fabricmc.loader.api.FabricLoader;
+import dynamic_fps.impl.service.Platform;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.LoadingOverlay;
 import net.minecraft.sounds.SoundSource;
 
-import static dynamic_fps.impl.util.Localization.translationKey;
-
 import org.jetbrains.annotations.Nullable;
 
-public class DynamicFPSMod implements ClientModInitializer {
-	public static final String MOD_ID = "dynamic_fps";
-	public static final boolean DEBUG = FabricLoader.getInstance().isDevelopmentEnvironment();
-
+public class DynamicFPSMod {
 	private static Config config = Config.ACTIVE;
 	private static PowerState state = PowerState.FOCUSED;
 
@@ -54,35 +44,15 @@ public class DynamicFPSMod implements ClientModInitializer {
 
 	private static final boolean OVERLAY_OPTIMIZATION_ACTIVE = !ModCompatibility.disableOverlayOptimization();
 
-	private static final KeyMappingHandler toggleForcedKeyBinding = new KeyMappingHandler(
-			translationKey("key", "toggle_forced"),
-			"key.categories.misc",
-			() -> {
-				isForcingLowFPS = !isForcingLowFPS;
-				onStatusChanged(true);
-			});
-
-	private static final KeyMappingHandler toggleDisabledKeyBinding = new KeyMappingHandler(
-			translationKey("key", "toggle_disabled"),
-			"key.categories.misc",
-			() -> {
-				isDisabled = !isDisabled;
-				onStatusChanged(true);
-			});
-
-	@Override
-	public void onInitializeClient() {
-		toggleForcedKeyBinding.register();
-		toggleDisabledKeyBinding.register();
-
-		initializeIdleCheck();
-		HudRenderCallback.EVENT.register(new HudInfoRenderer());
-	}
-
 	// Internal "API" for Dynamic FPS itself
 
 	public static boolean isDisabled() {
 		return isDisabled;
+	}
+
+	public static void toggleDisabled() {
+		isDisabled = !isDisabled;
+		onStatusChanged(true);
 	}
 
 	public static void onConfigChanged() {
@@ -107,6 +77,11 @@ public class DynamicFPSMod implements ClientModInitializer {
 
 	public static boolean isForcingLowFPS() {
 		return isForcingLowFPS;
+	}
+
+	public static void toggleForceLowFPS() {
+		isForcingLowFPS = !isForcingLowFPS;
+		onStatusChanged(true);
 	}
 
 	public static void setWindow(long address) {
@@ -185,7 +160,7 @@ public class DynamicFPSMod implements ClientModInitializer {
 		// When it's used to run less unused code at all times.
 		devices = new InputObserver(window.address());
 
-		ClientTickEvents.START_CLIENT_TICK.register((minecraft) -> {
+		Platform.getInstance().registerStartTickEvent(() -> {
 			boolean idle = isIdle();
 
 			if (idle != wasIdle) {
@@ -197,7 +172,7 @@ public class DynamicFPSMod implements ClientModInitializer {
 
 	@SuppressWarnings("squid:S1215") // Garbage collector call
 	public static void handleStateChange(PowerState previous, PowerState current) {
-		if (DEBUG) {
+		if (Constants.DEBUG) {
 			Logging.getLogger().info("State changed from {} to {}.", previous, current);
 		}
 
