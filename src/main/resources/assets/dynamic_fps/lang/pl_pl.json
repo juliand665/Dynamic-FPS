@@ -2,9 +2,39 @@
 	"config.dynamic_fps.title": "Skonfiguruj Dynamic FPS",
 
 	"config.dynamic_fps.category.general": "Ogólne",
+	"config.dynamic_fps.category.hovered": "Zawieszone",
+	"config.dynamic_fps.category.unfocused": "Bez koncentracji",
+	"config.dynamic_fps.category.abandoned": "Bezczynne",
+	"config.dynamic_fps.category.invisible": "Niewidzialne",
+
+	"config.dynamic_fps.disabled": "Wyłączony",
+	"config.dynamic_fps.minutes": "%d Minut(y)",
+
+	"config.dynamic_fps.idle_time": "Czas bezczynności",
+	"config.dynamic_fps.idle_time_tooltip": "Minuty bez wprowadzania danych, zanim Dynamic FPS aktywuje stan bezczynności, gdy gra jest skupiona.",
+
+	"config.dynamic_fps.uncap_menu_frame_rate": "Odblokuj menu FPS",
+	"config.dynamic_fps.uncap_menu_frame_rate_tooltip": "Usuń limit 60 FPS w menu głównym.",
+
+	"config.dynamic_fps.frame_rate_target": "Docelowa liczba klatek na sekundę",
+	"config.dynamic_fps.volume_multiplier": "Mnożnik głośności",
+
+	"config.dynamic_fps.graphics_state": "Opcje graficzne",
+	"config.dynamic_fps.graphics_state_default": "Domyślna",
+	"config.dynamic_fps.graphics_state_reduced": "Zmniejszona",
+	"config.dynamic_fps.graphics_state_minimal": "Minimalna",
+	"config.dynamic_fps.graphics_state_minimal_tooltip": "Minimalna grafika powoduje przeładowanie świata!",
+
+	"config.dynamic_fps.show_toasts": "Pokaż toasty",
+	"config.dynamic_fps.show_toasts_tooltip": "Czy wyświetlać lub opóźniać powiadomienia o toastach",
+
+	"config.dynamic_fps.run_garbage_collector": "Wywołaj Garbage Collector",
+	"config.dynamic_fps.run_garbage_collector_tooltip": "Zwolnienie nieużywanej pamięci podczas przełączania do tego stanu.",
 
 	"key.dynamic_fps.toggle_forced": "Wymuś obniżenie FPS (przełącznik)",
 	"key.dynamic_fps.toggle_disabled": "Wyłącz Dynamic FPS (przełącznik)",
 	"gui.dynamic_fps.hud.reducing": "Dynamic FPS: wymuszono obniżenie FPS",
-	"gui.dynamic_fps.hud.disabled": "Dynamic FPS wyłączone"
+	"gui.dynamic_fps.hud.disabled": "Dynamic FPS wyłączone",
+
+	"modmenu.descriptionTranslation.dynamic_fps": "Dynamicznie dostosowuje liczbę klatek na sekundę, dzięki czemu Minecraft nie blokuje zasobów w tle."
 }
