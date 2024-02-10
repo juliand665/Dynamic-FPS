@@ -16,7 +16,7 @@ public class GuiMixin {
 	/**
 	 * Cancels rendering the GUI if it is determined to currently not be visible.
 	 */
-	@Inject(at = @At("HEAD"), method = "render", cancellable = true)
+	@Inject(method = "render", at = @At("HEAD"), cancellable = true)
 	private void shouldRender(CallbackInfo callbackInfo) {
 		if (!DynamicFPSMod.shouldShowLevels()) {
 			callbackInfo.cancel();

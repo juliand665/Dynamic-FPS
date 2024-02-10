@@ -19,7 +19,14 @@ public class GameRendererMixin {
 	 * Note: Inject after the pause on lost focus check,
 	 * This allows the feature to work even at zero FPS.
 	 */
-	@ModifyExpressionValue(method = "render", at = @At(value = "FIELD", target = "Lnet/minecraft/client/Minecraft;noRender:Z", opcode = Opcodes.GETFIELD))
+	@ModifyExpressionValue(
+		method = "render",
+		at = @At(
+			value = "FIELD",
+			target = "Lnet/minecraft/client/Minecraft;noRender:Z",
+			opcode = Opcodes.GETFIELD
+		)
+	)
 	private boolean skipRendering(boolean original) {
 		return original || !DynamicFPSMod.checkForRender();
 	}
@@ -27,7 +34,11 @@ public class GameRendererMixin {
 	/**
 	 * Cancels rendering the world if a it is determined to currently not be visible.
 	 */
-	@Inject(at = @At("HEAD"), method = { "renderLevel", "renderItemActivationAnimation" }, cancellable = true)
+	@Inject(
+		method = { "renderLevel", "renderItemActivationAnimation" },
+		at = @At("HEAD"),
+		cancellable = true
+	)
 	private void shouldRender(CallbackInfo callbackInfo) {
 		if (!DynamicFPSMod.shouldShowLevels()) {
 			callbackInfo.cancel();
