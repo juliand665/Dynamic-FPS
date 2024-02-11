@@ -39,6 +39,18 @@
 		"fabric-resource-loader-v0": "*",
 		"fabric-lifecycle-events-v1": "*"
 	},
+	"conflicts": {
+		"optifabric": "*",
+		"smoothmenu": "*"
+	},
+	"recommends": {
+		"modmenu": "*",
+		"cloth-config": "*",
+		"quilt_loader": "*"
+	},
+	"breaks": {
+		"fastload": "<=3.4.0"
+	},
 
 	"custom": {
 		"loom:injected_interfaces": {
