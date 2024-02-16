@@ -10,7 +10,7 @@ version = "${version}"
 displayName = "Dynamic FPS"
 authors = "julian665 & LostLuma"
 description = "Dynamically adjusts FPS so Minecraft doesn't hog resources in the background."
-logoFile = "assets/dynamic_fps/icon.png"
+logoFile = "dynamic_fps.png"
 displayTest = "IGNORE_ALL_VERSION"
 updateJSONURL = "https://api.lostluma.net/mod-updates/dynamic-fps?platform=neoforge"
 
