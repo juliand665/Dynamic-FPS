@@ -1,0 +1,82 @@
+plugins {
+    alias libs.plugins.shadow
+}
+
+repositories {
+	maven { url "https://https://maven.shedaniel.me" } // cloth-config
+	maven { url = "https://maven.terraformersmc.com/releases" } // modmenu
+    maven { url "https://maven.quiltmc.org/repository/release" }
+}
+
+architectury {
+    platformSetupLoomIde()
+    loader("quilt")
+}
+
+loom {
+    accessWidenerPath = project(":platforms:common").loom.accessWidenerPath
+}
+
+configurations {
+    common
+    shadowCommon // Don't use shadow from the shadow plugin since it *excludes* files.
+    compileClasspath.extendsFrom common
+    runtimeClasspath.extendsFrom common
+    developmentQuilt.extendsFrom common
+}
+
+dependencies {
+    modImplementation(libs.quilt.loader)
+	modImplementation(libs.qsl.lifecycle.events)
+
+	modApi(libs.modmenu)
+
+    common(project(path: ":platforms:common", configuration: "namedElements")) { transitive false }
+    shadowCommon(project(path: ":platforms:common", configuration: "transformProductionQuilt")) { transitive false }
+}
+
+processResources {
+    inputs.property "version", rootProject.mod_version
+
+    filesMatching("quilt.mod.json") {
+        expand "version": rootProject.mod_version
+    }
+}
+
+shadowJar {
+    exclude "architectury.common.json"
+
+    configurations = [project.configurations.shadowCommon]
+}
+
+remapJar {
+    injectAccessWidener = true
+    input.set shadowJar.archiveFile
+    dependsOn shadowJar
+}
+
+sourcesJar {
+    def commonSources = project(":platforms:common").sourcesJar
+    dependsOn commonSources
+    from commonSources.archiveFile.map { zipTree(it) }
+}
+
+components.java {
+    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
+        skip()
+    }
+}
+
+publishing {
+    publications {
+        mavenQuilt(MavenPublication) {
+            artifactId = rootProject.archives_base_name + "-" + project.name
+            from components.java
+        }
+    }
+
+    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+    repositories {
+        // Add repositories to publish to here.
+    }
+}
