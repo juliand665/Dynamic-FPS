@@ -47,6 +47,11 @@ shadowJar {
 
 	exclude "assets/dynamic_fps/icon.png"
 
+	// Sue me
+	// Fixes crash in prod from our GameRenderer mixin
+	// Idk anything about NeoForge, if you do explain.
+	exclude "dynamic-fps-platforms_common-refmap.json"
+
 	configurations = [project.configurations.shadowCommon]
 }
 
