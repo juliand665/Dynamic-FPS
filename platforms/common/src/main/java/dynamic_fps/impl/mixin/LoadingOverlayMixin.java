@@ -9,11 +9,14 @@ import dynamic_fps.impl.util.duck.DuckLoadingOverlay;
 
 @Mixin(LoadingOverlay.class)
 public class LoadingOverlayMixin implements DuckLoadingOverlay {
+	/*
 	@Shadow
 	private long fadeOutStart;
+	 */
 
 	@Override
 	public boolean dynamic_fps$isReloadComplete() {
-		return this.fadeOutStart > -1L;
+		LoadingOverlay self = (LoadingOverlay)(Object) this;
+		return self.fadeOutStart > -1L;
 	}
 }
