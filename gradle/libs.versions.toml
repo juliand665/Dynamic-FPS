@@ -7,7 +7,6 @@ fabric_loader = "0.15.6"
 fabric_api = "0.91.6+1.20.2"
 
 forge = "1.20.2-48.0.0"
-mixinextras = "0.3.5"
 
 neoforge = "20.2.88"
 
@@ -18,6 +17,8 @@ quilt_standard_libraries = "7.0.0-alpha.10+1.20.2"
 
 modmenu = "8.0.1"
 cloth_config = "12.0.119"
+
+mixinextras = "0.3.5"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
