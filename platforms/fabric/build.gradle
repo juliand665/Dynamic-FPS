@@ -3,7 +3,6 @@ plugins {
 }
 
 repositories {
-	maven { url "https://https://maven.shedaniel.me" } // cloth-config
 	maven { url = "https://maven.terraformersmc.com/releases" } // modmenu
 }
 
