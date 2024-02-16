@@ -28,7 +28,7 @@ public final class BlockableEventLoopMixin {
 	 * Skip the Thread.yield() call.
 	 */
 	@WrapWithCondition(method = "waitForTasks", at = @At(value = "INVOKE", target = "Ljava/lang/Thread;yield()V"))
-	private boolean skipYield() {
+	private boolean doThreadYield() {
 		return false;
 	}
 
@@ -36,7 +36,7 @@ public final class BlockableEventLoopMixin {
 	 * Increase wait time to 0.5 milliseconds.
 	 */
 	@ModifyConstant(method = "waitForTasks", constant = @Constant(longValue = 100000L))
-	private long parkNanosTime(long original) {
+	private long incParkNanosTime(long original) {
 		return 500_000L;
 	}
 }
