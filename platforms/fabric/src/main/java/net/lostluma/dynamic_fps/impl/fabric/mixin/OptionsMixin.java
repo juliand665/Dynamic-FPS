@@ -31,7 +31,6 @@ public class OptionsMixin {
 		List<KeyMapping> mappings = Lists.newArrayList(this.keyMappings);
 
 		for (KeyMappingHandler handler : KeyMappingHandler.getHandlers()) {
-			handler.registerTickHandler();
 			mappings.add(handler.keyMapping());
 		}
 

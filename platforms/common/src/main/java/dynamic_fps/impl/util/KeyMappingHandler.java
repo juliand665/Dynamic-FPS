@@ -36,7 +36,9 @@ public final class KeyMappingHandler {
 			InputConstants.UNKNOWN.getValue(),
 			category
 		);
+
 		this.pressHandler = pressHandler;
+		Platform.getInstance().registerStartTickEvent(this::onStartTick);
 	}
 
 	public static KeyMappingHandler[] getHandlers() {
@@ -45,10 +47,6 @@ public final class KeyMappingHandler {
 
 	public KeyMapping keyMapping() {
 		return this.keyMapping;
-	}
-
-	public void registerTickHandler() {
-		Platform.getInstance().registerStartTickEvent(this::onStartTick);
 	}
 
 	private void onStartTick() {

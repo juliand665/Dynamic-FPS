@@ -49,7 +49,6 @@ public class DynamicFPSForgeMod {
 
 	public void registerKeyMappings(RegisterKeyMappingsEvent event) {
 		for (KeyMappingHandler handler : KeyMappingHandler.getHandlers()) {
-			handler.registerTickHandler();
 			event.register(handler.keyMapping());
 		}
 	}
