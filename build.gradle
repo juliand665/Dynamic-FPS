@@ -8,6 +8,10 @@ architectury {
 }
 
 subprojects {
+	if (project.name == "platforms") {
+		return
+	}
+
 	apply plugin: "dev.architectury.loom"
 
 	loom {
@@ -21,6 +25,10 @@ subprojects {
 }
 
 allprojects {
+	if (project.name == "platforms") {
+		return
+	}
+
 	apply plugin: "java"
 	apply plugin: "architectury-plugin"
 	apply plugin: "maven-publish"
