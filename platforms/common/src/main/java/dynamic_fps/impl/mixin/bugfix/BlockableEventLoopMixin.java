@@ -36,7 +36,7 @@ public final class BlockableEventLoopMixin {
 	 * Increase wait time to 0.5 milliseconds.
 	 */
 	@ModifyConstant(method = "waitForTasks", constant = @Constant(longValue = 100000L))
-	private float parkNanosTime(long original) {
+	private long parkNanosTime(long original) {
 		return 500_000L;
 	}
 }
