@@ -205,9 +205,7 @@ public class DynamicFPSMod {
 		}
 
 		for (SoundSource source : SoundSource.values()) {
-			if (before.volumeMultiplier(source) != config.volumeMultiplier(source)) {
-				((DuckSoundEngine) minecraft.getSoundManager().soundEngine).dynamic_fps$updateVolume(source);
-			}
+			((DuckSoundEngine) minecraft.getSoundManager().soundEngine).dynamic_fps$updateVolume(before, source);
 		}
 
 		if (before.graphicsState() != config.graphicsState()) {
