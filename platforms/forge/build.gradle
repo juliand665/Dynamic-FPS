@@ -52,6 +52,8 @@ shadowJar {
 	exclude "fabric.mod.json"
 	exclude "architectury.common.json"
 
+	exclude "assets/dynamic_fps/icon.png"
+
 	configurations = [project.configurations.shadowCommon]
 }
 
