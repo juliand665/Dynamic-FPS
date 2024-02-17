@@ -10,7 +10,6 @@ import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import me.shedaniel.clothconfig2.impl.builders.SubCategoryBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 
@@ -43,7 +42,7 @@ public final class ClothConfig {
 		);
 
 		general.addEntry(
-			entryBuilder.startTextDescription(CommonComponents.SPACE).build()
+			entryBuilder.startTextDescription(Component.literal(" ")).build()
 		);
 
 		general.addEntry(
