@@ -53,6 +53,9 @@ public class QuiltModCompat implements ModCompat {
 		}
 
 		parseOverlayOverride(root.get("optimized_overlay"));
+
+		parseScreenOverrides(root.get("optimized_screens"), "enabled", optedInScreens);
+		parseScreenOverrides(root.get("optimized_screens"), "disabled", optedOutScreens);
 	}
 
 	private static void parseOverlayOverride(@Nullable LoaderValue value) {
