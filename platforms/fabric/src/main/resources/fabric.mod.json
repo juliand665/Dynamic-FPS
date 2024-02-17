@@ -5,7 +5,7 @@
     "name": "Dynamic FPS",
     "description": "Dynamically adjusts FPS so Minecraft doesn't hog resources in the background.",
     "authors": [
-        "julian665",
+        "juliand665",
         "LostLuma"
     ],
     "contact": {
