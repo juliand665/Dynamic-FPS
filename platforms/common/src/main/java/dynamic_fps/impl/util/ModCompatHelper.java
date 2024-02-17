@@ -19,7 +19,7 @@ public class ModCompatHelper {
 	private static void fixFastloadSoftLock() {
 		Optional<String> optional = Platform.getInstance().getModVersion("fastload");
 
-		if (optional.isEmpty()) {
+		if (!optional.isPresent()) {
 			return;
 		}
 

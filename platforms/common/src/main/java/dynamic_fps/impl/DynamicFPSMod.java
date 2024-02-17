@@ -56,7 +56,7 @@ public class DynamicFPSMod {
 		ModCompatHelper.init();
 
 		Platform platform = Platform.getInstance();
-		String version = platform.getModVersion(Constants.MOD_ID).orElseThrow();
+		String version = platform.getModVersion(Constants.MOD_ID).orElseThrow(RuntimeException::new);
 
 		Logging.getLogger().info("Dynamic FPS {} active on {}!", version, platform.getName());
 	}
