@@ -4,3 +4,6 @@
 # Renames package for the mod ID change,
 # Move all code to internal impl package
 db024e48db528898eb6782d810dba8a4c9ce38f1
+
+# Update lang files due to config change
+2ebdd4c177f055468cac54ada8270b5046a45849
