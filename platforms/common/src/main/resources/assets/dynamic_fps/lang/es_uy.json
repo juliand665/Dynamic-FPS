@@ -1,21 +1,21 @@
 {
-	"config.dynamic_fps.title": "Configurar Dynamic FPS",
+    "config.dynamic_fps.title": "Configurar Dynamic FPS",
 
-	"config.dynamic_fps.category.hovered": "Sobre",
-	"config.dynamic_fps.category.unfocused": "Desenfocado",
-	"config.dynamic_fps.category.invisible": "Invisible",
+    "config.dynamic_fps.category.hovered": "Sobre",
+    "config.dynamic_fps.category.unfocused": "Desenfocado",
+    "config.dynamic_fps.category.invisible": "Invisible",
 
-	"config.dynamic_fps.frame_rate_target": "Objetivo de Velocidad de Fotogramas",
-	"config.dynamic_fps.frame_rate_target_description": "Establecer el objetivo de FPS en -1 para desactivar la reducción de FPS.",
-	"config.dynamic_fps.volume_multiplier": "Multiplicador de Volumen",
-	"config.dynamic_fps.graphics_state": "Opciones Gráficas",
-	"config.dynamic_fps.show_toasts": "Mostrar Notificaciones",
-	"config.dynamic_fps.run_garbage_collector": "Ejecutar el Garbage Collector",
+    "config.dynamic_fps.frame_rate_target": "Objetivo de Velocidad de Fotogramas",
+    "config.dynamic_fps.frame_rate_target_description": "Establecer el objetivo de FPS en -1 para desactivar la reducción de FPS.",
+    "config.dynamic_fps.volume_multiplier": "Multiplicador de Volumen",
+    "config.dynamic_fps.graphics_state": "Opciones Gráficas",
+    "config.dynamic_fps.show_toasts": "Mostrar Notificaciones",
+    "config.dynamic_fps.run_garbage_collector": "Ejecutar el Garbage Collector",
 
-	"key.dynamic_fps.toggle_forced": "Forzar el modo desenfocado (Alternar)",
-	"key.dynamic_fps.toggle_disabled": "Deshabilitar Dynamic FPS (Alternar)",
-	"gui.dynamic_fps.hud.reducing": "Dynamic FPS: Forzando FPS reducidos",
-	"gui.dynamic_fps.hud.disabled": "Dynamic FPS Deshabilitado",
+    "key.dynamic_fps.toggle_forced": "Forzar el modo desenfocado (Alternar)",
+    "key.dynamic_fps.toggle_disabled": "Deshabilitar Dynamic FPS (Alternar)",
+    "gui.dynamic_fps.hud.reducing": "Dynamic FPS: Forzando FPS reducidos",
+    "gui.dynamic_fps.hud.disabled": "Dynamic FPS Deshabilitado",
 
-	"modmenu.descriptionTranslation.dynamic_fps": "Ajusta dinámicamente los FPS para que Minecraft no acapare recursos en segundo plano."
+    "modmenu.descriptionTranslation.dynamic_fps": "Ajusta dinámicamente los FPS para que Minecraft no acapare recursos en segundo plano."
 }

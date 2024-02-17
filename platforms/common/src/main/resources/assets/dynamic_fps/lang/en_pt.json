@@ -1,41 +1,41 @@
 {
-	"config.dynamic_fps.title": "Dynamic Anchor Code o' Conduct",
+    "config.dynamic_fps.title": "Dynamic Anchor Code o' Conduct",
 
-	"config.dynamic_fps.category.general": "Main Deck",
-	"config.dynamic_fps.category.hovered": "Makin' Chase",
-	"config.dynamic_fps.category.unfocused": "Abandoned Ship",
-	"config.dynamic_fps.category.abandoned": "Nappin' Below Deck",
-	"config.dynamic_fps.category.invisible": "Lost in Davy Jones' Locker",
+    "config.dynamic_fps.category.general": "Main Deck",
+    "config.dynamic_fps.category.hovered": "Makin' Chase",
+    "config.dynamic_fps.category.unfocused": "Abandoned Ship",
+    "config.dynamic_fps.category.abandoned": "Nappin' Below Deck",
+    "config.dynamic_fps.category.invisible": "Lost in Davy Jones' Locker",
 
-	"config.dynamic_fps.disabled": "Avast!",
-	"config.dynamic_fps.minutes": "%d Minut'(s)",
+    "config.dynamic_fps.disabled": "Avast!",
+    "config.dynamic_fps.minutes": "%d Minut'(s)",
 
-	"config.dynamic_fps.idle_time": "Time Before Nappin'",
-	"config.dynamic_fps.idle_time_tooltip": "Minut's without workin' on deck before Dynamic Anchor declares you are Nappin' Below Deck.",
+    "config.dynamic_fps.idle_time": "Time Before Nappin'",
+    "config.dynamic_fps.idle_time_tooltip": "Minut's without workin' on deck before Dynamic Anchor declares you are Nappin' Below Deck.",
 
-	"config.dynamic_fps.uncap_menu_frame_rate": "Banish th' Menu Speed Limit?",
-	"config.dynamic_fps.uncap_menu_frame_rate_tooltip": "Makes th' 60-knots Speed Limit in th' main menu walk th' plank.",
+    "config.dynamic_fps.uncap_menu_frame_rate": "Banish th' Menu Speed Limit?",
+    "config.dynamic_fps.uncap_menu_frame_rate_tooltip": "Makes th' 60-knots Speed Limit in th' main menu walk th' plank.",
 
-	"config.dynamic_fps.frame_rate_target": "Speed Limit Target",
-	"config.dynamic_fps.volume_multiplier": "Noise Multiplier",
+    "config.dynamic_fps.frame_rate_target": "Speed Limit Target",
+    "config.dynamic_fps.volume_multiplier": "Noise Multiplier",
 
-	"config.dynamic_fps.graphics_state": "Spyglass Lens",
-	"config.dynamic_fps.graphics_state_default": "Fair Condition",
-	"config.dynamic_fps.graphics_state_reduced": "Budget'd",
-	"config.dynamic_fps.graphics_state_minimal": "Blurry",
-	"config.dynamic_fps.graphics_state_minimal_tooltip": "A blurry lens causes th' sea to be remapped!",
+    "config.dynamic_fps.graphics_state": "Spyglass Lens",
+    "config.dynamic_fps.graphics_state_default": "Fair Condition",
+    "config.dynamic_fps.graphics_state_reduced": "Budget'd",
+    "config.dynamic_fps.graphics_state_minimal": "Blurry",
+    "config.dynamic_fps.graphics_state_minimal_tooltip": "A blurry lens causes th' sea to be remapped!",
 
-	"config.dynamic_fps.show_toasts": "Notify th' Captain",
-	"config.dynamic_fps.show_toasts_tooltip": "Notify th' Captain",
+    "config.dynamic_fps.show_toasts": "Notify th' Captain",
+    "config.dynamic_fps.show_toasts_tooltip": "Notify th' Captain",
 
-	"config.dynamic_fps.run_garbage_collector": "Order th' Ship Janitor to Swab th' Deck",
-	"config.dynamic_fps.run_garbage_collector_tooltip": "Frees up ship resources when switching to th' state.",
+    "config.dynamic_fps.run_garbage_collector": "Order th' Ship Janitor to Swab th' Deck",
+    "config.dynamic_fps.run_garbage_collector_tooltip": "Frees up ship resources when switching to th' state.",
 
-	"key.dynamic_fps.toggle_forced": "Lower th' Anchor (Switch)",
-	"key.dynamic_fps.toggle_disabled": "Dynamic Anchor, walk th' plank! (Switch)",
-	"gui.dynamic_fps.hud.reducing": "Dynamic Anchor: Lowerin' th' anchor",
-	"gui.dynamic_fps.hud.disabled": "Avast, be th' Dynamic Anchor! Sailing at Full Mast",
+    "key.dynamic_fps.toggle_forced": "Lower th' Anchor (Switch)",
+    "key.dynamic_fps.toggle_disabled": "Dynamic Anchor, walk th' plank! (Switch)",
+    "gui.dynamic_fps.hud.reducing": "Dynamic Anchor: Lowerin' th' anchor",
+    "gui.dynamic_fps.hud.disabled": "Avast, be th' Dynamic Anchor! Sailing at Full Mast",
 
-	"modmenu.nameTranslation.dynamic_fps": "Dynamic Anchor",
-	"modmenu.descriptionTranslation.dynamic_fps": "Magically edits yer Ship's speed limit so Minecraft doesn't steal yer booty when yer not lookin'."
+    "modmenu.nameTranslation.dynamic_fps": "Dynamic Anchor",
+    "modmenu.descriptionTranslation.dynamic_fps": "Magically edits yer Ship's speed limit so Minecraft doesn't steal yer booty when yer not lookin'."
 }

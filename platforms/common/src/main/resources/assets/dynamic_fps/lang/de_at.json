@@ -1,31 +1,31 @@
 {
-	"config.dynamic_fps.title": "Dynamic FPS Konfigurieren",
+    "config.dynamic_fps.title": "Dynamic FPS Konfigurieren",
 
-	"config.dynamic_fps.category.general": "Allgemein",
-	"config.dynamic_fps.category.hovered": "Hover",
-	"config.dynamic_fps.category.unfocused": "Unfokussiert",
-	"config.dynamic_fps.category.abandoned": "Untätig",
-	"config.dynamic_fps.category.invisible": "Unsichtbar",
+    "config.dynamic_fps.category.general": "Allgemein",
+    "config.dynamic_fps.category.hovered": "Hover",
+    "config.dynamic_fps.category.unfocused": "Unfokussiert",
+    "config.dynamic_fps.category.abandoned": "Untätig",
+    "config.dynamic_fps.category.invisible": "Unsichtbar",
 
-	"config.dynamic_fps.frame_rate_target": "Zielbildrate",
-	"config.dynamic_fps.volume_multiplier": "Lautstärke",
+    "config.dynamic_fps.frame_rate_target": "Zielbildrate",
+    "config.dynamic_fps.volume_multiplier": "Lautstärke",
 
-	"config.dynamic_fps.graphics_state": "Grafikoptionen",
-	"config.dynamic_fps.graphics_state_default": "Standard",
-	"config.dynamic_fps.graphics_state_reduced": "Reduziert",
-	"config.dynamic_fps.graphics_state_minimal": "Minimal",
-	"config.dynamic_fps.graphics_state_minimal_tooltip": "Minimale Grafik bewirkt, dass die Welt neu lädt!",
+    "config.dynamic_fps.graphics_state": "Grafikoptionen",
+    "config.dynamic_fps.graphics_state_default": "Standard",
+    "config.dynamic_fps.graphics_state_reduced": "Reduziert",
+    "config.dynamic_fps.graphics_state_minimal": "Minimal",
+    "config.dynamic_fps.graphics_state_minimal_tooltip": "Minimale Grafik bewirkt, dass die Welt neu lädt!",
 
-	"config.dynamic_fps.show_toasts": "Toasts Anzeigen",
-	"config.dynamic_fps.show_toasts_tooltip": "Toast Benachrichtigungen weiterhin anzeigen oder verzögern",
+    "config.dynamic_fps.show_toasts": "Toasts Anzeigen",
+    "config.dynamic_fps.show_toasts_tooltip": "Toast Benachrichtigungen weiterhin anzeigen oder verzögern",
 
-	"config.dynamic_fps.run_garbage_collector": "GC auslösen",
-	"config.dynamic_fps.run_garbage_collector_tooltip": "Ungenutzen Arbeitsspeicher frei machen, wenn dieser Status aktiviert wird",
+    "config.dynamic_fps.run_garbage_collector": "GC auslösen",
+    "config.dynamic_fps.run_garbage_collector_tooltip": "Ungenutzen Arbeitsspeicher frei machen, wenn dieser Status aktiviert wird",
 
-	"key.dynamic_fps.toggle_forced": "Unfokussierten Modus forcieren (Toggle)",
-	"key.dynamic_fps.toggle_disabled": "Dynamic FPS deaktivieren (Toggle)",
-	"gui.dynamic_fps.hud.reducing": "Dynamic FPS: tiefe FPS forciert",
-	"gui.dynamic_fps.hud.disabled": "Dynamic FPS deaktiviert",
+    "key.dynamic_fps.toggle_forced": "Unfokussierten Modus forcieren (Toggle)",
+    "key.dynamic_fps.toggle_disabled": "Dynamic FPS deaktivieren (Toggle)",
+    "gui.dynamic_fps.hud.reducing": "Dynamic FPS: tiefe FPS forciert",
+    "gui.dynamic_fps.hud.disabled": "Dynamic FPS deaktiviert",
 
-	"modmenu.descriptionTranslation.dynamic_fps": "Ändert die maximale Bildrate, damit Minecraft weniger Ressourcen im Hintergrund braucht."
+    "modmenu.descriptionTranslation.dynamic_fps": "Ändert die maximale Bildrate, damit Minecraft weniger Ressourcen im Hintergrund braucht."
 }
