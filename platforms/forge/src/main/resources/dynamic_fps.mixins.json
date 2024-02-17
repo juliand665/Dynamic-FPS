@@ -3,7 +3,9 @@
     "package": "net.lostluma.dynamic_fps.impl.forge.mixin",
     "compatibilityLevel": "JAVA_17",
     "minVersion": "0.8",
-    "client": [],
+    "client": [
+        "GameRendererMixin"
+    ],
     "mixins": [],
     "server": [],
     "injectors": {

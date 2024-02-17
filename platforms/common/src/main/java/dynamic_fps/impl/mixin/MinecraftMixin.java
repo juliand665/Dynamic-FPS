@@ -48,7 +48,7 @@ public class MinecraftMixin {
 				callbackInfo.setReturnValue(limit);
 			}
 		} else if (DynamicFPSMod.uncapMenuFrameRate()) {
-			if (this.options.enableVsync().get()) {
+			if (this.options.enableVsync) {
 				// VSync will regulate to a non-infinite value
 				callbackInfo.setReturnValue(NO_FRAME_RATE_LIMIT);
 			} else {
