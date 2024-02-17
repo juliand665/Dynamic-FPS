@@ -27,7 +27,10 @@
     },
     "depends": {
         "fabricloader": ">=0.15.0",
-        "minecraft": ">=1.20.0",
+        "minecraft": [
+            "=1.14.3",
+            "=1.14.4"
+        ],
         "mixinextras": ">=0.3.2",
         "fabric-resource-loader-v0": "*",
         "fabric-lifecycle-events-v1": "*"
@@ -55,7 +58,6 @@
                     "net.minecraft.class_426",
                     "net.minecraft.class_4288",
                     "net.minecraft.class_6777",
-                    "net.minecraft.class_443",
                     "net.minecraft.class_446",
                     "net.minecraft.class_445",
                     "net.minecraft.class_6599"
@@ -72,7 +74,6 @@
                         "net.minecraft.class_426": "net.minecraft.client.gui.screens.LanguageSelectScreen",
                         "net.minecraft.class_4288": "net.minecraft.client.gui.screens.MouseSettingsScreen",
                         "net.minecraft.class_6777": "net.minecraft.client.gui.screens.OnlineOptionsScreen",
-                        "net.minecraft.class_443": "net.minecraft.client.gui.screens.SoundOptionsScreen",
                         "net.minecraft.class_446": "net.minecraft.client.gui.screens.VideoSettingsScreen",
                         "net.minecraft.class_445": "net.minecraft.client.gui.screens.WinScreen",
                         "net.minecraft.class_6599": "net.minecraft.client.gui.screens.controls.KeyBindsScreen"

@@ -1,9 +1,9 @@
 package net.lostluma.dynamic_fps.impl.quilt.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
+import com.mojang.blaze3d.vertex.PoseStack;
 import dynamic_fps.impl.util.HudInfoRenderer;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiGraphics;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -18,10 +18,10 @@ public class GuiMixin {
 		method = "render",
 		at = @At(
 			value = "INVOKE",
-			target = "Lnet/minecraft/client/gui/Gui;renderSavingIndicator(Lnet/minecraft/client/gui/GuiGraphics;)V"
+			target = "Lnet/minecraft/client/gui/Gui;renderSavingIndicator(Lcom/mojang/blaze3d/vertex/PoseStack;)V"
 		)
 	)
-	private void render(CallbackInfo callbackInfo, @Local GuiGraphics guiGraphics) {
-		HudInfoRenderer.renderInfo(guiGraphics);
+	private void render(CallbackInfo callbackInfo, @Local PoseStack poseStack) {
+		HudInfoRenderer.renderInfo(poseStack);
 	}
 }

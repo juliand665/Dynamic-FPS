@@ -6,6 +6,10 @@ loom {
 	accessWidenerPath = file("src/main/resources/dynamic_fps.accesswidener")
 }
 
+repositories {
+	maven { url = "https://api.modrinth.com/maven" } // cloth-config
+}
+
 dependencies {
 	// We depend on fabric loader here to use the fabric @Environment annotations and get the mixin dependencies
 	// Do NOT use other classes from fabric loader

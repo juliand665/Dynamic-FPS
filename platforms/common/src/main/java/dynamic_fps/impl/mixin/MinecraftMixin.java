@@ -3,6 +3,7 @@ package dynamic_fps.impl.mixin;
 import com.mojang.blaze3d.platform.Window;
 import dynamic_fps.impl.DynamicFPSMod;
 import dynamic_fps.impl.PowerState;
+import dynamic_fps.impl.util.Logging;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import org.spongepowered.asm.mixin.Final;
@@ -26,7 +27,7 @@ public class MinecraftMixin {
 	// Minecraft considers limits >=260 as infinite
 	private static final int NO_FRAME_RATE_LIMIT = 260;
 
-	@Inject(method = "<init>", at = @At("TAIL"))
+	@Inject(method = "init", at = @At("RETURN"))
 	private void onInit(CallbackInfo callbackInfo) {
 		DynamicFPSMod.setWindow(this.window.window);
 	}
@@ -48,7 +49,7 @@ public class MinecraftMixin {
 				callbackInfo.setReturnValue(limit);
 			}
 		} else if (DynamicFPSMod.uncapMenuFrameRate()) {
-			if (this.options.enableVsync().get()) {
+			if (this.options.enableVsync) {
 				// VSync will regulate to a non-infinite value
 				callbackInfo.setReturnValue(NO_FRAME_RATE_LIMIT);
 			} else {

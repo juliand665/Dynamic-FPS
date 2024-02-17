@@ -3,7 +3,7 @@ plugins {
 }
 
 repositories {
-	maven { url = "https://maven.terraformersmc.com/releases" } // modmenu
+	maven { url = "https://api.modrinth.com/maven" } // modmenu
 }
 
 architectury {
@@ -26,6 +26,7 @@ configurations {
 dependencies {
 	modImplementation(libs.fabric.loader)
 
+	modImplementation(fabricApi.module("fabric-api-base", libs.versions.fabric.api.get()))
 	modImplementation(fabricApi.module("fabric-resource-loader-v0", libs.versions.fabric.api.get()))
 	modImplementation(fabricApi.module("fabric-lifecycle-events-v1", libs.versions.fabric.api.get()))
 

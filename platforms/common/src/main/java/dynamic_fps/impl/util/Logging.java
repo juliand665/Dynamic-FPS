@@ -1,11 +1,11 @@
 package dynamic_fps.impl.util;
 
 import dynamic_fps.impl.Constants;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Logging {
-	private static final Logger logger = LoggerFactory.getLogger(Constants.MOD_ID);
+	private static final Logger logger = LogManager.getLogger(Constants.MOD_ID);
 
 	public static Logger getLogger() {
 		return logger;

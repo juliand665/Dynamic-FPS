@@ -1,22 +1,22 @@
 [versions]
-minecraft = "1.20.4"
+minecraft = "1.14.4"
 
 # Platform libraries
 
 fabric_loader = "0.15.6"
-fabric_api = "0.96.1+1.20.4"
+fabric_api = "0.28.5+1.14"
 
-forge = "1.20.4-49.0.30"
+# forge = "1.16.5-36.2.41"
 
-neoforge = "20.4.160-beta"
+# neoforge = "20.4.160-beta"
 
-quilt_loader = "0.23.1"
-quilt_standard_libraries = "7.0.0-alpha.10+1.20.2"
+# quilt_loader = "0.23.1"
+# quilt_standard_libraries = "1.1.0-beta.26+1.18.2"
 
 # Third-party libraries
 
-modmenu = "9.0.0"
-cloth_config = "13.0.121"
+modmenu = "1.7.17"
+cloth_config = "1.8+fabric"
 
 mixinextras = "0.3.5"
 
@@ -28,20 +28,20 @@ minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
 fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_loader" }
 # fabric_api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric_api" }
 
-forge = { module = "net.minecraftforge:forge", version.ref = "forge" }
+# forge = { module = "net.minecraftforge:forge", version.ref = "forge" }
 
-neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
+# neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
 
-quilt_loader = { module = "org.quiltmc:quilt-loader", version.ref = "quilt_loader" }
-qsl_lifecycle_events = { module = "org.quiltmc.qsl.core:lifecycle_events", version.ref = "quilt_standard_libraries" }
+# quilt_loader = { module = "org.quiltmc:quilt-loader", version.ref = "quilt_loader" }
+# qsl_lifecycle_events = { module = "org.quiltmc.qsl.core:lifecycle_events", version.ref = "quilt_standard_libraries" }
 
 # Third-party libraries
 
-modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
-cloth_config = { module = "me.shedaniel.cloth:cloth-config", version.ref = "cloth_config" }
+modmenu = { module = "maven.modrinth:modmenu", version.ref = "modmenu" }
+cloth_config = { module = "maven.modrinth:cloth-config", version.ref = "cloth_config" }
 
 mixinextras_common = { module = "io.github.llamalad7:mixinextras-common", version.ref = "mixinextras" }
-mixinextras_forge = { module = "io.github.llamalad7:mixinextras-forge", version.ref = "mixinextras" }
+# mixinextras_forge = { module = "io.github.llamalad7:mixinextras-forge", version.ref = "mixinextras" }
 
 [bundles]
 
