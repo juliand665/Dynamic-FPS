@@ -39,5 +39,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dynamic-fps-artifacts
-          path: build/libs
+          path: |
+              platforms/**/build/libs
+              !platforms/**/build/libs/*-all.jar
+              !platforms/**/build/libs/*-transformProduction*.jar
           if-no-files-found: error

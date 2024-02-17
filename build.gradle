@@ -1,86 +1,72 @@
 plugins {
-	id "maven-publish"
-	alias libs.plugins.fabric.loom
+	alias libs.plugins.architectury
+	alias libs.plugins.architectury.loom apply false
 }
 
-group = project.maven_group
-version = "${generateVersion()}+minecraft-${libs.versions.minecraft.get()}"
-
-base {
-	archivesName = project.archives_base_name
+architectury {
+	minecraft = libs.versions.minecraft.get()
 }
 
-repositories {
-	maven { url = "https://maven.shedaniel.me/" } // cloth config
-	maven { url = "https://maven.terraformersmc.com/releases/" } // modmenu
-}
+subprojects {
+	if (project.name == "platforms") {
+		return
+	}
 
-dependencies {
-	minecraft libs.minecraft
-	mappings loom.officialMojangMappings()
+	apply plugin: "dev.architectury.loom"
 
-	modImplementation libs.fabric.api
-	modImplementation libs.fabric.loader
+	loom {
+		silentMojangMappingsLicense()
+	}
 
-	modApi libs.modmenu
-	modApi libs.cloth.config
-}
-
-loom {
-	accessWidenerPath = file("src/main/resources/dynamic_fps.accesswidener")
-}
-
-processResources {
-	inputs.property "version", generateVersion()
-
-	filesMatching("fabric.mod.json") {
-		expand "version": generateVersion()
+	dependencies {
+		minecraft libs.minecraft
+		mappings loom.officialMojangMappings()
 	}
 }
 
-java {
-	withSourcesJar()
-
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
-	}
-}
-
-tasks.withType(JavaCompile).configureEach {
-	it.options.encoding = "UTF-8"
-
-	javaCompiler = javaToolchains.compilerFor {
-		languageVersion = JavaLanguageVersion.of(17)
+allprojects {
+	if (project.name == "platforms") {
+		return
 	}
 
-	it.options.compilerArgs += ["-Xlint:deprecation", "-Xlint:unchecked"]
-}
+	apply plugin: "java"
+	apply plugin: "architectury-plugin"
+	apply plugin: "maven-publish"
 
-tasks.withType(org.gradle.jvm.tasks.Jar).configureEach {
-	it.from(".") {
-		include("LICENSE")
+	base {
+		archivesName = rootProject.archives_base_name
 	}
-}
 
-// configure the maven publication
-publishing {
-	publications {
-		mavenJava(MavenPublication) {
-			from components.java
+	group = rootProject.maven_group
+
+	if (!project.hasProperty("loom.platform")) {
+		version = rootProject.mod_version
+	} else {
+		var platform = project.property("loom.platform")
+		version = "${rootProject.mod_version}+minecraft-${libs.versions.minecraft.get()}-${platform}"
+	}
+
+	repositories {
+		// Add repositories to retrieve artifacts from in here.
+		// You should only use this when depending on other mods because
+		// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
+		// See https://docs.gradle.org/current/userguide/declaring_repositories.html
+		// for more information about repositories.
+	}
+
+	java {
+		withSourcesJar()
+
+		toolchain {
+			languageVersion = JavaLanguageVersion.of(17)
 		}
 	}
 
-	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-	repositories {
-		// Add repositories to publish to here.
-		// Notice: This block does NOT have the same function as the block in the top level.
-		// The repositories here will be used for publishing your artifact, not for
-		// retrieving dependencies.
-	}
-}
+	tasks.withType(JavaCompile).configureEach {
+		it.options.encoding = "UTF-8"
 
-def generateVersion() {
-	var version = project.mod_version;
-	// NOTE: To create a release jar run `./gradlew build -Prelease=true`
-	return project.hasProperty("release") ? version : version + "-alpha";
+		javaCompiler = javaToolchains.compilerFor {
+			languageVersion = JavaLanguageVersion.of(17)
+		}
+	}
 }

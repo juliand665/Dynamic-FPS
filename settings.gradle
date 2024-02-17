@@ -1,11 +1,16 @@
 pluginManagement {
     repositories {
-		maven {
-			name = 'Fabric'
-			url = 'https://maven.fabricmc.net/'
-		}
-		gradlePluginPortal()
+        maven { url "https://maven.fabricmc.net/" }
+        maven { url "https://maven.architectury.dev/" }
+        maven { url "https://maven.minecraftforge.net/" }
+        gradlePluginPortal()
     }
 }
 
 rootProject.name = "dynamic-fps"
+
+include(":platforms:common")
+include(":platforms:fabric")
+include(":platforms:forge")
+include(":platforms:neoforge")
+include(":platforms:quilt")

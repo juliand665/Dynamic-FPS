@@ -1,0 +1,13 @@
+accessWidener v2 named
+
+accessible field com/mojang/blaze3d/platform/Window window J
+accessible field net/minecraft/client/sounds/SoundManager soundEngine Lnet/minecraft/client/sounds/SoundEngine;
+
+# Temporary fix for the NeoForge build
+accessible field net/minecraft/client/gui/screens/LoadingOverlay fadeOutStart J
+accessible field net/minecraft/client/Minecraft window Lcom/mojang/blaze3d/platform/Window;
+accessible field net/minecraft/client/sounds/SoundEngine options Lnet/minecraft/client/Options;
+accessible field net/minecraft/client/sounds/SoundEngine loaded Z
+accessible field net/minecraft/client/sounds/SoundEngine listener Lcom/mojang/blaze3d/audio/Listener;
+accessible field net/minecraft/client/sounds/SoundEngine instanceToChannel Ljava/util/Map;
+accessible method net/minecraft/client/sounds/SoundEngine calculateVolume (Lnet/minecraft/client/resources/sounds/SoundInstance;)F

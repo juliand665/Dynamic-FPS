@@ -1,0 +1,120 @@
+{
+    "schema_version": 1,
+    "quilt_loader": {
+        "group": "net.lostluma",
+        "id": "dynamic_fps",
+        "version": "${version}",
+        "metadata": {
+            "name": "Dynamic FPS",
+            "description": "Dynamically adjusts FPS so Minecraft doesn't hog resources in the background.",
+            "contributors": {
+                "juliand665": "Owner",
+                "LostLuma": "Owner"
+            },
+            "contact": {
+                "homepage": "https://dapprgames.com/mods",
+                "issues": "https://github.com/juliand665/Dynamic-FPS/issues",
+                "sources": "https://github.com/juliand665/Dynamic-FPS"
+            },
+            "icon": "assets/dynamic_fps/icon.png",
+            "license": {
+                "id": "MIT",
+                "name": "MIT License",
+                "url": "https://github.com/juliand665/Dynamic-FPS/blob/main/LICENSE"
+            }
+        },
+        "intermediate_mappings": "net.fabricmc:intermediary",
+        "entrypoints": {
+            "client_init": [
+                "net.lostluma.dynamic_fps.impl.quilt.compat.FREX",
+                "net.lostluma.dynamic_fps.impl.quilt.DynamicFPSQuiltMod"
+            ],
+            "modmenu": [
+                "net.lostluma.dynamic_fps.impl.quilt.compat.ModMenu"
+            ]
+        },
+        "depends": [
+            {
+                "id": "quilt_loader",
+                "versions": ">=0.23.1"
+            },
+            {
+                "id": "minecraft",
+                "versions": ">=1.20.0"
+            },
+            {
+                "id": "mixinextras",
+                "versions": ">=0.3.2"
+            },
+            {
+                "id": "quilt_resource_loader",
+                "versions": "*"
+            },
+            {
+                "id": "quilt_lifecycle_events",
+                "versions": "*"
+            },
+            {
+                "id": "modmenu",
+                "versions": "*",
+                "optional": true
+            },
+            {
+                "id": "cloth-config",
+                "versions": "*",
+                "optional": true
+            }
+        ],
+        "breaks": [
+            {
+                "id": "fastload",
+                "versions": "<=3.4.0",
+                "reason": "Softlock in world loading screen, see https://github.com/BumbleSoftware/Fastload/issues/108"
+            }
+        ]
+    },
+    "minecraft": {
+        "environment": "client"
+    },
+    "mixin": [
+        "dynamic_fps.mixins.json",
+        "dynamic_fps-common.mixins.json"
+    ],
+    "access_widener": "dynamic_fps.accesswidener",
+    "dynamic_fps": {
+        "optimized_screens": {
+            "enabled": [
+                "net.minecraft.class_4189",
+                "net.minecraft.class_404",
+                "net.minecraft.class_426",
+                "net.minecraft.class_4288",
+                "net.minecraft.class_6777",
+                "net.minecraft.class_443",
+                "net.minecraft.class_446",
+                "net.minecraft.class_445",
+                "net.minecraft.class_6599"
+            ],
+            "disabled": [
+                "net.minecraft.class_434"
+            ],
+            "_comment": {
+                "_0": "Mojang mapping names of the enabled / disabled screens.",
+                "_1": "Sorted by fully qualified name. Translation not needed for mod screens.",
+                "enabled": {
+                    "net.minecraft.class_4189": "net.minecraft.client.gui.screens.AccessibilityOptionsScreen",
+                    "net.minecraft.class_404": "net.minecraft.client.gui.screens.ChatOptionsScreen",
+                    "net.minecraft.class_426": "net.minecraft.client.gui.screens.LanguageSelectScreen",
+                    "net.minecraft.class_4288": "net.minecraft.client.gui.screens.MouseSettingsScreen",
+                    "net.minecraft.class_6777": "net.minecraft.client.gui.screens.OnlineOptionsScreen",
+                    "net.minecraft.class_443": "net.minecraft.client.gui.screens.SoundOptionsScreen",
+                    "net.minecraft.class_446": "net.minecraft.client.gui.screens.VideoSettingsScreen",
+                    "net.minecraft.class_445": "net.minecraft.client.gui.screens.WinScreen",
+                    "net.minecraft.class_6599": "net.minecraft.client.gui.screens.controls.KeyBindsScreen"
+                },
+                "disabled": {
+                    "net.minecraft.class_434": "net.minecraft.client.gui.screens.ReceivingLevelScreen"
+                }
+            }
+        }
+    }
+}

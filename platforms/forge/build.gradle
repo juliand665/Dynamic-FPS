@@ -1,0 +1,87 @@
+plugins {
+	alias libs.plugins.shadow
+}
+
+architectury {
+	platformSetupLoomIde()
+	forge()
+}
+
+loom {
+	accessWidenerPath = project(":platforms:common").loom.accessWidenerPath
+
+	forge {
+		convertAccessWideners = true
+		extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
+
+		mixinConfig "dynamic_fps.mixins.json"
+		mixinConfig "dynamic_fps-common.mixins.json"
+	}
+}
+
+configurations {
+	common
+	shadowCommon // Don't use shadow from the shadow plugin since it *excludes* files.
+	compileClasspath.extendsFrom common
+	runtimeClasspath.extendsFrom common
+	developmentForge.extendsFrom common
+}
+
+dependencies {
+	forge libs.forge
+
+	compileOnly(libs.mixinextras.common)
+	annotationProcessor(libs.mixinextras.common)
+
+	include(libs.mixinextras.forge)
+	implementation(libs.mixinextras.forge)
+
+	common(project(path: ":platforms:common", configuration: "namedElements")) { transitive false }
+	shadowCommon(project(path: ":platforms:common", configuration: "transformProductionForge")) { transitive = false }
+}
+
+processResources {
+	inputs.property "version", rootProject.mod_version
+
+	filesMatching("META-INF/mods.toml") {
+		expand "version": rootProject.mod_version
+	}
+}
+
+shadowJar {
+	exclude "fabric.mod.json"
+	exclude "architectury.common.json"
+
+	configurations = [project.configurations.shadowCommon]
+}
+
+remapJar {
+	input.set shadowJar.archiveFile
+	dependsOn shadowJar
+}
+
+sourcesJar {
+	def commonSources = project(":platforms:common").sourcesJar
+	dependsOn commonSources
+	from commonSources.archiveFile.map { zipTree(it) }
+}
+
+components.java {
+	withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
+		skip()
+	}
+}
+
+publishing {
+	publications {
+		mavenForge(MavenPublication) {
+			artifactId = rootProject.archives_base_name + "-" + project.name
+			from components.java
+		}
+	}
+
+	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+	repositories {
+		// Add repositories to publish to here.
+	}
+}

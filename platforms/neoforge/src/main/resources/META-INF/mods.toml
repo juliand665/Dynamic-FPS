@@ -1,0 +1,38 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+license = "MIT"
+issueTrackerURL = "https://github.com/juliand665/Dynamic-FPS/issues"
+
+[[mods]]
+modId = "dynamic_fps"
+namespace = "net.lostluma"
+version = "${version}"
+displayName = "Dynamic FPS"
+authors = "juliand665 & LostLuma"
+description = "Dynamically adjusts FPS so Minecraft doesn't hog resources in the background."
+logoFile = "dynamic_fps.png"
+displayTest = "IGNORE_ALL_VERSION"
+updateJSONURL = "https://api.lostluma.net/updates/dynamic-fps?platform=neoforge"
+
+[[mixins]]
+config = "dynamic_fps.mixins.json"
+
+[[mixins]]
+config = "dynamic_fps-common.mixins.json"
+
+[[accessTransformers]]
+file="META-INF/accesstransformer.cfg"
+
+[[dependencies.dynamic_fps]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.0,)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.dynamic_fps]]
+modId = "cloth_config"
+mandatory = true
+versionRange = "[1,)"
+ordering = "NONE"
+side = "CLIENT"

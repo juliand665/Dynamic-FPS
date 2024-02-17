@@ -1,22 +1,52 @@
 [versions]
-minecraft = "1.20"
-fabric_loader = "0.15.3"
+minecraft = "1.20.4"
 
-modmenu = "7.0.1"
-fabric_api = "0.83.0+1.20"
+# Platform libraries
 
-cloth_config = "11.0.99"
+fabric_loader = "0.15.6"
+fabric_api = "0.96.1+1.20.4"
+
+forge = "1.20.4-49.0.30"
+
+neoforge = "20.4.160-beta"
+
+quilt_loader = "0.23.1"
+quilt_standard_libraries = "7.0.0-alpha.10+1.20.2"
+
+# Third-party libraries
+
+modmenu = "9.0.0"
+cloth_config = "13.0.121"
+
+mixinextras = "0.3.5"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
+
+# Platform libraries
+
 fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_loader" }
+# fabric_api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric_api" }
+
+forge = { module = "net.minecraftforge:forge", version.ref = "forge" }
+
+neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
+
+quilt_loader = { module = "org.quiltmc:quilt-loader", version.ref = "quilt_loader" }
+qsl_lifecycle_events = { module = "org.quiltmc.qsl.core:lifecycle_events", version.ref = "quilt_standard_libraries" }
+
+# Third-party libraries
 
 modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
-fabric_api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric_api" }
+cloth_config = { module = "me.shedaniel.cloth:cloth-config", version.ref = "cloth_config" }
 
-cloth_config = { module = "me.shedaniel.cloth:cloth-config-fabric", version.ref = "cloth_config" }
+mixinextras_common = { module = "io.github.llamalad7:mixinextras-common", version.ref = "mixinextras" }
+mixinextras_forge = { module = "io.github.llamalad7:mixinextras-forge", version.ref = "mixinextras" }
 
 [bundles]
 
 [plugins]
-fabric_loom = { id = "fabric-loom", version = "1.5.7" }
+shadow = { id = "com.github.johnrengelman.shadow", version = "8.1.1" }
+
+architectury = { id = "architectury-plugin", version = "3.4.151" }
+architectury_loom = { id = "dev.architectury.loom", version = "1.5.388" }
