@@ -10,6 +10,7 @@ import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import me.shedaniel.clothconfig2.impl.builders.SubCategoryBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 
@@ -29,6 +30,20 @@ public final class ClothConfig {
 
 		ConfigCategory general = builder.getOrCreateCategory(
 			localized("config", "category.general")
+		);
+
+		general.addEntry(
+			entryBuilder.startBooleanToggle(
+				localized("config", "enabled"),
+				DynamicFPSMod.modConfig.enabled()
+			)
+			.setDefaultValue(true)
+			.setSaveConsumer(DynamicFPSMod.modConfig::setEnabled)
+			.build()
+		);
+
+		general.addEntry(
+			entryBuilder.startTextDescription(CommonComponents.SPACE).build()
 		);
 
 		general.addEntry(

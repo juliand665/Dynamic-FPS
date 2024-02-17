@@ -21,13 +21,25 @@ public class DebugScreenOverlayMixin {
 	 */
 	@ModifyReturnValue(method = "getGameInformation", at = @At("RETURN"))
 	private List<String> getGameInformation(List<String> result) {
-		PowerState status = DynamicFPSMod.powerState();
+		if (DynamicFPSMod.isDisabled()) {
+			String reason = DynamicFPSMod.whyIsTheModNotWorking();
+			result.add(2, this.format("§c[Dynamic FPS] Inactive! Reason: %s§r", reason));
+		} else {
+			PowerState status = DynamicFPSMod.powerState();
 
-		if (status != PowerState.FOCUSED) {
-			int target = DynamicFPSMod.targetFrameRate();
-			result.add(2, String.format(Locale.ROOT, "§c[Dynamic FPS] FPS: %s P: %s§r", target, status.toString().toLowerCase()));
+			if (status != PowerState.FOCUSED) {
+				int target = DynamicFPSMod.targetFrameRate();
+				result.add(
+					2,
+					this.format("§c[Dynamic FPS] FPS: %s P: %s§r", target, status.toString().toLowerCase())
+				);
+			}
 		}
 
 		return result;
+	}
+
+	private String format(String template, Object... args) {
+		return String.format(Locale.ROOT, template, args);
 	}
 }

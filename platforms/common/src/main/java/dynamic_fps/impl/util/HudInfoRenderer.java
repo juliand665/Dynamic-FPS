@@ -16,7 +16,7 @@ public final class HudInfoRenderer {
 	private static final Minecraft minecraft = Minecraft.getInstance();
 
 	public static void renderInfo(GuiGraphics guiGraphics) {
-		if (DynamicFPSMod.isDisabled()) {
+		if (DynamicFPSMod.disabledByUser()) {
 			drawCenteredText(guiGraphics, localized("gui", "hud.disabled"), 32);
 		} else if (DynamicFPSMod.isForcingLowFPS()) {
 			drawCenteredText(guiGraphics, localized("gui", "hud.reducing"), 32);

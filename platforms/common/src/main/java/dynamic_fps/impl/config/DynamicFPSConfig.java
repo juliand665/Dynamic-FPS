@@ -7,13 +7,15 @@ import com.google.gson.annotations.SerializedName;
 import dynamic_fps.impl.PowerState;
 
 public final class DynamicFPSConfig {
+	private boolean enabled;
 	private int idleTime; // Seconds
 	private boolean uncapMenuFrameRate;
 
 	@SerializedName("states")
 	private final Map<PowerState, Config> configs;
 
-	DynamicFPSConfig(int abandonTime, boolean uncapMenuFrameRate, Map<PowerState, Config> configs) {
+	DynamicFPSConfig(boolean enabled, int abandonTime, boolean uncapMenuFrameRate, Map<PowerState, Config> configs) {
+		this.enabled = enabled;
 		this.idleTime = abandonTime;
 		this.uncapMenuFrameRate = uncapMenuFrameRate;
 
@@ -32,6 +34,14 @@ public final class DynamicFPSConfig {
 		} else {
 			return configs.get(state);
 		}
+	}
+
+	public boolean enabled() {
+		return this.enabled;
+	}
+
+	public void setEnabled(boolean value) {
+		this.enabled = value;
 	}
 
 	public int idleTime() {
