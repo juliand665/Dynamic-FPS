@@ -105,10 +105,7 @@ public class SoundEngineMixin implements DuckSoundEngine {
 	 */
 	@Inject(method = { "play", "playDelayed" }, at = @At("HEAD"), cancellable = true)
 	private void play(SoundInstance instance, CallbackInfo callbackInfo) {
-		float master = DynamicFPSMod.volumeMultiplier(SoundSource.MASTER);
-		float source = DynamicFPSMod.volumeMultiplier(instance.getSource());
-
-		if (master == 0.0f || source == 0.0f) {
+		if (DynamicFPSMod.volumeMultiplier(instance.getSource()) == 0.0f) {
 			callbackInfo.cancel();
 		}
 	}

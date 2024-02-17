@@ -102,10 +102,10 @@ public final class ClothConfig {
 				volumes.add(
 					entryBuilder.startIntSlider(
 						Component.translatable("soundCategory." + name),
-						(int) (config.volumeMultiplier(source) * 100),
+						(int) (config.rawVolumeMultiplier(source) * 100),
 						0, 100
 					)
-					.setDefaultValue((int) (standard.volumeMultiplier(source) * 100))
+					.setDefaultValue((int) (standard.rawVolumeMultiplier(source) * 100))
 					.setSaveConsumer(value -> config.setVolumeMultiplier(source, value / 100f))
 					.setTextGetter(ClothConfig::volumeMultiplierMessage)
 					.build()

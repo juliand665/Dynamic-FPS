@@ -33,14 +33,14 @@ public final class Config {
 	}
 
 	public float volumeMultiplier(SoundSource source) {
-		if (this.getVolumeMultiplier(SoundSource.MASTER) == 0.0f) {
+		if (this.rawVolumeMultiplier(SoundSource.MASTER) == 0.0f) {
 			return 0.0f;
 		} else {
-			return this.getVolumeMultiplier(source);
+			return this.rawVolumeMultiplier(source);
 		}
 	}
 
-	private float getVolumeMultiplier(SoundSource source) {
+	public float rawVolumeMultiplier(SoundSource source) {
 		return this.volumeMultipliers.getOrDefault(source, 1.0f);
 	}
 
