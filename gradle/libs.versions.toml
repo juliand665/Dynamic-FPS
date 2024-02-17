@@ -1,22 +1,22 @@
 [versions]
-minecraft = "1.20.4"
+minecraft = "1.19.4"
 
 # Platform libraries
 
 fabric_loader = "0.15.6"
-fabric_api = "0.96.1+1.20.4"
+fabric_api = "0.75.3+1.19.4"
 
-forge = "1.20.4-49.0.30"
+forge = "1.19.4-45.2.8"
 
-neoforge = "20.4.160-beta"
+# neoforge = "20.4.160-beta"
 
 quilt_loader = "0.23.1"
-quilt_standard_libraries = "7.0.0-alpha.10+1.20.2"
+quilt_standard_libraries = "5.0.0-beta.11+1.19.4"
 
 # Third-party libraries
 
-modmenu = "9.0.0"
-cloth_config = "13.0.121"
+modmenu = "6.1.0"
+cloth_config = "10.1.117"
 
 mixinextras = "0.3.5"
 
@@ -30,7 +30,7 @@ fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_l
 
 forge = { module = "net.minecraftforge:forge", version.ref = "forge" }
 
-neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
+# neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
 
 quilt_loader = { module = "org.quiltmc:quilt-loader", version.ref = "quilt_loader" }
 qsl_lifecycle_events = { module = "org.quiltmc.qsl.core:lifecycle_events", version.ref = "quilt_standard_libraries" }
