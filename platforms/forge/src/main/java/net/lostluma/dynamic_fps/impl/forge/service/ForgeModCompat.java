@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ForgeModCompat implements ModCompat {
+	private static final Set<String> optedInScreens = new HashSet<>();
 	private static final Set<String> optedOutScreens = new HashSet<>();
 
 	static {
@@ -26,7 +27,7 @@ public class ForgeModCompat implements ModCompat {
 
 	@Override
 	public Set<String> getOptedInScreens() {
-		return Set.of();
+		return optedInScreens;
 	}
 
 	@Override

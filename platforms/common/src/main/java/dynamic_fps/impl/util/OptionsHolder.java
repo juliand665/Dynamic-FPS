@@ -1,8 +1,8 @@
 package dynamic_fps.impl.util;
 
 import dynamic_fps.impl.GraphicsState;
+import net.minecraft.client.AmbientOcclusionStatus;
 import net.minecraft.client.CloudStatus;
-import net.minecraft.client.GraphicsStatus;
 import net.minecraft.client.Options;
 import net.minecraft.client.ParticleStatus;
 
@@ -13,11 +13,10 @@ import net.minecraft.client.ParticleStatus;
  */
 public class OptionsHolder {
 	private static CloudStatus cloudStatus;
-	private static GraphicsStatus graphicsStatus;
-	private static boolean ambientOcclusion;
+	private static boolean graphicsStatus;
+	private static AmbientOcclusionStatus ambientOcclusion;
 	private static ParticleStatus particlesStatus;
 	private static boolean entityShadows;
-	private static double entityDistance;
 
 	/*
 	 * Create an in-memory copy of current vanilla graphics options.
@@ -25,12 +24,11 @@ public class OptionsHolder {
 	 * This MUST be called while graphics options have not been changed yet.
 	 */
 	public static void copyOptions(Options options) {
-		cloudStatus = options.getCloudsType();
-		graphicsStatus = options.graphicsMode().get();
-		ambientOcclusion = options.ambientOcclusion().get();
-		particlesStatus = options.particles().get();
-		entityShadows = options.entityShadows().get();
-		entityDistance = options.entityDistanceScaling().get();
+		cloudStatus = options.renderClouds;
+		graphicsStatus = options.fancyGraphics;
+		ambientOcclusion = options.ambientOcclusion;
+		particlesStatus = options.particles;
+		entityShadows = options.entityShadows;
 	}
 
 	/*
@@ -38,21 +36,19 @@ public class OptionsHolder {
 	 */
 	public static void applyOptions(Options options, GraphicsState state) {
 		if (state == GraphicsState.DEFAULT) {
-			options.cloudStatus().set(cloudStatus);
-			options.graphicsMode().set(graphicsStatus);
-			options.ambientOcclusion().set(ambientOcclusion);
-			options.particles().set(particlesStatus);
-			options.entityShadows().set(entityShadows);
-			options.entityDistanceScaling().set(entityDistance);
+			options.renderClouds = cloudStatus;
+			options.fancyGraphics = graphicsStatus;
+			options.ambientOcclusion = ambientOcclusion;
+			options.particles = particlesStatus;
+			options.entityShadows = entityShadows;
 		} else { // state == GraphicsState.REDUCED
-			options.cloudStatus().set(CloudStatus.OFF);
-			options.particles().set(ParticleStatus.MINIMAL);
-			options.entityShadows().set(false);
-			options.entityDistanceScaling().set(0.5);
+			options.renderClouds = CloudStatus.OFF;
+			options.particles = ParticleStatus.MINIMAL;
+			options.entityShadows = false;
 
 			if (state == GraphicsState.MINIMAL) {
-				options.graphicsMode().set(GraphicsStatus.FAST);
-				options.ambientOcclusion().set(false);
+				options.fancyGraphics = false;
+				options.ambientOcclusion = AmbientOcclusionStatus.OFF;
 			}
 		}
 	}

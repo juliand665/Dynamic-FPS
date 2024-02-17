@@ -10,8 +10,9 @@ import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import me.shedaniel.clothconfig2.impl.builders.SubCategoryBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundSource;
 
 import java.util.Locale;
@@ -43,7 +44,7 @@ public final class ClothConfig {
 		);
 
 		general.addEntry(
-			entryBuilder.startTextDescription(CommonComponents.SPACE).build()
+			entryBuilder.startTextDescription(new TextComponent(" ").getContents()).build()
 		);
 
 		general.addEntry(
@@ -101,7 +102,7 @@ public final class ClothConfig {
 
 				volumes.add(
 					entryBuilder.startIntSlider(
-						Component.translatable("soundCategory." + name),
+						new TranslatableComponent("soundCategory." + name).getContents(),
 						(int) (config.rawVolumeMultiplier(source) * 100),
 						0, 100
 					)
@@ -121,9 +122,9 @@ public final class ClothConfig {
 					config.graphicsState()
 				)
 				.setDefaultValue(standard.graphicsState())
-				.setSaveConsumer(config::setGraphicsState)
-				.setEnumNameProvider(ClothConfig::graphicsStateMessage)
-				.setTooltipSupplier(ClothConfig::graphicsStateTooltip)
+				.setSaveConsumer((selected) -> config.setGraphicsState((GraphicsState) selected))
+				.setEnumNameProvider((selected) -> ClothConfig.graphicsStateMessage((GraphicsState) selected))
+				.setTooltipSupplier((selected) -> ClothConfig.graphicsStateTooltip((GraphicsState) selected)) // what
 				.build()
 			);
 
@@ -153,7 +154,7 @@ public final class ClothConfig {
 		return builder.build();
 	}
 
-	private static Component idleTimeMessage(int value) {
+	private static String idleTimeMessage(int value) {
 		if (value == 0) {
 			return localized("config", "disabled");
 		} else {
@@ -171,27 +172,27 @@ public final class ClothConfig {
 		return value == -1 ? 61 : value;
 	}
 
-	private static Component fpsTargetMessage(int value) {
+	private static String fpsTargetMessage(int value) {
 		if (toConfigFpsTarget(value) != -1) {
-			return Component.translatable("options.framerate", value);
+			return new TranslatableComponent("options.framerate", value).getContents();
 		} else {
-			return Component.translatable("options.framerateLimit.max");
+			return new TranslatableComponent("options.framerateLimit.max").getContents();
 		}
 	}
 
-	private static Component volumeMultiplierMessage(int value) {
-		return Component.literal(Integer.toString(value) + "%");
+	private static String volumeMultiplierMessage(int value) {
+		return new TextComponent(Integer.toString(value) + "%").getContents();
 	}
 
-	private static Component graphicsStateMessage(Enum<GraphicsState> graphicsState) {
+	private static String graphicsStateMessage(Enum<GraphicsState> graphicsState) {
 		return localized("config", "graphics_state_" + graphicsState.toString().toLowerCase(Locale.ROOT));
 	}
 
-	private static Optional<Component[]> graphicsStateTooltip(GraphicsState graphicsState) {
+	private static Optional<String[]> graphicsStateTooltip(GraphicsState graphicsState) {
 		if (!graphicsState.equals(GraphicsState.MINIMAL)) {
 			return Optional.empty();
 		}
 
-		return Optional.of(new Component[]{ localized("config", "graphics_state_minimal_tooltip").withStyle(ChatFormatting.RED) });
+		return Optional.of(new String[]{ localized("config", "graphics_state_minimal_tooltip") });
 	}
 }
