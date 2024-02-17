@@ -19,6 +19,9 @@ import net.minecraft.sounds.SoundSource;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DynamicFPSMod {
 	private static Config config = Config.ACTIVE;
 	private static PowerState state = PowerState.FOCUSED;
@@ -26,7 +29,7 @@ public class DynamicFPSMod {
 	public static DynamicFPSConfig modConfig = DynamicFPSConfig.load();
 
 	private static boolean isForcingLowFPS = false;
-	private static boolean isDisabled = false;
+	private static boolean isKeybindDisabled = false;
 
 	private static final Minecraft minecraft = Minecraft.getInstance();
 
@@ -53,12 +56,34 @@ public class DynamicFPSMod {
 		Logging.getLogger().info("Dynamic FPS {} active on {}!", platform.modVersion(), platform.getName());
 	}
 
+	public static boolean disabledByUser() {
+		return isKeybindDisabled;
+	}
+
 	public static boolean isDisabled() {
-		return isDisabled;
+		return isKeybindDisabled || !modConfig.enabled() || ModCompat.getInstance().isDisabled();
+	}
+
+	public static String whyIsTheModNotWorking() {
+		List<String> results = new ArrayList<>();
+
+		if (isKeybindDisabled) {
+			results.add("keybinding");
+		}
+
+		if (!modConfig.enabled()) {
+			results.add("mod config");
+		}
+
+		if (ModCompat.getInstance().isDisabled()) {
+			results.add("another mod");
+		}
+
+		return String.join(", ", results);
 	}
 
 	public static void toggleDisabled() {
-		isDisabled = !isDisabled;
+		isKeybindDisabled = !isKeybindDisabled;
 		onStatusChanged(true);
 	}
 
@@ -125,14 +150,10 @@ public class DynamicFPSMod {
 	}
 
 	public static boolean shouldShowLevels() {
-		return isDisabledInternal() || !(isLevelCoveredByScreen() || isLevelCoveredByOverlay());
+		return isDisabled() || !(isLevelCoveredByScreen() || isLevelCoveredByOverlay());
 	}
 
 	// Internal logic
-
-	private static boolean isDisabledInternal() {
-		return isDisabled || ModCompat.getInstance().isDisabled();
-	}
 
 	private static boolean isLevelCoveredByScreen() {
 		return minecraft.screen != null && ((DuckScreen) minecraft.screen).dynamic_fps$rendersBackground();
@@ -233,7 +254,7 @@ public class DynamicFPSMod {
 	private static void checkForStateChanges0() {
 		PowerState current;
 
-		if (isDisabledInternal()) {
+		if (isDisabled()) {
 			current = PowerState.FOCUSED;
 		} else if (isForcingLowFPS) {
 			current = PowerState.UNFOCUSED;

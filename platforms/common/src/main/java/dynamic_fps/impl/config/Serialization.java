@@ -69,7 +69,12 @@ public class Serialization {
 		try {
 			data = Files.readAllBytes(config);
 		} catch (NoSuchFileException e) {
-			DynamicFPSConfig instance = new DynamicFPSConfig(0, false, new EnumMap<>(PowerState.class));
+			DynamicFPSConfig instance = new DynamicFPSConfig(
+				true,
+				0,
+				false,
+				new EnumMap<>(PowerState.class)
+			);
 			instance.save();
 			return instance;
 		} catch (IOException e) {
@@ -87,6 +92,7 @@ public class Serialization {
 		upgradeVolumeMultiplier(root);
 		addAbandonedConfig(root);
 		addUncapMenuFrameRate(root);
+		addEnabled(root);
 	}
 
 	private static void addIdleTime(JsonObject root) {
@@ -151,6 +157,13 @@ public class Serialization {
 		// Add uncap_menu_frame_rate field if it's missing
 		if (!root.has("uncap_menu_frame_rate")) {
 			root.addProperty("uncap_menu_frame_rate", false);
+		}
+	}
+
+	private static void addEnabled(JsonObject root) {
+		// Add enabled field if it's missing
+		if (!root.has("enabled")) {
+			root.addProperty("enabled", true);
 		}
 	}
 
