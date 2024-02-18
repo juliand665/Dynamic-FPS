@@ -1,6 +1,7 @@
 package dynamic_fps.impl.config;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import dynamic_fps.impl.GraphicsState;
@@ -9,14 +10,14 @@ import net.minecraft.sounds.SoundSource;
 
 public final class Config {
 	private int frameRateTarget;
-	private final Map<SoundSource, Float> volumeMultipliers;
+	private final Map<String, Float> volumeMultipliers;
 	private GraphicsState graphicsState;
 	private boolean showToasts;
 	private boolean runGarbageCollector;
 
 	public static final Config ACTIVE = new Config(-1, new HashMap<>(), GraphicsState.DEFAULT, true, false);
 
-	public Config(int frameRateTarget, Map<SoundSource, Float> volumeMultipliers, GraphicsState graphicsState, boolean showToasts, boolean runGarbageCollector) {
+	public Config(int frameRateTarget, Map<String, Float> volumeMultipliers, GraphicsState graphicsState, boolean showToasts, boolean runGarbageCollector) {
 		this.frameRateTarget = frameRateTarget;
 		this.volumeMultipliers = new HashMap<>(volumeMultipliers); // Ensure the map is mutable
 		this.graphicsState = graphicsState;
@@ -41,15 +42,22 @@ public final class Config {
 	}
 
 	public float rawVolumeMultiplier(SoundSource source) {
-		return this.volumeMultipliers.getOrDefault(source, 1.0f);
+		String key = soundSourceName(source);
+		return this.volumeMultipliers.getOrDefault(key, 1.0f);
 	}
 
 	public void setVolumeMultiplier(SoundSource source, float value) {
+		String key = soundSourceName(source);
+
 		if (value != 1.0f) {
-			this.volumeMultipliers.put(source, value);
+			this.volumeMultipliers.put(key, value);
 		} else {
-			this.volumeMultipliers.remove(source); // Same as default value
+			this.volumeMultipliers.remove(key); // Same as default value
 		}
+	}
+
+	private static String soundSourceName(SoundSource source) {
+		return source.getName().toLowerCase(Locale.ROOT);
 	}
 
 	public GraphicsState graphicsState() {
@@ -96,9 +104,10 @@ public final class Config {
 		}
 	}
 
-	private static Map<SoundSource, Float> withMasterVolume(float value) {
-		Map<SoundSource, Float> volumes = new HashMap<>();
-		volumes.put(SoundSource.MASTER, value);
+	private static Map<String, Float> withMasterVolume(float value) {
+		Map<String, Float> volumes = new HashMap<>();
+		volumes.put(soundSourceName(SoundSource.MASTER), value);
+
 		return volumes;
 	}
 }

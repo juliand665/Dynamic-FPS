@@ -38,7 +38,6 @@ public class Serialization {
 		.enableComplexMapKeySerialization()
 		.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
 		.registerTypeAdapter(PowerState.class, new PowerStateSerializer())
-		.registerTypeAdapter(SoundSource.class, new SoundSourceSerializer())
 		.registerTypeAdapter(GraphicsState.class, new GraphicsStateSerializer())
 		.create();
 
@@ -200,18 +199,6 @@ public class Serialization {
 		@Override
 		public GraphicsState deserialize(JsonElement element, Type type, JsonDeserializationContext context) throws JsonParseException {
 			return GraphicsState.valueOf(element.getAsString().toUpperCase(Locale.ROOT));
-		}
-	}
-
-	private static final class SoundSourceSerializer implements JsonSerializer<SoundSource>, JsonDeserializer<SoundSource> {
-		@Override
-		public JsonElement serialize(SoundSource source, Type type, JsonSerializationContext context) {
-			return new JsonPrimitive(source.toString().toLowerCase(Locale.ROOT));
-		}
-
-		@Override
-		public SoundSource deserialize(JsonElement element, Type type, JsonDeserializationContext context) throws JsonParseException {
-			return SoundSource.valueOf(element.getAsString().toUpperCase(Locale.ROOT));
 		}
 	}
 }
