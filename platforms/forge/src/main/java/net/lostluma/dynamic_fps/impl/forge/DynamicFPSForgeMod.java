@@ -38,8 +38,14 @@ public class DynamicFPSForgeMod {
 		);
 
 		MinecraftForge.EVENT_BUS.addListener(this::onClientTick);
+		MinecraftForge.EVENT_BUS.addListener(this::renderGuiOverlay);
+
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::registerKeyMappings);
     }
+
+	public void renderGuiOverlay(RenderGuiOverlayEvent event) {
+		HudInfoRenderer.renderInfo(event.getGuiGraphics());
+	}
 
 	public void registerKeyMappings(RegisterKeyMappingsEvent event) {
 		for (KeyMappingHandler handler : KeyMappingHandler.getHandlers()) {

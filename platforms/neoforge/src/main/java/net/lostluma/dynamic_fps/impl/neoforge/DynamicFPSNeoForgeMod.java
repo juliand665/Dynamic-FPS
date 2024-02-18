@@ -31,7 +31,12 @@ public class DynamicFPSNeoForgeMod {
 		);
 
 		modEventBus.addListener(this::registerKeyMappings);
+		NeoForge.EVENT_BUS.addListener(this::renderGuiOverlay);
     }
+
+	public void renderGuiOverlay(RenderGuiOverlayEvent.Pre event) {
+		HudInfoRenderer.renderInfo(event.getGuiGraphics());
+	}
 
 	public void registerKeyMappings(RegisterKeyMappingsEvent event) {
 		for (KeyMappingHandler handler : KeyMappingHandler.getHandlers()) {
