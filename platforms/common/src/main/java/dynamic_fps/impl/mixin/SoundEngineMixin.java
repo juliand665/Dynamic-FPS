@@ -27,7 +27,6 @@ import net.minecraft.sounds.SoundSource;
 
 @Mixin(SoundEngine.class)
 public class SoundEngineMixin implements DuckSoundEngine {
-	/*
 	@Shadow
 	@Final
 	private Options options;
@@ -47,21 +46,18 @@ public class SoundEngineMixin implements DuckSoundEngine {
 	private float calculateVolume(SoundInstance instance) {
 		throw new RuntimeException("Failed to find SoundEngine#calculateVolume.");
 	};
-	 */
 
 	@Unique
 	private static final Minecraft dynamic_fps$minecraft = Minecraft.getInstance();
 
 	public void dynamic_fps$updateVolume(Config before, SoundSource source) {
-		SoundEngine self = (SoundEngine)(Object) this;
-
-		if (!self.loaded) {
+		if (!this.loaded) {
 			return;
 		}
 
 		if (source.equals(SoundSource.MASTER)) {
-			float volume = self.options.getSoundSourceVolume(source);
-			self.listener.setGain(this.adjustVolume(volume, source));
+			float volume = this.options.getSoundSourceVolume(source);
+			this.listener.setGain(this.adjustVolume(volume, source));
 			return;
 		}
 
@@ -70,9 +66,9 @@ public class SoundEngineMixin implements DuckSoundEngine {
 		// Also fixes this compat bug: https://github.com/juliand665/Dynamic-FPS/issues/55
 		boolean isMusic = source.equals(SoundSource.MUSIC) || source.equals(SoundSource.RECORDS);
 
-		self.instanceToChannel.forEach((instance, handle) -> {
+		this.instanceToChannel.forEach((instance, handle) -> {
 			if (instance.getSource().equals(source)) {
-				float volume = self.calculateVolume(instance);
+				float volume = this.calculateVolume(instance);
 
 				handle.execute(channel -> {
 					if (volume <= 0.0f) {

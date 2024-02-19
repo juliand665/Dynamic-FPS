@@ -15,7 +15,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Minecraft.class)
 public class MinecraftMixin {
-	/*
 	@Shadow
 	@Final
     private Window window;
@@ -23,15 +22,13 @@ public class MinecraftMixin {
 	@Shadow
 	@Final
 	public Options options;
-	 */
 
 	// Minecraft considers limits >=260 as infinite
 	private static final int NO_FRAME_RATE_LIMIT = 260;
 
 	@Inject(method = "<init>", at = @At("TAIL"))
 	private void onInit(CallbackInfo callbackInfo) {
-		Minecraft self = (Minecraft)(Object) this;
-		DynamicFPSMod.setWindow(self.window.window);
+		DynamicFPSMod.setWindow(this.window.window);
 	}
 
 	/**
@@ -43,8 +40,7 @@ public class MinecraftMixin {
 	 */
 	@Inject(method = "getFramerateLimit", at = @At(value = "CONSTANT", args = "intValue=60"), cancellable = true)
 	private void getFramerateLimit(CallbackInfoReturnable<Integer> callbackInfo) {
-		Minecraft self = (Minecraft)(Object) this;
-		int limit = self.window.getFramerateLimit();
+		int limit = this.window.getFramerateLimit();
 
 		if (DynamicFPSMod.powerState() != PowerState.FOCUSED) {
 			// Limit may be 260 (uncapped)
@@ -52,7 +48,7 @@ public class MinecraftMixin {
 				callbackInfo.setReturnValue(limit);
 			}
 		} else if (DynamicFPSMod.uncapMenuFrameRate()) {
-			if (self.options.enableVsync().get()) {
+			if (this.options.enableVsync().get()) {
 				// VSync will regulate to a non-infinite value
 				callbackInfo.setReturnValue(NO_FRAME_RATE_LIMIT);
 			} else {
