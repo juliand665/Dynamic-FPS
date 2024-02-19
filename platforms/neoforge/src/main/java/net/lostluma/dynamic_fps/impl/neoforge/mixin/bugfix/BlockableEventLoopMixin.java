@@ -1,9 +1,8 @@
-package dynamic_fps.impl.mixin.bugfix;
-
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
+package net.lostluma.dynamic_fps.impl.neoforge.mixin.bugfix;
 
 import net.minecraft.util.thread.BlockableEventLoop;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
 
 import java.util.concurrent.locks.LockSupport;
 

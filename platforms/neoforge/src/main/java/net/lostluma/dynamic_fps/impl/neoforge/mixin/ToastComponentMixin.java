@@ -1,12 +1,11 @@
-package dynamic_fps.impl.mixin;
+package net.lostluma.dynamic_fps.impl.neoforge.mixin;
 
+import dynamic_fps.impl.DynamicFPSMod;
+import net.minecraft.client.gui.components.toasts.ToastComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import dynamic_fps.impl.DynamicFPSMod;
-import net.minecraft.client.gui.components.toasts.ToastComponent;
 
 @Mixin(ToastComponent.class)
 public class ToastComponentMixin {

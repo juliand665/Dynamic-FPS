@@ -1,13 +1,11 @@
-package dynamic_fps.impl.mixin;
+package net.lostluma.dynamic_fps.impl.neoforge.mixin;
 
+import com.mojang.blaze3d.platform.Window;
+import dynamic_fps.impl.DynamicFPSMod;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import com.mojang.blaze3d.platform.Window;
-
-import dynamic_fps.impl.DynamicFPSMod;
 
 @Mixin(Window.class)
 public class WindowMixin {

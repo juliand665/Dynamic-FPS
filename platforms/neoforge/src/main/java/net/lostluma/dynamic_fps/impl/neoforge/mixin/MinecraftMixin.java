@@ -1,4 +1,4 @@
-package dynamic_fps.impl.mixin;
+package net.lostluma.dynamic_fps.impl.neoforge.mixin;
 
 import com.mojang.blaze3d.platform.Window;
 import dynamic_fps.impl.DynamicFPSMod;

@@ -1,16 +1,14 @@
-package dynamic_fps.impl.mixin;
-
-import java.util.List;
-import java.util.Locale;
-
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
+package net.lostluma.dynamic_fps.impl.neoforge.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-
 import dynamic_fps.impl.DynamicFPSMod;
 import dynamic_fps.impl.PowerState;
 import net.minecraft.client.gui.components.DebugScreenOverlay;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+
+import java.util.List;
+import java.util.Locale;
 
 @Mixin(DebugScreenOverlay.class)
 public class DebugScreenOverlayMixin {
