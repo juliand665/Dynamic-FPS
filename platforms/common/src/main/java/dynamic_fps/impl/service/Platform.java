@@ -1,14 +1,16 @@
 package dynamic_fps.impl.service;
 
 import java.nio.file.Path;
+import java.util.Optional;
 
 public interface Platform {
 	String getName();
-	String modVersion();
 
 	Path getCacheDir();
 	Path getConfigDir();
 	boolean isDevelopmentEnvironment();
+
+	Optional<String> getModVersion(String modId);
 
 	void registerStartTickEvent(StartTickEvent event);
 

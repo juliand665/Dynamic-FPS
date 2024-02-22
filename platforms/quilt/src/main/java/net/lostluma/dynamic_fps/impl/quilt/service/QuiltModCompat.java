@@ -33,13 +33,13 @@ public class QuiltModCompat implements ModCompat {
 	}
 
 	@Override
-	public boolean isScreenOptedIn(String className) {
-		return optedInScreens.contains(className);
+	public Set<String> getOptedInScreens() {
+		return optedInScreens;
 	}
 
 	@Override
-	public boolean isScreenOptedOut(String className) {
-		return optedOutScreens.contains(className);
+	public Set<String> getOptedOutScreens() {
+		return optedOutScreens;
 	}
 
 	private static void parseModMetadata(ModContainer mod) {

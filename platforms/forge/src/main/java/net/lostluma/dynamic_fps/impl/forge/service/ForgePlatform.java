@@ -14,21 +14,9 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 public class ForgePlatform implements Platform {
-
 	@Override
 	public String getName() {
 		return "Forge";
-	}
-
-	@Override
-	public String modVersion() {
-		Optional<? extends ModContainer> optional = ModList.get().getModContainerById(Constants.MOD_ID);
-
-		if (optional.isPresent()) {
-			return optional.get().getModInfo().getVersion().toString();
-		} else {
-			throw new RuntimeException("Own mod container is somehow not available!");
-		}
 	}
 
 	@Override
@@ -45,6 +33,12 @@ public class ForgePlatform implements Platform {
 	@Override
 	public boolean isDevelopmentEnvironment() {
 		return !FMLLoader.isProduction();
+	}
+
+	@Override
+	public Optional<String> getModVersion(String modId) {
+		Optional<? extends ModContainer> optional = ModList.get().getModContainerById(modId);
+		return optional.map(modContainer -> modContainer.getModInfo().getVersion().toString());
 	}
 
 	@Override

@@ -18,17 +18,6 @@ public class QuiltPlatform implements Platform {
 	}
 
 	@Override
-	public String modVersion() {
-		Optional<ModContainer> optional = QuiltLoader.getModContainer(Constants.MOD_ID);
-
-		if (optional.isPresent()) {
-			return optional.get().metadata().version().toString();
-		} else {
-			throw new RuntimeException("Own mod container is somehow not available!");
-		}
-	}
-
-	@Override
 	public Path getCacheDir() {
 		return this.ensureDir(QuiltLoader.getCacheDir().resolve(Constants.MOD_ID));
 	}
@@ -41,6 +30,12 @@ public class QuiltPlatform implements Platform {
 	@Override
 	public boolean isDevelopmentEnvironment() {
 		return QuiltLoader.isDevelopmentEnvironment();
+	}
+
+	@Override
+	public Optional<String> getModVersion(String modId) {
+		Optional<ModContainer> optional = QuiltLoader.getModContainer(modId);
+		return optional.map(modContainer -> modContainer.metadata().version().toString());
 	}
 
 	@Override
