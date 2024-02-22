@@ -60,6 +60,14 @@ public class DynamicFPSMod {
 		return isKeybindDisabled;
 	}
 
+	public static WindowObserver getWindow() {
+		if (window != null) {
+			return window;
+		}
+
+		throw new RuntimeException("Accessed window too early!");
+	}
+
 	public static boolean isDisabled() {
 		return isKeybindDisabled || !modConfig.enabled() || ModCompat.getInstance().isDisabled();
 	}
@@ -207,22 +215,11 @@ public class DynamicFPSMod {
 		Config before = config;
 		config = modConfig.get(current);
 
+		GLFW.applyWorkaround(); // Apply mouse hover fix if required
 		hasRenderedLastFrame = false; // Render next frame w/o delay
 
 		if (config.runGarbageCollector()) {
 			System.gc();
-		}
-
-		if (GLFW.useHoverEventWorkaround()) {
-			if (!current.windowActive) {
-				minecraft.mouseHandler.releaseMouse();
-			} else {
-				// Grabbing the mouse only works while Minecraft
-				// Agrees that the window is focused. The mod is
-				// A little too fast for this, so we schedule it
-				// For the next client tick (before next frame).
-				minecraft.tell(minecraft.mouseHandler::grabMouse);
-			}
 		}
 
 		for (SoundSource source : SoundSource.values()) {
