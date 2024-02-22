@@ -160,9 +160,9 @@ public class DynamicFPSMod {
 	}
 
 	private static boolean isIdle() {
-		int idleTime = modConfig.idleTime();
+		long idleTime = modConfig.idleTime();
 
-		if (idleTime == 0) {
+		if (idleTime == 0 || devices == null) {
 			return false;
 		}
 
