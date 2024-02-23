@@ -1,5 +1,6 @@
 package dynamic_fps.impl.compat;
 
+import dynamic_fps.impl.DynamicFPSMod;
 import net.minecraft.client.Minecraft;
 
 public class GLFW {
@@ -7,14 +8,30 @@ public class GLFW {
 	private static final boolean enterEventBroken = isEnterEventBroken();
 
 	/**
-	 * Whether to use a workaround for the cursor enter event not working.
+	 * Apply a workaround for the cursor enter event not working if needed.
 	 *
 	 * This fixes an issue when running GLFW version 3.3.x or earlier where
 	 * the cursor enter event will only work if the window is not capturing
 	 * The mouse cursor. Since this is often not the case when switching windows
 	 * Dynamic FPS releases and captures the cursor in tandem with window focus.
 	 */
-	public static boolean useHoverEventWorkaround() {
+	public static void applyWorkaround() {
+		if (!useWorkaround()) {
+			return;
+		}
+
+		if (!DynamicFPSMod.getWindow().isFocused()) {
+			minecraft.mouseHandler.releaseMouse();
+		} else {
+			// Grabbing the mouse only works while Minecraft
+			// Agrees that the window is focused. The mod is
+			// A little too fast for this, so we schedule it
+			// For the next client tick (before next frame).
+			minecraft.tell(minecraft.mouseHandler::grabMouse);
+		}
+	}
+
+	private static boolean useWorkaround() {
 		return enterEventBroken && minecraft.screen == null && !minecraft.options.pauseOnLostFocus;
 	}
 
