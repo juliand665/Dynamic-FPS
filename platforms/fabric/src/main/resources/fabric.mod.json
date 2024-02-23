@@ -41,9 +41,6 @@
         "cloth-config": "*",
         "quilt_loader": "*"
     },
-    "breaks": {
-        "fastload": "<=3.4.0"
-    },
     "mixins": [
         "dynamic_fps.mixins.json",
         "dynamic_fps-common.mixins.json"

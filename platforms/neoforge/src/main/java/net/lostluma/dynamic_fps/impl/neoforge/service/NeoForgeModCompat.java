@@ -4,7 +4,16 @@ import dynamic_fps.impl.service.ModCompat;
 import net.minecraft.client.gui.screens.ReceivingLevelScreen;
 import net.neoforged.fml.ModList;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class NeoForgeModCompat implements ModCompat {
+	private static final Set<String> optedOutScreens = new HashSet<>();
+
+	static {
+		optedOutScreens.add(ReceivingLevelScreen.class.getCanonicalName());
+	}
+
 	@Override
 	public boolean isDisabled() {
 		return false;
@@ -16,12 +25,12 @@ public class NeoForgeModCompat implements ModCompat {
 	}
 
 	@Override
-	public boolean isScreenOptedIn(String className) {
-		return false;
+	public Set<String> getOptedInScreens() {
+		return Set.of();
 	}
 
 	@Override
-	public boolean isScreenOptedOut(String className) {
-		return ReceivingLevelScreen.class.getCanonicalName().equals(className);
+	public Set<String> getOptedOutScreens() {
+		return optedOutScreens;
 	}
 }

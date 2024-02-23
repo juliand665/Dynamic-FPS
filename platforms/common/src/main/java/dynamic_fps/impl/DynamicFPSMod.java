@@ -5,6 +5,7 @@ import dynamic_fps.impl.config.Config;
 import dynamic_fps.impl.config.DynamicFPSConfig;
 import dynamic_fps.impl.service.ModCompat;
 import dynamic_fps.impl.util.Logging;
+import dynamic_fps.impl.util.ModCompatHelper;
 import dynamic_fps.impl.util.OptionsHolder;
 import dynamic_fps.impl.util.duck.DuckScreen;
 import dynamic_fps.impl.util.duck.DuckLoadingOverlay;
@@ -52,8 +53,12 @@ public class DynamicFPSMod {
 	// Internal "API" for Dynamic FPS itself
 
 	public static void init() {
+		ModCompatHelper.init();
+
 		Platform platform = Platform.getInstance();
-		Logging.getLogger().info("Dynamic FPS {} active on {}!", platform.modVersion(), platform.getName());
+		String version = platform.getModVersion(Constants.MOD_ID).orElseThrow();
+
+		Logging.getLogger().info("Dynamic FPS {} active on {}!", version, platform.getName());
 	}
 
 	public static boolean disabledByUser() {

@@ -64,13 +64,6 @@
                 "versions": "*",
                 "optional": true
             }
-        ],
-        "breaks": [
-            {
-                "id": "fastload",
-                "versions": "<=3.4.0",
-                "reason": "Softlock in world loading screen, see https://github.com/BumbleSoftware/Fastload/issues/108"
-            }
         ]
     },
     "minecraft": {

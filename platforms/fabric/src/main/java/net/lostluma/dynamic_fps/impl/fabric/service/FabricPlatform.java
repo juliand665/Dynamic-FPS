@@ -18,17 +18,6 @@ public class FabricPlatform implements Platform {
 	}
 
 	@Override
-	public String modVersion() {
-		Optional<ModContainer> optional = FabricLoader.getInstance().getModContainer(Constants.MOD_ID);
-
-		if (optional.isPresent()) {
-			return optional.get().getMetadata().getVersion().getFriendlyString();
-		} else {
-			throw new RuntimeException("Own mod container is somehow not available!");
-		}
-	}
-
-	@Override
 	public Path getCacheDir() {
 		Path base = FabricLoader.getInstance().getGameDir();
 		return this.ensureDir(base.resolve(".cache").resolve(Constants.MOD_ID));
@@ -42,6 +31,12 @@ public class FabricPlatform implements Platform {
 	@Override
 	public boolean isDevelopmentEnvironment() {
 		return FabricLoader.getInstance().isDevelopmentEnvironment();
+	}
+
+	@Override
+	public Optional<String> getModVersion(String modId) {
+		Optional<ModContainer> optional = FabricLoader.getInstance().getModContainer(modId);
+		return optional.map(modContainer -> modContainer.getMetadata().getVersion().toString());
 	}
 
 	@Override
