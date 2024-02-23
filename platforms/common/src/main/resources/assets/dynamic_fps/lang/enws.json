@@ -1,0 +1,43 @@
+{
+    "config.dynamic_fps.title": "Changing Wishes for Changing FPS",
+
+    "config.dynamic_fps.category.general": "Humblest Wishes",
+    "config.dynamic_fps.category.hovered": "A Call'd Upon Mood",
+    "config.dynamic_fps.category.unfocused": "Busied Mood",
+    "config.dynamic_fps.category.abandoned": "Absent of Mind",
+    "config.dynamic_fps.category.invisible": "A Mood Yet Unseen",
+
+    "config.dynamic_fps.enabled": "Beest Active",
+
+    "config.dynamic_fps.disabled": "Unactive",
+    "config.dynamic_fps.minutes": "%d Minute(s)",
+
+    "config.dynamic_fps.idle_time": "Absent time",
+    "config.dynamic_fps.idle_time_tooltip": "There is a special mood, / If you be away; / Thou present in all but mind.",
+
+    "config.dynamic_fps.uncap_menu_frame_rate": "No Limit to Menu FPS",
+    "config.dynamic_fps.uncap_menu_frame_rate_tooltip": "I prithee, give no limits to my FPS. I am a menu, and privileged to render.",
+
+    "config.dynamic_fps.frame_rate_target": "Frame Rate's Aim",
+    "config.dynamic_fps.volume_multiplier": "Volume Multiplying Factors",
+
+    "config.dynamic_fps.graphics_state": "Thy Wishes of Visages",
+    "config.dynamic_fps.graphics_state_default": "Exquisite",
+    "config.dynamic_fps.graphics_state_reduced": "Dull",
+    "config.dynamic_fps.graphics_state_minimal": "Quite degraded",
+    "config.dynamic_fps.graphics_state_minimal_tooltip": "Then I degraded from normal graphics, / And come now to reload the lands!",
+
+    "config.dynamic_fps.show_toasts": "See Letters",
+    "config.dynamic_fps.show_toasts_tooltip": "Shall thy messenger send toasty letters or await your return?",
+
+    "config.dynamic_fps.run_garbage_collector": "Give Call to Garbage Collector",
+    "config.dynamic_fps.run_garbage_collector_tooltip": "Degrade unused words into nothing when gaining a mood thus.",
+
+    "key.dynamic_fps.toggle_forced": "Order Busied Mood (Change)",
+    "key.dynamic_fps.toggle_disabled": "Stop Changing FPS (Change)",
+    "gui.dynamic_fps.hud.reducing": "Changing FPS: Diminishing thy FPS",
+    "gui.dynamic_fps.hud.disabled": "Changing FPS Unactive",
+
+    "modmenu.nameTranslation.dynamic_fps": "Changing FPS",
+    "modmenu.descriptionTranslation.dynamic_fps": "The seasons alter: Machination-usage and FPS / Fall in the fresh mind of the calmed user;"
+}

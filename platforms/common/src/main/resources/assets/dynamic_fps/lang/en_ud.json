@@ -1,0 +1,43 @@
+{
+    "config.dynamic_fps.title": "SԀℲ ɔᴉɯɐuʎᗡ ǝɹnɓᴉɟuoƆ",
+
+    "config.dynamic_fps.category.general": "ʅɐɹǝuǝ⅁",
+    "config.dynamic_fps.category.hovered": "pǝɹǝʌoH",
+    "config.dynamic_fps.category.unfocused": "pǝsnɔoɟu∩",
+    "config.dynamic_fps.category.abandoned": "ǝʅpI",
+    "config.dynamic_fps.category.invisible": "ǝʅqᴉsᴉʌuI",
+
+    "config.dynamic_fps.enabled": "pǝʅqɐuƎ",
+
+    "config.dynamic_fps.disabled": "pǝʅqɐsᴉᗡ",
+    "config.dynamic_fps.minutes": "(s)ǝʇnuᴉW p%",
+
+    "config.dynamic_fps.idle_time": "ǝɯᴉʇ ǝʅpI",
+    "config.dynamic_fps.idle_time_tooltip": "·pǝsnɔoɟ sᴉ ǝɯɐɓ ǝɥʇ ǝʅᴉɥʍ ǝʇɐʇs ǝʅpI ǝɥʇ sǝʇɐʌᴉʇɔɐ SԀℲ ɔᴉɯɐuʎᗡ ʅᴉʇun ʇnduᴉ ʇnoɥʇᴉʍ sǝʇnuᴉW",
+
+    "config.dynamic_fps.uncap_menu_frame_rate": "SԀℲ nuǝW dɐɔu∩",
+    "config.dynamic_fps.uncap_menu_frame_rate_tooltip": "·nuǝɯ uᴉɐɯ ǝɥʇ uᴉ ʇᴉɯᴉʅ SԀℲ 09 ǝɥʇ ǝʌoɯǝꓤ",
+
+    "config.dynamic_fps.frame_rate_target": "ʇǝɓɹɐ⟘ ǝʇɐᴚ ǝɯɐɹℲ",
+    "config.dynamic_fps.volume_multiplier": "ɹǝᴉʅdᴉʇʅnW ǝɯnʅoɅ",
+
+    "config.dynamic_fps.graphics_state": "suoᴉʇdO sɔᴉɥdɐɹ⅁",
+    "config.dynamic_fps.graphics_state_default": "ʇʅnɐɟǝᗡ",
+    "config.dynamic_fps.graphics_state_reduced": "pǝɔnpǝᴚ",
+    "config.dynamic_fps.graphics_state_minimal": "ʅɐɯᴉuᴉW",
+    "config.dynamic_fps.graphics_state_minimal_tooltip": "¡pɐoʅǝɹ oʇ pʅɹoʍ ǝɥʇ ǝsnɐɔ sɔᴉɥdɐɹɓ ʅɐɯᴉuᴉW",
+
+    "config.dynamic_fps.show_toasts": "sʇsɐo⟘ ʍoɥS",
+    "config.dynamic_fps.show_toasts_tooltip": "suoᴉʇɐɔᴉɟᴉʇou ʇsɐoʇ ʎɐʅǝp ɹo ɓuᴉʎɐʅdsᴉp dǝǝʞ oʇ ɹǝɥʇǝɥM",
+
+    "config.dynamic_fps.run_garbage_collector": "ɹoʇɔǝʅʅoƆ ǝɓɐqɹɐ⅁ ǝʞoʌuI",
+    "config.dynamic_fps.run_garbage_collector_tooltip": "snʇɐʇs sᴉɥʇ oʇ ɓuᴉɥɔʇᴉʍs uǝɥʍ ʎɹoɯǝɯ pǝsnun dn ǝǝɹℲ",
+
+    "key.dynamic_fps.toggle_forced": "(ǝʅɓɓo⟘) ǝpoW pǝsnɔoɟu∩ ǝɔɹoℲ",
+    "key.dynamic_fps.toggle_disabled": "(ǝʅɓɓo⟘) SԀℲ ɔᴉɯɐuʎᗡ ǝʅqɐsᴉᗡ",
+    "gui.dynamic_fps.hud.reducing": "SԀℲ pǝɔnpǝꓤ ɓuᴉɔɹoℲ :SԀℲ ɔᴉɯɐuʎᗡ",
+    "gui.dynamic_fps.hud.disabled": "pǝʅqɐsᴉᗡ SԀℲ ɔᴉɯɐuʎᗡ",
+
+    "modmenu.nameTranslation.dynamic_fps": "SԀℲ ɔᴉɯɐuʎᗡ",
+    "modmenu.descriptionTranslation.dynamic_fps": "·punoɹɓʞɔɐq uᴉ sǝɔɹnosǝɹ ɓoɥ ʇˌusǝop ʇɟɐɹɔǝuᴉW os SԀℲ sʇsnꓩpɐ ʎʅʅɐɔᴉɯɐuʎᗡ"
+}
