@@ -22,14 +22,14 @@ public enum PowerState {
 	UNFOCUSED(true),
 
 	/**
-	 * User hasn't sent input for some time.
-	 */
-	ABANDONED(true),
-
-	/**
 	 * Window minimized or otherwise hidden.
 	 */
-	INVISIBLE(true);
+	INVISIBLE(true),
+
+	/**
+	 * User hasn't sent input for some time.
+	 */
+	ABANDONED(true);
 
 	public final boolean configurable;
 
