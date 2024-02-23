@@ -7,6 +7,17 @@
     "config.dynamic_fps.category.abandoned": "Untätig",
     "config.dynamic_fps.category.invisible": "Unsichtbar",
 
+    "config.dynamic_fps.enabled": "Aktiviert",
+
+    "config.dynamic_fps.disabled": "Deaktiviert",
+    "config.dynamic_fps.minutes": "%s Minute(n)",
+
+    "config.dynamic_fps.idle_time": "Untätigkeits-Timeout",
+    "config.dynamic_fps.idle_time_tooltip": "Zeit in Minuten ohne Aktivität, bis die Untätig Konfiguration aktiviert wird, während das Spiel fokussiert ist.",
+
+    "config.dynamic_fps.uncap_menu_frame_rate": "Unbegrenzte Menü FPS",
+    "config.dynamic_fps.uncap_menu_frame_rate_tooltip": "Entferne das 60 FPS Limit im Hauptmenü.",
+
     "config.dynamic_fps.frame_rate_target": "Zielbildrate",
     "config.dynamic_fps.volume_multiplier": "Lautstärke",
 
