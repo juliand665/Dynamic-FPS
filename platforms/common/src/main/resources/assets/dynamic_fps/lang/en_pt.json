@@ -7,6 +7,8 @@
     "config.dynamic_fps.category.abandoned": "Nappin' Below Deck",
     "config.dynamic_fps.category.invisible": "Lost in Davy Jones' Locker",
 
+    "config.dynamic_fps.enabled": "Merry Sailin'",
+
     "config.dynamic_fps.disabled": "Avast!",
     "config.dynamic_fps.minutes": "%d Minut'(s)",
 
