@@ -15,7 +15,7 @@ There's also an option to enter an idle state while the window is active but has
 
 ---
 
-In addition to this Dynamic FPS fixes a vanilla bug causing higher than necessary background CPU usage and stops 
+In addition to this Dynamic FPS fixes a vanilla bug causing higher-than-necessary background CPU usage and stops
 rendering the world while it's being obscured by opaque screens or the resource loading overlay, helping especially on low-end systems.
 
 ## Installation
