@@ -27,13 +27,7 @@
     },
     "depends": {
         "fabricloader": ">=0.15.0",
-        "minecraft": [
-            "=1.20.0",
-            "=1.20.1",
-            "=1.20.2",
-            "=1.20.3",
-            "=1.20.4"
-        ],
+        "minecraft": ">=1.20.5-alpha.24.9.a",
         "mixinextras": ">=0.3.2",
         "fabric-resource-loader-v0": "*",
         "fabric-lifecycle-events-v1": "*"
@@ -51,43 +45,5 @@
         "dynamic_fps.mixins.json",
         "dynamic_fps-common.mixins.json"
     ],
-    "accessWidener": "dynamic_fps.accesswidener",
-    "custom": {
-        "dynamic_fps": {
-            "optimized_screens": {
-                "enabled": [
-                    "net.minecraft.class_4189",
-                    "net.minecraft.class_404",
-                    "net.minecraft.class_426",
-                    "net.minecraft.class_4288",
-                    "net.minecraft.class_6777",
-                    "net.minecraft.class_443",
-                    "net.minecraft.class_446",
-                    "net.minecraft.class_445",
-                    "net.minecraft.class_6599"
-                ],
-                "disabled": [
-                    "net.minecraft.class_434"
-                ],
-                "_comment": {
-                    "_0": "Mojang mapping names of the enabled / disabled screens.",
-                    "_1": "Sorted by fully qualified name. Translation not needed for mod screens.",
-                    "enabled": {
-                        "net.minecraft.class_4189": "net.minecraft.client.gui.screens.AccessibilityOptionsScreen",
-                        "net.minecraft.class_404": "net.minecraft.client.gui.screens.ChatOptionsScreen",
-                        "net.minecraft.class_426": "net.minecraft.client.gui.screens.LanguageSelectScreen",
-                        "net.minecraft.class_4288": "net.minecraft.client.gui.screens.MouseSettingsScreen",
-                        "net.minecraft.class_6777": "net.minecraft.client.gui.screens.OnlineOptionsScreen",
-                        "net.minecraft.class_443": "net.minecraft.client.gui.screens.SoundOptionsScreen",
-                        "net.minecraft.class_446": "net.minecraft.client.gui.screens.VideoSettingsScreen",
-                        "net.minecraft.class_445": "net.minecraft.client.gui.screens.WinScreen",
-                        "net.minecraft.class_6599": "net.minecraft.client.gui.screens.controls.KeyBindsScreen"
-                    },
-                    "disabled": {
-                        "net.minecraft.class_434": "net.minecraft.client.gui.screens.ReceivingLevelScreen"
-                    }
-                }
-            }
-        }
-    }
+    "accessWidener": "dynamic_fps.accesswidener"
 }

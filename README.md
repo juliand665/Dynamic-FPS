@@ -16,7 +16,7 @@ There's also an option to enter an idle state while the window is active but has
 ---
 
 In addition to this Dynamic FPS fixes a vanilla bug causing higher-than-necessary background CPU usage and stops
-rendering the world while it's being obscured by opaque screens or the resource loading overlay, helping especially on low-end systems.
+rendering the world while it's being obscured by resource loading overlay, helping especially on low-end systems.
 
 ## Installation
 
@@ -46,19 +46,5 @@ Force disable the loading overlay optimization:
 ```json
     "dynamic_fps": {
         "optimized_overlay": false
-    },
-```
-
-Screen optimization is enabled for screens that call [`renderDirtBackground`](# "Mojang Mappings")/[`renderBackgroundTexture`](# "Quilt Mappings / Yarn").  
-Other screens can opt in or out by adding their package and class name to the `optimized_screens` object instead:
-
-```json
-    "dynamic_fps": {
-        "optimized_screens": {
-            "enabled": [
-                "com.example.example_mod.gui.screens.ExampleScreen"
-            ],
-            "disabled": []
-        }
     },
 ```

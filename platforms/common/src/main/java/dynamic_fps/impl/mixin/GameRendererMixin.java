@@ -32,7 +32,7 @@ public class GameRendererMixin {
 	}
 
 	/**
-	 * Cancels rendering the world if a it is determined to currently not be visible.
+	 * Cancels rendering the world if it is determined to currently not be visible.
 	 */
 	@Inject(
 		method = { "renderLevel", "renderItemActivationAnimation" },

@@ -9,9 +9,7 @@
         "GuiMixin",
         "LoadingOverlayMixin",
         "MinecraftMixin",
-        "ScreenMixin",
         "SoundEngineMixin",
-        "StatsScreenMixin",
         "ToastComponentMixin",
         "WindowMixin",
         "bugfix.BlockableEventLoopMixin"
