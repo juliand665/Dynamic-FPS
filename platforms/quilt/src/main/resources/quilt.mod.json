@@ -40,7 +40,9 @@
             },
             {
                 "id": "minecraft",
-                "versions": ">=1.20.0"
+                "versions": {
+                    "all": [">=1.20.0", "<=1.20.4"]
+                }
             },
             {
                 "id": "mixinextras",

@@ -26,7 +26,7 @@ file="META-INF/accesstransformer.cfg"
 [[dependencies.dynamic_fps]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.20.0,)"
+versionRange = "[1.20.0,1.20.4]"
 ordering = "NONE"
 side = "CLIENT"
 

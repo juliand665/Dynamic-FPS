@@ -27,7 +27,13 @@
     },
     "depends": {
         "fabricloader": ">=0.15.0",
-        "minecraft": ">=1.20.0",
+        "minecraft": [
+            "=1.20.0",
+            "=1.20.1",
+            "=1.20.2",
+            "=1.20.3",
+            "=1.20.4"
+        ],
         "mixinextras": ">=0.3.2",
         "fabric-resource-loader-v0": "*",
         "fabric-lifecycle-events-v1": "*"
