@@ -53,12 +53,20 @@ public class Serialization {
 			Path temp = Files.createTempFile(cache, "config", ".json");
 
 			Files.write(temp, data.getBytes(StandardCharsets.UTF_8));
-			Files.move(temp, config, StandardCopyOption.ATOMIC_MOVE);
+			Serialization.move(temp, config); // Attempt atomic move, fall back otherwise.
 		} catch (IOException e) {
 			// Cloth Config's built-in saving does not support catching exceptions :(
 			throw new RuntimeException("Failed to save or modify Dynamic FPS config!", e);
 		}
 	}
+
+	private static void move(Path from, Path to) throws IOException {
+		try {
+			Files.move(from, to, StandardCopyOption.ATOMIC_MOVE);
+		} catch (IOException | UnsupportedOperationException e) {
+            Files.move(from, to, StandardCopyOption.REPLACE_EXISTING);
+        }
+    }
 
 	@SuppressWarnings("deprecation")
 	public static DynamicFPSConfig load() {
