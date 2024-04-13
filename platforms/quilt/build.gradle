@@ -5,7 +5,6 @@ plugins {
 repositories {
 	maven { url = "https://maven.terraformersmc.com/releases" } // modmenu
     maven { url = "https://maven.quiltmc.org/repository/release" }
-    maven { url = "https://code.lostluma.net/api/packages/LoneLuma/maven" }
 }
 
 architectury {

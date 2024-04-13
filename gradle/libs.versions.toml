@@ -11,7 +11,7 @@ forge = "1.20.4-49.0.30"
 neoforge = "20.4.160-beta"
 
 quilt_loader = "0.23.1"
-quilt_standard_libraries = "8.0.0-alpha.0+1.20.4"
+quilt_standard_libraries = "8.0.0-alpha.12+1.20.4"
 
 # Third-party libraries
 
