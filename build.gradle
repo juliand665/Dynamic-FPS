@@ -25,7 +25,8 @@ subprojects {
 }
 
 allprojects {
-	if (project.name == "platforms") {
+	// Ignore the root project and plain "projects" directory ...
+	if (List.of("dynamic-fps", "platforms").contains(project.name)) {
 		return
 	}
 
