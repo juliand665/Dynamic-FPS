@@ -6,7 +6,7 @@
         "version": "${version}",
         "metadata": {
             "name": "Dynamic FPS",
-            "description": "Dynamically adjusts FPS so Minecraft doesn't hog resources in the background.",
+            "description": "Reduce resource usage while Minecraft is in the background or idle.",
             "contributors": {
                 "juliand665": "Owner",
                 "LostLuma": "Owner"
