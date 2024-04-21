@@ -12,6 +12,8 @@ authors = "juliand665 & LostLuma"
 description = "Reduce resource usage while Minecraft is in the background or idle."
 logoFile = "dynamic_fps.png"
 displayTest = "IGNORE_ALL_VERSION"
+modUrl = "https://dapprgames.com/mods"
+displayURL = "https://dapprgames.com/mods"
 updateJSONURL = "https://api.lostluma.net/updates/dynamic-fps?platform=neoforge&provider=modrinth"
 
 [[mixins]]
