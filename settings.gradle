@@ -11,6 +11,6 @@ rootProject.name = "dynamic-fps"
 
 include(":platforms:common")
 include(":platforms:fabric")
-// include(":platforms:forge")
+include(":platforms:forge")
 // include(":platforms:neoforge")
-// include(":platforms:quilt")
+include(":platforms:quilt")

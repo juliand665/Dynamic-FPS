@@ -5,7 +5,9 @@ import dynamic_fps.impl.config.Config;
 import dynamic_fps.impl.config.DynamicFPSConfig;
 import dynamic_fps.impl.service.ModCompat;
 import dynamic_fps.impl.util.Logging;
+import dynamic_fps.impl.util.ModCompatHelper;
 import dynamic_fps.impl.util.OptionsHolder;
+import dynamic_fps.impl.util.duck.DuckScreen;
 import dynamic_fps.impl.util.duck.DuckLoadingOverlay;
 import dynamic_fps.impl.util.duck.DuckSoundEngine;
 import dynamic_fps.impl.util.event.InputObserver;
@@ -51,6 +53,8 @@ public class DynamicFPSMod {
 	// Internal "API" for Dynamic FPS itself
 
 	public static void init() {
+		ModCompatHelper.init();
+
 		Platform platform = Platform.getInstance();
 		String version = platform.getModVersion(Constants.MOD_ID).orElseThrow();
 
@@ -159,10 +163,14 @@ public class DynamicFPSMod {
 	}
 
 	public static boolean shouldShowLevels() {
-		return isDisabled() || !isLevelCoveredByOverlay();
+		return isDisabled() || !(isLevelCoveredByScreen() || isLevelCoveredByOverlay());
 	}
 
 	// Internal logic
+
+	private static boolean isLevelCoveredByScreen() {
+		return minecraft.screen != null && ((DuckScreen) minecraft.screen).dynamic_fps$rendersBackground();
+	}
 
 	private static boolean isIdle() {
 		long idleTime = modConfig.idleTime();
