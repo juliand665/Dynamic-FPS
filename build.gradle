@@ -59,7 +59,7 @@ allprojects {
 		withSourcesJar()
 
 		toolchain {
-			languageVersion = JavaLanguageVersion.of(17)
+			languageVersion = JavaLanguageVersion.of(21)
 		}
 	}
 
@@ -67,7 +67,7 @@ allprojects {
 		it.options.encoding = "UTF-8"
 
 		javaCompiler = javaToolchains.compilerFor {
-			languageVersion = JavaLanguageVersion.of(17)
+			languageVersion = JavaLanguageVersion.of(21)
 		}
 	}
 }

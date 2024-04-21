@@ -36,11 +36,11 @@
         "depends": [
             {
                 "id": "quilt_loader",
-                "versions": ">=0.23.1"
+                "versions": ">=0.25.0"
             },
             {
                 "id": "minecraft",
-                "versions": ">=1.20.5-alpha.24.9.a"
+                "versions": ">=1.20.5-alpha.24.14.a"
             },
             {
                 "id": "mixinextras",

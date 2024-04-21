@@ -1,22 +1,22 @@
 [versions]
-minecraft = "24w09a"
+minecraft = "1.20.5-rc2"
 
 # Platform libraries
 
-fabric_loader = "0.15.7"
-fabric_api = "0.96.6+1.20.5"
+fabric_loader = "0.15.10"
+fabric_api = "0.97.4+1.20.5"
 
 forge = "1.20.4-49.0.30"
 
 neoforge = "20.4.160-beta"
 
-quilt_loader = "0.23.1"
+quilt_loader = "0.25.0"
 quilt_standard_libraries = "8.0.0-alpha.12+1.20.4"
 
 # Third-party libraries
 
-modmenu = "10.0.0-alpha.1"
-cloth_config = "14.0.122"
+modmenu = "10.0.0-alpha.3"
+cloth_config = "14.0.125"
 
 mixinextras = "0.3.5"
 
@@ -48,5 +48,5 @@ mixinextras_forge = { module = "io.github.llamalad7:mixinextras-forge", version.
 [plugins]
 shadow = { id = "com.github.johnrengelman.shadow", version = "8.1.1" }
 
-architectury = { id = "architectury-plugin", version = "3.4.151" }
-architectury_loom = { id = "dev.architectury.loom", version = "1.5.388" }
+architectury = { id = "architectury-plugin", version = "3.4.155" }
+architectury_loom = { id = "dev.architectury.loom", version = "1.6.394" }
