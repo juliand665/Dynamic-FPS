@@ -12,27 +12,11 @@ subprojects {
 		return
 	}
 
-	apply plugin: "dev.architectury.loom"
-
-	loom {
-		silentMojangMappingsLicense()
-	}
-
-	dependencies {
-		minecraft libs.minecraft
-		mappings loom.officialMojangMappings()
-	}
-}
-
-allprojects {
-	// Ignore the root project and plain "projects" directory ...
-	if (List.of("dynamic-fps", "platforms").contains(project.name)) {
-		return
-	}
-
 	apply plugin: "java"
-	apply plugin: "architectury-plugin"
 	apply plugin: "maven-publish"
+
+	apply plugin: "architectury-plugin"
+	apply plugin: "dev.architectury.loom"
 
 	base {
 		archivesName = rootProject.archives_base_name
@@ -47,12 +31,21 @@ allprojects {
 		version = "${rootProject.mod_version}+minecraft-${libs.versions.minecraft.get()}-${platform}"
 	}
 
+	loom {
+		silentMojangMappingsLicense()
+	}
+
 	repositories {
 		// Add repositories to retrieve artifacts from in here.
 		// You should only use this when depending on other mods because
 		// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
 		// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 		// for more information about repositories.
+	}
+
+	dependencies {
+		minecraft libs.minecraft
+		mappings loom.officialMojangMappings()
 	}
 
 	java {
