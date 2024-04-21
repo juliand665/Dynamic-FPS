@@ -12,7 +12,7 @@ authors = "juliand665 & LostLuma"
 description = "Dynamically adjusts FPS so Minecraft doesn't hog resources in the background."
 logoFile = "assets/dynamic_fps/icon.png"
 displayTest = "IGNORE_ALL_VERSION"
-updateJSONURL = "https://api.lostluma.net/updates/dynamic-fps?platform=forge"
+updateJSONURL = "https://api.lostluma.net/updates/dynamic-fps?platform=forge&provider=modrinth"
 
 [[mixins]]
 config = "dynamic_fps.mixins.json"
