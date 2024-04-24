@@ -9,9 +9,9 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.loading.FMLLoader;
-import net.neoforged.neoforge.client.ConfigScreenHandler;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
-import net.neoforged.neoforge.client.event.RenderGuiOverlayEvent;
+import net.neoforged.neoforge.client.event.RenderGuiEvent;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
 
 @Mod(Constants.MOD_ID)
@@ -24,17 +24,15 @@ public class DynamicFPSNeoForgeMod {
 		DynamicFPSMod.init();
 
 		ModLoadingContext.get().registerExtensionPoint(
-			ConfigScreenHandler.ConfigScreenFactory.class,
-			() -> new ConfigScreenHandler.ConfigScreenFactory(
-				(minecraft, screen) -> ClothConfig.genConfigScreen(screen)
-			)
+			IConfigScreenFactory.class,
+			() -> (minecraft, screen) -> ClothConfig.genConfigScreen(screen)
 		);
 
 		modEventBus.addListener(this::registerKeyMappings);
 		NeoForge.EVENT_BUS.addListener(this::renderGuiOverlay);
     }
 
-	public void renderGuiOverlay(RenderGuiOverlayEvent.Pre event) {
+	public void renderGuiOverlay(RenderGuiEvent.Pre event) {
 		HudInfoRenderer.renderInfo(event.getGuiGraphics());
 	}
 
