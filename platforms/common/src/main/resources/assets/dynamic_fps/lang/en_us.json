@@ -38,5 +38,5 @@
     "gui.dynamic_fps.hud.reducing": "Dynamic FPS: Forcing Reduced FPS",
     "gui.dynamic_fps.hud.disabled": "Dynamic FPS Disabled",
 
-    "modmenu.descriptionTranslation.dynamic_fps": "Dynamically adjusts FPS so Minecraft doesn't hog resources in background."
+    "modmenu.descriptionTranslation.dynamic_fps": "Reduce resource usage while Minecraft is in the background or idle."
 }
