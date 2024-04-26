@@ -1,10 +1,12 @@
 package dynamic_fps.impl;
 
+import dynamic_fps.impl.compat.ClothConfig;
 import dynamic_fps.impl.compat.GLFW;
 import dynamic_fps.impl.config.Config;
 import dynamic_fps.impl.config.DynamicFPSConfig;
 import dynamic_fps.impl.service.ModCompat;
 import dynamic_fps.impl.util.IdleHandler;
+import dynamic_fps.impl.util.FallbackConfigScreen;
 import dynamic_fps.impl.util.Logging;
 import dynamic_fps.impl.util.OptionsHolder;
 import dynamic_fps.impl.util.duck.DuckLoadingOverlay;
@@ -14,6 +16,7 @@ import dynamic_fps.impl.service.Platform;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.LoadingOverlay;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.sounds.SoundSource;
 
 import org.jetbrains.annotations.Nullable;
@@ -93,6 +96,14 @@ public class DynamicFPSMod {
 	public static void onConfigChanged() {
 		modConfig.save();
 		IdleHandler.init();
+	}
+
+	public static Screen getConfigScreen(Screen parent) {
+		if (!Platform.getInstance().isModLoaded("cloth-config")) {
+			return new FallbackConfigScreen(parent);
+		} else {
+			return ClothConfig.genConfigScreen(parent);
+		}
 	}
 
 	public static void onStatusChanged(boolean userInitiated) {

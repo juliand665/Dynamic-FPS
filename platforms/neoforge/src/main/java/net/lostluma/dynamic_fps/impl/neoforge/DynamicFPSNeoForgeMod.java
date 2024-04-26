@@ -2,7 +2,6 @@ package net.lostluma.dynamic_fps.impl.neoforge;
 
 import dynamic_fps.impl.Constants;
 import dynamic_fps.impl.DynamicFPSMod;
-import dynamic_fps.impl.compat.ClothConfig;
 import dynamic_fps.impl.util.HudInfoRenderer;
 import dynamic_fps.impl.util.KeyMappingHandler;
 import net.neoforged.bus.api.IEventBus;
@@ -25,7 +24,7 @@ public class DynamicFPSNeoForgeMod {
 
 		ModLoadingContext.get().registerExtensionPoint(
 			IConfigScreenFactory.class,
-			() -> (minecraft, screen) -> ClothConfig.genConfigScreen(screen)
+			() -> (minecraft, screen) -> DynamicFPSMod.getConfigScreen(screen)
 		);
 
 		modEventBus.addListener(this::registerKeyMappings);

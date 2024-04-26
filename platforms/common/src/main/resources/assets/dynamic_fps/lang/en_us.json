@@ -1,6 +1,9 @@
 {
     "config.dynamic_fps.title": "Configure Dynamic FPS",
 
+    "config.dynamic_fps.warn_cloth_config.0": "Cloth Config is required to configure Dynamic FPS from within Minecraft.",
+    "config.dynamic_fps.warn_cloth_config.1": "Either install Cloth Config, edit the config file, or use the default settings instead.",
+
     "config.dynamic_fps.category.general": "General",
     "config.dynamic_fps.category.hovered": "Hovered",
     "config.dynamic_fps.category.unfocused": "Unfocused",

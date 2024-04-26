@@ -81,7 +81,7 @@ side = "CLIENT"
 
 [[dependencies.dynamic_fps]]
 modId = "cloth_config"
-mandatory = true
+mandatory = false
 versionRange = "[1,)"
 ordering = "NONE"
 side = "CLIENT"

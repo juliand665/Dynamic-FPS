@@ -10,6 +10,7 @@ public interface Platform {
 	Path getConfigDir();
 	boolean isDevelopmentEnvironment();
 
+	boolean isModLoaded(String modId);
 	Optional<String> getModVersion(String modId);
 
 	void registerStartTickEvent(StartTickEvent event);

@@ -34,6 +34,11 @@ public class FabricPlatform implements Platform {
 	}
 
 	@Override
+	public boolean isModLoaded(String modId) {
+		return FabricLoader.getInstance().isModLoaded(modId);
+	}
+
+	@Override
 	public Optional<String> getModVersion(String modId) {
 		Optional<ModContainer> optional = FabricLoader.getInstance().getModContainer(modId);
 		return optional.map(modContainer -> modContainer.getMetadata().getVersion().toString());

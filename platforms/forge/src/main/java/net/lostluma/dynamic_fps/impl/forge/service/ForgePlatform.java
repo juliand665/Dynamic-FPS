@@ -36,6 +36,11 @@ public class ForgePlatform implements Platform {
 	}
 
 	@Override
+	public boolean isModLoaded(String modId) {
+		return ModList.get().isLoaded(modId);
+	}
+
+	@Override
 	public Optional<String> getModVersion(String modId) {
 		Optional<? extends ModContainer> optional = ModList.get().getModContainerById(modId);
 		return optional.map(modContainer -> modContainer.getModInfo().getVersion().toString());

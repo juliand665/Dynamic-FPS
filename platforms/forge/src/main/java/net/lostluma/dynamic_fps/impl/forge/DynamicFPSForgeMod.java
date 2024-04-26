@@ -2,7 +2,6 @@ package net.lostluma.dynamic_fps.impl.forge;
 
 import dynamic_fps.impl.Constants;
 import dynamic_fps.impl.DynamicFPSMod;
-import dynamic_fps.impl.compat.ClothConfig;
 import dynamic_fps.impl.service.Platform;
 import dynamic_fps.impl.util.HudInfoRenderer;
 import dynamic_fps.impl.util.KeyMappingHandler;
@@ -33,7 +32,7 @@ public class DynamicFPSForgeMod {
 		ModLoadingContext.get().registerExtensionPoint(
 			ConfigScreenHandler.ConfigScreenFactory.class,
 			() -> new ConfigScreenHandler.ConfigScreenFactory(
-				(minecraft, screen) -> ClothConfig.genConfigScreen(screen)
+				(minecraft, screen) -> DynamicFPSMod.getConfigScreen(screen)
 			)
 		);
 
