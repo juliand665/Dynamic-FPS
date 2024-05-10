@@ -4,11 +4,11 @@ import dynamic_fps.impl.compat.GLFW;
 import dynamic_fps.impl.config.Config;
 import dynamic_fps.impl.config.DynamicFPSConfig;
 import dynamic_fps.impl.service.ModCompat;
+import dynamic_fps.impl.util.IdleHandler;
 import dynamic_fps.impl.util.Logging;
 import dynamic_fps.impl.util.OptionsHolder;
 import dynamic_fps.impl.util.duck.DuckLoadingOverlay;
 import dynamic_fps.impl.util.duck.DuckSoundEngine;
-import dynamic_fps.impl.util.event.InputObserver;
 import dynamic_fps.impl.util.event.WindowObserver;
 import dynamic_fps.impl.service.Platform;
 import net.minecraft.Util;
@@ -33,12 +33,8 @@ public class DynamicFPSMod {
 	private static final Minecraft minecraft = Minecraft.getInstance();
 
 	private static @Nullable WindowObserver window;
-	private static @Nullable InputObserver devices;
 
 	private static long lastRender;
-
-	private static boolean wasIdle = false;
-	private static boolean idleCheckRegistered = false;
 
 	// we always render one last frame before actually reducing FPS, so the hud text
 	// shows up instantly when forcing low fps.
@@ -51,6 +47,8 @@ public class DynamicFPSMod {
 	// Internal "API" for Dynamic FPS itself
 
 	public static void init() {
+		IdleHandler.init();
+
 		Platform platform = Platform.getInstance();
 		String version = platform.getModVersion(Constants.MOD_ID).orElseThrow();
 
@@ -61,12 +59,8 @@ public class DynamicFPSMod {
 		return isKeybindDisabled;
 	}
 
-	public static WindowObserver getWindow() {
-		if (window != null) {
-			return window;
-		}
-
-		throw new RuntimeException("Accessed window too early!");
+	public static @Nullable WindowObserver getWindow() {
+		return window;
 	}
 
 	public static boolean isDisabled() {
@@ -98,15 +92,14 @@ public class DynamicFPSMod {
 
 	public static void onConfigChanged() {
 		modConfig.save();
-		initializeIdleCheck();
+		IdleHandler.init();
 	}
 
 	public static void onStatusChanged(boolean userInitiated) {
-		// Reset idle timeout to ensure
-		// The game runs at full speed when
-		// Returning but not giving any input
-		if (userInitiated && devices != null) {
-			devices.updateLastActionTime();
+		// Ensure game runs at full speed when
+		// Returning without giving any other input
+		if (userInitiated) {
+			IdleHandler.onActivity();
 		}
 
 		checkForStateChanges();
@@ -126,8 +119,8 @@ public class DynamicFPSMod {
 	}
 
 	public static void setWindow(long address) {
+		IdleHandler.setWindow(address);
 		window = new WindowObserver(address);
-		initializeIdleCheck(); // Register input observer if wanted
 	}
 
 	public static boolean checkForRender() {
@@ -164,43 +157,8 @@ public class DynamicFPSMod {
 
 	// Internal logic
 
-	private static boolean isIdle() {
-		long idleTime = modConfig.idleTime();
-
-		if (idleTime == 0 || devices == null) {
-			return false;
-		}
-
-		return (Util.getEpochMillis() - devices.lastActionTime()) >= idleTime * 1000;
-	}
-
 	private static boolean isLevelCoveredByOverlay() {
 		return OVERLAY_OPTIMIZATION_ACTIVE && minecraft.getOverlay() instanceof LoadingOverlay && ((DuckLoadingOverlay)minecraft.getOverlay()).dynamic_fps$isReloadComplete();
-	}
-
-	private static void initializeIdleCheck() {
-		if (idleCheckRegistered) {
-			return;
-		}
-
-		if (modConfig.idleTime() == 0 || window == null) {
-			return;
-		}
-
-		idleCheckRegistered = true;
-
-		// We only register the input observer and tick handler
-		// When it's used to run less unused code at all times.
-		devices = new InputObserver(window.address());
-
-		Platform.getInstance().registerStartTickEvent(() -> {
-			boolean idle = isIdle();
-
-			if (idle != wasIdle) {
-				wasIdle = idle;
-				onStatusChanged(false);
-			}
-		});
 	}
 
 	@SuppressWarnings("squid:S1215") // Garbage collector call
@@ -253,7 +211,7 @@ public class DynamicFPSMod {
 		} else if (isForcingLowFPS) {
 			current = PowerState.UNFOCUSED;
 		} else if (window.isFocused()) {
-			if (!isIdle()) {
+			if (!IdleHandler.isIdle()) {
 				current = PowerState.FOCUSED;
 			} else {
 				current = PowerState.ABANDONED;
