@@ -68,7 +68,9 @@ public class IdleHandler {
 	}
 
 	private static void checkActivity() {
-		checkPlayerActivity();
+		if (DynamicFPSMod.modConfig.detectIdleMovement()) {
+			checkPlayerActivity();
+		}
 
 		boolean idle = isIdle();
 

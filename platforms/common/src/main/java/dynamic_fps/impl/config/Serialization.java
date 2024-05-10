@@ -99,6 +99,7 @@ public class Serialization {
 		addAbandonedConfig(root);
 		addUncapMenuFrameRate(root);
 		addEnabled(root);
+		addDetectIdleMovement(root);
 	}
 
 	private static void addIdleTime(JsonObject root) {
@@ -170,6 +171,13 @@ public class Serialization {
 		// Add enabled field if it's missing
 		if (!root.has("enabled")) {
 			root.addProperty("enabled", true);
+		}
+	}
+
+	private static void addDetectIdleMovement(JsonObject root) {
+		// Add detect_idle_movement field if it's missing
+		if (!root.has("detect_idle_movement")) {
+			root.addProperty("detect_idle_movement", true);
 		}
 	}
 
