@@ -3,6 +3,7 @@ package dynamic_fps.impl.mixin;
 import com.mojang.blaze3d.platform.Window;
 import dynamic_fps.impl.DynamicFPSMod;
 import dynamic_fps.impl.PowerState;
+import dynamic_fps.impl.util.IdleHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import org.spongepowered.asm.mixin.Final;
@@ -29,6 +30,11 @@ public class MinecraftMixin {
 	@Inject(method = "<init>", at = @At("TAIL"))
 	private void onInit(CallbackInfo callbackInfo) {
 		DynamicFPSMod.setWindow(this.window.window);
+	}
+
+	@Inject(method = "setScreen", at = @At("HEAD"))
+	private void setScreen(CallbackInfo callbackInfo) {
+		IdleHandler.onActivity();
 	}
 
 	/**

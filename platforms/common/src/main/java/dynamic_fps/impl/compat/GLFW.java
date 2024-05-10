@@ -20,6 +20,10 @@ public class GLFW {
 			return;
 		}
 
+		if (DynamicFPSMod.getWindow() == null) {
+			return;
+		}
+
 		if (!DynamicFPSMod.getWindow().isFocused()) {
 			minecraft.mouseHandler.releaseMouse();
 		} else {
