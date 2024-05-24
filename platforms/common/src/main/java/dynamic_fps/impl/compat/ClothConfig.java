@@ -1,9 +1,11 @@
 package dynamic_fps.impl.compat;
 
+import dynamic_fps.impl.Constants;
 import dynamic_fps.impl.DynamicFPSMod;
 import dynamic_fps.impl.GraphicsState;
 import dynamic_fps.impl.PowerState;
 import dynamic_fps.impl.config.Config;
+import dynamic_fps.impl.util.VariableStepTransformer;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
@@ -70,6 +72,9 @@ public final class ClothConfig {
 			.build()
 		);
 
+		// Used for each state's frame rate target slider below
+		VariableStepTransformer fpsTransformer = getFpsTransformer();
+
 		for (PowerState state : PowerState.values()) {
 			if (!state.configurable) {
 				continue;
@@ -82,14 +87,17 @@ public final class ClothConfig {
 				localized("config", "category." + state.toString().toLowerCase())
 			);
 
+			// Having too many possible values on our slider is hard to use, so the conversion is not linear:
+			// Instead the steps between possible values keep getting larger (from 1 to 2, 5, and finally 10)
+			// Selecting the value all the way at the end sets no FPS limit, imitating the regular FPS slider
 			category.addEntry(
 				entryBuilder.startIntSlider(
 					localized("config", "frame_rate_target"),
-					fromConfigFpsTarget(config.frameRateTarget()),
-					0, 61
+					fpsTransformer.toStep(config.frameRateTarget()),
+					0, 68
 				)
-				.setDefaultValue(fromConfigFpsTarget(standard.frameRateTarget()))
-				.setSaveConsumer(value -> config.setFrameRateTarget(toConfigFpsTarget(value)))
+				.setDefaultValue(fpsTransformer.toStep(standard.frameRateTarget()))
+				.setSaveConsumer(step -> config.setFrameRateTarget(fpsTransformer.toValue(step)))
 				.setTextGetter(ClothConfig::fpsTargetMessage)
 				.build()
 			);
@@ -161,19 +169,23 @@ public final class ClothConfig {
 		}
 	}
 
-	// Convert magic -1 number to 61 (and reverse)
-	// So the "unlocked" FPS value is on the right
-	private static int toConfigFpsTarget(int value) {
-		return value == 61 ? -1 : value;
+	private static VariableStepTransformer getFpsTransformer() {
+		VariableStepTransformer transformer = new VariableStepTransformer();
+
+		transformer.addStep(1, 20);
+		transformer.addStep(2, 72);
+		transformer.addStep(3, 75);
+		transformer.addStep(5, 100);
+		transformer.addStep(10, 260);
+
+		return transformer;
 	}
 
-	private static int fromConfigFpsTarget(int value) {
-		return value == -1 ? 61 : value;
-	}
+	private static Component fpsTargetMessage(int step) {
+		int fps = getFpsTransformer().toValue(step);
 
-	private static Component fpsTargetMessage(int value) {
-		if (toConfigFpsTarget(value) != -1) {
-			return Component.translatable("options.framerate", value);
+		if (fps != Constants.NO_FRAME_RATE_LIMIT) {
+			return Component.translatable("options.framerate", fps);
 		} else {
 			return Component.translatable("options.framerateLimit.max");
 		}

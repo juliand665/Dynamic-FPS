@@ -233,7 +233,7 @@ public class DynamicFPSMod {
 	}
 
 	private static boolean checkForRender(long timeSinceLastRender) {
-		int frameRateTarget = config.frameRateTarget();
+		int frameRateTarget = targetFrameRate();
 
 		// Special frame rate target
 		//  0 -> disable rendering

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import dynamic_fps.impl.Constants;
 import dynamic_fps.impl.GraphicsState;
 import dynamic_fps.impl.PowerState;
 import net.minecraft.sounds.SoundSource;
@@ -26,11 +27,19 @@ public final class Config {
 	}
 
 	public int frameRateTarget() {
-		return this.frameRateTarget;
+		if (this.frameRateTarget != -1) {
+			return this.frameRateTarget;
+		} else {
+			return Constants.NO_FRAME_RATE_LIMIT;
+		}
 	}
 
 	public void setFrameRateTarget(int value) {
-		this.frameRateTarget = value;
+		if (value == Constants.NO_FRAME_RATE_LIMIT) {
+			this.frameRateTarget = -1;
+		} else {
+			this.frameRateTarget = value;
+		}
 	}
 
 	public float volumeMultiplier(SoundSource source) {

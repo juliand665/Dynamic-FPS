@@ -1,6 +1,7 @@
 package dynamic_fps.impl.mixin;
 
 import com.mojang.blaze3d.platform.Window;
+import dynamic_fps.impl.Constants;
 import dynamic_fps.impl.DynamicFPSMod;
 import dynamic_fps.impl.PowerState;
 import dynamic_fps.impl.util.IdleHandler;
@@ -23,9 +24,6 @@ public class MinecraftMixin {
 	@Shadow
 	@Final
 	public Options options;
-
-	// Minecraft considers limits >=260 as infinite
-	private static final int NO_FRAME_RATE_LIMIT = 260;
 
 	@Inject(method = "<init>", at = @At("TAIL"))
 	private void onInit(CallbackInfo callbackInfo) {
@@ -56,11 +54,11 @@ public class MinecraftMixin {
 		} else if (DynamicFPSMod.uncapMenuFrameRate()) {
 			if (this.options.enableVsync().get()) {
 				// VSync will regulate to a non-infinite value
-				callbackInfo.setReturnValue(NO_FRAME_RATE_LIMIT);
+				callbackInfo.setReturnValue(Constants.NO_FRAME_RATE_LIMIT);
 			} else {
 				// Even though the option "uncaps" the frame rate the max is 250 FPS
 				// Since otherwise this will just cause coil whine for no real benefit.
-				callbackInfo.setReturnValue(Math.min(limit, NO_FRAME_RATE_LIMIT - 10));
+				callbackInfo.setReturnValue(Math.min(limit, Constants.NO_FRAME_RATE_LIMIT - 10));
 			}
 		}
 	}
