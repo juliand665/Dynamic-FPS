@@ -1,10 +1,10 @@
 [versions]
-minecraft = "24w20a"
+minecraft = "1.21-pre1"
 
 # Platform libraries
 
 fabric_loader = "0.15.10"
-fabric_api = "0.98.2+1.21"
+fabric_api = "0.99.2+1.21"
 
 forge = "1.20.4-49.0.30"
 
@@ -16,7 +16,7 @@ quilt_standard_libraries = "8.0.0-alpha.12+1.20.4"
 # Third-party libraries
 
 modmenu = "10.0.0-alpha.3"
-cloth_config = "14.0.125"
+cloth_config = "14.0.126"
 
 mixinextras = "0.3.5"
 
