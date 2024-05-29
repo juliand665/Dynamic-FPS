@@ -61,7 +61,7 @@ Thanks to:
 """
 modUrl = "https://dapprgames.com/mods"
 displayURL = "https://dapprgames.com/mods"
-updateJSONURL = "https://api.lostluma.net/updates/dynamic-fps?platform=forge&provider=modrinth"
+updateJSONURL = "https://api.lostluma.net/updates/dynamic-fps?platform=forge"
 
 [[mixins]]
 config = "dynamic_fps.mixins.json"
