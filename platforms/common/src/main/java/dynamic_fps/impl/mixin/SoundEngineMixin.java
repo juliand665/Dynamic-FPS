@@ -2,7 +2,6 @@ package dynamic_fps.impl.mixin;
 
 import java.util.Map;
 
-import dynamic_fps.impl.config.Config;
 import net.minecraft.client.Minecraft;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
@@ -44,13 +43,14 @@ public class SoundEngineMixin implements DuckSoundEngine {
 
 	@Shadow
 	private float calculateVolume(SoundInstance instance) {
-		throw new RuntimeException("Failed to find SoundEngine#calculateVolume.");
-	};
+		throw new RuntimeException("Failed to find SoundEngine.calculateVolume.");
+	}
 
 	@Unique
 	private static final Minecraft dynamic_fps$minecraft = Minecraft.getInstance();
 
-	public void dynamic_fps$updateVolume(Config before, SoundSource source) {
+	@Override
+	public void dynamic_fps$updateVolume(SoundSource source) {
 		if (!this.loaded) {
 			return;
 		}
@@ -67,29 +67,32 @@ public class SoundEngineMixin implements DuckSoundEngine {
 		boolean isMusic = source.equals(SoundSource.MUSIC) || source.equals(SoundSource.RECORDS);
 
 		this.instanceToChannel.forEach((instance, handle) -> {
-			if (instance.getSource().equals(source)) {
-				float volume = this.calculateVolume(instance);
+			if (!instance.getSource().equals(source)) {
+				return;
+			}
 
-				handle.execute(channel -> {
-					if (volume <= 0.0f) {
-						// Pause music unconditionally when volume is zero
-						// Other sounds get paused by vanilla if the game is also paused, else we cancel them
-						if (isMusic) {
-							channel.pause();
-						} else if (!dynamic_fps$minecraft.isPaused()) {
-							channel.stop();
-						}
-					} else {
-						// Resume music if Minecraft is active *and* the previous volume was zero
-						// Prevents us from resuming music when the user returns to a paused game
-						// Or the game was just paused and the user is focusing to another window
-						if (!dynamic_fps$minecraft.isPaused() && isMusic && before.volumeMultiplier(source) == 0.0f) {
-							channel.unpause();
-						}
+			float volume = this.calculateVolume(instance);
+
+			handle.execute(channel -> {
+				if (volume <= 0.0f) {
+					// Pause music unconditionally when volume is zero
+					// Otherwise if vanilla doesn't pause the sound set the volume to zero
+					// This allows long sounds (e.g. sonic boom) to be heard when tabbing back in
+					if (isMusic) {
+						channel.pause();
+					} else if (!dynamic_fps$minecraft.isPaused()) {
 						channel.setVolume(volume);
 					}
-				});
-			}
+				} else {
+					// Only resume music if the game is not paused
+					// Because vanilla pauses music on pause screens
+					if (isMusic && !dynamic_fps$minecraft.isPaused()) {
+						channel.unpause();
+					}
+
+					channel.setVolume(volume);
+				}
+			});
 		});
 	}
 
@@ -110,10 +113,13 @@ public class SoundEngineMixin implements DuckSoundEngine {
 	 * Applies the user's requested volume multiplier to any newly played sounds.
 	 */
 	@ModifyReturnValue(method = "getVolume", at = @At("RETURN"))
-	private float getVolume(float original, @Local @Nullable SoundSource source) {
+	private float getVolume(float original, @Local(argsOnly = true) @Nullable SoundSource source) {
 		return this.adjustVolume(original, source);
 	}
 
+	/**
+	 * Adjust the given volume with the multiplier set in the active Dynamic FPS config.
+	 */
 	private float adjustVolume(float value, @Nullable SoundSource source) {
 		if (source == null) {
 			source = SoundSource.MASTER;
