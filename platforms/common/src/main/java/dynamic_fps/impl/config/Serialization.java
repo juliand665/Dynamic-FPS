@@ -100,6 +100,7 @@ public class Serialization {
 		addUncapMenuFrameRate(root);
 		addEnabled(root);
 		addDetectIdleMovement(root);
+		addVolumeTransitionSpeed(root);
 	}
 
 	private static void addIdleTime(JsonObject root) {
@@ -178,6 +179,18 @@ public class Serialization {
 		// Add detect_idle_movement field if it's missing
 		if (!root.has("detect_idle_movement")) {
 			root.addProperty("detect_idle_movement", true);
+		}
+	}
+
+	private static void addVolumeTransitionSpeed(JsonObject root) {
+		// Add volume_transition_speed object if it's missing
+		if (!root.has("volume_transition_speed")) {
+			JsonObject object = new JsonObject();
+
+			object.addProperty("up", 1.0f);
+			object.addProperty("down", 0.5f);
+
+			root.add("volume_transition_speed", object);
 		}
 	}
 

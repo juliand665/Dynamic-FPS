@@ -72,6 +72,34 @@ public final class ClothConfig {
 			.build()
 		);
 
+		VariableStepTransformer volumeTransformer = getVolumeStepTransformer();
+
+		general.addEntry(
+			entryBuilder.startIntSlider(
+					localized("config", "volume_transition_speed_up"),
+					volumeTransformer.toStep((int) (DynamicFPSMod.volumeTransitionSpeed().getUp() * 10)),
+					1, 31
+				)
+				.setDefaultValue(volumeTransformer.toStep((int) (1.0f * 10)))
+				.setSaveConsumer(step -> DynamicFPSMod.volumeTransitionSpeed().setUp((float) volumeTransformer.toValue(step) / 10))
+				.setTextGetter(ClothConfig::volumeTransitionMessage)
+				.setTooltip(localized("config", "volume_transition_speed_tooltip"))
+				.build()
+		);
+
+		general.addEntry(
+			entryBuilder.startIntSlider(
+					localized("config", "volume_transition_speed_down"),
+					volumeTransformer.toStep((int) (DynamicFPSMod.volumeTransitionSpeed().getDown() * 10)),
+					1, 31
+				)
+				.setDefaultValue(volumeTransformer.toStep((int) (0.5f * 10)))
+				.setSaveConsumer(step -> DynamicFPSMod.volumeTransitionSpeed().setDown((float) volumeTransformer.toValue(step) / 10))
+				.setTextGetter(ClothConfig::volumeTransitionMessage)
+				.setTooltip(localized("config", "volume_transition_speed_tooltip"))
+				.build()
+		);
+
 		// Used for each state's frame rate target slider below
 		VariableStepTransformer fpsTransformer = getFpsTransformer();
 
@@ -166,6 +194,25 @@ public final class ClothConfig {
 			return localized("config", "disabled");
 		} else {
 			return localized("config", "minutes", value);
+		}
+	}
+
+	private static VariableStepTransformer getVolumeStepTransformer() {
+		VariableStepTransformer transformer = new VariableStepTransformer();
+
+		transformer.addStep(1, 30);
+		transformer.addStep(970, 1000);
+
+		return transformer;
+	}
+
+	private static Component volumeTransitionMessage(int step) {
+		float value = (float) getVolumeStepTransformer().toValue(step) / 10;
+
+		if (value < 100.0f) {
+			return Component.literal(value + "%");
+		} else {
+			return localized("config", "volume_transition_speed_instant");
 		}
 	}
 

@@ -11,15 +11,17 @@ public final class DynamicFPSConfig {
 	private int idleTime; // Seconds
 	private boolean detectIdleMovement;
 	private boolean uncapMenuFrameRate;
+	private VolumeTransitionSpeed volumeTransitionSpeed;
 
 	@SerializedName("states")
 	private final Map<PowerState, Config> configs;
 
-	private DynamicFPSConfig(boolean enabled, int abandonTime, boolean detectIdleMovement, boolean uncapMenuFrameRate, Map<PowerState, Config> configs) {
+	private DynamicFPSConfig(boolean enabled, int abandonTime, boolean detectIdleMovement, boolean uncapMenuFrameRate, VolumeTransitionSpeed volumeTransitionSpeed, Map<PowerState, Config> configs) {
 		this.enabled = enabled;
 		this.idleTime = abandonTime;
 		this.detectIdleMovement = detectIdleMovement;
 		this.uncapMenuFrameRate = uncapMenuFrameRate;
+		this.volumeTransitionSpeed = volumeTransitionSpeed;
 
 		this.configs = new EnumMap<>(configs);
 
@@ -36,6 +38,7 @@ public final class DynamicFPSConfig {
 			0,
 			true,
 			false,
+			new VolumeTransitionSpeed(1.0f, 0.5f),
 			new EnumMap<>(PowerState.class)
 		);
 
@@ -67,6 +70,10 @@ public final class DynamicFPSConfig {
 		this.idleTime = value;
 	}
 
+	public VolumeTransitionSpeed volumeTransitionSpeed() {
+		return this.volumeTransitionSpeed;
+	}
+
 	public boolean detectIdleMovement() {
 		return this.detectIdleMovement;
 	}
@@ -95,5 +102,35 @@ public final class DynamicFPSConfig {
 
 	public void save() {
 		Serialization.save(this);
+	}
+
+	public static class VolumeTransitionSpeed {
+		private float up;
+		private float down;
+
+		protected VolumeTransitionSpeed(float up, float down) {
+			this.up = up;
+			this.down = down;
+		}
+
+		public float getUp() {
+			return this.up;
+		}
+
+		public void setUp(float value) {
+			this.up = value;
+		}
+
+		public float getDown() {
+			return this.down;
+		}
+
+		public void setDown(float value) {
+			this.down = value;
+		}
+
+		public boolean isActive() {
+			return this.up != 100.0f || this.down != 100.0f;
+		}
 	}
 }

@@ -10,6 +10,7 @@ import dynamic_fps.impl.util.FallbackConfigScreen;
 import dynamic_fps.impl.util.Logging;
 import dynamic_fps.impl.util.OptionsHolder;
 import dynamic_fps.impl.util.Version;
+import dynamic_fps.impl.util.SmoothVolumeHandler;
 import dynamic_fps.impl.util.duck.DuckLoadingOverlay;
 import dynamic_fps.impl.util.duck.DuckSoundEngine;
 import dynamic_fps.impl.util.event.WindowObserver;
@@ -52,6 +53,7 @@ public class DynamicFPSMod {
 
 	public static void init() {
 		IdleHandler.init();
+		SmoothVolumeHandler.init();
 
 		Platform platform = Platform.getInstance();
 		Version version = platform.getModVersion(Constants.MOD_ID).orElseThrow();
@@ -97,6 +99,7 @@ public class DynamicFPSMod {
 	public static void onConfigChanged() {
 		modConfig.save();
 		IdleHandler.init();
+		SmoothVolumeHandler.init();
 	}
 
 	public static Screen getConfigScreen(Screen parent) {
@@ -159,6 +162,10 @@ public class DynamicFPSMod {
 		return config.volumeMultiplier(source);
 	}
 
+	public static DynamicFPSConfig.VolumeTransitionSpeed volumeTransitionSpeed() {
+		return modConfig.volumeTransitionSpeed();
+	}
+
 	public static boolean shouldShowToasts() {
 		return config.showToasts();
 	}
@@ -189,6 +196,7 @@ public class DynamicFPSMod {
 			System.gc();
 		}
 
+		// Update volume of current sounds for users not using smooth volume transition
 		for (SoundSource source : SoundSource.values()) {
 			((DuckSoundEngine) minecraft.getSoundManager().soundEngine).dynamic_fps$updateVolume(source);
 		}
