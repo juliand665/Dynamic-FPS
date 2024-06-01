@@ -9,6 +9,7 @@ import dynamic_fps.impl.util.IdleHandler;
 import dynamic_fps.impl.util.FallbackConfigScreen;
 import dynamic_fps.impl.util.Logging;
 import dynamic_fps.impl.util.OptionsHolder;
+import dynamic_fps.impl.util.Version;
 import dynamic_fps.impl.util.duck.DuckLoadingOverlay;
 import dynamic_fps.impl.util.duck.DuckSoundEngine;
 import dynamic_fps.impl.util.event.WindowObserver;
@@ -53,7 +54,7 @@ public class DynamicFPSMod {
 		IdleHandler.init();
 
 		Platform platform = Platform.getInstance();
-		String version = platform.getModVersion(Constants.MOD_ID).orElseThrow();
+		Version version = platform.getModVersion(Constants.MOD_ID).orElseThrow();
 
 		Logging.getLogger().info("Dynamic FPS {} active on {}!", version, platform.getName());
 	}

@@ -2,6 +2,7 @@ package net.lostluma.dynamic_fps.impl.fabric.service;
 
 import dynamic_fps.impl.Constants;
 import dynamic_fps.impl.service.Platform;
+import dynamic_fps.impl.util.Version;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
@@ -39,9 +40,20 @@ public class FabricPlatform implements Platform {
 	}
 
 	@Override
-	public Optional<String> getModVersion(String modId) {
+	public Optional<Version> getModVersion(String modId) {
 		Optional<ModContainer> optional = FabricLoader.getInstance().getModContainer(modId);
-		return optional.map(modContainer -> modContainer.getMetadata().getVersion().toString());
+
+		if (optional.isEmpty()) {
+			return Optional.empty();
+		}
+
+		String raw = optional.get().getMetadata().getVersion().getFriendlyString();
+
+		try {
+			return Optional.of(Version.of(raw));
+		} catch (Version.VersionParseException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
