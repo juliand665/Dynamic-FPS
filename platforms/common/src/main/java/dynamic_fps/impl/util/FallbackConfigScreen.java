@@ -21,10 +21,10 @@ public class FallbackConfigScreen extends Screen {
 
 	@Override
 	protected void init() {
-		var width = 152;
-		var height = 20;
-		var x = (this.width - width) / 2;
-		var y = this.height - height - 5;
+		int width = 152;
+		int height = 20;
+		int x = (this.width - width) / 2;
+		int y = this.height - height - 5;
 
 		this.addRenderableWidget(
 			Button.builder(CommonComponents.GUI_BACK, button -> this.onClose()).bounds(x, y, width, height).build()
@@ -35,8 +35,8 @@ public class FallbackConfigScreen extends Screen {
 	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
 		super.render(guiGraphics, mouseX, mouseY, partialTicks);
 
-		var width = guiGraphics.guiWidth() / 2;
-		var height = guiGraphics.guiHeight() / 3;
+		int width = guiGraphics.guiWidth() / 2;
+		int height = guiGraphics.guiHeight() / 3;
 
 		guiGraphics.drawCenteredString(this.font, WARNING_0.getVisualOrderText(), width, height, 0xFFFFFF);
 		guiGraphics.drawCenteredString(this.font, WARNING_1.getVisualOrderText(), width, height + 10, 0xFFFFFF);
