@@ -197,8 +197,10 @@ public class DynamicFPSMod {
 		}
 
 		// Update volume of current sounds for users not using smooth volume transition
-		for (SoundSource source : SoundSource.values()) {
-			((DuckSoundEngine) minecraft.getSoundManager().soundEngine).dynamic_fps$updateVolume(source);
+		if (!volumeTransitionSpeed().isActive()) {
+			for (SoundSource source : SoundSource.values()) {
+				((DuckSoundEngine) minecraft.getSoundManager().soundEngine).dynamic_fps$updateVolume(source);
+			}
 		}
 
 		if (before.graphicsState() != config.graphicsState()) {
