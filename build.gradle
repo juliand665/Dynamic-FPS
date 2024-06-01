@@ -28,7 +28,7 @@ subprojects {
 		version = rootProject.mod_version
 	} else {
 		var platform = project.property("loom.platform")
-		version = "${rootProject.mod_version}+minecraft-${libs.versions.minecraft.get()}-${platform}"
+		version = "${rootProject.mod_version}+minecraft-${project.minecraft_version_min}-${platform}"
 	}
 
 	loom {
