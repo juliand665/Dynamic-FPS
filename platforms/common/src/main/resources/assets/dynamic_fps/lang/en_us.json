@@ -21,6 +21,11 @@
     "config.dynamic_fps.uncap_menu_frame_rate": "Uncap Menu FPS",
     "config.dynamic_fps.uncap_menu_frame_rate_tooltip": "Remove the 60 FPS limit in the main menu.",
 
+    "config.dynamic_fps.volume_transition_speed_up": "Upward Volume Transition Speed",
+    "config.dynamic_fps.volume_transition_speed_down": "Downward Volume Transition Speed",
+    "config.dynamic_fps.volume_transition_speed_instant": "Immediate",
+    "config.dynamic_fps.volume_transition_speed_tooltip": "Set the speed at which the game volume will be adjusted per second.",
+
     "config.dynamic_fps.frame_rate_target": "Frame Rate Target",
     "config.dynamic_fps.volume_multiplier": "Volume Multiplier",
 

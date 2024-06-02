@@ -2,6 +2,7 @@ package dynamic_fps.impl.mixin;
 
 import java.util.Map;
 
+import dynamic_fps.impl.util.SmoothVolumeHandler;
 import net.minecraft.client.Minecraft;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
@@ -16,7 +17,6 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.audio.Listener;
 
-import dynamic_fps.impl.DynamicFPSMod;
 import dynamic_fps.impl.util.duck.DuckSoundEngine;
 import net.minecraft.client.Options;
 import net.minecraft.client.resources.sounds.SoundInstance;
@@ -104,7 +104,7 @@ public class SoundEngineMixin implements DuckSoundEngine {
 	 */
 	@Inject(method = { "play", "playDelayed" }, at = @At("HEAD"), cancellable = true)
 	private void play(SoundInstance instance, CallbackInfo callbackInfo) {
-		if (DynamicFPSMod.volumeMultiplier(instance.getSource()) == 0.0f) {
+		if (SmoothVolumeHandler.volumeMultiplier(instance.getSource()) == 0.0f) {
 			callbackInfo.cancel();
 		}
 	}
@@ -125,6 +125,6 @@ public class SoundEngineMixin implements DuckSoundEngine {
 			source = SoundSource.MASTER;
 		}
 
-		return value * DynamicFPSMod.volumeMultiplier(source);
+		return value * SmoothVolumeHandler.volumeMultiplier(source);
 	}
 }
