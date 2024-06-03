@@ -16,13 +16,9 @@ public class WindowMixin {
 	 */
 	@Inject(method = "getFramerateLimit", at = @At("RETURN"), cancellable = true)
 	private void onGetFramerateLimit(CallbackInfoReturnable<Integer> callbackInfo) {
-		int target = DynamicFPSMod.targetFrameRate();
-
-		if (target != -1) {
-			// We're currently reducing the frame rate
-			// Instruct Minecraft to render max 15 FPS
-			// Going lower here makes resuming feel sluggish
-			callbackInfo.setReturnValue(Math.max(target, 15));
-		}
+		// We're currently reducing the frame rate
+		// Instruct Minecraft to render max 15 FPS
+		// Going lower here makes resuming feel sluggish
+		callbackInfo.setReturnValue(Math.max(Math.min(callbackInfo.getReturnValue(), DynamicFPSMod.targetFrameRate()), 15));
 	}
 }
