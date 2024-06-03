@@ -3,6 +3,7 @@ package dynamic_fps.impl.mixin;
 import java.util.List;
 import java.util.Locale;
 
+import dynamic_fps.impl.Constants;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -29,9 +30,11 @@ public class DebugScreenOverlayMixin {
 
 			if (status != PowerState.FOCUSED) {
 				int target = DynamicFPSMod.targetFrameRate();
+				String fps = target == Constants.NO_FRAME_RATE_LIMIT ? "inf" : Integer.toString(target);
+
 				result.add(
 					2,
-					this.format("§c[Dynamic FPS] FPS: %s P: %s§r", target, status.toString().toLowerCase())
+					this.format("§c[Dynamic FPS] FPS: %s P: %s§r", fps, status.toString().toLowerCase())
 				);
 			}
 		}

@@ -47,7 +47,8 @@ public class MinecraftMixin {
 		int limit = this.window.getFramerateLimit();
 
 		if (DynamicFPSMod.powerState() != PowerState.FOCUSED) {
-			// Limit may be 260 (uncapped)
+			// Vanilla returns 60 here
+			// Only overwrite if our current limit is lower
 			if (limit < 60) {
 				callbackInfo.setReturnValue(limit);
 			}
@@ -56,8 +57,8 @@ public class MinecraftMixin {
 				// VSync will regulate to a non-infinite value
 				callbackInfo.setReturnValue(Constants.NO_FRAME_RATE_LIMIT);
 			} else {
-				// Even though the option "uncaps" the frame rate the max is 250 FPS
-				// Since otherwise this will just cause coil whine for no real benefit.
+				// Even though the option "uncaps" the frame rate the limit is 250 FPS.
+				// Since otherwise this will just cause coil whine with no real benefit
 				callbackInfo.setReturnValue(Math.min(limit, Constants.NO_FRAME_RATE_LIMIT - 10));
 			}
 		}
