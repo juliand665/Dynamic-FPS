@@ -1,6 +1,7 @@
 package net.lostluma.dynamic_fps.impl.forge.service;
 
 import dynamic_fps.impl.service.ModCompat;
+import net.lostluma.dynamic_fps.impl.forge.compat.FREX;
 import net.minecraft.client.gui.screens.ReceivingLevelScreen;
 import net.minecraftforge.fml.ModList;
 
@@ -16,7 +17,7 @@ public class ForgeModCompat implements ModCompat {
 
 	@Override
 	public boolean isDisabled() {
-		return false;
+		return FREX.isFlawlessFramesActive();
 	}
 
 	@Override
