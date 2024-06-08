@@ -6,11 +6,17 @@ import dynamic_fps.impl.compat.ClothConfig;
 import dynamic_fps.impl.service.Platform;
 import dynamic_fps.impl.util.HudInfoRenderer;
 import dynamic_fps.impl.util.KeyMappingHandler;
+import dynamic_fps.impl.util.Localization;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.AlertScreen;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -33,7 +39,15 @@ public class DynamicFPSForgeMod {
 		ModLoadingContext.get().registerExtensionPoint(
 			ConfigScreenHandler.ConfigScreenFactory.class,
 			() -> new ConfigScreenHandler.ConfigScreenFactory(
-				(minecraft, screen) -> ClothConfig.genConfigScreen(screen)
+				(minecraft, parent) -> {
+					if (!ModList.get().isLoaded("cloth-config"))
+						return new AlertScreen(
+							() -> Minecraft.getInstance().setScreen(parent),
+							Localization.localized("config","title"),
+							Localization.localized("config","warn_cloth_config").withStyle(ChatFormatting.RED)
+						);
+					else return ClothConfig.genConfigScreen(parent);
+				}
 			)
 		);
 

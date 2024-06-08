@@ -77,10 +77,3 @@ mandatory = true
 versionRange = "[1.19.0,1.19.2]"
 ordering = "NONE"
 side = "CLIENT"
-
-[[dependencies.dynamic_fps]]
-modId = "cloth_config"
-mandatory = true
-versionRange = "[1,)"
-ordering = "NONE"
-side = "CLIENT"
