@@ -33,6 +33,8 @@
     "config.dynamic_fps.run_garbage_collector": "Invoke Garbage Collector",
     "config.dynamic_fps.run_garbage_collector_tooltip": "Free up unused memory when switching to this status",
 
+    "config.dynamic_fps.warn_cloth_config": "You need to install ConfigCloth to change configuration!",
+
     "key.dynamic_fps.toggle_forced": "Force Unfocused Mode (Toggle)",
     "key.dynamic_fps.toggle_disabled": "Disable Dynamic FPS (Toggle)",
     "gui.dynamic_fps.hud.reducing": "Dynamic FPS: Forcing Reduced FPS",

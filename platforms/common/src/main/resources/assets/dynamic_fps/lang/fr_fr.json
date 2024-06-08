@@ -18,5 +18,7 @@
     "gui.dynamic_fps.hud.reducing": "Dynamic FPS force la réduction d'IPS",
     "gui.dynamic_fps.hud.disabled": "Dynamic FPS est désactivé",
 
+    "config.dynamic_fps.warn_cloth_config": "Vous avez besoin d'installer ConfigCloth pour changer la configuration!",
+
     "modmenu.descriptionTranslation.dynamic_fps": "Ajuste dynamiquement les IPS afin que Minecraft ne monopolise pas les ressources en arrière-plan."
 }
