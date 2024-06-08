@@ -1,6 +1,5 @@
 package net.lostluma.dynamic_fps.impl.quilt.mixin;
 
-import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.vertex.PoseStack;
 import dynamic_fps.impl.util.HudInfoRenderer;
 import net.minecraft.client.gui.Gui;
@@ -21,7 +20,7 @@ public class GuiMixin {
 			target = "Lnet/minecraft/client/gui/Gui;renderSavingIndicator(Lcom/mojang/blaze3d/vertex/PoseStack;)V"
 		)
 	)
-	private void render(CallbackInfo callbackInfo, @Local PoseStack poseStack) {
+	private void render(PoseStack poseStack, float f, CallbackInfo ci) {
 		HudInfoRenderer.renderInfo(poseStack);
 	}
 }

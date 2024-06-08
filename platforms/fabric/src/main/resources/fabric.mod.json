@@ -69,7 +69,6 @@
             "=1.19.1",
             "=1.19.2"
         ],
-        "mixinextras": ">=0.3.2",
         "fabric-resource-loader-v0": "*",
         "fabric-lifecycle-events-v1": "*"
     },

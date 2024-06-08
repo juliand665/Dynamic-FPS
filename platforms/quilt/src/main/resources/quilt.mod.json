@@ -80,10 +80,6 @@
                 }
             },
             {
-                "id": "mixinextras",
-                "versions": ">=0.3.2"
-            },
-            {
                 "id": "quilt_resource_loader",
                 "versions": "*"
             },

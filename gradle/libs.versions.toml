@@ -18,8 +18,6 @@ quilt_standard_libraries = "2.0.0-beta.16+1.19"
 modmenu = "4.0.0"
 cloth_config = "7.0.72"
 
-mixinextras = "0.3.5"
-
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
 
@@ -39,9 +37,6 @@ qsl_lifecycle_events = { module = "org.quiltmc.qsl.core:lifecycle_events", versi
 
 modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
 cloth_config = { module = "me.shedaniel.cloth:cloth-config", version.ref = "cloth_config" }
-
-mixinextras_common = { module = "io.github.llamalad7:mixinextras-common", version.ref = "mixinextras" }
-mixinextras_forge = { module = "io.github.llamalad7:mixinextras-forge", version.ref = "mixinextras" }
 
 [bundles]
 
