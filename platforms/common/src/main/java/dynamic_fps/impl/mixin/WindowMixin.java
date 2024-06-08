@@ -1,5 +1,6 @@
 package dynamic_fps.impl.mixin;
 
+import dynamic_fps.impl.PowerState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -16,9 +17,12 @@ public class WindowMixin {
 	 */
 	@Inject(method = "getFramerateLimit", at = @At("RETURN"), cancellable = true)
 	private void onGetFramerateLimit(CallbackInfoReturnable<Integer> callbackInfo) {
-		// We're currently reducing the frame rate
-		// Instruct Minecraft to render max 15 FPS
-		// Going lower here makes resuming feel sluggish
-		callbackInfo.setReturnValue(Math.max(Math.min(callbackInfo.getReturnValue(), DynamicFPSMod.targetFrameRate()), 15));
+		PowerState state = DynamicFPSMod.powerState();
+
+		if (state != PowerState.FOCUSED) {
+			// Instruct Minecraft to render a minimum of 15 FPS
+			// Going lower here makes resuming again feel sluggish
+			callbackInfo.setReturnValue(Math.max(DynamicFPSMod.targetFrameRate(), 15));
+		}
 	}
 }

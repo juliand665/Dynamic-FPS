@@ -257,11 +257,14 @@ public class DynamicFPSMod {
 	private static boolean checkForRender(long timeSinceLastRender) {
 		int frameRateTarget = targetFrameRate();
 
-		// Special frame rate target
-		//  0 -> disable rendering
-		// -1 -> uncapped frame rate
-		if (frameRateTarget <= 0) {
-			return frameRateTarget == -1;
+		// Disable all rendering
+		if (frameRateTarget == 0) {
+			return false;
+		}
+
+		// Disable frame rate limiting
+		if (frameRateTarget == Constants.NO_FRAME_RATE_LIMIT) {
+			return true;
 		}
 
 		// Render one more frame before

@@ -27,7 +27,7 @@ To access the in-game config screen you'll also need to install [Mod Menu](https
 
 - Why is Minecraft still running at 15 FPS?
 
-Dynamic FPS will only reduce the client / render loop to a minimum of 15 cycles per second.
+Dynamic FPS will only slow the client render loop to a minimum of 15 cycles per second.
 Lower frame rates are achieved by then cancelling the rendering of all superfluous frames, e.g. 14 out of 15 frames are cancelled for 1 FPS.
 
 This lets you resume playing almost instantly after switching back to the game:
