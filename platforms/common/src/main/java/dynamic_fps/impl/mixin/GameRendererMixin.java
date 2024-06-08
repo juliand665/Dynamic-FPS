@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class GameRendererMixin {
 	/**
 	 * Implements the mod's big feature.
-	 *
+	 * <p>
 	 * Note: Inject after the pause on lost focus check,
 	 * This allows the feature to work even at zero FPS.
 	 */

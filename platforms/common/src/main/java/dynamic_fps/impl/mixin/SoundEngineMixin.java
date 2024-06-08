@@ -42,7 +42,7 @@ public class SoundEngineMixin implements DuckSoundEngine {
 	@Shadow
 	private float calculateVolume(SoundInstance instance) {
 		throw new RuntimeException("Failed to find SoundEngine#calculateVolume.");
-	};
+	}
 
 	@Unique
 	private static final Minecraft dynamic_fps$minecraft = Minecraft.getInstance();
@@ -92,7 +92,7 @@ public class SoundEngineMixin implements DuckSoundEngine {
 
 	/**
 	 * Cancels playing sounds while we are overwriting the volume to be off.
-	 *
+	 * <p>
 	 * This is done in favor of actually setting the volume to zero because it
 	 * Allows pausing and resuming the sound engine without cancelling all active sounds.
 	 */

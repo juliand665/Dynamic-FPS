@@ -16,7 +16,7 @@ import java.util.Locale;
 public class DebugScreenOverlayMixin {
 	/**
 	 * Show the current power state and effective frame rate below the FPS counter, unless focused.
-	 *
+	 * <p>
 	 * As we only slow the client loop to a minimum of 15 TPS the vanilla frame rate counter is inaccurate and confusing.
 	 */
 	@Inject(method = "getGameInformation", at = @At("RETURN"), cancellable = true)
