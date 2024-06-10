@@ -2,7 +2,7 @@ package dynamic_fps.impl.mixin;
 
 import java.util.Map;
 
-import dynamic_fps.impl.util.SmoothVolumeHandler;
+import dynamic_fps.impl.feature.volume.SmoothVolumeHandler;
 import net.minecraft.client.Minecraft;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;

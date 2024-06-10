@@ -1,4 +1,4 @@
-package dynamic_fps.impl.util;
+package dynamic_fps.impl.feature.volume;
 
 import dynamic_fps.impl.DynamicFPSMod;
 import dynamic_fps.impl.service.Platform;

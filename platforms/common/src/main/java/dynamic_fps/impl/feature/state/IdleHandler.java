@@ -1,4 +1,4 @@
-package dynamic_fps.impl.util;
+package dynamic_fps.impl.feature.state;
 
 import dynamic_fps.impl.DynamicFPSMod;
 import dynamic_fps.impl.service.Platform;
@@ -68,9 +68,7 @@ public class IdleHandler {
 	}
 
 	private static void checkActivity() {
-		if (DynamicFPSMod.modConfig.detectIdleMovement()) {
-			checkPlayerActivity();
-		}
+		checkPlayerActivity();
 
 		boolean idle = isIdle();
 

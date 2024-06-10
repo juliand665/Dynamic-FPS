@@ -1,6 +1,6 @@
-package dynamic_fps.impl.util;
+package dynamic_fps.impl.feature.state;
 
-import dynamic_fps.impl.GraphicsState;
+import dynamic_fps.impl.config.option.GraphicsState;
 import net.minecraft.client.CloudStatus;
 import net.minecraft.client.GraphicsStatus;
 import net.minecraft.client.Options;
@@ -11,7 +11,7 @@ import net.minecraft.client.ParticleStatus;
  *
  * Different power states may be configured to use different graphics settings.
  */
-public class OptionsHolder {
+public class OptionHolder {
 	private static CloudStatus cloudStatus;
 	private static GraphicsStatus graphicsStatus;
 	private static boolean ambientOcclusion;

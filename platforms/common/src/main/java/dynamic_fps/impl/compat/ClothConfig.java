@@ -2,7 +2,7 @@ package dynamic_fps.impl.compat;
 
 import dynamic_fps.impl.Constants;
 import dynamic_fps.impl.DynamicFPSMod;
-import dynamic_fps.impl.GraphicsState;
+import dynamic_fps.impl.config.option.GraphicsState;
 import dynamic_fps.impl.PowerState;
 import dynamic_fps.impl.config.Config;
 import dynamic_fps.impl.util.VariableStepTransformer;

@@ -4,16 +4,17 @@ import dynamic_fps.impl.compat.ClothConfig;
 import dynamic_fps.impl.compat.GLFW;
 import dynamic_fps.impl.config.Config;
 import dynamic_fps.impl.config.DynamicFPSConfig;
+import dynamic_fps.impl.config.option.GraphicsState;
 import dynamic_fps.impl.service.ModCompat;
-import dynamic_fps.impl.util.IdleHandler;
+import dynamic_fps.impl.feature.state.IdleHandler;
 import dynamic_fps.impl.util.FallbackConfigScreen;
 import dynamic_fps.impl.util.Logging;
-import dynamic_fps.impl.util.OptionsHolder;
+import dynamic_fps.impl.feature.state.OptionHolder;
 import dynamic_fps.impl.util.Version;
-import dynamic_fps.impl.util.SmoothVolumeHandler;
+import dynamic_fps.impl.feature.volume.SmoothVolumeHandler;
 import dynamic_fps.impl.util.duck.DuckLoadingOverlay;
 import dynamic_fps.impl.util.duck.DuckSoundEngine;
-import dynamic_fps.impl.util.event.WindowObserver;
+import dynamic_fps.impl.feature.state.WindowObserver;
 import dynamic_fps.impl.service.Platform;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
@@ -205,10 +206,10 @@ public class DynamicFPSMod {
 
 		if (before.graphicsState() != config.graphicsState()) {
 			if (before.graphicsState() == GraphicsState.DEFAULT) {
-				OptionsHolder.copyOptions(minecraft.options);
+				OptionHolder.copyOptions(minecraft.options);
 			}
 
-			OptionsHolder.applyOptions(minecraft.options, config.graphicsState());
+			OptionHolder.applyOptions(minecraft.options, config.graphicsState());
 		}
 	}
 
