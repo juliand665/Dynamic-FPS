@@ -1,17 +1,45 @@
 {
     "config.dynamic_fps.title": "設定 Dynamic FPS",
 
+    "config.dynamic_fps.warn_cloth_config.0": "需要 Cloth Config 來在 Minecraft 中設定 Dynamic FPS。",
+    "config.dynamic_fps.warn_cloth_config.1": "要麼安裝 Cloth Config、要麼編輯配置文件，要麼使用默認設置。",
+
     "config.dynamic_fps.category.general": "一般",
     "config.dynamic_fps.category.hovered": "聚焦時",
     "config.dynamic_fps.category.unfocused": "未聚焦時",
+    "config.dynamic_fps.category.abandoned": "Idle",
     "config.dynamic_fps.category.invisible": "不可見時",
 
+    "config.dynamic_fps.enabled": "啟用",
+
+    "config.dynamic_fps.disabled": "停用",
+    "config.dynamic_fps.minutes": "%d 分鐘",
+
+    "config.dynamic_fps.idle_time": "閒置逾時",
+    "config.dynamic_fps.idle_time_tooltip": "分鐘, 直到Dynamic FPS 在遊戲聚焦時激活閒置狀態。",
+
+    "config.dynamic_fps.uncap_menu_frame_rate": "取消選單 FPS 上限",
+    "config.dynamic_fps.uncap_menu_frame_rate_tooltip": "移除主選單中 60 FPS 的限制。",
+
+    "config.dynamic_fps.volume_transition_speed_up": "向上音量轉換速度",
+    "config.dynamic_fps.volume_transition_speed_down": "向下音量轉換速度",
+    "config.dynamic_fps.volume_transition_speed_instant": "立即",
+    "config.dynamic_fps.volume_transition_speed_tooltip": "設置每秒調整遊戲音量的速度。",
+
     "config.dynamic_fps.frame_rate_target": "FPS 目標",
-    "config.dynamic_fps.frame_rate_target_description": "將 FPS 目標設為 -1 以停用限制 FPS。",
     "config.dynamic_fps.volume_multiplier": "音量倍增器",
+
     "config.dynamic_fps.graphics_state": "圖形選項",
+    "config.dynamic_fps.graphics_state_default": "預設",
+    "config.dynamic_fps.graphics_state_reduced": "減少",
+    "config.dynamic_fps.graphics_state_minimal": "最小",
+    "config.dynamic_fps.graphics_state_minimal_tooltip": "最小畫質會導致世界重新加載！畫質會導致世界重新加載！",
+
     "config.dynamic_fps.show_toasts": "顯示彈出提示框",
+    "config.dynamic_fps.show_toasts_tooltip": "是否繼續顯示還是延遲顯示通知",
+
     "config.dynamic_fps.run_garbage_collector": "使用垃圾回收器",
+    "config.dynamic_fps.run_garbage_collector_tooltip": "切換到此狀態時，釋放未使用的記憶體",
 
     "key.dynamic_fps.toggle_forced": "強制未聚焦模式（切換）",
     "key.dynamic_fps.toggle_disabled": "停用 Dynamic FPS（切換）",
