@@ -76,8 +76,7 @@
     },
     "recommends": {
         "modmenu": "*",
-        "cloth-config": "*",
-        "quilt_loader": "*"
+        "cloth-config": "*"
     },
     "mixins": [
         "dynamic_fps.mixins.json",
