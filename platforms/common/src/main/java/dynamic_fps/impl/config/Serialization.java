@@ -13,8 +13,8 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import dynamic_fps.impl.Constants;
-import dynamic_fps.impl.GraphicsState;
 import dynamic_fps.impl.PowerState;
+import dynamic_fps.impl.config.option.GraphicsState;
 import dynamic_fps.impl.service.Platform;
 import dynamic_fps.impl.util.Logging;
 import org.jetbrains.annotations.Nullable;
@@ -99,7 +99,6 @@ public class Serialization {
 		addAbandonedConfig(root);
 		addUncapMenuFrameRate(root);
 		addEnabled(root);
-		addDetectIdleMovement(root);
 		addVolumeTransitionSpeed(root);
 	}
 
@@ -172,13 +171,6 @@ public class Serialization {
 		// Add enabled field if it's missing
 		if (!root.has("enabled")) {
 			root.addProperty("enabled", true);
-		}
-	}
-
-	private static void addDetectIdleMovement(JsonObject root) {
-		// Add detect_idle_movement field if it's missing
-		if (!root.has("detect_idle_movement")) {
-			root.addProperty("detect_idle_movement", true);
 		}
 	}
 

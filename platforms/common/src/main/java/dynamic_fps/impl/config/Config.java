@@ -5,8 +5,8 @@ import java.util.Locale;
 import java.util.Map;
 
 import dynamic_fps.impl.Constants;
-import dynamic_fps.impl.GraphicsState;
 import dynamic_fps.impl.PowerState;
+import dynamic_fps.impl.config.option.GraphicsState;
 import net.minecraft.sounds.SoundSource;
 
 public final class Config {

@@ -9,17 +9,15 @@ import dynamic_fps.impl.PowerState;
 public final class DynamicFPSConfig {
 	private boolean enabled;
 	private int idleTime; // Seconds
-	private boolean detectIdleMovement;
 	private boolean uncapMenuFrameRate;
 	private VolumeTransitionSpeed volumeTransitionSpeed;
 
 	@SerializedName("states")
 	private final Map<PowerState, Config> configs;
 
-	private DynamicFPSConfig(boolean enabled, int abandonTime, boolean detectIdleMovement, boolean uncapMenuFrameRate, VolumeTransitionSpeed volumeTransitionSpeed, Map<PowerState, Config> configs) {
+	private DynamicFPSConfig(boolean enabled, int abandonTime, boolean uncapMenuFrameRate, VolumeTransitionSpeed volumeTransitionSpeed, Map<PowerState, Config> configs) {
 		this.enabled = enabled;
 		this.idleTime = abandonTime;
-		this.detectIdleMovement = detectIdleMovement;
 		this.uncapMenuFrameRate = uncapMenuFrameRate;
 		this.volumeTransitionSpeed = volumeTransitionSpeed;
 
@@ -36,7 +34,6 @@ public final class DynamicFPSConfig {
 		DynamicFPSConfig instance =  new DynamicFPSConfig(
 			true,
 			0,
-			true,
 			false,
 			new VolumeTransitionSpeed(1.0f, 0.5f),
 			new EnumMap<>(PowerState.class)
@@ -73,16 +70,6 @@ public final class DynamicFPSConfig {
 	public VolumeTransitionSpeed volumeTransitionSpeed() {
 		return this.volumeTransitionSpeed;
 	}
-
-	public boolean detectIdleMovement() {
-		return this.detectIdleMovement;
-	}
-
-	/*
-	public void setDetectIdleMovement(boolean value) {
-		this.detectIdleMovement = value;
-	}
-	 */
 
 	public boolean uncapMenuFrameRate() {
 		return this.uncapMenuFrameRate;
