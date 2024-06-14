@@ -104,7 +104,7 @@ public class DynamicFPSMod {
 	}
 
 	public static Screen getConfigScreen(Screen parent) {
-		if (!Platform.getInstance().isModLoaded("cloth-config")) {
+		if (!Platform.getInstance().isModLoaded("cloth-config", "cloth_config")) {
 			return new FallbackConfigScreen(parent);
 		} else {
 			return ClothConfig.genConfigScreen(parent);

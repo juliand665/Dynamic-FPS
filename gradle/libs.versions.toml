@@ -8,7 +8,7 @@ fabric_api = "0.100.1+1.21"
 
 forge = "1.20.4-49.0.30"
 
-neoforge = "20.5.20-beta"
+neoforge = "21.0.0-beta"
 
 quilt_loader = "0.25.0"
 quilt_standard_libraries = "8.0.0-alpha.12+1.20.4"
@@ -49,4 +49,4 @@ mixinextras_forge = { module = "io.github.llamalad7:mixinextras-forge", version.
 shadow = { id = "com.github.johnrengelman.shadow", version = "8.1.1" }
 
 architectury = { id = "architectury-plugin", version = "3.4.155" }
-architectury_loom = { id = "dev.architectury.loom", version = "1.6.394" }
+architectury_loom = { id = "dev.architectury.loom", version = "1.6.397" }
