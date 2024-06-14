@@ -35,16 +35,22 @@ Instead of having to wait for up to a second until the next rendered frame comes
 
 ## Developer Info
 
-> [!IMPORTANT]  
-> These features are currently only accurate for the Fabric and Quilt versions of Dynamic FPS!
+If Dynamic FPS' optimizations conflict with a feature of your mod you can request to disable them.  
+The process of doing so is as simple as adding some additional metadata Dynamic FPS reads to your mod metadata.
 
-If Dynamic FPS' optimizations conflict with a feature of your mod you can disable them.  
-This is done by adding a `dynamic_fps` object to your mod's metadata (inside `quilt`/`fabric.mod.json`).
+**Disable the loading overlay optimization:**
 
-Force disable the loading overlay optimization:
+Fabric / Quilt:
 
 ```json
     "dynamic_fps": {
         "optimized_overlay": false
     },
+```
+
+Forge / NeoForge
+
+```toml
+[modproperties.your_mod_id]
+dynamic_fps = {optimized_overlay = false}
 ```
