@@ -104,7 +104,7 @@ public class DynamicFPSMod {
 	}
 
 	public static Screen getConfigScreen(Screen parent) {
-		if (!Platform.getInstance().isModLoaded("cloth-config")) {
+		if (!Platform.getInstance().isModLoaded("cloth-config", "cloth_config")) {
 			return new FallbackConfigScreen(parent);
 		} else {
 			return ClothConfig.genConfigScreen(parent);
@@ -197,12 +197,7 @@ public class DynamicFPSMod {
 			System.gc();
 		}
 
-		// Update volume of current sounds for users not using smooth volume transition
-		if (!volumeTransitionSpeed().isActive()) {
-			for (SoundSource source : SoundSource.values()) {
-				((DuckSoundEngine) minecraft.getSoundManager().soundEngine).dynamic_fps$updateVolume(source);
-			}
-		}
+		SmoothVolumeHandler.onStateChange();
 
 		if (before.graphicsState() != config.graphicsState()) {
 			if (before.graphicsState() == GraphicsState.DEFAULT) {

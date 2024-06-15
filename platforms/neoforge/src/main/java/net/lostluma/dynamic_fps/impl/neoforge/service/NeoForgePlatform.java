@@ -2,6 +2,7 @@ package net.lostluma.dynamic_fps.impl.neoforge.service;
 
 import dynamic_fps.impl.Constants;
 import dynamic_fps.impl.service.Platform;
+import dynamic_fps.impl.util.Version;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
@@ -42,9 +43,20 @@ public class NeoForgePlatform implements Platform {
 	}
 
 	@Override
-	public Optional<String> getModVersion(String modId) {
+	public Optional<Version> getModVersion(String modId) {
 		Optional<? extends ModContainer> optional = ModList.get().getModContainerById(modId);
-		return optional.map(modContainer -> modContainer.getModInfo().getVersion().toString());
+
+		if (optional.isEmpty()) {
+			return Optional.empty();
+		}
+
+		String raw = optional.get().getModInfo().getVersion().toString();
+
+		try {
+			return Optional.of(Version.of(raw));
+		} catch (Version.VersionParseException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
