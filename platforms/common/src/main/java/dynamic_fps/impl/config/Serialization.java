@@ -14,7 +14,6 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import dynamic_fps.impl.Constants;
 import dynamic_fps.impl.PowerState;
-import dynamic_fps.impl.config.option.GraphicsState;
 import dynamic_fps.impl.service.Platform;
 import dynamic_fps.impl.util.Logging;
 import org.jetbrains.annotations.Nullable;
@@ -35,9 +34,8 @@ public class Serialization {
 		.serializeNulls()
 		.setPrettyPrinting()
 		.enableComplexMapKeySerialization()
+		.registerTypeHierarchyAdapter(Enum.class, new EnumSerializer<>())
 		.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-		.registerTypeAdapter(PowerState.class, new PowerStateSerializer())
-		.registerTypeAdapter(GraphicsState.class, new GraphicsStateSerializer())
 		.create();
 
 	private static final String CONFIG_FILE = Constants.MOD_ID + ".json";
@@ -198,27 +196,20 @@ public class Serialization {
 		return root.getAsJsonObject("states");
 	}
 
-	private static final class PowerStateSerializer implements JsonSerializer<PowerState>, JsonDeserializer<PowerState> {
+	private static final class EnumSerializer<T extends Enum<T>> implements JsonSerializer<T>, JsonDeserializer<T> {
 		@Override
-		public JsonElement serialize(PowerState state, Type type, JsonSerializationContext context) {
-			return new JsonPrimitive(state.toString().toLowerCase(Locale.ROOT));
+		public JsonElement serialize(T instance, Type type, JsonSerializationContext context) {
+			return new JsonPrimitive(instance.toString().toLowerCase(Locale.ROOT));
 		}
 
 		@Override
-		public PowerState deserialize(JsonElement element, Type type, JsonDeserializationContext context) throws JsonParseException {
-			return PowerState.valueOf(element.getAsString().toUpperCase(Locale.ROOT));
-		}
-	}
-
-	private static final class GraphicsStateSerializer implements JsonSerializer<GraphicsState>, JsonDeserializer<GraphicsState> {
-		@Override
-		public JsonElement serialize(GraphicsState state, Type type, JsonSerializationContext context) {
-			return new JsonPrimitive(state.toString().toLowerCase(Locale.ROOT));
-		}
-
-		@Override
-		public GraphicsState deserialize(JsonElement element, Type type, JsonDeserializationContext context) throws JsonParseException {
-			return GraphicsState.valueOf(element.getAsString().toUpperCase(Locale.ROOT));
+		public T deserialize(JsonElement element, Type type, JsonDeserializationContext context) throws JsonParseException {
+			try {
+				Class<T> class_ = (Class<T>) Class.forName(type.getTypeName());
+				return Enum.valueOf(class_, element.getAsString().toUpperCase());
+			} catch (ClassNotFoundException | IllegalArgumentException e) {
+				throw new JsonParseException(e);
+			}
 		}
 	}
 }
