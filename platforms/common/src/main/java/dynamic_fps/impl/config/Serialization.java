@@ -89,27 +89,29 @@ public class Serialization {
 
 	@SuppressWarnings("deprecation")
 	public static DynamicFPSConfig load() {
-		byte[] data;
+		byte[] data = null;
 		Path config = Platform.getInstance().getConfigDir().resolve(CONFIG_FILE);
 
 		try {
 			data = Files.readAllBytes(config);
 		} catch (NoSuchFileException e) {
-			return DynamicFPSConfig.createDefault();
+			// Use default config
 		} catch (IOException e) {
 			throw new RuntimeException("Failed to load Dynamic FPS config.", e);
 		}
 
-		// Sometimes when the config failed to save properly it'll end up being only null bytes.
-		// Since most users don't seem to know how to deal with this we'll just replace the config.
-		if (data[0] == 0) {
-			Logging.getLogger().warn("Dynamic FPS config corrupted! Recreating from defaults ...");
-			return DynamicFPSConfig.createDefault();
+		JsonObject root;
+
+		// Sometimes failing to save the config produces a file of only null bytes (on Windows?).
+		// Since there's no point in crashing just reset the config to the default state instead.
+		if (data == null || data[0] == 0) {
+			root = new JsonObject();
+			Logging.getLogger().warn("Dynamic FPS config corrupted! Starting with defaults ...");
+		} else {
+			root = (JsonObject) new JsonParser().parse(new String(data, StandardCharsets.UTF_8));
 		}
 
-		JsonElement root = new JsonParser().parse(new String(data, StandardCharsets.UTF_8));
-
-		upgradeConfig((JsonObject) root);
+		upgradeConfig(root);
 		return GSON.fromJson(root, DynamicFPSConfig.class); // Ignores regular constructor!
 	}
 

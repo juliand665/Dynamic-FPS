@@ -32,19 +32,6 @@ public final class DynamicFPSConfig {
 		}
 	}
 
-	public static DynamicFPSConfig createDefault() {
-		DynamicFPSConfig instance =  new DynamicFPSConfig(
-			true,
-			0,
-			false,
-			new VolumeTransitionSpeed(1.0f, 0.5f),
-			new EnumMap<>(PowerState.class)
-		);
-
-		instance.save();
-		return instance;
-	}
-
 	public Config get(PowerState state) {
 		if (state == PowerState.FOCUSED) {
 			return Config.ACTIVE;
