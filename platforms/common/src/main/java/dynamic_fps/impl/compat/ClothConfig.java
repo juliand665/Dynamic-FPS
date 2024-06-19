@@ -2,6 +2,7 @@ package dynamic_fps.impl.compat;
 
 import dynamic_fps.impl.Constants;
 import dynamic_fps.impl.DynamicFPSMod;
+import dynamic_fps.impl.config.DynamicFPSConfig;
 import dynamic_fps.impl.config.option.GraphicsState;
 import dynamic_fps.impl.PowerState;
 import dynamic_fps.impl.config.Config;
@@ -34,12 +35,14 @@ public final class ClothConfig {
 			localized("config", "category.general")
 		);
 
+		DynamicFPSConfig defaultConfig = DynamicFPSConfig.DEFAULT;
+
 		general.addEntry(
 			entryBuilder.startBooleanToggle(
 				localized("config", "enabled"),
 				DynamicFPSMod.modConfig.enabled()
 			)
-			.setDefaultValue(true)
+			.setDefaultValue(defaultConfig.enabled())
 			.setSaveConsumer(DynamicFPSMod.modConfig::setEnabled)
 			.build()
 		);
@@ -54,7 +57,7 @@ public final class ClothConfig {
 				DynamicFPSMod.modConfig.idleTime() / 60,
 				0, 30
 			)
-			.setDefaultValue(0)
+			.setDefaultValue(defaultConfig.idleTime())
 			.setSaveConsumer(value -> DynamicFPSMod.modConfig.setIdleTime(value * 60))
 			.setTextGetter(ClothConfig::idleTimeMessage)
 			.setTooltip(localized("config", "idle_time_tooltip"))
@@ -66,7 +69,7 @@ public final class ClothConfig {
 				localized("config", "uncap_menu_frame_rate"),
 				DynamicFPSMod.modConfig.uncapMenuFrameRate()
 			)
-			.setDefaultValue(false)
+			.setDefaultValue(defaultConfig.uncapMenuFrameRate())
 			.setSaveConsumer(DynamicFPSMod.modConfig::setUncapMenuFrameRate)
 			.setTooltip(localized("config", "uncap_menu_frame_rate_tooltip"))
 			.build()
@@ -76,40 +79,40 @@ public final class ClothConfig {
 
 		general.addEntry(
 			entryBuilder.startIntSlider(
-					localized("config", "volume_transition_speed_up"),
-					volumeTransformer.toStep((int) (DynamicFPSMod.volumeTransitionSpeed().getUp() * 10)),
-					1, 31
-				)
-				.setDefaultValue(volumeTransformer.toStep((int) (1.0f * 10)))
-				.setSaveConsumer(step -> DynamicFPSMod.volumeTransitionSpeed().setUp((float) volumeTransformer.toValue(step) / 10))
-				.setTextGetter(ClothConfig::volumeTransitionMessage)
-				.setTooltip(localized("config", "volume_transition_speed_tooltip"))
-				.build()
+				localized("config", "volume_transition_speed_up"),
+				volumeTransformer.toStep((int) (DynamicFPSMod.volumeTransitionSpeed().getUp() * 10)),
+				1, 31
+			)
+			.setDefaultValue(volumeTransformer.toStep((int) (defaultConfig.volumeTransitionSpeed().getUp() * 10)))
+			.setSaveConsumer(step -> DynamicFPSMod.volumeTransitionSpeed().setUp((float) volumeTransformer.toValue(step) / 10))
+			.setTextGetter(ClothConfig::volumeTransitionMessage)
+			.setTooltip(localized("config", "volume_transition_speed_tooltip"))
+			.build()
 		);
 
 		general.addEntry(
 			entryBuilder.startIntSlider(
-					localized("config", "volume_transition_speed_down"),
-					volumeTransformer.toStep((int) (DynamicFPSMod.volumeTransitionSpeed().getDown() * 10)),
-					1, 31
-				)
-				.setDefaultValue(volumeTransformer.toStep((int) (0.5f * 10)))
-				.setSaveConsumer(step -> DynamicFPSMod.volumeTransitionSpeed().setDown((float) volumeTransformer.toValue(step) / 10))
-				.setTextGetter(ClothConfig::volumeTransitionMessage)
-				.setTooltip(localized("config", "volume_transition_speed_tooltip"))
-				.build()
+				localized("config", "volume_transition_speed_down"),
+				volumeTransformer.toStep((int) (DynamicFPSMod.volumeTransitionSpeed().getDown() * 10)),
+				1, 31
+			)
+			.setDefaultValue(volumeTransformer.toStep((int) (defaultConfig.volumeTransitionSpeed().getDown() * 10)))
+			.setSaveConsumer(step -> DynamicFPSMod.volumeTransitionSpeed().setDown((float) volumeTransformer.toValue(step) / 10))
+			.setTextGetter(ClothConfig::volumeTransitionMessage)
+			.setTooltip(localized("config", "volume_transition_speed_tooltip"))
+			.build()
 		);
 
 		// Used for each state's frame rate target slider below
 		VariableStepTransformer fpsTransformer = getFpsTransformer();
 
 		for (PowerState state : PowerState.values()) {
-			if (!state.configurable) {
+			if (state.configurabilityLevel == PowerState.ConfigurabilityLevel.NONE) {
 				continue;
 			}
 
 			Config config = DynamicFPSMod.modConfig.get(state);
-			Config standard = Config.getDefault(state);
+			Config standard = defaultConfig.get(state);
 
 			ConfigCategory category = builder.getOrCreateCategory(
 				localized("config", "category." + state.toString().toLowerCase())
@@ -129,6 +132,11 @@ public final class ClothConfig {
 				.setTextGetter(ClothConfig::fpsTargetMessage)
 				.build()
 			);
+
+			// Further options are not allowed since this state is used while active.
+			if (state.configurabilityLevel == PowerState.ConfigurabilityLevel.SOME) {
+				continue;
+			}
 
 			SubCategoryBuilder volumes = entryBuilder.startSubCategory(localized("config", "volume_multiplier"));
 

@@ -92,31 +92,4 @@ public final class Config {
 	public void setRunGarbageCollector(boolean value) {
 		this.runGarbageCollector = value;
 	}
-
-	public static Config getDefault(PowerState state) {
-		switch (state) {
-			case HOVERED: {
-				return new Config(60, withMasterVolume(1.0f), GraphicsState.DEFAULT, true, false);
-			}
-			case UNFOCUSED: {
-				return new Config(1, withMasterVolume(0.25f), GraphicsState.DEFAULT, false, false);
-			}
-			case ABANDONED: {
-				return new Config(10, withMasterVolume(1.0f), GraphicsState.DEFAULT, false, false);
-			}
-			case INVISIBLE: {
-				return new Config(0, withMasterVolume(0.0f), GraphicsState.DEFAULT, false, false);
-			}
-			default: {
-				throw new RuntimeException("Getting default configuration for unhandled power state " + state.toString());
-			}
-		}
-	}
-
-	private static Map<String, Float> withMasterVolume(float value) {
-		Map<String, Float> volumes = new HashMap<>();
-		volumes.put(soundSourceName(SoundSource.MASTER), value);
-
-		return volumes;
-	}
 }

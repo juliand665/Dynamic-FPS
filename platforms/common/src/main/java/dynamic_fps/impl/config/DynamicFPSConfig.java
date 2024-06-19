@@ -15,6 +15,8 @@ public final class DynamicFPSConfig {
 	@SerializedName("states")
 	private final Map<PowerState, Config> configs;
 
+	public static final DynamicFPSConfig DEFAULT = Serialization.loadDefault();
+
 	private DynamicFPSConfig(boolean enabled, int abandonTime, boolean uncapMenuFrameRate, VolumeTransitionSpeed volumeTransitionSpeed, Map<PowerState, Config> configs) {
 		this.enabled = enabled;
 		this.idleTime = abandonTime;
@@ -24,8 +26,8 @@ public final class DynamicFPSConfig {
 		this.configs = new EnumMap<>(configs);
 
 		for (PowerState state : PowerState.values()) {
-			if (state.configurable) {
-				this.configs.computeIfAbsent(state, Config::getDefault);
+			if (state.configurabilityLevel != PowerState.ConfigurabilityLevel.NONE) {
+				this.configs.computeIfAbsent(state, DEFAULT.configs::get);
 			}
 		}
 	}
