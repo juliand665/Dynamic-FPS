@@ -16,7 +16,7 @@
                 "EuropaYou": ["Contributor", "Translator"],
                 "N4TH4NOT": "Contributor",
                 "parly": "Contributor",
-                "Pixaurora": ["Contributor" ,"Translator"],
+                "Pixaurora": ["Contributor" , "Illustrator", "Translator"],
                 "Setadokalo": "Contributor",
                 "Siphalor": "Contributor",
                 "sisby-folk": "Contributor",
@@ -52,7 +52,7 @@
                 "issues": "https://github.com/juliand665/Dynamic-FPS/issues",
                 "sources": "https://github.com/juliand665/Dynamic-FPS"
             },
-            "icon": "assets/dynamic_fps/icon.png",
+            "icon": "assets/dynamic_fps/textures/icon.png",
             "license": {
                 "id": "MIT",
                 "name": "MIT License",

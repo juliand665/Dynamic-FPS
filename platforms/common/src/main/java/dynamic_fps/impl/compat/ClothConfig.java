@@ -2,10 +2,14 @@ package dynamic_fps.impl.compat;
 
 import dynamic_fps.impl.Constants;
 import dynamic_fps.impl.DynamicFPSMod;
+import dynamic_fps.impl.config.BatteryTrackerConfig;
 import dynamic_fps.impl.config.DynamicFPSConfig;
+import dynamic_fps.impl.config.option.BatteryIndicatorPlacement;
+import dynamic_fps.impl.config.option.BatteryIndicatorCondition;
 import dynamic_fps.impl.config.option.GraphicsState;
 import dynamic_fps.impl.PowerState;
 import dynamic_fps.impl.config.Config;
+import dynamic_fps.impl.config.option.IdleCondition;
 import dynamic_fps.impl.util.VariableStepTransformer;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
@@ -48,23 +52,6 @@ public final class ClothConfig {
 		);
 
 		general.addEntry(
-			entryBuilder.startTextDescription(CommonComponents.SPACE).build()
-		);
-
-		general.addEntry(
-			entryBuilder.startIntSlider(
-				localized("config", "idle_time"),
-				DynamicFPSMod.modConfig.idleTime() / 60,
-				0, 30
-			)
-			.setDefaultValue(defaultConfig.idleTime())
-			.setSaveConsumer(value -> DynamicFPSMod.modConfig.setIdleTime(value * 60))
-			.setTextGetter(ClothConfig::idleTimeMessage)
-			.setTooltip(localized("config", "idle_time_tooltip"))
-			.build()
-		);
-
-		general.addEntry(
 			entryBuilder.startBooleanToggle(
 				localized("config", "uncap_menu_frame_rate"),
 				DynamicFPSMod.modConfig.uncapMenuFrameRate()
@@ -73,6 +60,39 @@ public final class ClothConfig {
 			.setSaveConsumer(DynamicFPSMod.modConfig::setUncapMenuFrameRate)
 			.setTooltip(localized("config", "uncap_menu_frame_rate_tooltip"))
 			.build()
+		);
+
+		general.addEntry(
+			entryBuilder.startTextDescription(CommonComponents.SPACE).build()
+		);
+
+		general.addEntry(
+			entryBuilder.startIntSlider(
+				localized("config", "idle_time"),
+				DynamicFPSMod.modConfig.idle().timeout() / 60,
+				0, 30
+			)
+			.setDefaultValue(defaultConfig.idle().timeout() / 60)
+			.setSaveConsumer(value -> DynamicFPSMod.modConfig.idle().setTimeout(value * 60))
+			.setTextGetter(ClothConfig::idleTimeMessage)
+			.setTooltip(localized("config", "idle_time_tooltip"))
+			.build()
+		);
+
+		general.addEntry(
+			entryBuilder.startEnumSelector(
+				localized("config", "idle_condition"),
+				IdleCondition.class,
+				DynamicFPSMod.modConfig.idle().condition()
+			)
+			.setDefaultValue(defaultConfig.idle().condition())
+			.setSaveConsumer(DynamicFPSMod.modConfig.idle()::setCondition)
+			.setEnumNameProvider(ClothConfig::IdleConditionMessage)
+			.build()
+		);
+
+		general.addEntry(
+			entryBuilder.startTextDescription(CommonComponents.SPACE).build()
 		);
 
 		VariableStepTransformer volumeTransformer = getVolumeStepTransformer();
@@ -100,6 +120,69 @@ public final class ClothConfig {
 			.setSaveConsumer(step -> DynamicFPSMod.volumeTransitionSpeed().setDown((float) volumeTransformer.toValue(step) / 10))
 			.setTextGetter(ClothConfig::volumeTransitionMessage)
 			.setTooltip(localized("config", "volume_transition_speed_tooltip"))
+			.build()
+		);
+
+		general.addEntry(
+			entryBuilder.startTextDescription(CommonComponents.SPACE).build()
+		);
+
+		BatteryTrackerConfig batteryTracker = DynamicFPSMod.batteryTracking();
+
+		general.addEntry(
+			entryBuilder.startBooleanToggle(
+				localized("config", "battery_tracker"),
+				batteryTracker.enabled()
+			)
+			.setDefaultValue(defaultConfig.batteryTracker().enabled())
+			.setSaveConsumer(batteryTracker::setEnabled)
+			.setTooltip(localized("config", "battery_tracker_tooltip"))
+			.build()
+		);
+
+		general.addEntry(
+			entryBuilder.startBooleanToggle(
+				localized("config", "battery_tracker_switch_states"),
+				batteryTracker.switchStates()
+			)
+			.setDefaultValue(defaultConfig.batteryTracker().switchStates())
+			.setSaveConsumer(batteryTracker::setSwitchStates)
+			.setTooltip(localized("config", "battery_tracker_switch_states_tooltip"))
+			.build()
+		);
+
+		general.addEntry(
+			entryBuilder.startBooleanToggle(
+				localized("config", "battery_tracker_notifications"),
+				batteryTracker.notifications()
+			)
+			.setDefaultValue(defaultConfig.batteryTracker().notifications())
+			.setSaveConsumer(batteryTracker::setNotifications)
+			.setTooltip(localized("config", "battery_tracker_notifications_tooltip"))
+			.build()
+		);
+
+		general.addEntry(
+			entryBuilder.startEnumSelector(
+				localized("config", "battery_indicator_condition"),
+				BatteryIndicatorCondition.class,
+				batteryTracker.display().condition()
+			)
+			.setDefaultValue(defaultConfig.batteryTracker().display().condition())
+			.setSaveConsumer(batteryTracker.display()::setCondition)
+			.setEnumNameProvider(ClothConfig::batteryIndicatorConditionMessage)
+			.build()
+		);
+
+		general.addEntry(
+			entryBuilder.startEnumSelector(
+				localized("config", "battery_indicator_placement"),
+				BatteryIndicatorPlacement.class,
+				batteryTracker.display().placement()
+			)
+			.setDefaultValue(defaultConfig.batteryTracker().display().placement())
+			.setSaveConsumer(batteryTracker.display()::setPlacement)
+			.setEnumNameProvider(ClothConfig::batteryIndicatorPlacementMessage)
 			.build()
 		);
 
@@ -250,8 +333,20 @@ public final class ClothConfig {
 		return Component.literal(Integer.toString(value) + "%");
 	}
 
+	public static Component IdleConditionMessage(Enum<IdleCondition> state) {
+		return localized("config", "idle_condition_" + state.toString().toLowerCase(Locale.ROOT));
+	}
+
 	private static Component graphicsStateMessage(Enum<GraphicsState> graphicsState) {
 		return localized("config", "graphics_state_" + graphicsState.toString().toLowerCase(Locale.ROOT));
+	}
+
+	public static Component batteryIndicatorConditionMessage(Enum<BatteryIndicatorCondition> state) {
+		return localized("config", "battery_indicator_condition_" + state.toString().toLowerCase(Locale.ROOT));
+	}
+
+	public static Component batteryIndicatorPlacementMessage(Enum<BatteryIndicatorPlacement> state) {
+		return localized("config", "battery_indicator_placement_" + state.toString().toLowerCase(Locale.ROOT));
 	}
 
 	private static Optional<Component[]> graphicsStateTooltip(GraphicsState graphicsState) {

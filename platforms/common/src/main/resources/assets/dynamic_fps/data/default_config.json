@@ -1,7 +1,19 @@
 {
     "enabled": true,
-    "idle_time": 0,
     "uncap_menu_frame_rate": false,
+    "idle": {
+        "timeout": 300,
+        "condition": "on_battery"
+    },
+    "battery_tracker": {
+        "enabled": true,
+        "switch_states": false,
+        "notifications": true,
+        "display": {
+            "condition": "critical",
+            "placement": "top_left"
+        }
+    },
     "volume_transition_speed": {
         "up": 1.0,
         "down": 0.5
@@ -30,6 +42,13 @@
             },
             "graphics_state": "default",
             "show_toasts": false,
+            "run_garbage_collector": false
+        },
+        "unplugged": {
+            "frame_rate_target": 60,
+            "volume_multipliers": {},
+            "graphics_state": "default",
+            "show_toasts": true,
             "run_garbage_collector": false
         },
         "abandoned": {

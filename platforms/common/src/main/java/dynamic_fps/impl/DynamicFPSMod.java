@@ -2,30 +2,39 @@ package dynamic_fps.impl;
 
 import dynamic_fps.impl.compat.ClothConfig;
 import dynamic_fps.impl.compat.GLFW;
+import dynamic_fps.impl.config.BatteryTrackerConfig;
 import dynamic_fps.impl.config.Config;
 import dynamic_fps.impl.config.DynamicFPSConfig;
+import dynamic_fps.impl.config.VolumeTransitionConfig;
 import dynamic_fps.impl.config.option.GraphicsState;
 import dynamic_fps.impl.service.ModCompat;
+import dynamic_fps.impl.feature.battery.BatteryToast;
+import dynamic_fps.impl.feature.battery.BatteryTracker;
 import dynamic_fps.impl.feature.state.IdleHandler;
 import dynamic_fps.impl.util.FallbackConfigScreen;
 import dynamic_fps.impl.util.Logging;
 import dynamic_fps.impl.feature.state.OptionHolder;
+import dynamic_fps.impl.util.ResourceLocations;
 import dynamic_fps.impl.util.Version;
 import dynamic_fps.impl.feature.volume.SmoothVolumeHandler;
 import dynamic_fps.impl.util.duck.DuckLoadingOverlay;
-import dynamic_fps.impl.util.duck.DuckSoundEngine;
 import dynamic_fps.impl.feature.state.WindowObserver;
 import dynamic_fps.impl.service.Platform;
+import net.lostluma.battery.api.State;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.LoadingOverlay;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static dynamic_fps.impl.util.Localization.localized;
 
 public class DynamicFPSMod {
 	private static Config config = Config.ACTIVE;
@@ -55,6 +64,10 @@ public class DynamicFPSMod {
 	public static void init() {
 		IdleHandler.init();
 		SmoothVolumeHandler.init();
+
+		if (batteryTracking().enabled()) {
+			initBatteryTracker();
+		}
 
 		Platform platform = Platform.getInstance();
 		Version version = platform.getModVersion(Constants.MOD_ID).orElseThrow();
@@ -101,6 +114,12 @@ public class DynamicFPSMod {
 		modConfig.save();
 		IdleHandler.init();
 		SmoothVolumeHandler.init();
+
+		if (batteryTracking().enabled()) {
+			initBatteryTracker();
+		}
+
+		checkForStateChanges(); // The unplugged state may now be enabled or disabled
 	}
 
 	public static Screen getConfigScreen(Screen parent) {
@@ -163,7 +182,11 @@ public class DynamicFPSMod {
 		return config.volumeMultiplier(source);
 	}
 
-	public static DynamicFPSConfig.VolumeTransitionSpeed volumeTransitionSpeed() {
+	public static BatteryTrackerConfig batteryTracking() {
+		return modConfig.batteryTracker();
+	}
+
+	public static VolumeTransitionConfig volumeTransitionSpeed() {
 		return modConfig.volumeTransitionSpeed();
 	}
 
@@ -175,7 +198,43 @@ public class DynamicFPSMod {
 		return isDisabled() || !isLevelCoveredByOverlay();
 	}
 
+	public static void onBatteryChargeChanged(int before, int after) {
+		if (before > 10 && after <= 10) {
+			showNotification("battery_critical", "reminder");
+		}
+	}
+
+	public static void onBatteryStatusChanged(State before, State after) {
+		if (after == State.CHARGING) {
+			showNotification("battery_charging", "charging");
+		} else if (after == State.DISCHARGING) {
+			showNotification("battery_draining", "draining");
+		}
+	}
+
 	// Internal logic
+
+	// Prevent classloading when unused
+	// Since static init has some side effects
+	private static void initBatteryTracker() {
+		BatteryTracker.init();
+	}
+
+	private static boolean isUnplugged() {
+		return BatteryTracker.status() == State.DISCHARGING;
+	}
+
+	private static void showNotification(String titleTranslationKey, String iconPath) {
+		if (!batteryTracking().notifications()) {
+			return;
+		}
+
+		Component title = localized("toast", titleTranslationKey);
+		Component description = localized("toast", "battery_charge", BatteryTracker.charge());
+		ResourceLocation icon = ResourceLocations.of("dynamic_fps", "textures/battery/toast/" + iconPath + ".png");
+
+		minecraft.getToasts().addToast(new BatteryToast(title, description, icon));
+	}
 
 	private static boolean isLevelCoveredByOverlay() {
 		return OVERLAY_OPTIMIZATION_ACTIVE && minecraft.getOverlay() instanceof LoadingOverlay && ((DuckLoadingOverlay)minecraft.getOverlay()).dynamic_fps$isReloadComplete();
@@ -229,10 +288,12 @@ public class DynamicFPSMod {
 		} else if (isForcingLowFPS) {
 			current = PowerState.UNFOCUSED;
 		} else if (window.isFocused()) {
-			if (!IdleHandler.isIdle()) {
-				current = PowerState.FOCUSED;
-			} else {
+			if (IdleHandler.isIdle()) {
 				current = PowerState.ABANDONED;
+			} else if (batteryTracking().enabled() && batteryTracking().switchStates() && isUnplugged()) {
+				current = PowerState.UNPLUGGED;
+			} else {
+				current = PowerState.FOCUSED; // Default
 			}
 		} else if (window.isHovered()) {
 			current = PowerState.HOVERED;
