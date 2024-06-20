@@ -13,7 +13,11 @@ neoforge = "21.0.0-beta"
 quilt_loader = "0.25.0"
 quilt_standard_libraries = "8.0.0-alpha.12+1.20.4"
 
-# Third-party libraries
+# Regular libraries
+
+battery = "1.0.0"
+
+# Modding libraries
 
 modmenu = "11.0.0-beta.1"
 cloth_config = "15.0.127"
@@ -35,7 +39,11 @@ neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
 quilt_loader = { module = "org.quiltmc:quilt-loader", version.ref = "quilt_loader" }
 qsl_lifecycle_events = { module = "org.quiltmc.qsl.core:lifecycle_events", version.ref = "quilt_standard_libraries" }
 
-# Third-party libraries
+# Regular libraries
+
+battery = { module = "net.lostluma:battery", version.ref = "battery" }
+
+# Modding libraries
 
 modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
 cloth_config = { module = "me.shedaniel.cloth:cloth-config", version.ref = "cloth_config" }

@@ -135,6 +135,9 @@ public class Serialization {
 		// v3.3.0
 		upgradeVolumeMultiplier(config);
 
+		// v3.5.0
+		upgradeIdleConfig(config);
+
 		// version agnostic
 		addMissingFields(config, (JsonObject) GSON.toJsonTree(DynamicFPSConfig.DEFAULT));
 	}
@@ -190,6 +193,34 @@ public class Serialization {
 
 			element.add("volume_multipliers", multipliers);
 		}
+	}
+
+	private static void upgradeIdleConfig(JsonObject root) {
+		// Replace idle_time field with the new object
+		if (!root.has("idle_time")) {
+			return;
+		}
+
+		JsonElement idleTime = root.get("idle_time");
+
+		if (!idleTime.isJsonPrimitive() || !idleTime.getAsJsonPrimitive().isNumber()) {
+			return;
+		}
+
+		int timeout = idleTime.getAsInt();
+
+		// The setting is unused, so no need to migrate
+		// Instead the new default value from the JAR will overwrite it
+		if (timeout == 0) {
+			return;
+		}
+
+		JsonObject idle = new JsonObject();
+
+		idle.addProperty("timeout", timeout);
+		idle.addProperty("condition", "none");
+
+		root.add("idle", idle);
 	}
 
 	private static @Nullable JsonObject getStatesAsObject(JsonObject root) {

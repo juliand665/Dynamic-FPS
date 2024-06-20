@@ -11,7 +11,8 @@ Reduce resource usage while Minecraft is in the background or idle.
 Dynamic FPS will detect whether the Minecraft window is currently active, being hovered over, unfocused, or invisible.  
 For each of these states you're able to adjust the frame rate, volume, and whether [toast notifications](https://minecraft.wiki/w/Toasts) are temporarily paused.
 
-There's also an option to enter an idle state while the window is active but hasn't received any input in a certain amount of time.
+You can also configure these settings for when you're idling (with a custom timeout) or while your laptop / handheld is on battery.  
+Optionally you may also display the current battery status on the in-game HUD and receive toast notifications about battery activity.
 
 ---
 
@@ -32,6 +33,18 @@ Lower frame rates are achieved by then cancelling the rendering of all superfluo
 
 This lets you resume playing almost instantly after switching back to the game:
 Instead of having to wait for up to a second until the next rendered frame comes along, the game checks back within 1/15th of a second.
+
+## Disclaimer
+
+Enabling the battery integration requires downloading an additional library at runtime.  
+The mod contains the hashes for these files ahead of time and will verify them before usage.
+
+You may disable this behavior in the mod's settings, or [install the library yourself](GitHub/MANUAL_NATIVES_INSTALL.md) if you wish.
+
+## License
+
+Dynamic FPS' code and translations are available under the [MIT license](LICENSE).  
+Other assets included in this repository may not be released under an open source license.
 
 ## Developer Info
 

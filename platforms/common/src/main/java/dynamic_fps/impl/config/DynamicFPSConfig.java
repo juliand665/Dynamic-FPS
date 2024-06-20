@@ -8,29 +8,16 @@ import dynamic_fps.impl.PowerState;
 
 public final class DynamicFPSConfig {
 	private boolean enabled;
-	private int idleTime; // Seconds
 	private boolean uncapMenuFrameRate;
-	private VolumeTransitionSpeed volumeTransitionSpeed;
+	private IdleConfig idle;
+	private BatteryTrackerConfig batteryTracker;
+	private VolumeTransitionConfig volumeTransitionSpeed;
+	private boolean downloadNatives;
 
 	@SerializedName("states")
-	private final Map<PowerState, Config> configs;
+	private Map<PowerState, Config> configs;
 
 	public static final DynamicFPSConfig DEFAULT = Serialization.loadDefault();
-
-	private DynamicFPSConfig(boolean enabled, int abandonTime, boolean uncapMenuFrameRate, VolumeTransitionSpeed volumeTransitionSpeed, Map<PowerState, Config> configs) {
-		this.enabled = enabled;
-		this.idleTime = abandonTime;
-		this.uncapMenuFrameRate = uncapMenuFrameRate;
-		this.volumeTransitionSpeed = volumeTransitionSpeed;
-
-		this.configs = new EnumMap<>(configs);
-
-		for (PowerState state : PowerState.values()) {
-			if (state.configurabilityLevel != PowerState.ConfigurabilityLevel.NONE) {
-				this.configs.computeIfAbsent(state, DEFAULT.configs::get);
-			}
-		}
-	}
 
 	public Config get(PowerState state) {
 		if (state == PowerState.FOCUSED) {
@@ -48,15 +35,15 @@ public final class DynamicFPSConfig {
 		this.enabled = value;
 	}
 
-	public int idleTime() {
-		return this.idleTime;
+	public IdleConfig idle() {
+		return this.idle;
 	}
 
-	public void setIdleTime(int value) {
-		this.idleTime = value;
+	public BatteryTrackerConfig batteryTracker() {
+		return this.batteryTracker;
 	}
 
-	public VolumeTransitionSpeed volumeTransitionSpeed() {
+	public VolumeTransitionConfig volumeTransitionSpeed() {
 		return this.volumeTransitionSpeed;
 	}
 
@@ -66,6 +53,14 @@ public final class DynamicFPSConfig {
 
 	public void setUncapMenuFrameRate(boolean value) {
 		this.uncapMenuFrameRate = value;
+	}
+
+	public boolean downloadNatives() {
+		return this.downloadNatives;
+	}
+
+	public void setDownloadNatives(boolean value) {
+		this.downloadNatives = value;
 	}
 
 	private Map<PowerState, Config> configs() {
@@ -78,35 +73,5 @@ public final class DynamicFPSConfig {
 
 	public void save() {
 		Serialization.save(this);
-	}
-
-	public static class VolumeTransitionSpeed {
-		private float up;
-		private float down;
-
-		protected VolumeTransitionSpeed(float up, float down) {
-			this.up = up;
-			this.down = down;
-		}
-
-		public float getUp() {
-			return this.up;
-		}
-
-		public void setUp(float value) {
-			this.up = value;
-		}
-
-		public float getDown() {
-			return this.down;
-		}
-
-		public void setDown(float value) {
-			this.down = value;
-		}
-
-		public boolean isActive() {
-			return this.up != 100.0f || this.down != 100.0f;
-		}
 	}
 }

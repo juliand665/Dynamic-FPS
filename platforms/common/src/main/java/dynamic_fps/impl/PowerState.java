@@ -27,6 +27,11 @@ public enum PowerState {
 	INVISIBLE(ConfigurabilityLevel.FULL),
 
 	/**
+	 * The device is currently on battery.
+	 */
+	UNPLUGGED(ConfigurabilityLevel.SOME),
+
+	/**
 	 * User hasn't sent input for some time.
 	 */
 	ABANDONED(ConfigurabilityLevel.FULL);

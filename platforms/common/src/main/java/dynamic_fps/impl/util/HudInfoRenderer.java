@@ -1,14 +1,15 @@
 package dynamic_fps.impl.util;
 
+import dynamic_fps.impl.config.BatteryTrackerConfig;
+import dynamic_fps.impl.feature.battery.BatteryTracker;
+import net.lostluma.battery.api.State;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.Font.DisplayMode;
 import net.minecraft.network.chat.Component;
 
 import static dynamic_fps.impl.util.Localization.localized;
 
-import org.joml.Matrix4f;
+import net.minecraft.resources.ResourceLocation;
 
 import dynamic_fps.impl.DynamicFPSMod;
 
@@ -16,30 +17,44 @@ public final class HudInfoRenderer {
 	private static final Minecraft minecraft = Minecraft.getInstance();
 
 	public static void renderInfo(GuiGraphics guiGraphics) {
+		if (DynamicFPSMod.batteryTracking().enabled()) {
+			drawBatteryOverlay(guiGraphics);
+		}
+
 		if (DynamicFPSMod.disabledByUser()) {
-			drawCenteredText(guiGraphics, localized("gui", "hud.disabled"), 32);
+			drawCenteredText(guiGraphics, localized("gui", "hud.disabled"));
 		} else if (DynamicFPSMod.isForcingLowFPS()) {
-			drawCenteredText(guiGraphics, localized("gui", "hud.reducing"), 32);
+			drawCenteredText(guiGraphics, localized("gui", "hud.reducing"));
 		}
 	}
 
-	private static void drawCenteredText(GuiGraphics guiGraphics, Component component, float y) {
-		Font fontRenderer = minecraft.gui.getFont();
+	private static void drawCenteredText(GuiGraphics guiGraphics, Component component) {
+		int width = guiGraphics.guiWidth() / 2;
 
-		int stringWidth = fontRenderer.width(component);
-		int windowWidth = minecraft.getWindow().getGuiScaledWidth();
+		guiGraphics.drawCenteredString(minecraft.font, component, width, 32, 0xFFFFFF);
+	}
 
-		fontRenderer.drawInBatch(
-			component,
-			(windowWidth - stringWidth) / 2f,
-			y,
-			0xFFFFFFFF,
-			true,
-			new Matrix4f(),
-			guiGraphics.bufferSource(),
-			DisplayMode.NORMAL,
-			0,
-			255
-		);
+	private static void drawBatteryOverlay(GuiGraphics graphics) {
+		if (minecraft.screen != null || minecraft.getDebugOverlay().showDebugScreen() || !BatteryTracker.hasBatteries()) {
+			return;
+		}
+
+		BatteryTrackerConfig.DisplayConfig config = DynamicFPSMod.batteryTracking().display();
+
+		if (!config.condition().isConditionMet()) {
+			return;
+		}
+
+		int index = BatteryTracker.charge() / 10;
+		String type = BatteryUtil.isCharging(BatteryTracker.status()) ? "charging" : "draining";
+		ResourceLocation icon = ResourceLocations.of("dynamic_fps", "textures/battery/icon/" + type + "_" + index + ".png");
+
+		// pair of coordinates
+		int[] position = config.placement().get(graphics);
+
+		// resource, x, y, z, ?, ?, width, height, width, height
+		graphics.blit(icon, position[0], position[1], 0, 0.0f, 0.0f, 16, 16, 16, 16);
+		// font, text, x, y, text color
+		graphics.drawString(minecraft.font, BatteryTracker.charge() + "%", position[0] + 20, position[1] + 4, 0xFFFFFF);
 	}
 }

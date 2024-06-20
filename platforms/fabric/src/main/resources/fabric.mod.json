@@ -52,7 +52,7 @@
         "sources": "https://github.com/juliand665/Dynamic-FPS"
     },
     "license": "MIT",
-    "icon": "assets/dynamic_fps/icon.png",
+    "icon": "assets/dynamic_fps/textures/icon.png",
     "environment": "client",
     "entrypoints": {
         "client": [

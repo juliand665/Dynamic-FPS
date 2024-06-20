@@ -36,16 +36,18 @@ subprojects {
 	}
 
 	repositories {
-		// Add repositories to retrieve artifacts from in here.
-		// You should only use this when depending on other mods because
-		// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-		// See https://docs.gradle.org/current/userguide/declaring_repositories.html
-		// for more information about repositories.
+		// Battery
+		exclusiveContent {
+			filter { includeGroup("net.lostluma") }
+			forRepository { maven { url = "https://maven.lostluma.net/releases" } }
+		}
 	}
 
 	dependencies {
 		minecraft libs.minecraft
 		mappings loom.officialMojangMappings()
+
+		implementation(libs.battery)
 	}
 
 	java {

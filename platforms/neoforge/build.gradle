@@ -29,6 +29,8 @@ repositories {
 dependencies {
 	neoForge libs.neoforge
 
+	include(libs.battery)
+
 	common(project(path: ":platforms:common", configuration: "namedElements")) { transitive false }
 	shadowCommon(project(path: ":platforms:common", configuration: "transformProductionNeoForge")) { transitive = false }
 }
@@ -45,7 +47,7 @@ shadowJar {
 	exclude "fabric.mod.json"
 	exclude "architectury.common.json"
 
-	exclude "assets/dynamic_fps/icon.png"
+	exclude "assets/textures/dynamic_fps/icon.png"
 
 	// Sue me
 	// Fixes crash in prod from our GameRenderer mixin

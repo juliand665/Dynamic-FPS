@@ -9,7 +9,7 @@ import dynamic_fps.impl.PowerState;
 import dynamic_fps.impl.config.option.GraphicsState;
 import net.minecraft.sounds.SoundSource;
 
-public final class Config {
+public class Config {
 	private int frameRateTarget;
 	private final Map<String, Float> volumeMultipliers;
 	private GraphicsState graphicsState;
