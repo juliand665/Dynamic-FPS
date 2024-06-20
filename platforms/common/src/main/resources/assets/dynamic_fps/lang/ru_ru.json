@@ -84,5 +84,5 @@
     "toast.dynamic_fps.battery_charge": "Уровень заряда: %d%%",
 
     "modmenu.descriptionTranslation.dynamic_fps": "Динамическое изменение энергозатратных настроек в зависимости от состояния окна игры.",
-    "modmenu.summaryTranslation.dynamic_fps": "Автоматическое снижение потребления игрой вычислительных ресурсов в фоне и в простое."
+    "modmenu.summaryTranslation.dynamic_fps": "Автоматическое снижение потребления игрой ресурсов в фоне и в простое."
 }
