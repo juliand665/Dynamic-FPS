@@ -21,10 +21,7 @@ public enum BatteryIndicatorCondition {
 	/**
 	 * Show battery indicator when the battery is at a critical level (<= 10%).
 	 */
-	CRITICAL(() -> {
-		@Nullable Integer charge = BatteryTracker.charge();
-		return DRAINING.isConditionMet() && charge != null && charge <= 10;
-	}),
+	CRITICAL(() -> DRAINING.isConditionMet() && BatteryTracker.charge() <= 10),
 
 	/**
 	 * Show battery indicator at all times.
