@@ -91,7 +91,6 @@ public class BatteryTracker {
 
 		if (readInitialData && status != newStatus) {
 			DynamicFPSMod.onBatteryStatusChanged(status ,newStatus);
-			Logging.getLogger().info("Status changed from {} to {}", status, newStatus);
 		}
 
 		charge = newCharge;
