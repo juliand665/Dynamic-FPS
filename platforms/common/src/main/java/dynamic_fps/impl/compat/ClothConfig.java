@@ -277,6 +277,24 @@ public final class ClothConfig {
 			);
 		}
 
+		ConfigCategory advanced = builder.getOrCreateCategory(
+			localized("config", "category.advanced")
+		);
+
+		advanced.addEntry(
+			entryBuilder.startBooleanToggle(
+				localized("config", "download_natives"),
+				DynamicFPSMod.modConfig.downloadNatives()
+			)
+			.setDefaultValue(defaultConfig.downloadNatives())
+			.setSaveConsumer(DynamicFPSMod.modConfig::setDownloadNatives)
+			.setTooltip(new Component[]{
+				localized("config", "download_natives_description_0"),
+				localized("config", "download_natives_description_1")}
+			)
+			.build()
+		);
+
 		return builder.build();
 	}
 

@@ -12,6 +12,7 @@ public final class DynamicFPSConfig {
 	private IdleConfig idle;
 	private BatteryTrackerConfig batteryTracker;
 	private VolumeTransitionConfig volumeTransitionSpeed;
+	private boolean downloadNatives;
 
 	@SerializedName("states")
 	private Map<PowerState, Config> configs;
@@ -52,6 +53,14 @@ public final class DynamicFPSConfig {
 
 	public void setUncapMenuFrameRate(boolean value) {
 		this.uncapMenuFrameRate = value;
+	}
+
+	public boolean downloadNatives() {
+		return this.downloadNatives;
+	}
+
+	public void setDownloadNatives(boolean value) {
+		this.downloadNatives = value;
 	}
 
 	private Map<PowerState, Config> configs() {

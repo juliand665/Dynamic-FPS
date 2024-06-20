@@ -34,6 +34,13 @@ Lower frame rates are achieved by then cancelling the rendering of all superfluo
 This lets you resume playing almost instantly after switching back to the game:
 Instead of having to wait for up to a second until the next rendered frame comes along, the game checks back within 1/15th of a second.
 
+## Disclaimer
+
+Enabling the battery integration requires downloading an additional library at runtime.  
+The mod contains the hashes for these files ahead of time and will verify them before usage.
+
+You may disable this behavior in the mod's settings, or [install the library yourself](GitHub/MANUAL_NATIVES_INSTALL.md) if you wish.
+
 ## License
 
 Dynamic FPS' code and translations are available under the [MIT license](LICENSE).  

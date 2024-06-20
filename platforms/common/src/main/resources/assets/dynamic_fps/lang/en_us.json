@@ -5,6 +5,8 @@
     "config.dynamic_fps.warn_cloth_config.1": "Either install Cloth Config, edit the config file, or use the default settings instead.",
 
     "config.dynamic_fps.category.general": "General",
+    "config.dynamic_fps.category.advanced": "Advanced",
+
     "config.dynamic_fps.category.hovered": "Hovered",
     "config.dynamic_fps.category.unfocused": "Unfocused",
     "config.dynamic_fps.category.invisible": "Invisible",
@@ -20,7 +22,7 @@
     "config.dynamic_fps.idle_time_tooltip": "Minutes without input until Dynamic FPS activates the Idle state while the game is focused.",
 
     "config.dynamic_fps.idle_condition": "Idle Condition",
-    "config.dynamic_fps.idle_condition_none": "Always",
+    "config.dynamic_fps.idle_condition_none": "None",
     "config.dynamic_fps.idle_condition_on_battery": "While on battery",
 
     "config.dynamic_fps.uncap_menu_frame_rate": "Uncap Menu FPS",
@@ -67,13 +69,17 @@
     "config.dynamic_fps.run_garbage_collector": "Invoke Garbage Collector",
     "config.dynamic_fps.run_garbage_collector_tooltip": "Free up unused memory when switching to this status",
 
+    "config.dynamic_fps.download_natives": "Download Natives",
+    "config.dynamic_fps.download_natives_description_0": "Using the battery features requires an additional library.",
+    "config.dynamic_fps.download_natives_description_1": "Set whether the mod may download this component on your behalf.",
+
     "key.dynamic_fps.toggle_forced": "Force Unfocused Mode (Toggle)",
     "key.dynamic_fps.toggle_disabled": "Disable Dynamic FPS (Toggle)",
     "gui.dynamic_fps.hud.reducing": "Dynamic FPS: Forcing Reduced FPS",
     "gui.dynamic_fps.hud.disabled": "Dynamic FPS Disabled",
 
-    "toast.dynamic_fps.battery_charging": "Plugged In!",
-    "toast.dynamic_fps.battery_draining": "Unplugged!",
+    "toast.dynamic_fps.battery_charging": "Charging!",
+    "toast.dynamic_fps.battery_draining": "Discharging!",
     "toast.dynamic_fps.battery_critical": "Battery Low!",
 
     "toast.dynamic_fps.battery_charge": "Currently at %d%%",

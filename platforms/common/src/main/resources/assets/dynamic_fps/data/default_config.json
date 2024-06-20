@@ -6,7 +6,7 @@
         "condition": "on_battery"
     },
     "battery_tracker": {
-        "enabled": true,
+        "enabled": false,
         "switch_states": false,
         "notifications": true,
         "display": {
@@ -58,5 +58,6 @@
             "show_toasts": false,
             "run_garbage_collector": false
         }
-    }
+    },
+    "download_natives": true
 }

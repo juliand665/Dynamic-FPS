@@ -7,7 +7,7 @@ import net.lostluma.battery.api.Battery;
 import net.lostluma.battery.api.Manager;
 import net.lostluma.battery.api.State;
 import net.lostluma.battery.api.exception.LibraryLoadError;
-import net.lostluma.battery.impl.Constants;
+import net.lostluma.battery.api.util.LibraryUtil;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
@@ -17,36 +17,17 @@ import java.util.Collection;
 import java.util.Collections;
 
 public class BatteryTracker {
-	private static boolean isActive;
 	private static boolean readInitialData = false;
 
 	private static volatile int charge = 0;
 	private static volatile State status = State.UNKNOWN;
 
-	private static final @Nullable Manager manager;
-	private static final Collection<Battery> batteries;
+	private static @Nullable Manager manager = null;
+	private static Collection<Battery> batteries = Collections.emptyList();
 
 	private static final Duration updateInterval = Duration.of(15, ChronoUnit.SECONDS);
 
-	static {
-		replaceCacheDir(); // =^..^=
-
-		Manager temp = createManager();
-		batteries = getBatteries(temp);
-
-		if (batteries.isEmpty()) {
-			temp.close();
-			manager = null;
-		} else {
-			manager = temp;
-		}
-	}
-
-	public static boolean isAvailable() {
-		return !batteries.isEmpty();
-	}
-
-	public static Integer charge() {
+	public static int charge() {
 		return charge;
 	}
 
@@ -54,13 +35,28 @@ public class BatteryTracker {
 		return status;
 	}
 
+	public static boolean hasBatteries() {
+		return !batteries.isEmpty();
+	}
+
 	public static void init() {
-		if (!isAvailable() || isActive) {
+		if (manager != null || !DynamicFPSMod.batteryTracking().enabled()) {
 			return;
 		}
 
-		isActive = true;
-		Thread.ofVirtual().name("refresh-battery").start(BatteryTracker::updateBatteries);
+		customizeInstallation();
+
+		Manager temp = createManager();
+		batteries = getBatteries(temp);
+
+		if (batteries.isEmpty()) {
+			if (temp != null) {
+				temp.close();
+			}
+		} else {
+			manager = temp; // Keep around to allow updating batteries
+			Thread.ofVirtual().name("refresh-battery").start(BatteryTracker::updateBatteries);
+		}
 	}
 
 	private static State mergeStates(State a, State b) {
@@ -74,16 +70,6 @@ public class BatteryTracker {
 			return a == State.UNKNOWN ? b : a;
 		}
 	}
-
-	/*
-	private static Duration mergeDurations(Duration a, Optional<Duration> b) {
-		if (b.isEmpty()) {
-			return a;
-		} else {
-			return a.plus(b.get());
-		}
-	}
-	 */
 
 	private static void updateState() {
 		boolean changed = false;
@@ -105,6 +91,7 @@ public class BatteryTracker {
 
 		if (readInitialData && status != newStatus) {
 			DynamicFPSMod.onBatteryStatusChanged(status ,newStatus);
+			Logging.getLogger().info("Status changed from {} to {}", status, newStatus);
 		}
 
 		charge = newCharge;
@@ -144,9 +131,9 @@ public class BatteryTracker {
 		}
 	}
 
-	private static void replaceCacheDir() {
-		// Don't tell anyone this is not part of the public API ...
-		Constants.CACHE_DIR = Platform.getInstance().getCacheDir();
+	private static void customizeInstallation() {
+		LibraryUtil.setCacheDir(Platform.getInstance().getCacheDir());
+		LibraryUtil.setAllowDownloads(DynamicFPSMod.modConfig.downloadNatives());
 	}
 
 	private static Manager createManager() {

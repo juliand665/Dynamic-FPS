@@ -41,7 +41,7 @@ public class IdleHandler {
 			return;
 		}
 
-		if (config.idle().condition() == IdleCondition.ON_BATTERY && (!config.batteryTracker().enabled() || !isBatteryTrackingAvailable())) {
+		if (config.idle().condition() == IdleCondition.ON_BATTERY && !BatteryTracker.hasBatteries()) {
 			return;
 		}
 
@@ -74,20 +74,11 @@ public class IdleHandler {
 			return false;
 		}
 
-		if (config.idle().condition() == IdleCondition.ON_BATTERY && config.batteryTracker().enabled() && !isOnBattery()) {
+		if (config.idle().condition() == IdleCondition.ON_BATTERY && !(BatteryTracker.status() == State.DISCHARGING)) {
 			return false;
 		}
 
 		return (Util.getEpochMillis() - previousActivity) >= (long) config.idle().timeout() * 1000;
-	}
-
-	// Prevent classloading when unused
-	private static boolean isBatteryTrackingAvailable() {
-		return BatteryTracker.isAvailable();
-	}
-
-	private static boolean isOnBattery() {
-		return BatteryTracker.status() == State.DISCHARGING;
 	}
 
 	private static void checkActivity() {

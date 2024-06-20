@@ -35,7 +35,7 @@ public final class HudInfoRenderer {
 	}
 
 	private static void drawBatteryOverlay(GuiGraphics graphics) {
-		if (minecraft.screen != null || minecraft.getDebugOverlay().showDebugScreen() || !BatteryTracker.isAvailable()) {
+		if (minecraft.screen != null || minecraft.getDebugOverlay().showDebugScreen() || !BatteryTracker.hasBatteries()) {
 			return;
 		}
 
@@ -46,7 +46,7 @@ public final class HudInfoRenderer {
 		}
 
 		int index = BatteryTracker.charge() / 10;
-		String type = BatteryTracker.status() == State.CHARGING ? "charging" : "draining";
+		String type = BatteryUtil.isCharging(BatteryTracker.status()) ? "charging" : "draining";
 		ResourceLocation icon = ResourceLocations.of("dynamic_fps", "textures/battery/icon/" + type + "_" + index + ".png");
 
 		// pair of coordinates

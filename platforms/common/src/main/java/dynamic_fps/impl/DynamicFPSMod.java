@@ -11,6 +11,7 @@ import dynamic_fps.impl.service.ModCompat;
 import dynamic_fps.impl.feature.battery.BatteryToast;
 import dynamic_fps.impl.feature.battery.BatteryTracker;
 import dynamic_fps.impl.feature.state.IdleHandler;
+import dynamic_fps.impl.util.BatteryUtil;
 import dynamic_fps.impl.util.FallbackConfigScreen;
 import dynamic_fps.impl.util.Logging;
 import dynamic_fps.impl.feature.state.OptionHolder;
@@ -62,12 +63,7 @@ public class DynamicFPSMod {
 	// Internal "API" for Dynamic FPS itself
 
 	public static void init() {
-		IdleHandler.init();
-		SmoothVolumeHandler.init();
-
-		if (batteryTracking().enabled()) {
-			initBatteryTracker();
-		}
+		doInit();
 
 		Platform platform = Platform.getInstance();
 		Version version = platform.getModVersion(Constants.MOD_ID).orElseThrow();
@@ -112,13 +108,8 @@ public class DynamicFPSMod {
 
 	public static void onConfigChanged() {
 		modConfig.save();
-		IdleHandler.init();
-		SmoothVolumeHandler.init();
 
-		if (batteryTracking().enabled()) {
-			initBatteryTracker();
-		}
-
+		doInit();
 		checkForStateChanges(); // The unplugged state may now be enabled or disabled
 	}
 
@@ -205,23 +196,21 @@ public class DynamicFPSMod {
 	}
 
 	public static void onBatteryStatusChanged(State before, State after) {
-		if (after == State.CHARGING) {
+		if (before == State.DISCHARGING && BatteryUtil.isCharging(after)) {
 			showNotification("battery_charging", "charging");
-		} else if (after == State.DISCHARGING) {
+		} else if (BatteryUtil.isCharging(before) && after == State.DISCHARGING) {
 			showNotification("battery_draining", "draining");
 		}
 	}
 
 	// Internal logic
 
-	// Prevent classloading when unused
-	// Since static init has some side effects
-	private static void initBatteryTracker() {
+	private static void doInit() {
+		// NOTE: Init battery tracker first here
+		// Since the idle handler queries it for info
 		BatteryTracker.init();
-	}
-
-	private static boolean isUnplugged() {
-		return BatteryTracker.status() == State.DISCHARGING;
+		IdleHandler.init();
+		SmoothVolumeHandler.init();
 	}
 
 	private static void showNotification(String titleTranslationKey, String iconPath) {
@@ -290,7 +279,7 @@ public class DynamicFPSMod {
 		} else if (window.isFocused()) {
 			if (IdleHandler.isIdle()) {
 				current = PowerState.ABANDONED;
-			} else if (batteryTracking().enabled() && batteryTracking().switchStates() && isUnplugged()) {
+			} else if (batteryTracking().enabled() && batteryTracking().switchStates() && BatteryTracker.status() == State.DISCHARGING) {
 				current = PowerState.UNPLUGGED;
 			} else {
 				current = PowerState.FOCUSED; // Default
