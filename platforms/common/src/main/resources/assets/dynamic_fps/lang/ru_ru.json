@@ -1,5 +1,5 @@
 {
-    "config.dynamic_fps.title": "Настройки Dynamic FPS",
+    "config.dynamic_fps.title": "Конфигурация Dynamic FPS",
 
     "config.dynamic_fps.category.general": "Основные",
     "config.dynamic_fps.category.hovered": "Наведён",
@@ -7,7 +7,7 @@
     "config.dynamic_fps.category.abandoned": "Простаивает",
     "config.dynamic_fps.category.invisible": "Свёрнут",
 
-    "config.dynamic_fps.disabled": "Отключён",
+    "config.dynamic_fps.disabled": "Отключёно",
     "config.dynamic_fps.minutes": "%d минут(ы)",
 
     "config.dynamic_fps.idle_time": "Время простоя",
@@ -17,14 +17,13 @@
     "config.dynamic_fps.uncap_menu_frame_rate_tooltip": "Снимает ограничение в 60 FPS в главном меню.",
 
     "config.dynamic_fps.frame_rate_target": "Количество FPS",
-    "config.dynamic_fps.frame_rate_target_description": "Для отключения снижения FPS, установите значение -1 для параметра Количество FPS",
     "config.dynamic_fps.volume_multiplier": "Процент громкости звуков",
 
     "config.dynamic_fps.graphics_state": "Настройки графики",
     "config.dynamic_fps.graphics_state_default": "По умолчанию",
     "config.dynamic_fps.graphics_state_reduced": "Сниженная",
     "config.dynamic_fps.graphics_state_minimal": "Минимальная",
-    "config.dynamic_fps.graphics_state_minimal_tooltip": "Минимаьная графика заставляет мир перезагружаться!",
+    "config.dynamic_fps.graphics_state_minimal_tooltip": "Минимальная графика заставляет мир перезагружаться!",
 
     "config.dynamic_fps.show_toasts": "Показывать уведомления",
     "config.dynamic_fps.show_toasts_tooltip": "Продолжать ли отображать всплывающие уведомления или откладывать их",
@@ -37,7 +36,13 @@
     "gui.dynamic_fps.hud.reducing": "Dynamic FPS: принудительное снижениие частоты кадров",
     "gui.dynamic_fps.hud.disabled": "Dynamic FPS отключён",
 
-    "modmenu.descriptionTranslation.dynamic_fps": "Динамически снижает FPS, чтобы Minecraft не забирал ресурсы в фоновом режиме.",
-    "modmenu.summaryTranslation.dynamic_fps": "Автоматическое изменение FPS для снижения потребления вычислительных ресурсов в фоне."
-}
+    "modmenu.descriptionTranslation.dynamic_fps": "Динамически снижает FPS, чтобы Minecraft излишне не использовал ресурсы системы в фоновом режиме",
 
+    "config.dynamic_fps.warn_cloth_config.0": "Cloth Config необходим для настройки Dynamic FPS внутри игры.",
+    "config.dynamic_fps.warn_cloth_config.1": "Либо установите Cloth Config и редактируйте файл конфигурации, либо используйте настройки по умолчанию.",
+    "config.dynamic_fps.enabled": "Мод включен",
+    "config.dynamic_fps.volume_transition_speed_up": "Скорость увеличения громкости",
+    "config.dynamic_fps.volume_transition_speed_down": "Скорость снижения громкости",
+    "config.dynamic_fps.volume_transition_speed_instant": "Немедленно",
+    "config.dynamic_fps.volume_transition_speed_tooltip": "Устанавливает скорость изменения громкости игры в секунду."
+}
