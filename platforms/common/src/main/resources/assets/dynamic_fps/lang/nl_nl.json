@@ -70,7 +70,7 @@
 
     "config.dynamic_fps.download_natives": "Bibliotheken downloaden",
     "config.dynamic_fps.download_natives_description_0": "Voor het gebruik van de batterijfuncties is een extra bibliotheek nodig.",
-    "config.dynamic_fps.download_natives_description_1": "Stel in of de mod dit onderdeel namens u mag downloaden.",
+    "config.dynamic_fps.download_natives_description_1": "Stel in of de mod dit onderdeel namens jou mag downloaden.",
 
     "key.dynamic_fps.toggle_forced": "Forceer de \"Niet gefocust\" modus (Toggle)",
     "key.dynamic_fps.toggle_disabled": "Schakel Dynamic FPS uit (Toggle)",
