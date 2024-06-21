@@ -1,0 +1,87 @@
+{
+    "config.dynamic_fps.title": "Configureer Dynamic FPS",
+
+    "config.dynamic_fps.warn_cloth_config.0": "Cloth Config is vereist om Dynamic FPS vanuit Minecraft te configureren.",
+    "config.dynamic_fps.warn_cloth_config.1": "Installeer Cloth Config, bewerk het configuratiebestand of gebruik in plaats daarvan de standaardinstellingen.",
+
+    "config.dynamic_fps.category.general": "Algemeen",
+    "config.dynamic_fps.category.advanced": "Geavanceerd",
+
+    "config.dynamic_fps.category.unfocused": "Niet gefocust",
+    "config.dynamic_fps.category.invisible": "Onzichtbaar",
+    "config.dynamic_fps.category.unplugged": "Op batterij",
+    "config.dynamic_fps.category.abandoned": "Inactief",
+
+    "config.dynamic_fps.enabled": "Ingeschakeld",
+
+    "config.dynamic_fps.disabled": "Uitgeschakeld",
+    "config.dynamic_fps.minutes": "%d Minu(u)t(en)",
+
+    "config.dynamic_fps.idle_time": "Inactief timeout",
+    "config.dynamic_fps.idle_time_tooltip": "Minuten zonder invoer totdat Dynamic FPS de Idle-status activeert terwijl het spel gefocust is.",
+
+    "config.dynamic_fps.idle_condition": "Inactieve conditie",
+    "config.dynamic_fps.idle_condition_none": "Geen",
+    "config.dynamic_fps.idle_condition_on_battery": "Terwijl op batterij",
+
+    "config.dynamic_fps.uncap_menu_frame_rate": "Ontgrendel Menu FPS",
+    "config.dynamic_fps.uncap_menu_frame_rate_tooltip": "Verwijder de limiet van 60 FPS in het hoofdmenu.",
+
+    "config.dynamic_fps.battery_tracker": "Batterij bijhouden",
+    "config.dynamic_fps.battery_tracker_tooltip": "Schakel alle batterijgerelateerde functies in of uit.",
+
+    "config.dynamic_fps.battery_tracker_switch_states": "Inschakelen op batterijstatus",
+    "config.dynamic_fps.battery_tracker_switch_states_tooltip": "Schakel automatisch de status Op batterij in wanneer je op batterij zit.",
+
+    "config.dynamic_fps.battery_tracker_notifications": "Batterij notificaties",
+    "config.dynamic_fps.battery_tracker_notifications_tooltip": "Krijg in-game notificaties over je batterij status.",
+
+    "config.dynamic_fps.battery_indicator_condition": "Batterijindicator conditie",
+    "config.dynamic_fps.battery_indicator_condition_disabled": "Uitgeschakeld",
+    "config.dynamic_fps.battery_indicator_condition_draining": "Tijdens het ontladen",
+    "config.dynamic_fps.battery_indicator_condition_critical": "Kritisch / <= 10%",
+    "config.dynamic_fps.battery_indicator_condition_constant": "Altijd",
+
+    "config.dynamic_fps.battery_indicator_placement": "Indicator plaatsing",
+    "config.dynamic_fps.battery_indicator_placement_top_left": "Linksboven",
+    "config.dynamic_fps.battery_indicator_placement_top_right": "Rechtsboven",
+    "config.dynamic_fps.battery_indicator_placement_bottom_left": "Linksonder",
+    "config.dynamic_fps.battery_indicator_placement_bottom_right": "Rechtsonder",
+
+    "config.dynamic_fps.volume_transition_speed_up": "Opwaartse volumetransitiesnelheid",
+    "config.dynamic_fps.volume_transition_speed_down": "Neerwaartse volumetransitiesnelheid",
+    "config.dynamic_fps.volume_transition_speed_instant": "Direct",
+    "config.dynamic_fps.volume_transition_speed_tooltip": "Stel de snelheid in waarmee het spelvolume per seconde wordt aangepast.",
+
+    "config.dynamic_fps.frame_rate_target": "Doelframerate",
+    "config.dynamic_fps.volume_multiplier": "Volume vermenigvuldiger",
+
+    "config.dynamic_fps.graphics_state": "Grafische opties",
+    "config.dynamic_fps.graphics_state_default": "Standaard",
+    "config.dynamic_fps.graphics_state_reduced": "Verminderd",
+    "config.dynamic_fps.graphics_state_minimal": "Minimaal",
+    "config.dynamic_fps.graphics_state_minimal_tooltip": "Minimale graphics zorgen ervoor dat de wereld herlaadt!",
+
+    "config.dynamic_fps.show_toasts": "Toasts weergeven",
+    "config.dynamic_fps.show_toasts_tooltip": "Of toast notificaties moeten blijven worden weergegeven of vertraagd",
+
+    "config.dynamic_fps.run_garbage_collector": "Roep Garbage Collector aan",
+    "config.dynamic_fps.run_garbage_collector_tooltip": "Maak ongebruikt geheugen vrij wanneer je overschakelt naar deze status",
+
+    "config.dynamic_fps.download_natives": "Bibliotheken downloaden",
+    "config.dynamic_fps.download_natives_description_0": "Voor het gebruik van de batterijfuncties is een extra bibliotheek nodig.",
+    "config.dynamic_fps.download_natives_description_1": "Stel in of de mod dit onderdeel namens u mag downloaden.",
+
+    "key.dynamic_fps.toggle_forced": "Forceer de \"Niet gefocust\" modus (Toggle)",
+    "key.dynamic_fps.toggle_disabled": "Schakel Dynamic FPS uit (Toggle)",
+    "gui.dynamic_fps.hud.reducing": "Dynamic FPS: Verminderde FPS forceren",
+    "gui.dynamic_fps.hud.disabled": "Dynamic FPS Uitgeschakeld",
+
+    "toast.dynamic_fps.battery_charging": "Opladen!",
+    "toast.dynamic_fps.battery_draining": "Ontladen!",
+    "toast.dynamic_fps.battery_critical": "Batterij bijna leeg!",
+
+    "toast.dynamic_fps.battery_charge": "Momenteel op %d%%",
+
+    "modmenu.descriptionTranslation.dynamic_fps": "Verminder het gebruik van hulpbronnen terwijl Minecraft op de achtergrond of inactief is."
+}
