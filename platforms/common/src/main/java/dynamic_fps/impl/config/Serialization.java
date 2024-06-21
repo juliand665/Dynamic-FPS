@@ -77,6 +77,10 @@ public class Serialization {
 			JsonElement other = entry.getValue();
 			JsonElement value = config.get(name);
 
+			if (value == null) {
+				return;
+			}
+
 			if (value.equals(other)) {
 				config.remove(name);
 			} else if (value.isJsonObject() && other.isJsonObject()) {
