@@ -61,7 +61,7 @@
     "config.dynamic_fps.graphics_state_default": "預設",
     "config.dynamic_fps.graphics_state_reduced": "減少",
     "config.dynamic_fps.graphics_state_minimal": "最小",
-    "config.dynamic_fps.graphics_state_minimal_tooltip": "最小畫質會導致世界重新加載！畫質會導致世界重新加載！",
+    "config.dynamic_fps.graphics_state_minimal_tooltip": "最低圖形設定導致世界重新加載！",
 
     "config.dynamic_fps.show_toasts": "顯示彈出提示框",
     "config.dynamic_fps.show_toasts_tooltip": "是否繼續顯示還是延遲顯示通知",
