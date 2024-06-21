@@ -4,28 +4,46 @@ public class VolumeTransitionConfig {
 	private float up;
 	private float down;
 
+	private static final float IMMEDIATE = 10.0f;
+
 	protected VolumeTransitionConfig(float up, float down) {
 		this.up = up;
 		this.down = down;
 	}
 
 	public float getUp() {
-		return this.up;
+		if (this.up == -1) {
+			return IMMEDIATE;
+		} else {
+			return this.up;
+		}
 	}
 
 	public void setUp(float value) {
-		this.up = value;
+		if (value >= IMMEDIATE) {
+			this.up = -1.0f;
+		} else {
+			this.up = value;
+		}
 	}
 
 	public float getDown() {
-		return this.down;
+		if (this.down == -1) {
+			return IMMEDIATE;
+		} else {
+			return this.down;
+		}
 	}
 
 	public void setDown(float value) {
-		this.down = value;
+		if (value >= IMMEDIATE) {
+			this.down = -1.0f;
+		} else {
+			this.down = value;
+		}
 	}
 
 	public boolean isActive() {
-		return this.up != 100.0f || this.down != 100.0f;
+		return this.up != -1.0f || this.down != -1.0f;
 	}
 }
