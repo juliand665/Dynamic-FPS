@@ -107,9 +107,8 @@ public class DynamicFPSMod {
 	}
 
 	public static void onConfigChanged() {
-		modConfig.save();
-
 		doInit();
+		modConfig.save();
 		checkForStateChanges(); // The unplugged state may now be enabled or disabled
 	}
 
