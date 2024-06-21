@@ -60,7 +60,7 @@
     "config.dynamic_fps.graphics_state": "圖形選項",
     "config.dynamic_fps.graphics_state_default": "預設",
     "config.dynamic_fps.graphics_state_reduced": "減少",
-    "config.dynamic_fps.graphics_state_minimal": "最小",
+    "config.dynamic_fps.graphics_state_minimal": "最低",
     "config.dynamic_fps.graphics_state_minimal_tooltip": "最低圖形設定導致世界重新加載！",
 
     "config.dynamic_fps.show_toasts": "顯示彈出提示框",
