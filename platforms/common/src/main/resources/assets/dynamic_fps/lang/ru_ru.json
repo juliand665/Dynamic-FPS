@@ -1,48 +1,88 @@
 {
-    "config.dynamic_fps.title": "Конфигурация Dynamic FPS",
+    "config.dynamic_fps.title": "Настройки Dynamic FPS",
+    "config.dynamic_fps.warn_cloth_config.0": "Для настройки Dynamic FPS через интерфейс Minecraft требуется Cloth Config.",
+    "config.dynamic_fps.warn_cloth_config.1": "Можно использовать настройки по умолчанию, отредактировать файл настроек вручную или установить Cloth Config для настройки через игру.",
 
     "config.dynamic_fps.category.general": "Основные",
-    "config.dynamic_fps.category.hovered": "Наведён",
-    "config.dynamic_fps.category.unfocused": "Расфокусирован",
-    "config.dynamic_fps.category.abandoned": "Простаивает",
-    "config.dynamic_fps.category.invisible": "Свёрнут",
+    "config.dynamic_fps.category.advanced": "Дополнительные",
 
-    "config.dynamic_fps.disabled": "Отключёно",
-    "config.dynamic_fps.minutes": "%d минут(ы)",
+    "config.dynamic_fps.category.hovered": "Наведение мыши",
+    "config.dynamic_fps.category.unfocused": "Фоновый режим",
+    "config.dynamic_fps.category.invisible": "Свёрнутый режим",
+    "config.dynamic_fps.category.unplugged": "Экономия энергии",
+    "config.dynamic_fps.category.abandoned": "Режим ожидания",
 
-    "config.dynamic_fps.idle_time": "Время простоя",
-    "config.dynamic_fps.idle_time_tooltip": "Минут без ввода, пока Dynamic FPS не активирует режим простоя, пока игра находится в режиме фокуса.",
+    "config.dynamic_fps.enabled": "Включён",
 
-    "config.dynamic_fps.uncap_menu_frame_rate": "Снять ограничение FPS в меню",
-    "config.dynamic_fps.uncap_menu_frame_rate_tooltip": "Снимает ограничение в 60 FPS в главном меню.",
+    "config.dynamic_fps.disabled": "Отключено",
+    "config.dynamic_fps.minutes": "Минут: %d",
 
-    "config.dynamic_fps.frame_rate_target": "Количество FPS",
-    "config.dynamic_fps.volume_multiplier": "Процент громкости звуков",
+    "config.dynamic_fps.idle_time": "Время перехода в режим ожидания",
+    "config.dynamic_fps.idle_time_tooltip": "Время простоя перед переходом в режим ожидания,\nкогда игра не свёрнута и находится в фокусе.",
 
-    "config.dynamic_fps.graphics_state": "Настройки графики",
-    "config.dynamic_fps.graphics_state_default": "По умолчанию",
-    "config.dynamic_fps.graphics_state_reduced": "Сниженная",
-    "config.dynamic_fps.graphics_state_minimal": "Минимальная",
-    "config.dynamic_fps.graphics_state_minimal_tooltip": "Минимальная графика заставляет мир перезагружаться!",
+    "config.dynamic_fps.idle_condition": "Условие для перехода",
+    "config.dynamic_fps.idle_condition_none": "Всегда",
+    "config.dynamic_fps.idle_condition_on_battery": "Работа от батареи",
+
+    "config.dynamic_fps.uncap_menu_frame_rate": "Неограниченная частота кадров в меню",
+    "config.dynamic_fps.uncap_menu_frame_rate_tooltip": "Снять ограничение в 60 кадров в секунду в главном меню.",
+
+    "config.dynamic_fps.battery_tracker": "Отслеживание заряда батареи",
+    "config.dynamic_fps.battery_tracker_tooltip": "Переключить все функции, связанные с батареей.",
+
+    "config.dynamic_fps.battery_tracker_switch_states": "Переход в режим экономии энергии",
+    "config.dynamic_fps.battery_tracker_switch_states_tooltip": "Автоматически включать режим экономии\nэнергии при питании от батареи.",
+
+    "config.dynamic_fps.battery_tracker_notifications": "Уведомления батареи",
+    "config.dynamic_fps.battery_tracker_notifications_tooltip": "Выводить стилизованные уведомления о состоянии батареи.",
+
+    "config.dynamic_fps.battery_indicator_condition": "Отображение индикатора батареи",
+    "config.dynamic_fps.battery_indicator_condition_disabled": "Отключён",
+    "config.dynamic_fps.battery_indicator_condition_draining": "При разрядке",
+    "config.dynamic_fps.battery_indicator_condition_critical": "Низкий заряд | ≤10%",
+    "config.dynamic_fps.battery_indicator_condition_constant": "Всегда",
+
+    "config.dynamic_fps.battery_indicator_placement": "Положение индикатора",
+    "config.dynamic_fps.battery_indicator_placement_top_left": "Сверху слева",
+    "config.dynamic_fps.battery_indicator_placement_top_right": "Сверху справа",
+    "config.dynamic_fps.battery_indicator_placement_bottom_left": "Снизу слева",
+    "config.dynamic_fps.battery_indicator_placement_bottom_right": "Снизу справа",
+
+    "config.dynamic_fps.volume_transition_speed_up": "Скорость нарастания громкости",
+    "config.dynamic_fps.volume_transition_speed_down": "Скорость угасания громкости",
+    "config.dynamic_fps.volume_transition_speed_instant": "Мгновенно",
+    "config.dynamic_fps.volume_transition_speed_tooltip": "Скорость изменения громкости звуков игры за секунду.",
+
+    "config.dynamic_fps.frame_rate_target": "Частота кадров",
+    "config.dynamic_fps.volume_multiplier": "Громкость звуков",
+
+    "config.dynamic_fps.graphics_state": "Снижение настроек графики",
+    "config.dynamic_fps.graphics_state_default": "Отключено",
+    "config.dynamic_fps.graphics_state_reduced": "Среднее",
+    "config.dynamic_fps.graphics_state_minimal": "Сильное",
+    "config.dynamic_fps.graphics_state_minimal_tooltip": "Сильное снижение настроек графики вызывает перезагрузку чанков,\nчто может привести к бóльшим затратам, чем к экономии.",
 
     "config.dynamic_fps.show_toasts": "Показывать уведомления",
-    "config.dynamic_fps.show_toasts_tooltip": "Продолжать ли отображать всплывающие уведомления или откладывать их",
+    "config.dynamic_fps.show_toasts_tooltip": "Вывод уведомлений можно отложить до возвращения к игре.",
 
     "config.dynamic_fps.run_garbage_collector": "Запускать сборщик мусора",
-    "config.dynamic_fps.run_garbage_collector_tooltip": "Освобождать неиспользуемую оперативную память при переключении в этот статус",
+    "config.dynamic_fps.run_garbage_collector_tooltip": "Освобождать неиспользуемую оперативную память при активации режима.",
 
-    "key.dynamic_fps.toggle_forced": "Принудительно снизить FPS",
-    "key.dynamic_fps.toggle_disabled": "Отключить Dynamic FPS",
+    "config.dynamic_fps.download_natives": "Загрузка библиотек",
+    "config.dynamic_fps.download_natives_description_0": "Разрешить автоматическую загрузку необходимых компонентов для вас",
+    "config.dynamic_fps.download_natives_description_1": "(для проверки состояния батареи требуется дополнительная библиотека).",
+
+    "key.dynamic_fps.toggle_forced": "Переключить фоновый режим",
+    "key.dynamic_fps.toggle_disabled": "Переключить работу Dynamic FPS",
     "gui.dynamic_fps.hud.reducing": "Dynamic FPS: принудительное снижениие частоты кадров",
     "gui.dynamic_fps.hud.disabled": "Dynamic FPS отключён",
 
-    "modmenu.descriptionTranslation.dynamic_fps": "Динамически снижает FPS, чтобы Minecraft излишне не использовал ресурсы системы в фоновом режиме",
+    "toast.dynamic_fps.battery_charging": "Зарядка...",
+    "toast.dynamic_fps.battery_draining": "Батарея разряжается",
+    "toast.dynamic_fps.battery_critical": "Низкий уровень заряда",
 
-    "config.dynamic_fps.warn_cloth_config.0": "Cloth Config необходим для настройки Dynamic FPS внутри игры.",
-    "config.dynamic_fps.warn_cloth_config.1": "Либо установите Cloth Config и редактируйте файл конфигурации, либо используйте настройки по умолчанию.",
-    "config.dynamic_fps.enabled": "Мод включен",
-    "config.dynamic_fps.volume_transition_speed_up": "Скорость увеличения громкости",
-    "config.dynamic_fps.volume_transition_speed_down": "Скорость снижения громкости",
-    "config.dynamic_fps.volume_transition_speed_instant": "Немедленно",
-    "config.dynamic_fps.volume_transition_speed_tooltip": "Устанавливает скорость изменения громкости игры в секунду."
+    "toast.dynamic_fps.battery_charge": "Уровень заряда: %d%%",
+
+    "modmenu.descriptionTranslation.dynamic_fps": "Динамическое изменение энергозатратных настроек в зависимости от состояния окна игры.",
+    "modmenu.summaryTranslation.dynamic_fps": "Автоматическое снижение потребления игрой ресурсов в фоне и в простое."
 }
