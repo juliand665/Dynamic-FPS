@@ -10,7 +10,7 @@ version = "${version}"
 displayName = "Dynamic FPS"
 authors = "juliand665 & LostLuma"
 description = "Reduce resource usage while Minecraft is in the background or idle."
-logoFile = "assets/dynamic_fps/icon.png"
+logoFile = "assets/dynamic_fps/textures/icon.png"
 displayTest = "IGNORE_ALL_VERSION"
 credits = """
 Thanks to:
@@ -30,6 +30,9 @@ Thanks to:
     Siphalor
     sisby-folk
     triphora
+
+  Illustrators:
+    Pixaurora
 
   Translators:
     AlphaKR93

@@ -13,13 +13,12 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import dynamic_fps.impl.Constants;
-import dynamic_fps.impl.GraphicsState;
-import dynamic_fps.impl.PowerState;
 import dynamic_fps.impl.service.Platform;
 import dynamic_fps.impl.util.Logging;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -35,24 +34,26 @@ public class Serialization {
 		.serializeNulls()
 		.setPrettyPrinting()
 		.enableComplexMapKeySerialization()
+		.registerTypeHierarchyAdapter(Enum.class, new EnumSerializer<>())
 		.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-		.registerTypeAdapter(PowerState.class, new PowerStateSerializer())
-		.registerTypeAdapter(GraphicsState.class, new GraphicsStateSerializer())
 		.create();
 
 	private static final String CONFIG_FILE = Constants.MOD_ID + ".json";
 
 	public static void save(DynamicFPSConfig instance) {
-		String data = GSON.toJson(instance) + "\n";
+		JsonObject config = (JsonObject) GSON.toJsonTree(instance);
+		JsonObject parent = (JsonObject) GSON.toJsonTree(DynamicFPSConfig.DEFAULT);
+
+		String data = GSON.toJson(removeUnchangedFields(config, parent)) + "\n";
 
 		Path cache = Platform.getInstance().getCacheDir();
-		Path config = Platform.getInstance().getConfigDir().resolve(CONFIG_FILE);
+		Path configs = Platform.getInstance().getConfigDir().resolve(CONFIG_FILE);
 
 		try {
 			Path temp = Files.createTempFile(cache, "config", ".json");
 
 			Files.write(temp, data.getBytes(StandardCharsets.UTF_8));
-			Serialization.move(temp, config); // Attempt atomic move, fall back otherwise.
+			Serialization.move(temp, configs); // Attempt atomic move, fall back otherwise
 		} catch (IOException e) {
 			// Cloth Config's built-in saving does not support catching exceptions :(
 			throw new RuntimeException("Failed to save or modify Dynamic FPS config!", e);
@@ -67,47 +68,95 @@ public class Serialization {
         }
     }
 
+	private static JsonObject removeUnchangedFields(JsonObject config, JsonObject parent) {
+		// Recursively delete all fields that are equal to the defaults ...
+
+		parent.entrySet().forEach(entry -> {
+			String name = entry.getKey();
+
+			JsonElement other = entry.getValue();
+			JsonElement value = config.get(name);
+
+			if (value.equals(other)) {
+				config.remove(name);
+			} else if (value.isJsonObject() && other.isJsonObject()) {
+				removeUnchangedFields((JsonObject) value, (JsonObject) other);
+			}
+		});
+
+		return config;
+	}
+
 	@SuppressWarnings("deprecation")
 	public static DynamicFPSConfig load() {
-		byte[] data;
+		byte[] data = null;
 		Path config = Platform.getInstance().getConfigDir().resolve(CONFIG_FILE);
 
 		try {
 			data = Files.readAllBytes(config);
 		} catch (NoSuchFileException e) {
-			return DynamicFPSConfig.createDefault();
+			// Use default config
 		} catch (IOException e) {
 			throw new RuntimeException("Failed to load Dynamic FPS config.", e);
 		}
 
-		// Sometimes when the config failed to save properly it'll end up being only null bytes.
-		// Since most users don't seem to know how to deal with this we'll just replace the config.
-		if (data[0] == 0) {
-			Logging.getLogger().warn("Dynamic FPS config corrupted! Recreating from defaults ...");
-			return DynamicFPSConfig.createDefault();
+		JsonObject root;
+
+		// Sometimes failing to save the config produces a file of only null bytes (on Windows?).
+		// Since there's no point in crashing just reset the config to the default state instead.
+		if (data == null || data[0] == 0) {
+			root = new JsonObject();
+			Logging.getLogger().warn("Dynamic FPS config corrupted! Starting with defaults ...");
+		} else {
+			root = (JsonObject) new JsonParser().parse(new String(data, StandardCharsets.UTF_8));
 		}
 
-		JsonElement root = new JsonParser().parse(new String(data, StandardCharsets.UTF_8));
-
-		upgradeConfig((JsonObject) root);
+		upgradeConfig(root);
 		return GSON.fromJson(root, DynamicFPSConfig.class); // Ignores regular constructor!
 	}
 
-	private static void upgradeConfig(JsonObject root) {
-		addIdleTime(root);
-		upgradeVolumeMultiplier(root);
-		addAbandonedConfig(root);
-		addUncapMenuFrameRate(root);
-		addEnabled(root);
-		addDetectIdleMovement(root);
-		addVolumeTransitionSpeed(root);
+	public static DynamicFPSConfig loadDefault() {
+		byte[] data;
+
+		try (InputStream stream = Serialization.class.getResourceAsStream("/assets/dynamic_fps/data/default_config.json")) {
+			if (stream == null) {
+				throw new IOException("Stream is null.");
+			}
+
+			data = stream.readAllBytes();
+		} catch (IOException e) {
+			throw new RuntimeException("Failed to load Dynamic FPS config.", e);
+		}
+
+		return GSON.fromJson(new String(data, StandardCharsets.UTF_8), DynamicFPSConfig.class);
 	}
 
-	private static void addIdleTime(JsonObject root) {
-		// Add idle_time field if it's missing
-		if (!root.has("idle_time")) {
-			root.addProperty("idle_time", 0);
-		}
+	private static void upgradeConfig(JsonObject config) {
+		// v3.3.0
+		upgradeVolumeMultiplier(config);
+
+		// v3.5.0
+		upgradeIdleConfig(config);
+
+		// version agnostic
+		addMissingFields(config, (JsonObject) GSON.toJsonTree(DynamicFPSConfig.DEFAULT));
+	}
+
+	private static void addMissingFields(JsonObject config, JsonObject parent) {
+		// Recursively add all fields that are missing from the user config
+
+		parent.entrySet().forEach(entry -> {
+			String name = entry.getKey();
+
+			JsonElement other = entry.getValue();
+			JsonElement value = config.get(name);
+
+			if (value == null) {
+				config.add(name, other);
+			} else if (value.isJsonObject() && other.isJsonObject()) {
+				addMissingFields((JsonObject) value, (JsonObject) other);
+			}
+		});
 	}
 
 	private static void upgradeVolumeMultiplier(JsonObject root) {
@@ -146,52 +195,32 @@ public class Serialization {
 		}
 	}
 
-	private static void addAbandonedConfig(JsonObject root) {
-		// Add default config for abandoned power state
-		JsonObject states = getStatesAsObject(root);
-
-		if (states == null) {
+	private static void upgradeIdleConfig(JsonObject root) {
+		// Replace idle_time field with the new object
+		if (!root.has("idle_time")) {
 			return;
 		}
 
-		if (states.has("abandoned")) {
+		JsonElement idleTime = root.get("idle_time");
+
+		if (!idleTime.isJsonPrimitive() || !idleTime.getAsJsonPrimitive().isNumber()) {
 			return;
 		}
 
-		states.add("abandoned", GSON.toJsonTree(Config.getDefault(PowerState.ABANDONED)));
-	}
+		int timeout = idleTime.getAsInt();
 
-	private static void addUncapMenuFrameRate(JsonObject root) {
-		// Add uncap_menu_frame_rate field if it's missing
-		if (!root.has("uncap_menu_frame_rate")) {
-			root.addProperty("uncap_menu_frame_rate", false);
+		// The setting is unused, so no need to migrate
+		// Instead the new default value from the JAR will overwrite it
+		if (timeout == 0) {
+			return;
 		}
-	}
 
-	private static void addEnabled(JsonObject root) {
-		// Add enabled field if it's missing
-		if (!root.has("enabled")) {
-			root.addProperty("enabled", true);
-		}
-	}
+		JsonObject idle = new JsonObject();
 
-	private static void addDetectIdleMovement(JsonObject root) {
-		// Add detect_idle_movement field if it's missing
-		if (!root.has("detect_idle_movement")) {
-			root.addProperty("detect_idle_movement", true);
-		}
-	}
+		idle.addProperty("timeout", timeout);
+		idle.addProperty("condition", "none");
 
-	private static void addVolumeTransitionSpeed(JsonObject root) {
-		// Add volume_transition_speed object if it's missing
-		if (!root.has("volume_transition_speed")) {
-			JsonObject object = new JsonObject();
-
-			object.addProperty("up", 1.0f);
-			object.addProperty("down", 0.5f);
-
-			root.add("volume_transition_speed", object);
-		}
+		root.add("idle", idle);
 	}
 
 	private static @Nullable JsonObject getStatesAsObject(JsonObject root) {
@@ -206,27 +235,20 @@ public class Serialization {
 		return root.getAsJsonObject("states");
 	}
 
-	private static final class PowerStateSerializer implements JsonSerializer<PowerState>, JsonDeserializer<PowerState> {
+	private static final class EnumSerializer<T extends Enum<T>> implements JsonSerializer<T>, JsonDeserializer<T> {
 		@Override
-		public JsonElement serialize(PowerState state, Type type, JsonSerializationContext context) {
-			return new JsonPrimitive(state.toString().toLowerCase(Locale.ROOT));
+		public JsonElement serialize(T instance, Type type, JsonSerializationContext context) {
+			return new JsonPrimitive(instance.toString().toLowerCase(Locale.ROOT));
 		}
 
 		@Override
-		public PowerState deserialize(JsonElement element, Type type, JsonDeserializationContext context) throws JsonParseException {
-			return PowerState.valueOf(element.getAsString().toUpperCase(Locale.ROOT));
-		}
-	}
-
-	private static final class GraphicsStateSerializer implements JsonSerializer<GraphicsState>, JsonDeserializer<GraphicsState> {
-		@Override
-		public JsonElement serialize(GraphicsState state, Type type, JsonSerializationContext context) {
-			return new JsonPrimitive(state.toString().toLowerCase(Locale.ROOT));
-		}
-
-		@Override
-		public GraphicsState deserialize(JsonElement element, Type type, JsonDeserializationContext context) throws JsonParseException {
-			return GraphicsState.valueOf(element.getAsString().toUpperCase(Locale.ROOT));
+		public T deserialize(JsonElement element, Type type, JsonDeserializationContext context) throws JsonParseException {
+			try {
+				Class<T> class_ = (Class<T>) Class.forName(type.getTypeName());
+				return Enum.valueOf(class_, element.getAsString().toUpperCase());
+			} catch (ClassNotFoundException | IllegalArgumentException e) {
+				throw new JsonParseException(e);
+			}
 		}
 	}
 }

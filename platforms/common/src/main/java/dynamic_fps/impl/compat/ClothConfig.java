@@ -2,9 +2,14 @@ package dynamic_fps.impl.compat;
 
 import dynamic_fps.impl.Constants;
 import dynamic_fps.impl.DynamicFPSMod;
-import dynamic_fps.impl.GraphicsState;
+import dynamic_fps.impl.config.BatteryTrackerConfig;
+import dynamic_fps.impl.config.DynamicFPSConfig;
+import dynamic_fps.impl.config.option.BatteryIndicatorPlacement;
+import dynamic_fps.impl.config.option.BatteryIndicatorCondition;
+import dynamic_fps.impl.config.option.GraphicsState;
 import dynamic_fps.impl.PowerState;
 import dynamic_fps.impl.config.Config;
+import dynamic_fps.impl.config.option.IdleCondition;
 import dynamic_fps.impl.util.VariableStepTransformer;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
@@ -34,13 +39,26 @@ public final class ClothConfig {
 			localized("config", "category.general")
 		);
 
+		DynamicFPSConfig defaultConfig = DynamicFPSConfig.DEFAULT;
+
 		general.addEntry(
 			entryBuilder.startBooleanToggle(
 				localized("config", "enabled"),
 				DynamicFPSMod.modConfig.enabled()
 			)
-			.setDefaultValue(true)
+			.setDefaultValue(defaultConfig.enabled())
 			.setSaveConsumer(DynamicFPSMod.modConfig::setEnabled)
+			.build()
+		);
+
+		general.addEntry(
+			entryBuilder.startBooleanToggle(
+				localized("config", "uncap_menu_frame_rate"),
+				DynamicFPSMod.modConfig.uncapMenuFrameRate()
+			)
+			.setDefaultValue(defaultConfig.uncapMenuFrameRate())
+			.setSaveConsumer(DynamicFPSMod.modConfig::setUncapMenuFrameRate)
+			.setTooltip(localized("config", "uncap_menu_frame_rate_tooltip"))
 			.build()
 		);
 
@@ -51,65 +69,133 @@ public final class ClothConfig {
 		general.addEntry(
 			entryBuilder.startIntSlider(
 				localized("config", "idle_time"),
-				DynamicFPSMod.modConfig.idleTime() / 60,
+				DynamicFPSMod.modConfig.idle().timeout() / 60,
 				0, 30
 			)
-			.setDefaultValue(0)
-			.setSaveConsumer(value -> DynamicFPSMod.modConfig.setIdleTime(value * 60))
+			.setDefaultValue(defaultConfig.idle().timeout() / 60)
+			.setSaveConsumer(value -> DynamicFPSMod.modConfig.idle().setTimeout(value * 60))
 			.setTextGetter(ClothConfig::idleTimeMessage)
 			.setTooltip(localized("config", "idle_time_tooltip"))
 			.build()
 		);
 
 		general.addEntry(
-			entryBuilder.startBooleanToggle(
-				localized("config", "uncap_menu_frame_rate"),
-				DynamicFPSMod.modConfig.uncapMenuFrameRate()
+			entryBuilder.startEnumSelector(
+				localized("config", "idle_condition"),
+				IdleCondition.class,
+				DynamicFPSMod.modConfig.idle().condition()
 			)
-			.setDefaultValue(false)
-			.setSaveConsumer(DynamicFPSMod.modConfig::setUncapMenuFrameRate)
-			.setTooltip(localized("config", "uncap_menu_frame_rate_tooltip"))
+			.setDefaultValue(defaultConfig.idle().condition())
+			.setSaveConsumer(DynamicFPSMod.modConfig.idle()::setCondition)
+			.setEnumNameProvider(ClothConfig::IdleConditionMessage)
 			.build()
+		);
+
+		general.addEntry(
+			entryBuilder.startTextDescription(CommonComponents.SPACE).build()
 		);
 
 		VariableStepTransformer volumeTransformer = getVolumeStepTransformer();
 
 		general.addEntry(
 			entryBuilder.startIntSlider(
-					localized("config", "volume_transition_speed_up"),
-					volumeTransformer.toStep((int) (DynamicFPSMod.volumeTransitionSpeed().getUp() * 10)),
-					1, 31
-				)
-				.setDefaultValue(volumeTransformer.toStep((int) (1.0f * 10)))
-				.setSaveConsumer(step -> DynamicFPSMod.volumeTransitionSpeed().setUp((float) volumeTransformer.toValue(step) / 10))
-				.setTextGetter(ClothConfig::volumeTransitionMessage)
-				.setTooltip(localized("config", "volume_transition_speed_tooltip"))
-				.build()
+				localized("config", "volume_transition_speed_up"),
+				volumeTransformer.toStep((int) (DynamicFPSMod.volumeTransitionSpeed().getUp() * 10)),
+				1, 31
+			)
+			.setDefaultValue(volumeTransformer.toStep((int) (defaultConfig.volumeTransitionSpeed().getUp() * 10)))
+			.setSaveConsumer(step -> DynamicFPSMod.volumeTransitionSpeed().setUp((float) volumeTransformer.toValue(step) / 10))
+			.setTextGetter(ClothConfig::volumeTransitionMessage)
+			.setTooltip(localized("config", "volume_transition_speed_tooltip"))
+			.build()
 		);
 
 		general.addEntry(
 			entryBuilder.startIntSlider(
-					localized("config", "volume_transition_speed_down"),
-					volumeTransformer.toStep((int) (DynamicFPSMod.volumeTransitionSpeed().getDown() * 10)),
-					1, 31
-				)
-				.setDefaultValue(volumeTransformer.toStep((int) (0.5f * 10)))
-				.setSaveConsumer(step -> DynamicFPSMod.volumeTransitionSpeed().setDown((float) volumeTransformer.toValue(step) / 10))
-				.setTextGetter(ClothConfig::volumeTransitionMessage)
-				.setTooltip(localized("config", "volume_transition_speed_tooltip"))
-				.build()
+				localized("config", "volume_transition_speed_down"),
+				volumeTransformer.toStep((int) (DynamicFPSMod.volumeTransitionSpeed().getDown() * 10)),
+				1, 31
+			)
+			.setDefaultValue(volumeTransformer.toStep((int) (defaultConfig.volumeTransitionSpeed().getDown() * 10)))
+			.setSaveConsumer(step -> DynamicFPSMod.volumeTransitionSpeed().setDown((float) volumeTransformer.toValue(step) / 10))
+			.setTextGetter(ClothConfig::volumeTransitionMessage)
+			.setTooltip(localized("config", "volume_transition_speed_tooltip"))
+			.build()
+		);
+
+		general.addEntry(
+			entryBuilder.startTextDescription(CommonComponents.SPACE).build()
+		);
+
+		BatteryTrackerConfig batteryTracker = DynamicFPSMod.batteryTracking();
+
+		general.addEntry(
+			entryBuilder.startBooleanToggle(
+				localized("config", "battery_tracker"),
+				batteryTracker.enabled()
+			)
+			.setDefaultValue(defaultConfig.batteryTracker().enabled())
+			.setSaveConsumer(batteryTracker::setEnabled)
+			.setTooltip(localized("config", "battery_tracker_tooltip"))
+			.build()
+		);
+
+		general.addEntry(
+			entryBuilder.startBooleanToggle(
+				localized("config", "battery_tracker_switch_states"),
+				batteryTracker.switchStates()
+			)
+			.setDefaultValue(defaultConfig.batteryTracker().switchStates())
+			.setSaveConsumer(batteryTracker::setSwitchStates)
+			.setTooltip(localized("config", "battery_tracker_switch_states_tooltip"))
+			.build()
+		);
+
+		general.addEntry(
+			entryBuilder.startBooleanToggle(
+				localized("config", "battery_tracker_notifications"),
+				batteryTracker.notifications()
+			)
+			.setDefaultValue(defaultConfig.batteryTracker().notifications())
+			.setSaveConsumer(batteryTracker::setNotifications)
+			.setTooltip(localized("config", "battery_tracker_notifications_tooltip"))
+			.build()
+		);
+
+		general.addEntry(
+			entryBuilder.startEnumSelector(
+				localized("config", "battery_indicator_condition"),
+				BatteryIndicatorCondition.class,
+				batteryTracker.display().condition()
+			)
+			.setDefaultValue(defaultConfig.batteryTracker().display().condition())
+			.setSaveConsumer(batteryTracker.display()::setCondition)
+			.setEnumNameProvider(ClothConfig::batteryIndicatorConditionMessage)
+			.build()
+		);
+
+		general.addEntry(
+			entryBuilder.startEnumSelector(
+				localized("config", "battery_indicator_placement"),
+				BatteryIndicatorPlacement.class,
+				batteryTracker.display().placement()
+			)
+			.setDefaultValue(defaultConfig.batteryTracker().display().placement())
+			.setSaveConsumer(batteryTracker.display()::setPlacement)
+			.setEnumNameProvider(ClothConfig::batteryIndicatorPlacementMessage)
+			.build()
 		);
 
 		// Used for each state's frame rate target slider below
 		VariableStepTransformer fpsTransformer = getFpsTransformer();
 
 		for (PowerState state : PowerState.values()) {
-			if (!state.configurable) {
+			if (state.configurabilityLevel == PowerState.ConfigurabilityLevel.NONE) {
 				continue;
 			}
 
 			Config config = DynamicFPSMod.modConfig.get(state);
-			Config standard = Config.getDefault(state);
+			Config standard = defaultConfig.get(state);
 
 			ConfigCategory category = builder.getOrCreateCategory(
 				localized("config", "category." + state.toString().toLowerCase())
@@ -129,6 +215,11 @@ public final class ClothConfig {
 				.setTextGetter(ClothConfig::fpsTargetMessage)
 				.build()
 			);
+
+			// Further options are not allowed since this state is used while active.
+			if (state.configurabilityLevel == PowerState.ConfigurabilityLevel.SOME) {
+				continue;
+			}
 
 			SubCategoryBuilder volumes = entryBuilder.startSubCategory(localized("config", "volume_multiplier"));
 
@@ -186,6 +277,24 @@ public final class ClothConfig {
 			);
 		}
 
+		ConfigCategory advanced = builder.getOrCreateCategory(
+			localized("config", "category.advanced")
+		);
+
+		advanced.addEntry(
+			entryBuilder.startBooleanToggle(
+				localized("config", "download_natives"),
+				DynamicFPSMod.modConfig.downloadNatives()
+			)
+			.setDefaultValue(defaultConfig.downloadNatives())
+			.setSaveConsumer(DynamicFPSMod.modConfig::setDownloadNatives)
+			.setTooltip(new Component[]{
+				localized("config", "download_natives_description_0"),
+				localized("config", "download_natives_description_1")}
+			)
+			.build()
+		);
+
 		return builder.build();
 	}
 
@@ -242,8 +351,20 @@ public final class ClothConfig {
 		return Component.literal(Integer.toString(value) + "%");
 	}
 
+	public static Component IdleConditionMessage(Enum<IdleCondition> state) {
+		return localized("config", "idle_condition_" + state.toString().toLowerCase(Locale.ROOT));
+	}
+
 	private static Component graphicsStateMessage(Enum<GraphicsState> graphicsState) {
 		return localized("config", "graphics_state_" + graphicsState.toString().toLowerCase(Locale.ROOT));
+	}
+
+	public static Component batteryIndicatorConditionMessage(Enum<BatteryIndicatorCondition> state) {
+		return localized("config", "battery_indicator_condition_" + state.toString().toLowerCase(Locale.ROOT));
+	}
+
+	public static Component batteryIndicatorPlacementMessage(Enum<BatteryIndicatorPlacement> state) {
+		return localized("config", "battery_indicator_placement_" + state.toString().toLowerCase(Locale.ROOT));
 	}
 
 	private static Optional<Component[]> graphicsStateTooltip(GraphicsState graphicsState) {

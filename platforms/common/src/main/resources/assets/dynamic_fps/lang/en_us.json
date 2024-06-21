@@ -5,10 +5,13 @@
     "config.dynamic_fps.warn_cloth_config.1": "Either install Cloth Config, edit the config file, or use the default settings instead.",
 
     "config.dynamic_fps.category.general": "General",
+    "config.dynamic_fps.category.advanced": "Advanced",
+
     "config.dynamic_fps.category.hovered": "Hovered",
     "config.dynamic_fps.category.unfocused": "Unfocused",
-    "config.dynamic_fps.category.abandoned": "Idle",
     "config.dynamic_fps.category.invisible": "Invisible",
+    "config.dynamic_fps.category.unplugged": "On Battery",
+    "config.dynamic_fps.category.abandoned": "Idle",
 
     "config.dynamic_fps.enabled": "Enabled",
 
@@ -18,8 +21,33 @@
     "config.dynamic_fps.idle_time": "Idle timeout",
     "config.dynamic_fps.idle_time_tooltip": "Minutes without input until Dynamic FPS activates the Idle state while the game is focused.",
 
+    "config.dynamic_fps.idle_condition": "Idle Condition",
+    "config.dynamic_fps.idle_condition_none": "None",
+    "config.dynamic_fps.idle_condition_on_battery": "While on battery",
+
     "config.dynamic_fps.uncap_menu_frame_rate": "Uncap Menu FPS",
     "config.dynamic_fps.uncap_menu_frame_rate_tooltip": "Remove the 60 FPS limit in the main menu.",
+
+    "config.dynamic_fps.battery_tracker": "Battery Tracking",
+    "config.dynamic_fps.battery_tracker_tooltip": "Toggle all battery-related features on or off.",
+
+    "config.dynamic_fps.battery_tracker_switch_states": "Enable On Battery State",
+    "config.dynamic_fps.battery_tracker_switch_states_tooltip": "Automatically enable the On Battery state when on battery.",
+
+    "config.dynamic_fps.battery_tracker_notifications": "Battery Notifications",
+    "config.dynamic_fps.battery_tracker_notifications_tooltip": "Receive in-game notifications about your battery status.",
+
+    "config.dynamic_fps.battery_indicator_condition": "Battery Indicator Condition",
+    "config.dynamic_fps.battery_indicator_condition_disabled": "Disabled",
+    "config.dynamic_fps.battery_indicator_condition_draining": "While discharging",
+    "config.dynamic_fps.battery_indicator_condition_critical": "Critical / <= 10%",
+    "config.dynamic_fps.battery_indicator_condition_constant": "Constant",
+
+    "config.dynamic_fps.battery_indicator_placement": "Indicator Placement",
+    "config.dynamic_fps.battery_indicator_placement_top_left": "Top Left",
+    "config.dynamic_fps.battery_indicator_placement_top_right": "Top Right",
+    "config.dynamic_fps.battery_indicator_placement_bottom_left": "Bottom Left",
+    "config.dynamic_fps.battery_indicator_placement_bottom_right": "Bottom Right",
 
     "config.dynamic_fps.volume_transition_speed_up": "Upward Volume Transition Speed",
     "config.dynamic_fps.volume_transition_speed_down": "Downward Volume Transition Speed",
@@ -41,10 +69,20 @@
     "config.dynamic_fps.run_garbage_collector": "Invoke Garbage Collector",
     "config.dynamic_fps.run_garbage_collector_tooltip": "Free up unused memory when switching to this status",
 
+    "config.dynamic_fps.download_natives": "Download Natives",
+    "config.dynamic_fps.download_natives_description_0": "Using the battery features requires an additional library.",
+    "config.dynamic_fps.download_natives_description_1": "Set whether the mod may download this component on your behalf.",
+
     "key.dynamic_fps.toggle_forced": "Force Unfocused Mode (Toggle)",
     "key.dynamic_fps.toggle_disabled": "Disable Dynamic FPS (Toggle)",
     "gui.dynamic_fps.hud.reducing": "Dynamic FPS: Forcing Reduced FPS",
     "gui.dynamic_fps.hud.disabled": "Dynamic FPS Disabled",
+
+    "toast.dynamic_fps.battery_charging": "Charging!",
+    "toast.dynamic_fps.battery_draining": "Discharging!",
+    "toast.dynamic_fps.battery_critical": "Battery Low!",
+
+    "toast.dynamic_fps.battery_charge": "Currently at %d%%",
 
     "modmenu.descriptionTranslation.dynamic_fps": "Reduce resource usage while Minecraft is in the background or idle."
 }

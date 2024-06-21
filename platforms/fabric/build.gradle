@@ -3,7 +3,11 @@ plugins {
 }
 
 repositories {
-	maven { url = "https://maven.terraformersmc.com/releases" } // modmenu
+	// ModMenu
+	exclusiveContent {
+		filter { includeGroup("com.terraformersmc") }
+		forRepository { maven { url = "https://maven.terraformersmc.com/releases" } }
+	}
 }
 
 architectury {
@@ -30,6 +34,8 @@ dependencies {
 	modImplementation(fabricApi.module("fabric-lifecycle-events-v1", libs.versions.fabric.api.get()))
 
 	modApi(libs.modmenu)
+
+	include(libs.battery)
 
 	common(project(path: ":platforms:common", configuration: "namedElements")) { transitive false }
 	shadowCommon(project(path: ":platforms:common", configuration: "transformProductionFabric")) { transitive false }

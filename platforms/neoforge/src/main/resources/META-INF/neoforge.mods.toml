@@ -31,6 +31,9 @@ Thanks to:
     sisby-folk
     triphora
 
+  Illustrators:
+    Pixaurora
+
   Translators:
     AlphaKR93
     Altegar
@@ -76,7 +79,7 @@ file="META-INF/accesstransformer.cfg"
 [[dependencies.dynamic_fps]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.20.5,)"
+versionRange = "[1.21.0,)"
 ordering = "NONE"
 side = "CLIENT"
 

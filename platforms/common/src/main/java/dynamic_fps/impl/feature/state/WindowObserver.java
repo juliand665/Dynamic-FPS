@@ -1,4 +1,4 @@
-package dynamic_fps.impl.util.event;
+package dynamic_fps.impl.feature.state;
 
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWCursorEnterCallback;

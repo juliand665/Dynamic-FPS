@@ -5,11 +5,11 @@ import java.util.Locale;
 import java.util.Map;
 
 import dynamic_fps.impl.Constants;
-import dynamic_fps.impl.GraphicsState;
 import dynamic_fps.impl.PowerState;
+import dynamic_fps.impl.config.option.GraphicsState;
 import net.minecraft.sounds.SoundSource;
 
-public final class Config {
+public class Config {
 	private int frameRateTarget;
 	private final Map<String, Float> volumeMultipliers;
 	private GraphicsState graphicsState;
@@ -91,32 +91,5 @@ public final class Config {
 
 	public void setRunGarbageCollector(boolean value) {
 		this.runGarbageCollector = value;
-	}
-
-	public static Config getDefault(PowerState state) {
-		switch (state) {
-			case HOVERED: {
-				return new Config(60, withMasterVolume(1.0f), GraphicsState.DEFAULT, true, false);
-			}
-			case UNFOCUSED: {
-				return new Config(1, withMasterVolume(0.25f), GraphicsState.DEFAULT, false, false);
-			}
-			case ABANDONED: {
-				return new Config(10, withMasterVolume(1.0f), GraphicsState.DEFAULT, false, false);
-			}
-			case INVISIBLE: {
-				return new Config(0, withMasterVolume(0.0f), GraphicsState.DEFAULT, false, false);
-			}
-			default: {
-				throw new RuntimeException("Getting default configuration for unhandled power state " + state.toString());
-			}
-		}
-	}
-
-	private static Map<String, Float> withMasterVolume(float value) {
-		Map<String, Float> volumes = new HashMap<>();
-		volumes.put(soundSourceName(SoundSource.MASTER), value);
-
-		return volumes;
 	}
 }

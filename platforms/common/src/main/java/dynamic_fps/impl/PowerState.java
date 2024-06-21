@@ -9,31 +9,42 @@ public enum PowerState {
 	/**
 	 * Window is currently focused.
 	 */
-	FOCUSED(false),
+	FOCUSED(ConfigurabilityLevel.NONE),
 
 	/**
 	 * Mouse positioned over unfocused window.
 	 */
-	HOVERED(true),
+	HOVERED(ConfigurabilityLevel.FULL),
 
 	/**
 	 * Another application is focused.
 	 */
-	UNFOCUSED(true),
+	UNFOCUSED(ConfigurabilityLevel.FULL),
 
 	/**
 	 * Window minimized or otherwise hidden.
 	 */
-	INVISIBLE(true),
+	INVISIBLE(ConfigurabilityLevel.FULL),
+
+	/**
+	 * The device is currently on battery.
+	 */
+	UNPLUGGED(ConfigurabilityLevel.SOME),
 
 	/**
 	 * User hasn't sent input for some time.
 	 */
-	ABANDONED(true);
+	ABANDONED(ConfigurabilityLevel.FULL);
 
-	public final boolean configurable;
+	public final ConfigurabilityLevel configurabilityLevel;
 
-	private PowerState(boolean configurable) {
-		this.configurable = configurable;
+	PowerState(ConfigurabilityLevel configurabilityLevel) {
+		this.configurabilityLevel = configurabilityLevel;
+	}
+
+	public enum ConfigurabilityLevel {
+		NONE,
+		SOME,
+		FULL;
 	}
 }

@@ -3,8 +3,15 @@ plugins {
 }
 
 repositories {
-	maven { url = "https://maven.terraformersmc.com/releases" } // modmenu
-    maven { url = "https://maven.quiltmc.org/repository/release" }
+	// ModMenu
+	exclusiveContent {
+		filter { includeGroup("com.terraformersmc") }
+		forRepository { maven { url = "https://maven.terraformersmc.com/releases" } }
+	}
+	exclusiveContent {
+		filter { includeGroup("org.quiltmc") }
+		forRepository { maven { url = "https://maven.quiltmc.org/repository/release" } }
+	}
 }
 
 architectury {

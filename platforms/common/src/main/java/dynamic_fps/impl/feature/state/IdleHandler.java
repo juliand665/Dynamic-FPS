@@ -1,7 +1,11 @@
-package dynamic_fps.impl.util;
+package dynamic_fps.impl.feature.state;
 
 import dynamic_fps.impl.DynamicFPSMod;
+import dynamic_fps.impl.config.DynamicFPSConfig;
+import dynamic_fps.impl.config.option.IdleCondition;
+import dynamic_fps.impl.feature.battery.BatteryTracker;
 import dynamic_fps.impl.service.Platform;
+import net.lostluma.battery.api.State;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.phys.Vec3;
@@ -31,7 +35,13 @@ public class IdleHandler {
 			return;
 		}
 
-		if (DynamicFPSMod.modConfig.idleTime() == 0) {
+		DynamicFPSConfig config = DynamicFPSMod.modConfig;
+
+		if (config.idle().timeout() == 0) {
+			return;
+		}
+
+		if (config.idle().condition() == IdleCondition.ON_BATTERY && !BatteryTracker.hasBatteries()) {
 			return;
 		}
 
@@ -58,19 +68,21 @@ public class IdleHandler {
 	}
 
 	public static boolean isIdle() {
-		long idleTime = DynamicFPSMod.modConfig.idleTime();
+		DynamicFPSConfig config = DynamicFPSMod.modConfig;
 
-		if (idleTime == 0) {
+		if (config.idle().timeout() == 0) {
 			return false;
 		}
 
-		return (Util.getEpochMillis() - previousActivity) >= idleTime * 1000;
+		if (config.idle().condition() == IdleCondition.ON_BATTERY && !(BatteryTracker.status() == State.DISCHARGING)) {
+			return false;
+		}
+
+		return (Util.getEpochMillis() - previousActivity) >= (long) config.idle().timeout() * 1000;
 	}
 
 	private static void checkActivity() {
-		if (DynamicFPSMod.modConfig.detectIdleMovement()) {
-			checkPlayerActivity();
-		}
+		checkPlayerActivity();
 
 		boolean idle = isIdle();
 

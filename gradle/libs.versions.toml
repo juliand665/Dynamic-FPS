@@ -1,22 +1,26 @@
 [versions]
-minecraft = "1.21-pre1"
+minecraft = "1.21"
 
 # Platform libraries
 
 fabric_loader = "0.15.10"
-fabric_api = "0.99.2+1.21"
+fabric_api = "0.100.1+1.21"
 
 forge = "1.20.4-49.0.30"
 
-neoforge = "20.5.20-beta"
+neoforge = "21.0.0-beta"
 
 quilt_loader = "0.25.0"
 quilt_standard_libraries = "8.0.0-alpha.12+1.20.4"
 
-# Third-party libraries
+# Regular libraries
 
-modmenu = "10.0.0-alpha.3"
-cloth_config = "14.0.126"
+battery = "1.0.0"
+
+# Modding libraries
+
+modmenu = "11.0.0-beta.1"
+cloth_config = "15.0.127"
 
 mixinextras = "0.3.5"
 
@@ -35,7 +39,11 @@ neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
 quilt_loader = { module = "org.quiltmc:quilt-loader", version.ref = "quilt_loader" }
 qsl_lifecycle_events = { module = "org.quiltmc.qsl.core:lifecycle_events", version.ref = "quilt_standard_libraries" }
 
-# Third-party libraries
+# Regular libraries
+
+battery = { module = "net.lostluma:battery", version.ref = "battery" }
+
+# Modding libraries
 
 modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
 cloth_config = { module = "me.shedaniel.cloth:cloth-config", version.ref = "cloth_config" }
@@ -49,4 +57,4 @@ mixinextras_forge = { module = "io.github.llamalad7:mixinextras-forge", version.
 shadow = { id = "com.github.johnrengelman.shadow", version = "8.1.1" }
 
 architectury = { id = "architectury-plugin", version = "3.4.155" }
-architectury_loom = { id = "dev.architectury.loom", version = "1.6.394" }
+architectury_loom = { id = "dev.architectury.loom", version = "1.6.397" }
