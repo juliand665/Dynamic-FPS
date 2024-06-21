@@ -3,20 +3,43 @@
 
     "config.dynamic_fps.category.general": "Général",
     "config.dynamic_fps.category.hovered": "Survolé",
-    "config.dynamic_fps.category.unfocused": "Non-focalisé",
+    "config.dynamic_fps.category.unfocused": "Arrière-plan",
+    "config.dynamic_fps.category.abandoned": "Inactivité",
     "config.dynamic_fps.category.invisible": "Invisible",
 
+    "config.dynamic_fps.enabled": "Activé",
+    "config.dynamic_fps.disabled": "Désactivé",
+    "config.dynamic_fps.minutes": "%d Minute(s)",
+    "config.dynamic_fps.idle_time": "Délai d'inactivité",
+    "config.dynamic_fps.idle_time_tooltip": "Minutes sans activité avant que Dynamic FPS active l'état 'Inactif' pendant que le jeu est en premier-plan.",
+
+    "config.dynamic_fps.uncap_menu_frame_rate": "Menu fluide",
+    "config.dynamic_fps.uncap_menu_frame_rate_tooltip": "Retire la limite de 60 FPS pour le menu.",
+
+    "config.dynamic_fps.volume_transition_speed_up": "Augmenter la vitesse de transition",
+    "config.dynamic_fps.volume_transition_speed_down": "Diminuer la vitesse de transition",
+    "config.dynamic_fps.volume_transition_speed_instant": "Instantané",
+    "config.dynamic_fps.volume_transition_speed_tooltip": "Définir la vitesse à laquelle le jeu va ajuster son volume par secondes.",
+
     "config.dynamic_fps.frame_rate_target": "Fréquence d'images ciblée",
-    "config.dynamic_fps.frame_rate_target_description": "Réglez la Fréquence d'images ciblée sur -1 pour désactiver la réduction du nombre d'images par seconde.",
     "config.dynamic_fps.volume_multiplier": "Multiplicateur de volume",
+
     "config.dynamic_fps.graphics_state": "Options graphiques",
+    "config.dynamic_fps.graphics_state_default": "Par défaut",
+    "config.dynamic_fps.graphics_state_reduced": "Réduit",
+    "config.dynamic_fps.graphics_state_minimal": "Minimal",
+    "config.dynamic_fps.graphics_state_minimal_tooltip": "Les graphisme à l'état 'Minimal' cause le rafraîchissement du monde!",
+
     "config.dynamic_fps.show_toasts": "Afficher les tutoriels",
+    "config.dynamic_fps.show_toasts_tooltip": "Faut-il continuer à afficher ou retarder les tutoriels",
+
     "config.dynamic_fps.run_garbage_collector": "Activer le collecteur de déchets",
+    "config.dynamic_fps.run_garbage_collector_tooltip": "Librère de la mémoire non utilisé lors du changement d'état",
 
     "key.dynamic_fps.toggle_forced": "Forcer le mode non-focalisé (Bascule)",
     "key.dynamic_fps.toggle_disabled": "Désactiver Dynamic FPS (Bascule)",
-    "gui.dynamic_fps.hud.reducing": "Dynamic FPS force la réduction d'IPS",
+    "gui.dynamic_fps.hud.reducing": "Dynamic FPS force la réduction de la fréquence IPS",
     "gui.dynamic_fps.hud.disabled": "Dynamic FPS est désactivé",
 
-    "modmenu.descriptionTranslation.dynamic_fps": "Ajuste dynamiquement les IPS afin que Minecraft ne monopolise pas les ressources en arrière-plan."
+    "modmenu.descriptionTranslation.dynamic_fps": "Ajuste dynamiquement la fréquence IPS afin que Minecraft ne monopolise pas les ressources en arrière-plan."
 }
