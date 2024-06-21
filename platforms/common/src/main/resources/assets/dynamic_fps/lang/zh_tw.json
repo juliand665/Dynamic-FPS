@@ -1,14 +1,17 @@
 {
     "config.dynamic_fps.title": "設定 Dynamic FPS",
 
-    "config.dynamic_fps.warn_cloth_config.0": "需要 Cloth Config 來在 Minecraft 中設定 Dynamic FPS。",
-    "config.dynamic_fps.warn_cloth_config.1": "要麼安裝 Cloth Config、要麼編輯配置文件，要麼使用默認設置。",
+    "config.dynamic_fps.warn_cloth_config.0": "Cloth Config 是在 Minecraft 中配置 Dynamic FPS 所必須的工具。",
+    "config.dynamic_fps.warn_cloth_config.1": "請安裝 Cloth Config、編輯配置檔案，或使用預設設定。",
 
     "config.dynamic_fps.category.general": "一般",
+    "config.dynamic_fps.category.advanced": "進階",
+
     "config.dynamic_fps.category.hovered": "聚焦時",
     "config.dynamic_fps.category.unfocused": "未聚焦時",
-    "config.dynamic_fps.category.abandoned": "Idle",
     "config.dynamic_fps.category.invisible": "不可見時",
+    "config.dynamic_fps.category.unplugged": "使用電池時",
+    "config.dynamic_fps.category.abandoned": "閒置時",
 
     "config.dynamic_fps.enabled": "啟用",
 
@@ -16,10 +19,35 @@
     "config.dynamic_fps.minutes": "%d 分鐘",
 
     "config.dynamic_fps.idle_time": "閒置逾時",
-    "config.dynamic_fps.idle_time_tooltip": "分鐘, 直到Dynamic FPS 在遊戲聚焦時激活閒置狀態。",
+    "config.dynamic_fps.idle_time_tooltip": "在遊戲處於焦點時，無操作達到幾分鐘後 Dynamic FPS 會進入閒置狀態。",
+
+    "config.dynamic_fps.idle_condition": "閒置條件",
+    "config.dynamic_fps.idle_condition_none": "無",
+    "config.dynamic_fps.idle_condition_on_battery": "使用電池時",
 
     "config.dynamic_fps.uncap_menu_frame_rate": "取消選單 FPS 上限",
     "config.dynamic_fps.uncap_menu_frame_rate_tooltip": "移除主選單中 60 FPS 的限制。",
+
+    "config.dynamic_fps.battery_tracker": "電池監控",
+    "config.dynamic_fps.battery_tracker_tooltip": "切換所有與電池相關的功能開啟或關閉。",
+
+    "config.dynamic_fps.battery_tracker_switch_states": "啟用電池模式",
+    "config.dynamic_fps.battery_tracker_switch_states_tooltip": "當使用電池時，自動啟用電池模式。",
+
+    "config.dynamic_fps.battery_tracker_notifications": "電池通知",
+    "config.dynamic_fps.battery_tracker_notifications_tooltip": "接收遊戲內有關電池狀態的通知。",
+
+    "config.dynamic_fps.battery_indicator_condition": "電池指示器條件",
+    "config.dynamic_fps.battery_indicator_condition_disabled": "已停用",
+    "config.dynamic_fps.battery_indicator_condition_draining": "放電時",
+    "config.dynamic_fps.battery_indicator_condition_critical": "危急 / <= 10%",
+    "config.dynamic_fps.battery_indicator_condition_constant": "持續的",
+
+    "config.dynamic_fps.battery_indicator_placement": "指示器放置位置",
+    "config.dynamic_fps.battery_indicator_placement_top_left": "左上角",
+    "config.dynamic_fps.battery_indicator_placement_top_right": "右上角",
+    "config.dynamic_fps.battery_indicator_placement_bottom_left": "左下角",
+    "config.dynamic_fps.battery_indicator_placement_bottom_right": "右下角",
 
     "config.dynamic_fps.volume_transition_speed_up": "向上音量轉換速度",
     "config.dynamic_fps.volume_transition_speed_down": "向下音量轉換速度",
@@ -41,10 +69,20 @@
     "config.dynamic_fps.run_garbage_collector": "使用垃圾回收器",
     "config.dynamic_fps.run_garbage_collector_tooltip": "切換到此狀態時，釋放未使用的記憶體",
 
+    "config.dynamic_fps.download_natives": "下載本地檔案",
+    "config.dynamic_fps.download_natives_description_0": "使用電池功能需要額外的程式庫。",
+    "config.dynamic_fps.download_natives_description_1": "設定是否允許模組代表您下載此元件。",
+
     "key.dynamic_fps.toggle_forced": "強制未聚焦模式（切換）",
     "key.dynamic_fps.toggle_disabled": "停用 Dynamic FPS（切換）",
     "gui.dynamic_fps.hud.reducing": "Dynamic FPS：強制限制 FPS",
     "gui.dynamic_fps.hud.disabled": "Dynamic FPS 已停用",
+
+    "toast.dynamic_fps.battery_charging": "正在充電！",
+    "toast.dynamic_fps.battery_draining": "正在放電！",
+    "toast.dynamic_fps.battery_critical": "電池電量過低！",
+
+    "toast.dynamic_fps.battery_charge": "目前電量為 %d%%",
 
     "modmenu.descriptionTranslation.dynamic_fps": "動態調整 FPS，使 Minecraft 在背景時不會占用很多資源。"
 }
