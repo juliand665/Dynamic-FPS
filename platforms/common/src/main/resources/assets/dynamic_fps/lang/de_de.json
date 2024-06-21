@@ -28,8 +28,8 @@
     "config.dynamic_fps.battery_tracker": "Akku-Tracker",
     "config.dynamic_fps.battery_tracker_tooltip": "Schalte alle Akku-Features ein oder aus.",
 
-    "config.dynamic_fps.battery_tracker_switch_states": "Nutze den Auf Akku Status",
-    "config.dynamic_fps.battery_tracker_switch_states_tooltip": "Wechsel automatisch zum Auf Akku Status wenn dein Gerät auf Akku läuft.",
+    "config.dynamic_fps.battery_tracker_switch_states": "Nutze den \"Auf Akku\"-Status",
+    "config.dynamic_fps.battery_tracker_switch_states_tooltip": "Wechsel automatisch zum \"Auf Akku\"-Status, wenn dein Gerät auf Akku läuft.",
 
     "config.dynamic_fps.battery_tracker_notifications": "Akku Benachrichtigungen",
     "config.dynamic_fps.battery_tracker_notifications_tooltip": "Erhalte im Spiel Benachrichtigungen zum Akkustatus.",
@@ -37,25 +37,25 @@
     "config.dynamic_fps.battery_indicator_condition": "Akkuanzeige Bedingung",
     "config.dynamic_fps.battery_indicator_condition_disabled": "Deaktiviert",
     "config.dynamic_fps.battery_indicator_condition_draining": "Während des Entladens",
-    "config.dynamic_fps.battery_indicator_condition_critical": "Kritisch / <= 10%",
+    "config.dynamic_fps.battery_indicator_condition_critical": "Kritisch / < 10%",
     "config.dynamic_fps.battery_indicator_condition_constant": "Konstant",
 
-    "config.dynamic_fps.battery_indicator_placement": "Akkuanzeige Platzierung",
+    "config.dynamic_fps.battery_indicator_placement": "Platzierung Akkuanzeige",
     "config.dynamic_fps.battery_indicator_placement_top_left": "Oben Links",
     "config.dynamic_fps.battery_indicator_placement_top_right": "Oben Rechts",
     "config.dynamic_fps.battery_indicator_placement_bottom_left": "Unten Links",
     "config.dynamic_fps.battery_indicator_placement_bottom_right": "Unten Rights",
 
-    "config.dynamic_fps.volume_transition_speed_up": "Aufwärts Lautstärke Anpassungsgeschwindigkeit",
-    "config.dynamic_fps.volume_transition_speed_down": "Abwärts Lautstärke Anpassungsgeschwindigkeit",
+    "config.dynamic_fps.volume_transition_speed_up": "Lautstärke Anpassungsgeschwindigkeit (aufwärts)",
+    "config.dynamic_fps.volume_transition_speed_down": "Lautstärke Anpassungsgeschwindigkeit (abwärts)",
     "config.dynamic_fps.volume_transition_speed_instant": "Sofort",
-    "config.dynamic_fps.volume_transition_speed_tooltip": "Stelle ein, wie schnell die Lautstärke pro Sekunde angepasst wird.",
+    "config.dynamic_fps.volume_transition_speed_tooltip": "Stelle ein, wie schnell die Lautstärke angepasst wird (pro Sekunde).",
 
     "config.dynamic_fps.uncap_menu_frame_rate": "Unbegrenzte Menü FPS",
     "config.dynamic_fps.uncap_menu_frame_rate_tooltip": "Entferne das 60 FPS Limit im Hauptmenü.",
 
     "config.dynamic_fps.frame_rate_target": "Zielbildrate",
-    "config.dynamic_fps.volume_multiplier": "Lautstärke Multiplikator",
+    "config.dynamic_fps.volume_multiplier": "Lautstärke-Faktor",
 
     "config.dynamic_fps.graphics_state": "Grafikoptionen",
     "config.dynamic_fps.graphics_state_default": "Standard",
@@ -84,5 +84,5 @@
 
     "toast.dynamic_fps.battery_charge": "Akkustand %d%%",
 
-    "modmenu.descriptionTranslation.dynamic_fps": "Reduziere die Ressourcennutzung, während Minecraft im Hintergrund oder inaktiv ist."
+    "modmenu.descriptionTranslation.dynamic_fps": "Reduziert die Ressourcennutzung, während Minecraft im Hintergrund oder inaktiv ist."
 }
