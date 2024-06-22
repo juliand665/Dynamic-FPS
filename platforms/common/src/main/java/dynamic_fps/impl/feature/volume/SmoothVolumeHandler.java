@@ -1,6 +1,8 @@
 package dynamic_fps.impl.feature.volume;
 
 import dynamic_fps.impl.DynamicFPSMod;
+import dynamic_fps.impl.config.DynamicFPSConfig;
+import dynamic_fps.impl.config.VolumeTransitionConfig;
 import dynamic_fps.impl.service.Platform;
 import dynamic_fps.impl.util.duck.DuckSoundEngine;
 import net.minecraft.client.Minecraft;
@@ -17,7 +19,7 @@ public class SmoothVolumeHandler {
 	private static final Map<SoundSource, Float> currentOverrides = new HashMap<>();
 
 	public static void init() {
-		if (active || !DynamicFPSMod.volumeTransitionSpeed().isActive()) {
+		if (active || !DynamicFPSConfig.INSTANCE.volumeTransitionSpeed().isActive()) {
 			return;
 		}
 
@@ -49,6 +51,7 @@ public class SmoothVolumeHandler {
 		}
 
 		boolean didUpdate = false;
+		VolumeTransitionConfig config = DynamicFPSConfig.INSTANCE.volumeTransitionSpeed();
 
 		for (SoundSource source : SoundSource.values()) {
 			float desired = DynamicFPSMod.volumeMultiplier(source);
@@ -58,11 +61,9 @@ public class SmoothVolumeHandler {
 				didUpdate = true;
 
 				if (current < desired) {
-					float up = DynamicFPSMod.volumeTransitionSpeed().getUp();
-					currentOverrides.put(source, Math.min(desired, current + up / 20.0f));
+					currentOverrides.put(source, Math.min(desired, current + config.getUp() / 20.0f));
 				} else {
-					float down = DynamicFPSMod.volumeTransitionSpeed().getDown();
-					currentOverrides.put(source, Math.max(desired, current - down / 20.0f));
+					currentOverrides.put(source, Math.max(desired, current - config.getDown() / 20.0f));
 				}
 
 				updateVolume(source);

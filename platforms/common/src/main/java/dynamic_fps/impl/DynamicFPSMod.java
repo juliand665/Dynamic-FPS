@@ -5,7 +5,6 @@ import dynamic_fps.impl.compat.GLFW;
 import dynamic_fps.impl.config.BatteryTrackerConfig;
 import dynamic_fps.impl.config.Config;
 import dynamic_fps.impl.config.DynamicFPSConfig;
-import dynamic_fps.impl.config.VolumeTransitionConfig;
 import dynamic_fps.impl.config.option.GraphicsState;
 import dynamic_fps.impl.service.ModCompat;
 import dynamic_fps.impl.feature.battery.BatteryToast;
@@ -40,8 +39,6 @@ import static dynamic_fps.impl.util.Localization.localized;
 public class DynamicFPSMod {
 	private static Config config = Config.ACTIVE;
 	private static PowerState state = PowerState.FOCUSED;
-
-	public static DynamicFPSConfig modConfig = DynamicFPSConfig.load();
 
 	private static boolean isForcingLowFPS = false;
 	private static boolean isKeybindDisabled = false;
@@ -80,7 +77,7 @@ public class DynamicFPSMod {
 	}
 
 	public static boolean isDisabled() {
-		return isKeybindDisabled || !modConfig.enabled() || ModCompat.getInstance().isDisabled();
+		return isKeybindDisabled || !DynamicFPSConfig.INSTANCE.enabled() || ModCompat.getInstance().isDisabled();
 	}
 
 	public static String whyIsTheModNotWorking() {
@@ -90,7 +87,7 @@ public class DynamicFPSMod {
 			results.add("keybinding");
 		}
 
-		if (!modConfig.enabled()) {
+		if (!DynamicFPSConfig.INSTANCE.enabled()) {
 			results.add("mod config");
 		}
 
@@ -108,7 +105,7 @@ public class DynamicFPSMod {
 
 	public static void onConfigChanged() {
 		doInit();
-		modConfig.save();
+		DynamicFPSConfig.INSTANCE.save();
 		checkForStateChanges(); // The unplugged state may now be enabled or disabled
 	}
 
@@ -164,20 +161,8 @@ public class DynamicFPSMod {
 		return config.frameRateTarget();
 	}
 
-	public static boolean uncapMenuFrameRate() {
-		return modConfig.uncapMenuFrameRate();
-	}
-
 	public static float volumeMultiplier(SoundSource source) {
 		return config.volumeMultiplier(source);
-	}
-
-	public static BatteryTrackerConfig batteryTracking() {
-		return modConfig.batteryTracker();
-	}
-
-	public static VolumeTransitionConfig volumeTransitionSpeed() {
-		return modConfig.volumeTransitionSpeed();
 	}
 
 	public static boolean shouldShowToasts() {
@@ -213,7 +198,7 @@ public class DynamicFPSMod {
 	}
 
 	private static void showNotification(String titleTranslationKey, String iconPath) {
-		if (!batteryTracking().notifications()) {
+		if (!DynamicFPSConfig.INSTANCE.batteryTracker().notifications()) {
 			return;
 		}
 
@@ -235,7 +220,7 @@ public class DynamicFPSMod {
 		}
 
 		Config before = config;
-		config = modConfig.get(current);
+		config = DynamicFPSConfig.INSTANCE.get(current);
 
 		GLFW.applyWorkaround(); // Apply mouse hover fix if required
 		hasRenderedLastFrame = false; // Render next frame w/o delay
@@ -270,6 +255,7 @@ public class DynamicFPSMod {
 
 	private static void checkForStateChanges0() {
 		PowerState current;
+		BatteryTrackerConfig batteryTracking = DynamicFPSConfig.INSTANCE.batteryTracker();
 
 		if (isDisabled()) {
 			current = PowerState.FOCUSED;
@@ -278,7 +264,7 @@ public class DynamicFPSMod {
 		} else if (window.isFocused()) {
 			if (IdleHandler.isIdle()) {
 				current = PowerState.ABANDONED;
-			} else if (batteryTracking().enabled() && batteryTracking().switchStates() && BatteryTracker.status() == State.DISCHARGING) {
+			} else if (batteryTracking.enabled() && batteryTracking.switchStates() && BatteryTracker.status() == State.DISCHARGING) {
 				current = PowerState.UNPLUGGED;
 			} else {
 				current = PowerState.FOCUSED; // Default

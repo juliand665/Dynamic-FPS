@@ -16,6 +16,8 @@ public class Config {
 	private boolean showToasts;
 	private boolean runGarbageCollector;
 
+	protected transient PowerState state; // Set by main config, allows retrieving values from the default power state config
+
 	public static final Config ACTIVE = new Config(-1, new HashMap<>(), GraphicsState.DEFAULT, true, false);
 
 	public Config(int frameRateTarget, Map<String, Float> volumeMultipliers, GraphicsState graphicsState, boolean showToasts, boolean runGarbageCollector) {
@@ -57,8 +59,9 @@ public class Config {
 
 	public void setVolumeMultiplier(SoundSource source, float value) {
 		String key = soundSourceName(source);
+		Config defaultConfig = DynamicFPSConfig.DEFAULTS.get(this.state);
 
-		if (value != 1.0f) {
+		if (value != 1.0f || defaultConfig.rawVolumeMultiplier(source) != 1.0f) {
 			this.volumeMultipliers.put(key, value);
 		} else {
 			this.volumeMultipliers.remove(key); // Same as default value

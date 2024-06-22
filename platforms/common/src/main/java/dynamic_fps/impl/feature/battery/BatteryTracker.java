@@ -1,6 +1,7 @@
 package dynamic_fps.impl.feature.battery;
 
 import dynamic_fps.impl.DynamicFPSMod;
+import dynamic_fps.impl.config.DynamicFPSConfig;
 import dynamic_fps.impl.service.Platform;
 import dynamic_fps.impl.util.Logging;
 import net.lostluma.battery.api.Battery;
@@ -40,7 +41,7 @@ public class BatteryTracker {
 	}
 
 	public static void init() {
-		if (manager != null || !DynamicFPSMod.batteryTracking().enabled()) {
+		if (manager != null || !DynamicFPSConfig.INSTANCE.batteryTracker().enabled()) {
 			return;
 		}
 
@@ -132,7 +133,7 @@ public class BatteryTracker {
 
 	private static void customizeInstallation() {
 		LibraryUtil.setCacheDir(Platform.getInstance().getCacheDir());
-		LibraryUtil.setAllowDownloads(DynamicFPSMod.modConfig.downloadNatives());
+		LibraryUtil.setAllowDownloads(DynamicFPSConfig.INSTANCE.downloadNatives());
 	}
 
 	private static Manager createManager() {

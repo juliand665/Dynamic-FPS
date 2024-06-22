@@ -42,7 +42,7 @@ public class Serialization {
 
 	public static void save(DynamicFPSConfig instance) {
 		JsonObject config = (JsonObject) GSON.toJsonTree(instance);
-		JsonObject parent = (JsonObject) GSON.toJsonTree(DynamicFPSConfig.DEFAULT);
+		JsonObject parent = (JsonObject) GSON.toJsonTree(DynamicFPSConfig.DEFAULTS);
 
 		String data = GSON.toJson(removeUnchangedFields(config, parent)) + "\n";
 
@@ -81,10 +81,12 @@ public class Serialization {
 				return;
 			}
 
-			if (value.equals(other)) {
-				config.remove(name);
-			} else if (value.isJsonObject() && other.isJsonObject()) {
+			if (value.isJsonObject() && other.isJsonObject()) {
 				removeUnchangedFields((JsonObject) value, (JsonObject) other);
+			}
+
+			if (value.equals(other) || (value.isJsonObject() && value.getAsJsonObject().isEmpty())) {
+				config.remove(name);
 			}
 		});
 
@@ -92,7 +94,7 @@ public class Serialization {
 	}
 
 	@SuppressWarnings("deprecation")
-	public static DynamicFPSConfig load() {
+	public static DynamicFPSConfig loadPersonalized() {
 		byte[] data = null;
 		Path config = Platform.getInstance().getConfigDir().resolve(CONFIG_FILE);
 
@@ -143,7 +145,7 @@ public class Serialization {
 		upgradeIdleConfig(config);
 
 		// version agnostic
-		addMissingFields(config, (JsonObject) GSON.toJsonTree(DynamicFPSConfig.DEFAULT));
+		addMissingFields(config, (JsonObject) GSON.toJsonTree(DynamicFPSConfig.DEFAULTS));
 	}
 
 	private static void addMissingFields(JsonObject config, JsonObject parent) {

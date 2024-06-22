@@ -35,7 +35,7 @@ public class IdleHandler {
 			return;
 		}
 
-		DynamicFPSConfig config = DynamicFPSMod.modConfig;
+		DynamicFPSConfig config = DynamicFPSConfig.INSTANCE;
 
 		if (config.idle().timeout() == 0) {
 			return;
@@ -68,7 +68,7 @@ public class IdleHandler {
 	}
 
 	public static boolean isIdle() {
-		DynamicFPSConfig config = DynamicFPSMod.modConfig;
+		DynamicFPSConfig config = DynamicFPSConfig.INSTANCE;
 
 		if (config.idle().timeout() == 0) {
 			return false;

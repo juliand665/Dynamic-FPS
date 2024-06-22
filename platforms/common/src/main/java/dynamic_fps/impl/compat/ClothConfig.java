@@ -39,25 +39,26 @@ public final class ClothConfig {
 			localized("config", "category.general")
 		);
 
-		DynamicFPSConfig defaultConfig = DynamicFPSConfig.DEFAULT;
+		DynamicFPSConfig config = DynamicFPSConfig.INSTANCE;
+		DynamicFPSConfig defaultConfig = DynamicFPSConfig.DEFAULTS;
 
 		general.addEntry(
 			entryBuilder.startBooleanToggle(
 				localized("config", "enabled"),
-				DynamicFPSMod.modConfig.enabled()
+					config.enabled()
 			)
 			.setDefaultValue(defaultConfig.enabled())
-			.setSaveConsumer(DynamicFPSMod.modConfig::setEnabled)
+			.setSaveConsumer(config::setEnabled)
 			.build()
 		);
 
 		general.addEntry(
 			entryBuilder.startBooleanToggle(
 				localized("config", "uncap_menu_frame_rate"),
-				DynamicFPSMod.modConfig.uncapMenuFrameRate()
+					config.uncapMenuFrameRate()
 			)
 			.setDefaultValue(defaultConfig.uncapMenuFrameRate())
-			.setSaveConsumer(DynamicFPSMod.modConfig::setUncapMenuFrameRate)
+			.setSaveConsumer(config::setUncapMenuFrameRate)
 			.setTooltip(localized("config", "uncap_menu_frame_rate_tooltip"))
 			.build()
 		);
@@ -69,11 +70,11 @@ public final class ClothConfig {
 		general.addEntry(
 			entryBuilder.startIntSlider(
 				localized("config", "idle_time"),
-				DynamicFPSMod.modConfig.idle().timeout() / 60,
+					config.idle().timeout() / 60,
 				0, 30
 			)
 			.setDefaultValue(defaultConfig.idle().timeout() / 60)
-			.setSaveConsumer(value -> DynamicFPSMod.modConfig.idle().setTimeout(value * 60))
+			.setSaveConsumer(value -> config.idle().setTimeout(value * 60))
 			.setTextGetter(ClothConfig::idleTimeMessage)
 			.setTooltip(localized("config", "idle_time_tooltip"))
 			.build()
@@ -83,10 +84,10 @@ public final class ClothConfig {
 			entryBuilder.startEnumSelector(
 				localized("config", "idle_condition"),
 				IdleCondition.class,
-				DynamicFPSMod.modConfig.idle().condition()
+					config.idle().condition()
 			)
 			.setDefaultValue(defaultConfig.idle().condition())
-			.setSaveConsumer(DynamicFPSMod.modConfig.idle()::setCondition)
+			.setSaveConsumer(config.idle()::setCondition)
 			.setEnumNameProvider(ClothConfig::IdleConditionMessage)
 			.build()
 		);
@@ -100,11 +101,11 @@ public final class ClothConfig {
 		general.addEntry(
 			entryBuilder.startIntSlider(
 				localized("config", "volume_transition_speed_up"),
-				volumeTransformer.toStep((int) (DynamicFPSMod.volumeTransitionSpeed().getUp() * 10)),
+				volumeTransformer.toStep((int) (config.volumeTransitionSpeed().getUp() * 10)),
 				1, 13
 			)
 			.setDefaultValue(volumeTransformer.toStep((int) (defaultConfig.volumeTransitionSpeed().getUp() * 10)))
-			.setSaveConsumer(step -> DynamicFPSMod.volumeTransitionSpeed().setUp((float) volumeTransformer.toValue(step) / 10))
+			.setSaveConsumer(step -> config.volumeTransitionSpeed().setUp((float) volumeTransformer.toValue(step) / 10))
 			.setTextGetter(ClothConfig::volumeTransitionMessage)
 			.setTooltip(localized("config", "volume_transition_speed_tooltip"))
 			.build()
@@ -113,11 +114,11 @@ public final class ClothConfig {
 		general.addEntry(
 			entryBuilder.startIntSlider(
 				localized("config", "volume_transition_speed_down"),
-				volumeTransformer.toStep((int) (DynamicFPSMod.volumeTransitionSpeed().getDown() * 10)),
+				volumeTransformer.toStep((int) (config.volumeTransitionSpeed().getDown() * 10)),
 				1, 13
 			)
 			.setDefaultValue(volumeTransformer.toStep((int) (defaultConfig.volumeTransitionSpeed().getDown() * 10)))
-			.setSaveConsumer(step -> DynamicFPSMod.volumeTransitionSpeed().setDown((float) volumeTransformer.toValue(step) / 10))
+			.setSaveConsumer(step -> config.volumeTransitionSpeed().setDown((float) volumeTransformer.toValue(step) / 10))
 			.setTextGetter(ClothConfig::volumeTransitionMessage)
 			.setTooltip(localized("config", "volume_transition_speed_tooltip"))
 			.build()
@@ -127,7 +128,7 @@ public final class ClothConfig {
 			entryBuilder.startTextDescription(CommonComponents.SPACE).build()
 		);
 
-		BatteryTrackerConfig batteryTracker = DynamicFPSMod.batteryTracking();
+		BatteryTrackerConfig batteryTracker = config.batteryTracker();
 
 		general.addEntry(
 			entryBuilder.startBooleanToggle(
@@ -194,7 +195,7 @@ public final class ClothConfig {
 				continue;
 			}
 
-			Config config = DynamicFPSMod.modConfig.get(state);
+			Config instance = config.get(state);
 			Config standard = defaultConfig.get(state);
 
 			ConfigCategory category = builder.getOrCreateCategory(
@@ -207,11 +208,11 @@ public final class ClothConfig {
 			category.addEntry(
 				entryBuilder.startIntSlider(
 					localized("config", "frame_rate_target"),
-					fpsTransformer.toStep(config.frameRateTarget()),
+					fpsTransformer.toStep(instance.frameRateTarget()),
 					0, 68
 				)
 				.setDefaultValue(fpsTransformer.toStep(standard.frameRateTarget()))
-				.setSaveConsumer(step -> config.setFrameRateTarget(fpsTransformer.toValue(step)))
+				.setSaveConsumer(step -> instance.setFrameRateTarget(fpsTransformer.toValue(step)))
 				.setTextGetter(ClothConfig::fpsTargetMessage)
 				.build()
 			);
@@ -229,11 +230,11 @@ public final class ClothConfig {
 				volumes.add(
 					entryBuilder.startIntSlider(
 						Component.translatable("soundCategory." + name),
-						(int) (config.rawVolumeMultiplier(source) * 100),
+						(int) (instance.rawVolumeMultiplier(source) * 100),
 						0, 100
 					)
 					.setDefaultValue((int) (standard.rawVolumeMultiplier(source) * 100))
-					.setSaveConsumer(value -> config.setVolumeMultiplier(source, value / 100f))
+					.setSaveConsumer(value -> instance.setVolumeMultiplier(source, value / 100f))
 					.setTextGetter(ClothConfig::volumeMultiplierMessage)
 					.build()
 				);
@@ -245,10 +246,10 @@ public final class ClothConfig {
 				entryBuilder.startEnumSelector(
 					localized("config", "graphics_state"),
 					GraphicsState.class,
-					config.graphicsState()
+					instance.graphicsState()
 				)
 				.setDefaultValue(standard.graphicsState())
-				.setSaveConsumer(config::setGraphicsState)
+				.setSaveConsumer(instance::setGraphicsState)
 				.setEnumNameProvider(ClothConfig::graphicsStateMessage)
 				.setTooltipSupplier(ClothConfig::graphicsStateTooltip)
 				.build()
@@ -257,10 +258,10 @@ public final class ClothConfig {
 			category.addEntry(
 				entryBuilder.startBooleanToggle(
 					localized("config", "show_toasts"),
-					config.showToasts()
+					instance.showToasts()
 				)
 				.setDefaultValue(standard.showToasts())
-				.setSaveConsumer(config::setShowToasts)
+				.setSaveConsumer(instance::setShowToasts)
 				.setTooltip(localized("config", "show_toasts_tooltip"))
 				.build()
 			);
@@ -268,10 +269,10 @@ public final class ClothConfig {
 			category.addEntry(
 				entryBuilder.startBooleanToggle(
 					localized("config", "run_garbage_collector"),
-					config.runGarbageCollector()
+					instance.runGarbageCollector()
 				)
 				.setDefaultValue(standard.runGarbageCollector())
-				.setSaveConsumer(config::setRunGarbageCollector)
+				.setSaveConsumer(instance::setRunGarbageCollector)
 				.setTooltip(localized("config", "run_garbage_collector_tooltip"))
 				.build()
 			);
@@ -284,10 +285,10 @@ public final class ClothConfig {
 		advanced.addEntry(
 			entryBuilder.startBooleanToggle(
 				localized("config", "download_natives"),
-				DynamicFPSMod.modConfig.downloadNatives()
+				config.downloadNatives()
 			)
 			.setDefaultValue(defaultConfig.downloadNatives())
-			.setSaveConsumer(DynamicFPSMod.modConfig::setDownloadNatives)
+			.setSaveConsumer(config::setDownloadNatives)
 			.setTooltip(new Component[]{
 				localized("config", "download_natives_description_0"),
 				localized("config", "download_natives_description_1")}

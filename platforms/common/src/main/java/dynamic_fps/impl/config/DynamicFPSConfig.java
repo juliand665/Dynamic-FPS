@@ -1,6 +1,5 @@
 package dynamic_fps.impl.config;
 
-import java.util.EnumMap;
 import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
@@ -17,7 +16,17 @@ public final class DynamicFPSConfig {
 	@SerializedName("states")
 	private Map<PowerState, Config> configs;
 
-	public static final DynamicFPSConfig DEFAULT = Serialization.loadDefault();
+	public static final DynamicFPSConfig DEFAULTS;
+	public static final DynamicFPSConfig INSTANCE;
+
+	static {
+		DEFAULTS = Serialization.loadDefault();
+		INSTANCE = Serialization.loadPersonalized();
+
+		for (Map.Entry<PowerState, Config> entry: INSTANCE.configs.entrySet()) {
+			entry.getValue().state = entry.getKey();
+		}
+	}
 
 	public Config get(PowerState state) {
 		if (state == PowerState.FOCUSED) {
@@ -61,14 +70,6 @@ public final class DynamicFPSConfig {
 
 	public void setDownloadNatives(boolean value) {
 		this.downloadNatives = value;
-	}
-
-	private Map<PowerState, Config> configs() {
-		return this.configs;
-	}
-
-	public static DynamicFPSConfig load() {
-		return Serialization.load();
 	}
 
 	public void save() {

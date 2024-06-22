@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.Window;
 import dynamic_fps.impl.Constants;
 import dynamic_fps.impl.DynamicFPSMod;
 import dynamic_fps.impl.PowerState;
+import dynamic_fps.impl.config.DynamicFPSConfig;
 import dynamic_fps.impl.feature.state.IdleHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
@@ -52,7 +53,7 @@ public class MinecraftMixin {
 			if (limit < 60) {
 				callbackInfo.setReturnValue(limit);
 			}
-		} else if (DynamicFPSMod.uncapMenuFrameRate()) {
+		} else if (DynamicFPSConfig.INSTANCE.uncapMenuFrameRate()) {
 			if (this.options.enableVsync().get()) {
 				// VSync will regulate to a non-infinite value
 				callbackInfo.setReturnValue(Constants.NO_FRAME_RATE_LIMIT);

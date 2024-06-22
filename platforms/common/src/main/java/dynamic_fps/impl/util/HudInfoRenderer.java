@@ -1,8 +1,8 @@
 package dynamic_fps.impl.util;
 
 import dynamic_fps.impl.config.BatteryTrackerConfig;
+import dynamic_fps.impl.config.DynamicFPSConfig;
 import dynamic_fps.impl.feature.battery.BatteryTracker;
-import net.lostluma.battery.api.State;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -17,7 +17,7 @@ public final class HudInfoRenderer {
 	private static final Minecraft minecraft = Minecraft.getInstance();
 
 	public static void renderInfo(GuiGraphics guiGraphics) {
-		if (DynamicFPSMod.batteryTracking().enabled()) {
+		if (DynamicFPSConfig.INSTANCE.batteryTracker().enabled()) {
 			drawBatteryOverlay(guiGraphics);
 		}
 
@@ -39,7 +39,7 @@ public final class HudInfoRenderer {
 			return;
 		}
 
-		BatteryTrackerConfig.DisplayConfig config = DynamicFPSMod.batteryTracking().display();
+		BatteryTrackerConfig.DisplayConfig config = DynamicFPSConfig.INSTANCE.batteryTracker().display();
 
 		if (!config.condition().isConditionMet()) {
 			return;
