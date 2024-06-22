@@ -45,7 +45,7 @@ public final class ClothConfig {
 		general.addEntry(
 			entryBuilder.startBooleanToggle(
 				localized("config", "enabled"),
-					config.enabled()
+				config.enabled()
 			)
 			.setDefaultValue(defaultConfig.enabled())
 			.setSaveConsumer(config::setEnabled)
@@ -55,7 +55,7 @@ public final class ClothConfig {
 		general.addEntry(
 			entryBuilder.startBooleanToggle(
 				localized("config", "uncap_menu_frame_rate"),
-					config.uncapMenuFrameRate()
+				config.uncapMenuFrameRate()
 			)
 			.setDefaultValue(defaultConfig.uncapMenuFrameRate())
 			.setSaveConsumer(config::setUncapMenuFrameRate)
@@ -70,7 +70,7 @@ public final class ClothConfig {
 		general.addEntry(
 			entryBuilder.startIntSlider(
 				localized("config", "idle_time"),
-					config.idle().timeout() / 60,
+				config.idle().timeout() / 60,
 				0, 30
 			)
 			.setDefaultValue(defaultConfig.idle().timeout() / 60)
@@ -84,7 +84,7 @@ public final class ClothConfig {
 			entryBuilder.startEnumSelector(
 				localized("config", "idle_condition"),
 				IdleCondition.class,
-					config.idle().condition()
+				config.idle().condition()
 			)
 			.setDefaultValue(defaultConfig.idle().condition())
 			.setSaveConsumer(config.idle()::setCondition)
