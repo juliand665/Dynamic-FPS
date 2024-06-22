@@ -1,7 +1,5 @@
 package dynamic_fps.impl.service;
 
-import java.util.Set;
-
 public interface ModCompat {
 	boolean isDisabled();
 

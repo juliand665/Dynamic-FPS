@@ -2,7 +2,6 @@ package dynamic_fps.impl.config.option;
 
 import dynamic_fps.impl.feature.battery.BatteryTracker;
 import net.lostluma.battery.api.State;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Condition under which the battery indicator HUD is shown.

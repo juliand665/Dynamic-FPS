@@ -1,13 +1,10 @@
 package dynamic_fps.impl.util;
 
-import com.google.common.collect.Lists;
 import dynamic_fps.impl.DynamicFPSMod;
 import dynamic_fps.impl.service.Platform;
 import net.minecraft.client.KeyMapping;
 
 import com.mojang.blaze3d.platform.InputConstants;
-
-import java.util.List;
 
 import static dynamic_fps.impl.util.Localization.translationKey;
 
