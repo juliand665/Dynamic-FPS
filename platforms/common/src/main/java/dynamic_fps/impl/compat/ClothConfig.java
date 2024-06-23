@@ -101,11 +101,11 @@ public final class ClothConfig {
 		general.addEntry(
 			entryBuilder.startIntSlider(
 				localized("config", "volume_transition_speed_up"),
-				volumeTransformer.toStep((int) (config.volumeTransitionSpeed().getUp() * 10)),
-				1, 13
+				volumeTransformer.toStep((int) (config.volumeTransitionSpeed().getUp() * 100)),
+				1, 73
 			)
-			.setDefaultValue(volumeTransformer.toStep((int) (defaultConfig.volumeTransitionSpeed().getUp() * 10)))
-			.setSaveConsumer(step -> config.volumeTransitionSpeed().setUp((float) volumeTransformer.toValue(step) / 10))
+			.setDefaultValue(volumeTransformer.toStep((int) (defaultConfig.volumeTransitionSpeed().getUp() * 100)))
+			.setSaveConsumer(step -> config.volumeTransitionSpeed().setUp((float) volumeTransformer.toValue(step) / 100))
 			.setTextGetter(ClothConfig::volumeTransitionMessage)
 			.setTooltip(localized("config", "volume_transition_speed_tooltip"))
 			.build()
@@ -114,11 +114,11 @@ public final class ClothConfig {
 		general.addEntry(
 			entryBuilder.startIntSlider(
 				localized("config", "volume_transition_speed_down"),
-				volumeTransformer.toStep((int) (config.volumeTransitionSpeed().getDown() * 10)),
-				1, 13
+				volumeTransformer.toStep((int) (config.volumeTransitionSpeed().getDown() * 100)),
+				1, 73
 			)
-			.setDefaultValue(volumeTransformer.toStep((int) (defaultConfig.volumeTransitionSpeed().getDown() * 10)))
-			.setSaveConsumer(step -> config.volumeTransitionSpeed().setDown((float) volumeTransformer.toValue(step) / 10))
+			.setDefaultValue(volumeTransformer.toStep((int) (defaultConfig.volumeTransitionSpeed().getDown() * 100)))
+			.setSaveConsumer(step -> config.volumeTransitionSpeed().setDown((float) volumeTransformer.toValue(step) / 100))
 			.setTextGetter(ClothConfig::volumeTransitionMessage)
 			.setTooltip(localized("config", "volume_transition_speed_tooltip"))
 			.build()
@@ -311,16 +311,18 @@ public final class ClothConfig {
 		VariableStepTransformer transformer = new VariableStepTransformer();
 
 		// Since the transformer only works with integers
-		// We multiply the percentage by 10 to work with it
-		transformer.addStep(1, 10);
-		transformer.addStep(10, 30);
-		transformer.addStep(70, 100);
+		// We multiply the percentage by 100 to work with it
+		transformer.addStep(1, 50);
+		transformer.addStep(5, 100);
+		transformer.addStep(10, 200);
+		transformer.addStep(100, 300);
+		transformer.addStep(700, 1000);
 
 		return transformer;
 	}
 
 	private static Component volumeTransitionMessage(int step) {
-		int value = getVolumeStepTransformer().toValue(step) * 10;
+		int value = getVolumeStepTransformer().toValue(step);
 
 		if (value <= 300) {
 			return Component.literal(value + "%");
