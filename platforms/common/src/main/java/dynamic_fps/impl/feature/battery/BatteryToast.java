@@ -8,19 +8,20 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
+import static dynamic_fps.impl.util.Localization.localized;
+
 public class BatteryToast implements Toast {
 	private long firstRender;
 
 	private final Component title;
-	private final Component description;
+	private Component description;
 	private final ResourceLocation icon;
 
 	private static final ResourceLocation MOD_ICON = ResourceLocations.of("dynamic_fps", "textures/battery/toast/background_icon.png");
 	private static final ResourceLocation BACKGROUND_IMAGE = ResourceLocations.of("dynamic_fps", "textures/battery/toast/background.png");
 
-	public BatteryToast(Component title, Component description, ResourceLocation icon) {
+	public BatteryToast(Component title, ResourceLocation icon) {
 		this.title = title;
-		this.description = description;
 		this.icon = icon;
 	}
 
@@ -28,6 +29,8 @@ public class BatteryToast implements Toast {
 	public @NotNull Visibility render(GuiGraphics graphics, ToastComponent toastComponent, long currentTime) {
 		if (this.firstRender == 0) {
 			this.firstRender = currentTime;
+			// Initialize when first rendering so the battery percentage is mostly up-to-date
+			this.description = localized("toast", "battery_charge", BatteryTracker.charge());
 		}
 
 		// resource, x, y, z, ?, ?, width, height, width, height
