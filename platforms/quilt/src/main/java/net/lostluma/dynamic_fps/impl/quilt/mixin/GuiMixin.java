@@ -15,7 +15,7 @@ public class GuiMixin {
 	 * Render info on whether Dynamic FPS is disabled or always reducing the user's FPS.
 	 */
 	@Inject(method = "renderSavingIndicator", at = @At("HEAD"))
-	private void renderSavingIndicator(CallbackInfo callbackInfo, @Local GuiGraphics guiGraphics) {
+	private void renderSavingIndicator(CallbackInfo callbackInfo, @Local(argsOnly = true) GuiGraphics guiGraphics) {
 		HudInfoRenderer.renderInfo(guiGraphics);
 	}
 }

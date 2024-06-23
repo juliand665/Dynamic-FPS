@@ -17,6 +17,10 @@ public final class HudInfoRenderer {
 	private static final Minecraft minecraft = Minecraft.getInstance();
 
 	public static void renderInfo(GuiGraphics guiGraphics) {
+		if (minecraft.options.hideGui || minecraft.screen != null) {
+			return;
+		}
+
 		if (DynamicFPSConfig.INSTANCE.batteryTracker().enabled()) {
 			drawBatteryOverlay(guiGraphics);
 		}
@@ -35,7 +39,7 @@ public final class HudInfoRenderer {
 	}
 
 	private static void drawBatteryOverlay(GuiGraphics graphics) {
-		if (minecraft.screen != null || minecraft.getDebugOverlay().showDebugScreen() || !BatteryTracker.hasBatteries()) {
+		if (minecraft.getDebugOverlay().showDebugScreen() || !BatteryTracker.hasBatteries()) {
 			return;
 		}
 
