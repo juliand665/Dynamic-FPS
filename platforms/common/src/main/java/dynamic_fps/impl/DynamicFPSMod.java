@@ -205,7 +205,7 @@ public class DynamicFPSMod {
 		Component title = localized("toast", titleTranslationKey);
 		ResourceLocation icon = ResourceLocations.of("dynamic_fps", "textures/battery/toast/" + iconPath + ".png");
 
-		minecraft.getToasts().addToast(new BatteryToast(title, icon));
+		BatteryToast.queueToast(title, icon);
 	}
 
 	private static boolean isLevelCoveredByOverlay() {

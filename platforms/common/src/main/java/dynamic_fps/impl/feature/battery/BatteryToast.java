@@ -1,6 +1,7 @@
 package dynamic_fps.impl.feature.battery;
 
 import dynamic_fps.impl.util.ResourceLocations;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
@@ -13,21 +14,41 @@ import static dynamic_fps.impl.util.Localization.localized;
 public class BatteryToast implements Toast {
 	private long firstRender;
 
-	private final Component title;
+	private Component title;
 	private Component description;
-	private final ResourceLocation icon;
+	private ResourceLocation icon;
+
+	private static BatteryToast queuedToast;
 
 	private static final ResourceLocation MOD_ICON = ResourceLocations.of("dynamic_fps", "textures/battery/toast/background_icon.png");
 	private static final ResourceLocation BACKGROUND_IMAGE = ResourceLocations.of("dynamic_fps", "textures/battery/toast/background.png");
 
-	public BatteryToast(Component title, ResourceLocation icon) {
+	private BatteryToast(Component title, ResourceLocation icon) {
 		this.title = title;
 		this.icon = icon;
+	}
+
+	/**
+	 * Queue some information to be shown as a toast.
+	 * If an older toast of the same type is already queued its information will be replaced.
+	 */
+	public static void queueToast(Component title, ResourceLocation icon) {
+		if (queuedToast != null) {
+			queuedToast.title = title;
+			queuedToast.icon = icon;
+		} else {
+			queuedToast = new BatteryToast(title, icon);
+			Minecraft.getInstance().getToasts().addToast(queuedToast);
+		}
 	}
 
 	@Override
 	public @NotNull Visibility render(GuiGraphics graphics, ToastComponent toastComponent, long currentTime) {
 		if (this.firstRender == 0) {
+			if (this == queuedToast) {
+				queuedToast = null;
+			}
+
 			this.firstRender = currentTime;
 			// Initialize when first rendering so the battery percentage is mostly up-to-date
 			this.description = localized("toast", "battery_charge", BatteryTracker.charge());
