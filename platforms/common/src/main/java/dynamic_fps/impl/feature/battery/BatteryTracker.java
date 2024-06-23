@@ -9,6 +9,7 @@ import net.lostluma.battery.api.Manager;
 import net.lostluma.battery.api.State;
 import net.lostluma.battery.api.exception.LibraryLoadError;
 import net.lostluma.battery.api.util.LibraryUtil;
+import net.minecraft.client.Minecraft;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
@@ -26,6 +27,7 @@ public class BatteryTracker {
 	private static @Nullable Manager manager = null;
 	private static Collection<Battery> batteries = Collections.emptyList();
 
+	private static final Minecraft minecraft = Minecraft.getInstance();
 	private static final Duration updateInterval = Duration.of(15, ChronoUnit.SECONDS);
 
 	public static int charge() {
@@ -87,11 +89,17 @@ public class BatteryTracker {
 
 		if (readInitialData && charge != newCharge) {
 			changed = true;
-			DynamicFPSMod.onBatteryChargeChanged(charge, newCharge);
+
+			int current = charge;
+			minecraft.tell(() -> DynamicFPSMod.onBatteryChargeChanged(current, newCharge));
 		}
 
 		if (readInitialData && status != newStatus) {
-			DynamicFPSMod.onBatteryStatusChanged(status ,newStatus);
+			changed = true;
+
+			State current = status;
+			State updated = newStatus;
+			minecraft.tell(() -> DynamicFPSMod.onBatteryStatusChanged(current, updated));
 		}
 
 		charge = newCharge;
