@@ -8,10 +8,7 @@ repositories {
 		filter { includeGroup("com.terraformersmc") }
 		forRepository { maven { url = "https://maven.terraformersmc.com/releases" } }
 	}
-	exclusiveContent {
-		filter { includeGroup("org.quiltmc") }
-		forRepository { maven { url = "https://maven.quiltmc.org/repository/release" } }
-	}
+	maven { url = "https://maven.quiltmc.org/repository/release" }
 }
 
 architectury {
@@ -36,6 +33,8 @@ dependencies {
 	modImplementation(libs.qsl.lifecycle.events)
 
 	modApi(libs.modmenu)
+
+	include(libs.battery)
 
     common(project(path: ":platforms:common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":platforms:common", configuration: "transformProductionQuilt")) { transitive false }
