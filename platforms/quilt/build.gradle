@@ -12,12 +12,12 @@ repositories {
 }
 
 architectury {
-    platformSetupLoomIde()
-    loader("quilt")
+	platformSetupLoomIde()
+	loader("quilt")
 }
 
 loom {
-    accessWidenerPath = project(":platforms:common").loom.accessWidenerPath
+	accessWidenerPath = project(":platforms:common").loom.accessWidenerPath
 }
 
 configurations {
@@ -37,7 +37,7 @@ configurations {
 }
 
 dependencies {
-    modImplementation(libs.quilt.loader)
+	modImplementation(libs.quilt.loader)
 
 	include(libs.battery)
 
@@ -49,26 +49,26 @@ dependencies {
 }
 
 shadowJar {
-    exclude "architectury.common.json"
-    configurations = [project.configurations.shadowBundle]
+	exclude "architectury.common.json"
+	configurations = [project.configurations.shadowBundle]
 }
 
 remapJar {
-    injectAccessWidener = true
-    input.set shadowJar.archiveFile
-    dependsOn shadowJar
+	injectAccessWidener = true
+	input.set shadowJar.archiveFile
+	dependsOn shadowJar
 }
 
 sourcesJar {
-    def commonSources = project(":platforms:common").sourcesJar
-    dependsOn commonSources
-    from commonSources.archiveFile.map { zipTree(it) }
+	def commonSources = project(":platforms:common").sourcesJar
+	dependsOn commonSources
+	from commonSources.archiveFile.map { zipTree(it) }
 }
 
 components.java {
-    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
-        skip()
-    }
+	withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
+		skip()
+	}
 }
 
 var modVersion = project.property("mod_version").toString()
@@ -88,13 +88,11 @@ publishMods {
 		accessToken = providers.environmentVariable("CURSEFORGE_SECRET")
 		projectId = "335493"
 
-		/*
 		minecraftVersionRange {
 			start = project.property("minecraft_version_min").toString()
 			end = project.property("minecraft_version_max").toString()
 		}
-		*/
-		minecraftVersions.add(project.property("minecraft_version_min").toString())
+		// minecraftVersions.add(project.property("minecraft_version_min").toString())
 
 		clientRequired = true
 		serverRequired = false
@@ -107,13 +105,11 @@ publishMods {
 		accessToken = providers.environmentVariable("MODRINTH_SECRET")
 		projectId = "LQ3K71Q1"
 
-		/*
 		minecraftVersionRange {
 			start = project.property("minecraft_version_min").toString()
 			end = project.property("minecraft_version_max").toString()
 		}
-		*/
-		minecraftVersions.add(project.property("minecraft_version_min").toString())
+		// minecraftVersions.add(project.property("minecraft_version_min").toString())
 
 		requires("qsl")
 		optional("cloth-config", "modmenu")
