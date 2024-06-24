@@ -1,6 +1,6 @@
 package dynamic_fps.impl.service;
 
-import java.util.Optional;
+import java.util.NoSuchElementException;
 import java.util.ServiceLoader;
 
 class Services {
@@ -8,11 +8,9 @@ class Services {
 	static ModCompat MOD_COMPAT = loadService(ModCompat.class);
 
 	static <T> T loadService(Class<T> type) {
-		Optional<T> optional = ServiceLoader.load(type).findFirst();
-
-		if (optional.isPresent()) {
-			return optional.get();
-		} else {
+		try {
+			return ServiceLoader.load(type).iterator().next();
+		} catch (NoSuchElementException e) {
 			throw new RuntimeException("Failed to load Dynamic FPS " + type.getSimpleName() + " service!");
 		}
 	}

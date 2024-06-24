@@ -2,7 +2,10 @@
     "required": true,
     "package": "net.lostluma.dynamic_fps.impl.forge.mixin",
     "minVersion": "0.8",
-    "client": [],
+    "client": [
+        "GameRendererMixin",
+        "GuiMixin"
+    ],
     "mixins": [],
     "server": [],
     "injectors": {
