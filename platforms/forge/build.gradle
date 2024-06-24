@@ -41,6 +41,8 @@ dependencies {
 	include(libs.mixinextras.forge)
 	implementation(libs.mixinextras.forge)
 
+	include(libs.battery)
+
 	common(project(path: ":platforms:common", configuration: "namedElements")) { transitive false }
 	shadowCommon(project(path: ":platforms:common", configuration: "transformProductionForge")) { transitive = false }
 }
