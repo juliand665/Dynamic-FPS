@@ -3,6 +3,7 @@
     "package": "net.lostluma.dynamic_fps.impl.quilt.mixin",
     "minVersion": "0.8",
     "client": [
+        "GameRendererMixin",
         "GuiMixin",
         "OptionsMixin"
     ],
