@@ -33,6 +33,7 @@ public class FallbackConfigScreen extends Screen {
 
 	@Override
 	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+		this.renderDirtBackground(guiGraphics);
 		super.render(guiGraphics, mouseX, mouseY, partialTicks);
 
 		int width = guiGraphics.guiWidth() / 2;
