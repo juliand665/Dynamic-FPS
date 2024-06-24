@@ -1,8 +1,10 @@
 package dynamic_fps.impl.feature.battery;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import dynamic_fps.impl.util.ResourceLocations;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
 import net.minecraft.network.chat.Component;
@@ -43,7 +45,7 @@ public class BatteryToast implements Toast {
 	}
 
 	@Override
-	public @NotNull Visibility render(GuiGraphics graphics, ToastComponent toastComponent, long currentTime) {
+	public @NotNull Visibility render(PoseStack poseStack, ToastComponent toastComponent, long currentTime) {
 		if (this.firstRender == 0) {
 			if (this == queuedToast) {
 				queuedToast = null;
@@ -54,15 +56,18 @@ public class BatteryToast implements Toast {
 			this.description = localized("toast", "battery_charge", BatteryTracker.charge());
 		}
 
+		RenderSystem.setShaderTexture(0, BACKGROUND_IMAGE);
 		// resource, x, y, z, ?, ?, width, height, width, height
-		graphics.blit(BACKGROUND_IMAGE, 0, 0, 0, 0.0f, 0.0f, this.width(), this.height(), this.width(), this.height());
+		GuiComponent.blit(poseStack, 0, 0, 0, 0.0f, 0.0f, this.width(), this.height(), this.width(), this.height());
 
-		graphics.blit(MOD_ICON, 2, 2, 0, 0.0f, 0.0f, 8, 8, 8, 8);
-		graphics.blit(this.icon, 8, 8, 0, 0.0f, 0.0f, 16, 16, 16, 16);
+		RenderSystem.setShaderTexture(0, MOD_ICON);
+		GuiComponent.blit(poseStack, 2, 2, 0, 0.0f, 0.0f, 8, 8, 8, 8);
+		RenderSystem.setShaderTexture(0, this.icon);
+		GuiComponent.blit(poseStack, 8, 8, 0, 0.0f, 0.0f, 16, 16, 16, 16);
 
-		graphics.drawString(toastComponent.getMinecraft().font, this.title, 30, 7, 0x5f3315, false);
-		graphics.drawString(toastComponent.getMinecraft().font, this.description, 30, 18, -16777216, false);
+		GuiComponent.drawString(poseStack, toastComponent.getMinecraft().font, this.title, 30, 7, 0x5f3315);
+		GuiComponent.drawString(poseStack, toastComponent.getMinecraft().font, this.description, 30, 18, -16777216);
 
-		return currentTime - this.firstRender >= 5000.0 * toastComponent.getNotificationDisplayTimeMultiplier() ? Toast.Visibility.HIDE : Toast.Visibility.SHOW;
+		return currentTime - this.firstRender >= 5000.0 ? Toast.Visibility.HIDE : Toast.Visibility.SHOW;
 	}
 }

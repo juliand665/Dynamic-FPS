@@ -64,7 +64,7 @@ public final class ClothConfig {
 		);
 
 		general.addEntry(
-			entryBuilder.startTextDescription(CommonComponents.SPACE).build()
+			entryBuilder.startTextDescription(Component.literal(" ")).build()
 		);
 
 		general.addEntry(
@@ -93,7 +93,7 @@ public final class ClothConfig {
 		);
 
 		general.addEntry(
-			entryBuilder.startTextDescription(CommonComponents.SPACE).build()
+			entryBuilder.startTextDescription(Component.literal(" ")).build()
 		);
 
 		VariableStepTransformer volumeTransformer = getVolumeStepTransformer();
@@ -125,7 +125,7 @@ public final class ClothConfig {
 		);
 
 		general.addEntry(
-			entryBuilder.startTextDescription(CommonComponents.SPACE).build()
+			entryBuilder.startTextDescription(Component.literal(" ")).build()
 		);
 
 		BatteryTrackerConfig batteryTracker = config.batteryTracker();
