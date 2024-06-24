@@ -43,7 +43,7 @@ public class DynamicFPSForgeMod {
     }
 
 	public void renderGuiOverlay(RenderGuiOverlayEvent event) {
-		HudInfoRenderer.renderInfo(event.getGuiGraphics());
+		HudInfoRenderer.renderInfo(event.getPoseStack());
 	}
 
 	public void registerKeyMappings(RegisterKeyMappingsEvent event) {
