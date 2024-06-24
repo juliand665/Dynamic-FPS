@@ -1,10 +1,88 @@
 {
     "config.dynamic_fps.title": "Dynamic FPS 구성",
 
-    "config.dynamic_fps.category.general": "일반",
+    "config.dynamic_fps.warn_cloth_config.0": "Minecraft에서 Dynamic FPS 구성을 변경하려면 Cloth Config가 필요합니다.",
+    "config.dynamic_fps.warn_cloth_config.1": "Cloth Config를 설치하거나, ​​구성 파일(config file)을 편집하거나, 대신 기본 설정을 사용하세요.",
 
-    "key.dynamic_fps.toggle_forced": "강제로 FPS 감소 (토글)",
-    "key.dynamic_fps.toggle_disabled": "Dynamic FPS 비활성화 (Toggle)",
+    "config.dynamic_fps.category.general": "일반",
+    "config.dynamic_fps.category.advanced": "고급",
+
+    "config.dynamic_fps.category.hovered": "마우스 올림",
+    "config.dynamic_fps.category.unfocused": "비포커스",
+    "config.dynamic_fps.category.invisible": "비가시",
+    "config.dynamic_fps.category.unplugged": "배터리 켜짐",
+    "config.dynamic_fps.category.abandoned": "대기 중",
+
+    "config.dynamic_fps.enabled": "Dynamic FPS 활성화",
+
+    "config.dynamic_fps.disabled": "비활성화",
+    "config.dynamic_fps.minutes": "%d 분(초)",
+
+    "config.dynamic_fps.idle_time": "대기 시간 초과",
+    "config.dynamic_fps.idle_time_tooltip": "게임이 활성화된 상태에서 입력이 없어진 후 Dynamic FPS가 대기 상태를 활성화하는 시간(분).",
+
+    "config.dynamic_fps.idle_condition": "대기 상태",
+    "config.dynamic_fps.idle_condition_none": "없음",
+    "config.dynamic_fps.idle_condition_on_battery": "배터리 사용 중",
+
+    "config.dynamic_fps.uncap_menu_frame_rate": "메뉴 화면 FPS 제한 해제",
+    "config.dynamic_fps.uncap_menu_frame_rate_tooltip": "메인 메뉴의 60FPS 제한을 해제합니다.",
+
+    "config.dynamic_fps.battery_tracker": "배터리 추적",
+    "config.dynamic_fps.battery_tracker_tooltip": "배터리 관련 기능 모두 켜기/끄기.",
+
+    "config.dynamic_fps.battery_tracker_switch_states": "배터리 상태 활성화",
+    "config.dynamic_fps.battery_tracker_switch_states_tooltip": "배터리 사용 시 자동으로 배터리 상태로 전환합니다.",
+
+    "config.dynamic_fps.battery_tracker_notifications": "배터리 알림",
+    "config.dynamic_fps.battery_tracker_notifications_tooltip": "게임 내 배터리 상태 알림을 받습니다.",
+
+    "config.dynamic_fps.battery_indicator_condition": "배터리 표시기 상태",
+    "config.dynamic_fps.battery_indicator_condition_disabled": "비활성화",
+    "config.dynamic_fps.battery_indicator_condition_draining": "방전중",
+    "config.dynamic_fps.battery_indicator_condition_critical": "위험 / < 10%",
+    "config.dynamic_fps.battery_indicator_condition_constant": "고정",
+
+    "config.dynamic_fps.battery_indicator_placement": "표시기 배치",
+    "config.dynamic_fps.battery_indicator_placement_top_left": "좌측 위",
+    "config.dynamic_fps.battery_indicator_placement_top_right": "우측 위",
+    "config.dynamic_fps.battery_indicator_placement_bottom_left": "좌측 아래",
+    "config.dynamic_fps.battery_indicator_placement_bottom_right": "우측 아래",
+
+    "config.dynamic_fps.volume_transition_speed_up": "볼륨 증가 전환 속도",
+    "config.dynamic_fps.volume_transition_speed_down": "볼륨 감소 전환 속도",
+    "config.dynamic_fps.volume_transition_speed_instant": "즉시",
+    "config.dynamic_fps.volume_transition_speed_tooltip": "초당 게임 볼륨이 조정되는 속도를 설정합니다.",
+
+    "config.dynamic_fps.frame_rate_target": "프레임 속도",
+    "config.dynamic_fps.volume_multiplier": "볼륨 배수",
+
+    "config.dynamic_fps.graphics_state": "그래픽 옵션",
+    "config.dynamic_fps.graphics_state_default": "기본",
+    "config.dynamic_fps.graphics_state_reduced": "감소",
+    "config.dynamic_fps.graphics_state_minimal": "최소",
+    "config.dynamic_fps.graphics_state_minimal_tooltip": "최소 그래픽 설정으로 인해 세계가 다시로드됩니다!",
+
+    "config.dynamic_fps.show_toasts": "토스트 보이기",
+    "config.dynamic_fps.show_toasts_tooltip": "토스트 알림을 계속 표시할지 또는 지연할지 여부",
+
+    "config.dynamic_fps.run_garbage_collector": "가비지 컬렉터 호출",
+    "config.dynamic_fps.run_garbage_collector_tooltip": "이 상태로 전환할 때 사용되지 않는 메모리를 확보합니다.",
+
+    "config.dynamic_fps.download_natives": "네이티브 다운로드",
+    "config.dynamic_fps.download_natives_description_0": "배터리 기능을 사용하려면 추가 라이브러리가 필요합니다.",
+    "config.dynamic_fps.download_natives_description_1": "모드가 대신 이 구성 요소를 다운로드할 수 있는지 여부를 설정합니다.",
+
+    "key.dynamic_fps.toggle_forced": "강제로 FPS 감소",
+    "key.dynamic_fps.toggle_disabled": "Dynamic FPS 비활성화",
     "gui.dynamic_fps.hud.reducing": "Dynamic FPS: 강제로 FPS 감소중",
-    "gui.dynamic_fps.hud.disabled": "Dynamic FPS "
+    "gui.dynamic_fps.hud.disabled": "Dynamic FPS 비활성화",
+
+    "toast.dynamic_fps.battery_charging": "충전 중!",
+    "toast.dynamic_fps.battery_draining": "방전 중!",
+    "toast.dynamic_fps.battery_critical": "배터리 부족!",
+
+    "toast.dynamic_fps.battery_charge": "현재 %d%%",
+
+    "modmenu.descriptionTranslation.dynamic_fps": "Minecraft가 백그라운드에 있거나 대기 상태인 동안 리소스 사용량을 줄입니다."
 }
