@@ -1,10 +1,88 @@
 {
-    "config.dynamic_fps.title": "Định cấu hình Dynamic FPS",
+    "config.dynamic_fps.title": "Cấu hình FPS Động",
+
+    "config.dynamic_fps.warn_cloth_config.0": "Cloth Config là bắt buộc để cấu hình Dynamic FPS trong Minecraft.",
+    "config.dynamic_fps.warn_cloth_config.1": "Hoặc cài đặt Cloth Config, chỉnh sửa tệp cấu hình, hoặc sử dụng các thiết lập mặc định.",
 
     "config.dynamic_fps.category.general": "Chung",
+    "config.dynamic_fps.category.advanced": "Nâng Cao",
 
-    "key.dynamic_fps.toggle_forced": "Buộc giảm FPS (Đổi)",
-    "key.dynamic_fps.toggle_disabled": "Vô hiệu hoá Dynamic FPS (Đổi)",
-    "gui.dynamic_fps.hud.reducing": "Dynamic FPS: Buộc giảm FPS",
-    "gui.dynamic_fps.hud.disabled": "Dynamic FPS đã bị vô hiệu hoá"
+    "config.dynamic_fps.category.hovered": "Đang Di Chuột",
+    "config.dynamic_fps.category.unfocused": "Mất Tập Trung",
+    "config.dynamic_fps.category.invisible": "Vô Hình",
+    "config.dynamic_fps.category.unplugged": "Đang Sử Dụng Pin",
+    "config.dynamic_fps.category.abandoned": "Nhàn Rỗi",
+
+    "config.dynamic_fps.enabled": "Đã bật",
+
+    "config.dynamic_fps.disabled": "Đã tắt",
+    "config.dynamic_fps.minutes": "%d Phút",
+
+    "config.dynamic_fps.idle_time": "Thời gian nhàn rỗi",
+    "config.dynamic_fps.idle_time_tooltip": "Số phút không có thao tác đến khi FPS Động kích hoạt trạng thái Nhàn rỗi trong khi trò chơi được tập trung.",
+
+    "config.dynamic_fps.idle_condition": "Điều Kiện Nhàn Rỗi",
+    "config.dynamic_fps.idle_condition_none": "Không Có",
+    "config.dynamic_fps.idle_condition_on_battery": "Khi Đang Sử Dụng Pin",
+
+    "config.dynamic_fps.uncap_menu_frame_rate": "Bỏ giới hạn FPS của Menu",
+    "config.dynamic_fps.uncap_menu_frame_rate_tooltip": "Gỡ bỏ giới hạn 60 FPS trong menu chính.",
+
+    "config.dynamic_fps.battery_tracker": "Theo Dõi Pin",
+    "config.dynamic_fps.battery_tracker_tooltip": "Bật hoặc tắt tất cả các tính năng liên quan đến pin.",
+
+    "config.dynamic_fps.battery_tracker_switch_states": "Bật Trạng Thái Khi Sử Dụng Pin",
+    "config.dynamic_fps.battery_tracker_switch_states_tooltip": "Tự động bật trạng thái Khi Sử Dụng Pin khi đang dùng pin.",
+
+    "config.dynamic_fps.battery_tracker_notifications": "Thông Báo Pin",
+    "config.dynamic_fps.battery_tracker_notifications_tooltip": "Nhận thông báo trong game về trạng thái pin của bạn.",
+
+    "config.dynamic_fps.battery_indicator_condition": "Điều Kiện Chỉ Báo Pin",
+    "config.dynamic_fps.battery_indicator_condition_disabled": "Tắt",
+    "config.dynamic_fps.battery_indicator_condition_draining": "Khi Đang Xả",
+    "config.dynamic_fps.battery_indicator_condition_critical": "Nguy Kịch / < 10%",
+    "config.dynamic_fps.battery_indicator_condition_constant": "Liên Tục",
+
+    "config.dynamic_fps.battery_indicator_placement": "Vị Trí Chỉ Báo",
+    "config.dynamic_fps.battery_indicator_placement_top_left": "Trên Trái",
+    "config.dynamic_fps.battery_indicator_placement_top_right": "Trên Phải",
+    "config.dynamic_fps.battery_indicator_placement_bottom_left": "Dưới Trái",
+    "config.dynamic_fps.battery_indicator_placement_bottom_right": "Dưới Phải",
+
+    "config.dynamic_fps.volume_transition_speed_up": "Tốc Độ Chuyển Âm Lên",
+    "config.dynamic_fps.volume_transition_speed_down": "Tốc Độ Chuyển Âm Xuống",
+    "config.dynamic_fps.volume_transition_speed_instant": "Ngay Lập Tức",
+    "config.dynamic_fps.volume_transition_speed_tooltip": "Đặt tốc độ điều chỉnh âm lượng trò chơi mỗi giây.",
+
+    "config.dynamic_fps.frame_rate_target": "Mục tiêu Tốc độ Khung hình",
+    "config.dynamic_fps.volume_multiplier": "Bội số Âm lượng",
+
+    "config.dynamic_fps.graphics_state": "Tùy chọn Đồ họa",
+    "config.dynamic_fps.graphics_state_default": "Mặc định",
+    "config.dynamic_fps.graphics_state_reduced": "Giảm bớt",
+    "config.dynamic_fps.graphics_state_minimal": "Tối thiểu",
+    "config.dynamic_fps.graphics_state_minimal_tooltip": "Đồ họa tối thiểu khiến thế giới được tải lại!",
+
+    "config.dynamic_fps.show_toasts": "Hiển thị Toast",
+    "config.dynamic_fps.show_toasts_tooltip": "Có tiếp tục hiển thị hoặc trì hoãn thông báo toast hay không",
+
+    "config.dynamic_fps.run_garbage_collector": "Kích hoạt Bộ Thu Gom Rác",
+    "config.dynamic_fps.run_garbage_collector_tooltip": "Giải phóng bộ nhớ không sử dụng khi chuyển sang trạng thái này",
+
+    "config.dynamic_fps.download_natives": "Tải Thư Viện Bản Địa",
+    "config.dynamic_fps.download_natives_description_0": "Sử dụng các tính năng pin cần thêm một thư viện.",
+    "config.dynamic_fps.download_natives_description_1": "Đặt xem mod có thể tải thành phần này thay bạn hay không.",
+
+    "key.dynamic_fps.toggle_forced": "Chế Độ Mất Tập Trung Cưỡng Chế (Bật/Tắt)",
+    "key.dynamic_fps.toggle_disabled": "Tắt Dynamic FPS (Bật/Tắt)",
+    "gui.dynamic_fps.hud.reducing": "Dynamic FPS: Giảm FPS Cưỡng Bức",
+    "gui.dynamic_fps.hud.disabled": "Dynamic FPS Đã Tắt",
+
+    "toast.dynamic_fps.battery_charging": "Đang Sạc!",
+    "toast.dynamic_fps.battery_draining": "Đang Xả Pin!",
+    "toast.dynamic_fps.battery_critical": "Pin Yếu!",
+
+    "toast.dynamic_fps.battery_charge": "Hiện tại là %d%%",
+
+    "modmenu.descriptionTranslation.dynamic_fps": "Giảm sử dụng tài nguyên khi Minecraft ở chế độ nền hoặc nhàn rỗi."
 }
