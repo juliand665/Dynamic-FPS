@@ -8,6 +8,7 @@ import dynamic_fps.impl.service.Platform;
 import net.lostluma.battery.api.State;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
@@ -93,14 +94,14 @@ public class IdleHandler {
 	}
 
 	private static void checkPlayerActivity() {
-		var player = Minecraft.getInstance().player;
+		Player player = Minecraft.getInstance().player;
 
 		if (player == null) {
 			return;
 		}
 
-		var position = player.position();
-		var lookAngle = player.getLookAngle();
+		Vec3 position = player.position();
+		Vec3 lookAngle = player.getLookAngle();
 
 		if (!position.equals(prevPosition) || !lookAngle.equals(prevLookAngle)) {
 			onActivity();

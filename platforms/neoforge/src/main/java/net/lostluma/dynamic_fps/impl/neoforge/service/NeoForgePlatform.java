@@ -46,7 +46,7 @@ public class NeoForgePlatform implements Platform {
 	public Optional<Version> getModVersion(String modId) {
 		Optional<? extends ModContainer> optional = ModList.get().getModContainerById(modId);
 
-		if (optional.isEmpty()) {
+		if (!optional.isPresent()) {
 			return Optional.empty();
 		}
 

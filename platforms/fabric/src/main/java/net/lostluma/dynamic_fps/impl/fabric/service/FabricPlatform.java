@@ -43,7 +43,7 @@ public class FabricPlatform implements Platform {
 	public Optional<Version> getModVersion(String modId) {
 		Optional<ModContainer> optional = FabricLoader.getInstance().getModContainer(modId);
 
-		if (optional.isEmpty()) {
+		if (!optional.isPresent()) {
 			return Optional.empty();
 		}
 
