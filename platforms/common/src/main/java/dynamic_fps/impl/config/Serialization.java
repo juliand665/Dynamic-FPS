@@ -85,7 +85,7 @@ public class Serialization {
 				removeUnchangedFields((JsonObject) value, (JsonObject) other);
 			}
 
-			if (value.equals(other) || (value.isJsonObject() && value.getAsJsonObject().isEmpty())) {
+			if (value.equals(other) || (value.isJsonObject() && value.getAsJsonObject().size() == 0)) {
 				config.remove(name);
 			}
 		});
