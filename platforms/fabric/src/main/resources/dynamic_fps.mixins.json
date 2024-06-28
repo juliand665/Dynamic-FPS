@@ -1,7 +1,6 @@
 {
     "required": true,
     "package": "net.lostluma.dynamic_fps.impl.fabric.mixin",
-    "compatibilityLevel": "JAVA_21",
     "minVersion": "0.8",
     "client": [
         "GuiMixin",
@@ -11,5 +10,9 @@
     "server": [],
     "injectors": {
         "defaultRequire": 1
+    },
+    "overwrites": {
+        "conformVisibility": true,
+        "requireAnnotations": true
     }
 }

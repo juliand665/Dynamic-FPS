@@ -1,12 +1,15 @@
 {
     "required": true,
     "package": "net.lostluma.dynamic_fps.impl.forge.mixin",
-    "compatibilityLevel": "JAVA_21",
     "minVersion": "0.8",
     "client": [],
     "mixins": [],
     "server": [],
     "injectors": {
         "defaultRequire": 1
+    },
+    "overwrites": {
+        "conformVisibility": true,
+        "requireAnnotations": true
     }
 }
