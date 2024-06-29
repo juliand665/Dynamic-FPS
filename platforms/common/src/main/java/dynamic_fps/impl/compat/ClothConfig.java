@@ -217,6 +217,16 @@ public final class ClothConfig {
 				.build()
 			);
 
+			category.addEntry(
+				entryBuilder.startBooleanToggle(
+					Component.translatable("options.vsync"),
+					instance.enableVsync()
+				)
+				.setDefaultValue(standard.enableVsync())
+				.setSaveConsumer(instance::setEnableVsync)
+				.build()
+			);
+
 			// Further options are not allowed since this state is used while active.
 			if (state.configurabilityLevel == PowerState.ConfigurabilityLevel.SOME) {
 				continue;

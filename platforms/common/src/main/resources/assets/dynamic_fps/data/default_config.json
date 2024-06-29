@@ -21,6 +21,7 @@
     "states": {
         "hovered": {
             "frame_rate_target": 60,
+            "enable_vsync": "false",
             "volume_multipliers": {},
             "graphics_state": "default",
             "show_toasts": true,
@@ -28,6 +29,7 @@
         },
         "unfocused": {
             "frame_rate_target": 1,
+            "enable_vsync": "false",
             "volume_multipliers": {
                 "master": 0.25
             },
@@ -37,6 +39,7 @@
         },
         "invisible": {
             "frame_rate_target": 0,
+            "enable_vsync": "false",
             "volume_multipliers": {
                 "master": 0.0
             },
@@ -45,7 +48,8 @@
             "run_garbage_collector": false
         },
         "unplugged": {
-            "frame_rate_target": 60,
+            "frame_rate_target": -1,
+            "enable_vsync": "true",
             "volume_multipliers": {},
             "graphics_state": "default",
             "show_toasts": true,
@@ -53,6 +57,7 @@
         },
         "abandoned": {
             "frame_rate_target": 10,
+            "enable_vsync": "false",
             "volume_multipliers": {},
             "graphics_state": "default",
             "show_toasts": false,

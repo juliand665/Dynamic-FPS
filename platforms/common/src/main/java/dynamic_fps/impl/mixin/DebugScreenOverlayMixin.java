@@ -29,12 +29,14 @@ public class DebugScreenOverlayMixin {
 			PowerState status = DynamicFPSMod.powerState();
 
 			if (status != PowerState.FOCUSED) {
-				int target = DynamicFPSMod.targetFrameRate();
-				String fps = target == Constants.NO_FRAME_RATE_LIMIT ? "inf" : Integer.toString(target);
+				int fps = DynamicFPSMod.targetFrameRate();
+
+				String vsync = DynamicFPSMod.enableVsync() ? " vsync": "";
+				String target = fps == Constants.NO_FRAME_RATE_LIMIT ? "inf" : Integer.toString(fps);
 
 				result.add(
 					2,
-					this.format("§c[Dynamic FPS] FPS: %s P: %s§r", fps, status.toString().toLowerCase())
+					this.format("§c[Dynamic FPS] FPS: %s%s P: %s§r", target, vsync, status.toString().toLowerCase())
 				);
 			}
 		}

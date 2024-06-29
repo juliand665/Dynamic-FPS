@@ -161,6 +161,10 @@ public class DynamicFPSMod {
 		return config.frameRateTarget();
 	}
 
+	public static boolean enableVsync() {
+		return config.enableVsync();
+	}
+
 	public static float volumeMultiplier(SoundSource source) {
 		return config.volumeMultiplier(source);
 	}
@@ -236,6 +240,13 @@ public class DynamicFPSMod {
 			}
 
 			OptionHolder.applyOptions(minecraft.options, config.graphicsState());
+		}
+
+		// The FOCUSED config doesn't have the user's actual vsync preference sadly ...
+		boolean enableVsync = current != PowerState.FOCUSED ? config.enableVsync() : minecraft.options.enableVsync().get();
+
+		if (enableVsync != before.enableVsync()) {
+			minecraft.getWindow().updateVsync(enableVsync);
 		}
 	}
 
