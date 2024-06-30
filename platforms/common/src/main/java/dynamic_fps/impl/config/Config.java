@@ -11,6 +11,7 @@ import net.minecraft.sounds.SoundSource;
 
 public class Config {
 	private int frameRateTarget;
+	private boolean enableVsync;
 	private final Map<String, Float> volumeMultipliers;
 	private GraphicsState graphicsState;
 	private boolean showToasts;
@@ -18,10 +19,11 @@ public class Config {
 
 	protected transient PowerState state; // Set by main config, allows retrieving values from the default power state config
 
-	public static final Config ACTIVE = new Config(-1, new HashMap<>(), GraphicsState.DEFAULT, true, false);
+	public static final Config ACTIVE = new Config(-1, false, new HashMap<>(), GraphicsState.DEFAULT, true, false);
 
-	public Config(int frameRateTarget, Map<String, Float> volumeMultipliers, GraphicsState graphicsState, boolean showToasts, boolean runGarbageCollector) {
+	public Config(int frameRateTarget, boolean enableVsync, Map<String, Float> volumeMultipliers, GraphicsState graphicsState, boolean showToasts, boolean runGarbageCollector) {
 		this.frameRateTarget = frameRateTarget;
+		this.enableVsync = enableVsync;
 		this.volumeMultipliers = new HashMap<>(volumeMultipliers); // Ensure the map is mutable
 		this.graphicsState = graphicsState;
 		this.showToasts = showToasts;
@@ -42,6 +44,14 @@ public class Config {
 		} else {
 			this.frameRateTarget = value;
 		}
+	}
+
+	public boolean enableVsync() {
+		return this.enableVsync;
+	}
+
+	public void setEnableVsync(boolean value) {
+		this.enableVsync = value;
 	}
 
 	public float volumeMultiplier(SoundSource source) {
