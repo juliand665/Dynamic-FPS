@@ -251,7 +251,7 @@ public class Serialization {
 		public T deserialize(JsonElement element, Type type, JsonDeserializationContext context) throws JsonParseException {
 			try {
 				Class<T> class_ = (Class<T>) Class.forName(type.getTypeName());
-				return Enum.valueOf(class_, element.getAsString().toUpperCase());
+				return Enum.valueOf(class_, element.getAsString().toUpperCase(Locale.ROOT));
 			} catch (ClassNotFoundException | IllegalArgumentException e) {
 				throw new JsonParseException(e);
 			}

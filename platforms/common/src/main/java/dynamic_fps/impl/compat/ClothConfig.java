@@ -199,7 +199,7 @@ public final class ClothConfig {
 			Config standard = defaultConfig.get(state);
 
 			ConfigCategory category = builder.getOrCreateCategory(
-				localized("config", "category." + state.toString().toLowerCase())
+				localized("config", "category." + state.toString().toLowerCase(Locale.ROOT))
 			);
 
 			// Having too many possible values on our slider is hard to use, so the conversion is not linear:

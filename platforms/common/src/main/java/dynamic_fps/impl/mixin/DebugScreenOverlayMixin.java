@@ -36,7 +36,7 @@ public class DebugScreenOverlayMixin {
 
 				result.add(
 					2,
-					this.format("§c[Dynamic FPS] FPS: %s%s P: %s§r", target, vsync, status.toString().toLowerCase())
+					this.format("§c[Dynamic FPS] FPS: %s%s P: %s§r", target, vsync, status.toString().toLowerCase(Locale.ROOT))
 				);
 			}
 		}
