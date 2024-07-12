@@ -29,7 +29,7 @@
     "config.dynamic_fps.uncap_menu_frame_rate_tooltip": "移除主選單的 60 FPS 限制。",
 
     "config.dynamic_fps.battery_tracker": "電池追蹤",
-    "config.dynamic_fps.battery_tracker_tooltip": "切換所有與電池相關的功能。",
+    "config.dynamic_fps.battery_tracker_tooltip": "開啟或關閉所有與電池相關的功能。",
 
     "config.dynamic_fps.battery_tracker_switch_states": "啟用電池狀態",
     "config.dynamic_fps.battery_tracker_switch_states_tooltip": "在電池供電時自動啟用電池狀態。",
