@@ -80,7 +80,7 @@
 
     "toast.dynamic_fps.battery_charging": "正在充電！",
     "toast.dynamic_fps.battery_draining": "正在放電！",
-    "toast.dynamic_fps.battery_critical": "電池電量過低！",
+    "toast.dynamic_fps.battery_critical": "電池電量偏低！",
 
     "toast.dynamic_fps.battery_charge": "目前電量為 %d%%",
 
