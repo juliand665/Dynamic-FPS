@@ -15,7 +15,7 @@ quilt_standard_libraries = "8.0.0-alpha.12+1.20.4"
 
 # Regular libraries
 
-battery = "1.0.1"
+battery = "1.1.0"
 
 # Modding libraries
 
