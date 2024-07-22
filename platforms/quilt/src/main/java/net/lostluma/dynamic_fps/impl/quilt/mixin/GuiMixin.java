@@ -1,4 +1,4 @@
-package net.lostluma.dynamic_fps.impl.fabric.mixin;
+package net.lostluma.dynamic_fps.impl.quilt.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import dynamic_fps.impl.util.HudInfoRenderer;

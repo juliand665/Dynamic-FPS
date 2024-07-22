@@ -2,6 +2,7 @@ package net.lostluma.dynamic_fps.impl.quilt.service;
 
 import dynamic_fps.impl.Constants;
 import dynamic_fps.impl.service.Platform;
+import dynamic_fps.impl.util.Version;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.loader.api.QuiltLoader;
 import org.quiltmc.qsl.lifecycle.api.client.event.ClientTickEvents;
@@ -33,9 +34,25 @@ public class QuiltPlatform implements Platform {
 	}
 
 	@Override
-	public Optional<String> getModVersion(String modId) {
+	public boolean isModLoaded(String modId) {
+		return QuiltLoader.isModLoaded(modId);
+	}
+
+	@Override
+	public Optional<Version> getModVersion(String modId) {
 		Optional<ModContainer> optional = QuiltLoader.getModContainer(modId);
-		return optional.map(modContainer -> modContainer.metadata().version().toString());
+
+		if (!optional.isPresent()) {
+			return Optional.empty();
+		}
+
+		String raw = optional.get().metadata().version().toString();
+
+		try {
+			return Optional.of(Version.of(raw));
+		} catch (Version.VersionParseException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override

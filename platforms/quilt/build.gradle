@@ -8,10 +8,7 @@ repositories {
 		filter { includeGroup("com.terraformersmc") }
 		forRepository { maven { url = "https://maven.terraformersmc.com/releases" } }
 	}
-	exclusiveContent {
-		filter { includeGroup("org.quiltmc") }
-		forRepository { maven { url = "https://maven.quiltmc.org/repository/release" } }
-	}
+	maven { url = "https://maven.quiltmc.org/repository/release" }
 }
 
 architectury {
