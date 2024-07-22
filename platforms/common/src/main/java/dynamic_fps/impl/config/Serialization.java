@@ -40,24 +40,29 @@ public class Serialization {
 
 	private static final String CONFIG_FILE = Constants.MOD_ID + ".json";
 
-	public static void save(DynamicFPSConfig instance) {
-		JsonObject config = (JsonObject) GSON.toJsonTree(instance);
+	public static void save() {
+		JsonObject config = (JsonObject) GSON.toJsonTree(DynamicFPSConfig.INSTANCE);
 		JsonObject parent = (JsonObject) GSON.toJsonTree(DynamicFPSConfig.DEFAULTS);
 
-		String data = GSON.toJson(removeUnchangedFields(config, parent)) + "\n";
-
-		Path cache = Platform.getInstance().getCacheDir();
-		Path configs = Platform.getInstance().getConfigDir().resolve(CONFIG_FILE);
+		String data = GSON.toJson(removeUnchangedFields(config, parent));
 
 		try {
-			Path temp = Files.createTempFile(cache, "config", ".json");
-
-			Files.write(temp, data.getBytes(StandardCharsets.UTF_8));
-			Serialization.move(temp, configs); // Attempt atomic move, fall back otherwise
+			write(data);
 		} catch (IOException e) {
 			// Cloth Config's built-in saving does not support catching exceptions :(
 			throw new RuntimeException("Failed to save or modify Dynamic FPS config!", e);
 		}
+	}
+
+	private static void write(String data) throws IOException {
+		data = data + "\n";
+		Platform platform = Platform.getInstance();
+
+		Path cache = Platform.getInstance().getCacheDir();
+		Path maybe = Files.createTempFile(cache, "config", ".json");
+
+		Files.write(maybe, data.getBytes(StandardCharsets.UTF_8));
+		Serialization.move(maybe, platform.getConfigDir().resolve(CONFIG_FILE));
 	}
 
 	private static void move(Path from, Path to) throws IOException {
@@ -102,6 +107,14 @@ public class Serialization {
 			data = Files.readAllBytes(config);
 		} catch (NoSuchFileException e) {
 			// Use default config
+
+			// Try to create an empty config file
+			// Prevents the "no config" warning next startup
+			try {
+				write("{}");
+			} catch (IOException ex) {
+				// At least we tried ...
+			}
 		} catch (IOException e) {
 			throw new RuntimeException("Failed to load Dynamic FPS config.", e);
 		}

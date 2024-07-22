@@ -73,6 +73,6 @@ public final class DynamicFPSConfig {
 	}
 
 	public void save() {
-		Serialization.save(this);
+		Serialization.save();
 	}
 }
