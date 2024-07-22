@@ -112,7 +112,7 @@ public class Serialization {
 		// Since there's no point in crashing just reset the config to the default state instead.
 		if (data == null || data[0] == 0) {
 			root = new JsonObject();
-			Logging.getLogger().warn("Dynamic FPS config corrupted! Starting with defaults ...");
+			Logging.getLogger().warn("Dynamic FPS config missing or corrupted! Using defaults.");
 		} else {
 			root = (JsonObject) new JsonParser().parse(new String(data, StandardCharsets.UTF_8));
 		}
