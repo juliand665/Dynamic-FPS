@@ -1,4 +1,5 @@
 plugins {
+	id("dynamic_fps.module")
 	alias libs.plugins.shadow
 }
 
@@ -35,14 +36,6 @@ dependencies {
 	shadowCommon(project(path: ":platforms:common", configuration: "transformProductionNeoForge")) { transitive = false }
 }
 
-processResources {
-	inputs.property "version", rootProject.mod_version
-
-	filesMatching("META-INF/neoforge.mods.toml") {
-		expand "version": rootProject.mod_version
-	}
-}
-
 shadowJar {
 	exclude "fabric.mod.json"
 	exclude "architectury.common.json"
@@ -74,19 +67,5 @@ sourcesJar {
 components.java {
 	withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
 		skip()
-	}
-}
-
-publishing {
-	publications {
-		mavenForge(MavenPublication) {
-			artifactId = rootProject.archives_base_name + "-" + project.name
-			from components.java
-		}
-	}
-
-	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-	repositories {
-		// Add repositories to publish to here.
 	}
 }

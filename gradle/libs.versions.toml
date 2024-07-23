@@ -24,6 +24,9 @@ cloth_config = "15.0.127"
 
 mixinextras = "0.3.5"
 
+architectury = "3.4.155"
+architectury_loom = "1.6.397"
+
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
 
@@ -51,10 +54,9 @@ cloth_config = { module = "me.shedaniel.cloth:cloth-config", version.ref = "clot
 mixinextras_common = { module = "io.github.llamalad7:mixinextras-common", version.ref = "mixinextras" }
 mixinextras_forge = { module = "io.github.llamalad7:mixinextras-forge", version.ref = "mixinextras" }
 
-[bundles]
+architectury_plugin = { module = "architectury-plugin:architectury-plugin.gradle.plugin", version.ref = "architectury" }
+architectury_loom = { module = "dev.architectury.loom:dev.architectury.loom.gradle.plugin", version.ref = "architectury_loom" }
 
 [plugins]
 shadow = { id = "com.github.johnrengelman.shadow", version = "8.1.1" }
-
-architectury = { id = "architectury-plugin", version = "3.4.155" }
-architectury_loom = { id = "dev.architectury.loom", version = "1.6.397" }
+architectury_loom = { id = "dev.architectury.loom", version.ref = "architectury_loom" }
