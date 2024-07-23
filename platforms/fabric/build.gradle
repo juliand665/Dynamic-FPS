@@ -1,6 +1,10 @@
+import me.modmuss50.mpp.ReleaseType
+import net.fabricmc.loom.task.RemapJarTask
+
 plugins {
 	id("dynamic_fps.module")
-	alias libs.plugins.shadow
+	alias(libs.plugins.shadow)
+	alias(libs.plugins.mod.publish.plugin)
 }
 
 repositories {
@@ -62,5 +66,49 @@ sourcesJar {
 components.java {
 	withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
 		skip()
+	}
+}
+
+var modVersion = project.property("mod_version").toString()
+
+publishMods {
+	version = modVersion
+	displayName = "v${modVersion}"
+
+	type = modVersion.contains("-") ? ReleaseType.BETA : ReleaseType.STABLE;
+	modLoaders.addAll(project.property("supported_platforms").toString().split(","))
+
+	changelog = file(rootDir.toPath().resolve("changelog.txt")).text
+	file = tasks.withType(RemapJarTask).named("remapJar").get().archiveFile
+
+	curseforge {
+		accessToken = providers.environmentVariable("CURSEFORGE_SECRET")
+		projectId = "335493"
+
+		minecraftVersionRange {
+			start = project.property("minecraft_version_min").toString()
+			end = project.property("minecraft_version_max").toString()
+		}
+
+		clientRequired = true
+		serverRequired = false
+
+		requires("fabric-api")
+		optional("cloth-config", "modmenu")
+	}
+
+	modrinth {
+		accessToken = providers.environmentVariable("MODRINTH_SECRET")
+		projectId = "LQ3K71Q1"
+
+		minecraftVersionRange {
+			start = project.property("minecraft_version_min").toString()
+			end = project.property("minecraft_version_max").toString()
+
+			includeSnapshots = true
+		}
+
+		requires("fabric-api")
+		optional("cloth-config", "modmenu")
 	}
 }

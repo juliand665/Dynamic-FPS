@@ -16,7 +16,7 @@ version = modVersion
 
 if (project.hasProperty("loom.platform")) {
     val platform = project.property("loom.platform")
-    val minecraft = project.property("minecraft_version_min")
+    val minecraft = project.property("minecraft_version")
 
     version = "${modVersion}+minecraft-${minecraft}-${platform}"
 }

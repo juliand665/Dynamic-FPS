@@ -27,6 +27,8 @@ mixinextras = "0.3.5"
 architectury = "3.4.155"
 architectury_loom = "1.7.410"
 
+mod_publish = "0.6.2"
+
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
 
@@ -60,3 +62,4 @@ architectury_loom = { module = "dev.architectury.loom:dev.architectury.loom.grad
 [plugins]
 shadow = { id = "com.github.johnrengelman.shadow", version = "8.1.1" }
 architectury_loom = { id = "dev.architectury.loom", version.ref = "architectury_loom" }
+mod_publish_plugin = { id = "me.modmuss50.mod-publish-plugin", version.ref = "mod_publish" }

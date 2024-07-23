@@ -1,0 +1,3 @@
+- Update Traditional Chinese Translation ([PR 208](https://github.com/juliand665/Dynamic-FPS/pull/208) by @notlin4)
+- Fix warning on startup due to invalid resource naming ([PR 209](https://github.com/juliand665/Dynamic-FPS/pull/209) by @LostLuma)
+- Fix no config file being created on first startup ([commit bfa3d2](https://github.com/juliand665/Dynamic-FPS/commit/bfa3d29d51c32f60d070c4835f616dfb1cac1774) by @LostLuma)
