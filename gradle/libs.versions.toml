@@ -25,7 +25,7 @@ cloth_config = "15.0.127"
 mixinextras = "0.3.5"
 
 architectury = "3.4.155"
-architectury_loom = "1.6.397"
+architectury_loom = "1.7.410"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
