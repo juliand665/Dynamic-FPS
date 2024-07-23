@@ -85,10 +85,13 @@ publishMods {
 		accessToken = providers.environmentVariable("CURSEFORGE_SECRET")
 		projectId = "335493"
 
+		/*
 		minecraftVersionRange {
 			start = project.property("minecraft_version_min").toString()
 			end = project.property("minecraft_version_max").toString()
 		}
+		*/
+		minecraftVersions.add(project.property("minecraft_version_min").toString())
 
 		clientRequired = true
 		serverRequired = false
@@ -101,12 +104,15 @@ publishMods {
 		accessToken = providers.environmentVariable("MODRINTH_SECRET")
 		projectId = "LQ3K71Q1"
 
+		/*
 		minecraftVersionRange {
 			start = project.property("minecraft_version_min").toString()
 			end = project.property("minecraft_version_max").toString()
 
 			includeSnapshots = true
 		}
+		*/
+		minecraftVersions.add(project.property("minecraft_version_min").toString())
 
 		requires("fabric-api")
 		optional("cloth-config", "modmenu")
