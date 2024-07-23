@@ -39,6 +39,8 @@ dependencies {
 
 	modApi(libs.modmenu)
 
+	include(libs.battery)
+
     common(project(path: ":platforms:common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":platforms:common", configuration: "transformProductionQuilt")) { transitive false }
 }
