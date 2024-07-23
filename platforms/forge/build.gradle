@@ -111,6 +111,6 @@ publishMods {
 		*/
 		minecraftVersions.add(project.property("minecraft_version_min").toString())
 
-		optional("modmenu")
+		optional("cloth-config")
 	}
 }
