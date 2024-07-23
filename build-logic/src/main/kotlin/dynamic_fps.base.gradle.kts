@@ -24,7 +24,7 @@ if (project.hasProperty("loom.platform")) {
 tasks.withType<ProcessResources> {
     inputs.property("version", modVersion)
 
-    filesMatching(listOf("fabric.mod.json", "mods.toml", "neoforge.mods.toml", "quilt.mod.json")) {
+    filesMatching(listOf("fabric.mod.json", "META-INF/mods.toml", "META-INF/neoforge.mods.toml", "quilt.mod.json")) {
         expand(inputs.properties)
     }
 }
