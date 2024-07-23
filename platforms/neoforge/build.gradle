@@ -85,6 +85,7 @@ publishMods {
 
 	changelog = file(rootDir.toPath().resolve("changelog.txt")).text
 	file = tasks.withType(RemapJarTask).named("remapJar").get().archiveFile
+	additionalFiles.from(tasks.withType(Jar).named("sourcesJar").get().archiveFile)
 
 	curseforge {
 		accessToken = providers.environmentVariable("CURSEFORGE_SECRET")
