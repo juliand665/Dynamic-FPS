@@ -111,8 +111,6 @@ publishMods {
 		minecraftVersionRange {
 			start = project.property("minecraft_version_min").toString()
 			end = project.property("minecraft_version_max").toString()
-
-			includeSnapshots = true
 		}
 		*/
 		minecraftVersions.add(project.property("minecraft_version_min").toString())
