@@ -1,3 +1,2 @@
 - Update Italian Translation ([PR 210](https://github.com/juliand665/Dynamic-FPS/pull/210) by @TheBossMagnus)
-  - This will be in a future release for other platforms / Minecraft versions
-- Fix battery library not being included on Quilt for 1.21.0 ([commit bfa3d2](https://github.com/juliand665/Dynamic-FPS/commit/bfa3d29d51c32f60d070c4835f616dfb1cac1774) by @LostLuma)
+- Share more code between Fabric and Quilt versions of the mod ([commit [7ba399](https://github.com/juliand665/Dynamic-FPS/commit/7ba399a2b2a8cbfb365bb544fd45c1a3cf08ffde) by @LostLuma)
