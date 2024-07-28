@@ -8,11 +8,6 @@ plugins {
 }
 
 repositories {
-	// ModMenu
-	exclusiveContent {
-		filter { includeGroup("com.terraformersmc") }
-		forRepository { maven { url = "https://maven.terraformersmc.com/releases" } }
-	}
 	maven { url = "https://maven.quiltmc.org/repository/release" }
 }
 
@@ -26,29 +21,36 @@ loom {
 }
 
 configurations {
-    common
-    shadowCommon // Don't use shadow from the shadow plugin since it *excludes* files.
-    compileClasspath.extendsFrom common
-    runtimeClasspath.extendsFrom common
-    developmentQuilt.extendsFrom common
+	common {
+		canBeResolved = true
+		canBeConsumed = false
+	}
+	// Files in this configuration will be bundled into your mod using the Shadow plugin.
+	// Don't use the `shadow` configuration from the plugin itself as it's meant for excluding files.
+	shadowBundle {
+		canBeResolved = true
+		canBeConsumed = false
+	}
+	compileClasspath.extendsFrom common
+	runtimeClasspath.extendsFrom common
+	developmentFabric.extendsFrom common
 }
 
 dependencies {
     modImplementation(libs.quilt.loader)
-	modImplementation(libs.qsl.lifecycle.events)
-
-	modApi(libs.modmenu)
 
 	include(libs.battery)
 
-    common(project(path: ":platforms:common", configuration: "namedElements")) { transitive false }
-    shadowCommon(project(path: ":platforms:common", configuration: "transformProductionQuilt")) { transitive false }
+	common(project(path: ":platforms:common", configuration: "namedElements")) { transitive false }
+	shadowBundle(project(path: ":platforms:common", configuration: "transformProductionQuilt")) { transitive false }
+
+	common(project(path: ":platforms:textile", configuration: "namedElements")) { transitive false }
+	shadowBundle(project(path: ":platforms:textile", configuration: "transformProductionQuilt")) { transitive false }
 }
 
 shadowJar {
     exclude "architectury.common.json"
-
-    configurations = [project.configurations.shadowCommon]
+    configurations = [project.configurations.shadowBundle]
 }
 
 remapJar {

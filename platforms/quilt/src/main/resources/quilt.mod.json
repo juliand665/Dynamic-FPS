@@ -66,12 +66,12 @@
         },
         "intermediate_mappings": "net.fabricmc:intermediary",
         "entrypoints": {
-            "client_init": [
-                "net.lostluma.dynamic_fps.impl.quilt.compat.FREX",
-                "net.lostluma.dynamic_fps.impl.quilt.DynamicFPSQuiltMod"
+            "client": [
+                "net.lostluma.dynamic_fps.impl.textile.compat.FREX",
+                "net.lostluma.dynamic_fps.impl.textile.DynamicFPSTextileMod"
             ],
             "modmenu": [
-                "net.lostluma.dynamic_fps.impl.quilt.compat.ModMenu"
+                "net.lostluma.dynamic_fps.impl.textile.compat.ModMenu"
             ]
         },
         "depends": [
@@ -88,11 +88,11 @@
                 "versions": ">=0.3.2"
             },
             {
-                "id": "quilt_resource_loader",
+                "id": "fabric-resource-loader-v0",
                 "versions": "*"
             },
             {
-                "id": "quilt_lifecycle_events",
+                "id": "fabric-lifecycle-events-v1",
                 "versions": "*"
             },
             {
@@ -112,7 +112,8 @@
     },
     "mixin": [
         "dynamic_fps.mixins.json",
-        "dynamic_fps-common.mixins.json"
+        "dynamic_fps-common.mixins.json",
+        "dynamic_fps-textile.mixins.json"
     ],
     "access_widener": "dynamic_fps.accesswidener"
 }

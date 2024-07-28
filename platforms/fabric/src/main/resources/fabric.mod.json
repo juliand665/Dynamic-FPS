@@ -61,11 +61,11 @@
     "environment": "client",
     "entrypoints": {
         "client": [
-            "net.lostluma.dynamic_fps.impl.fabric.compat.FREX",
-            "net.lostluma.dynamic_fps.impl.fabric.DynamicFPSFabricMod"
+            "net.lostluma.dynamic_fps.impl.textile.compat.FREX",
+            "net.lostluma.dynamic_fps.impl.textile.DynamicFPSTextileMod"
         ],
         "modmenu": [
-            "net.lostluma.dynamic_fps.impl.fabric.compat.ModMenu"
+            "net.lostluma.dynamic_fps.impl.textile.compat.ModMenu"
         ]
     },
     "depends": {
@@ -85,7 +85,8 @@
     },
     "mixins": [
         "dynamic_fps.mixins.json",
-        "dynamic_fps-common.mixins.json"
+        "dynamic_fps-common.mixins.json",
+        "dynamic_fps-textile.mixins.json"
     ],
     "accessWidener": "dynamic_fps.accesswidener"
 }

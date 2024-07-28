@@ -1,8 +1,11 @@
 {
     "required": true,
-    "package": "net.lostluma.dynamic_fps.impl.quilt.mixin",
+    "package": "net.lostluma.dynamic_fps.impl.textile.mixin",
     "minVersion": "0.8",
-    "client": [],
+    "client": [
+        "GuiMixin",
+        "OptionsMixin"
+    ],
     "mixins": [],
     "server": [],
     "injectors": {

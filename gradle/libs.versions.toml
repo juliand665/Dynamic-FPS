@@ -11,7 +11,6 @@ forge = "1.20.4-49.0.30"
 neoforge = "21.0.0-beta"
 
 quilt_loader = "0.25.0"
-quilt_standard_libraries = "8.0.0-alpha.12+1.20.4"
 
 # Regular libraries
 
@@ -42,7 +41,6 @@ forge = { module = "net.minecraftforge:forge", version.ref = "forge" }
 neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
 
 quilt_loader = { module = "org.quiltmc:quilt-loader", version.ref = "quilt_loader" }
-qsl_lifecycle_events = { module = "org.quiltmc.qsl.core:lifecycle_events", version.ref = "quilt_standard_libraries" }
 
 # Regular libraries
 

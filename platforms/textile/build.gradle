@@ -1,0 +1,25 @@
+plugins {
+	id("dynamic_fps.module")
+}
+
+architectury {
+	common rootProject.enabled_platforms.split(',')
+}
+
+repositories {
+	exclusiveContent {
+		filter { includeGroup("com.terraformersmc") }
+		forRepository { maven { url = "https://maven.terraformersmc.com/releases" } }
+	}
+}
+
+dependencies {
+	modImplementation(libs.fabric.loader)
+
+	modImplementation(fabricApi.module("fabric-resource-loader-v0", libs.versions.fabric.api.get()))
+	modImplementation(fabricApi.module("fabric-lifecycle-events-v1", libs.versions.fabric.api.get()))
+
+	modApi(libs.modmenu)
+
+	compileOnly(project(path: ':platforms:common', configuration: 'namedElements')) { transitive false }
+}

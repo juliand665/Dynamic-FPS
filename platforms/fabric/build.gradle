@@ -7,14 +7,6 @@ plugins {
 	alias(libs.plugins.mod.publish.plugin)
 }
 
-repositories {
-	// ModMenu
-	exclusiveContent {
-		filter { includeGroup("com.terraformersmc") }
-		forRepository { maven { url = "https://maven.terraformersmc.com/releases" } }
-	}
-}
-
 architectury {
 	platformSetupLoomIde()
 	fabric()
@@ -25,8 +17,16 @@ loom {
 }
 
 configurations {
-	common
-	shadowCommon // Don't use shadow from the shadow plugin since it *excludes* files.
+	common {
+		canBeResolved = true
+		canBeConsumed = false
+	}
+	// Files in this configuration will be bundled into your mod using the Shadow plugin.
+	// Don't use the `shadow` configuration from the plugin itself as it's meant for excluding files.
+	shadowBundle {
+		canBeResolved = true
+		canBeConsumed = false
+	}
 	compileClasspath.extendsFrom common
 	runtimeClasspath.extendsFrom common
 	developmentFabric.extendsFrom common
@@ -38,17 +38,18 @@ dependencies {
 	modImplementation(fabricApi.module("fabric-resource-loader-v0", libs.versions.fabric.api.get()))
 	modImplementation(fabricApi.module("fabric-lifecycle-events-v1", libs.versions.fabric.api.get()))
 
-	modApi(libs.modmenu)
-
 	include(libs.battery)
 
 	common(project(path: ":platforms:common", configuration: "namedElements")) { transitive false }
-	shadowCommon(project(path: ":platforms:common", configuration: "transformProductionFabric")) { transitive false }
+	shadowBundle(project(path: ":platforms:common", configuration: "transformProductionFabric")) { transitive false }
+
+	common(project(path: ":platforms:textile", configuration: "namedElements")) { transitive false }
+	shadowBundle(project(path: ":platforms:textile", configuration: "transformProductionFabric")) { transitive false }
 }
 
 shadowJar {
 	exclude "architectury.common.json"
-	configurations = [project.configurations.shadowCommon]
+	configurations = [project.configurations.shadowBundle]
 }
 
 remapJar {
