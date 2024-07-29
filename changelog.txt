@@ -1,2 +1,1 @@
-- Update Italian Translation ([PR 210](https://github.com/juliand665/Dynamic-FPS/pull/210) by @TheBossMagnus)
-- Share more code between Fabric and Quilt versions of the mod ([commit [7ba399](https://github.com/juliand665/Dynamic-FPS/commit/7ba399a2b2a8cbfb365bb544fd45c1a3cf08ffde) by @LostLuma)
+- Fix crash opening the config screen on NeoForge ([commit 7a2425](https://github.com/juliand665/Dynamic-FPS/commit/7a24257b9c5086c5e449ac5d8a681b1d1e86115d))
