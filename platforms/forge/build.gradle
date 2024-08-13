@@ -35,6 +35,8 @@ configurations {
 dependencies {
 	forge libs.forge
 
+	include(libs.battery)
+
 	compileOnly(libs.mixinextras.common)
 	annotationProcessor(libs.mixinextras.common)
 

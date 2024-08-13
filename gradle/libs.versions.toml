@@ -6,7 +6,7 @@ minecraft = "1.21"
 fabric_loader = "0.15.10"
 fabric_api = "0.100.1+1.21"
 
-forge = "1.20.4-49.0.30"
+forge = "1.21-51.0.33"
 
 neoforge = "21.0.143"
 
@@ -23,8 +23,8 @@ cloth_config = "15.0.127"
 
 mixinextras = "0.3.5"
 
-architectury = "3.4.155"
-architectury_loom = "1.7.410"
+architectury = "3.4.159"
+architectury_loom = "1.7.412"
 
 mod_publish = "0.6.3"
 
