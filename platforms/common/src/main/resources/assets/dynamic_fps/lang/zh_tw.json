@@ -84,5 +84,5 @@
 
     "toast.dynamic_fps.battery_charge": "目前電量為 %d%%",
 
-    "modmenu.descriptionTranslation.dynamic_fps": "當 Minecraft 在背景執行或閒置時，降低資源使用量"
+    "modmenu.descriptionTranslation.dynamic_fps": "當 Minecraft 在背景執行或閒置時，降低資源使用量。"
 }
