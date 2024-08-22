@@ -22,8 +22,14 @@
     "config.dynamic_fps.idle_time_tooltip": "在遊戲聚焦時，幾分鐘無操作後 Dynamic FPS 會啟動閒置狀態。",
 
     "config.dynamic_fps.idle_condition": "閒置條件",
+
     "config.dynamic_fps.idle_condition_none": "無",
+    "config.dynamic_fps.idle_condition_vanilla": "原版",
     "config.dynamic_fps.idle_condition_on_battery": "電池供電時",
+
+    "config.dynamic_fps.idle_condition_none_tooltip": "閒置過久時一律啟用閒置狀態。",
+    "config.dynamic_fps.idle_condition_vanilla_tooltip": "停用 Dynamic FPS 閒置。改用原版設定。",
+    "config.dynamic_fps.idle_condition_on_battery_tooltip": "閒置過久且使用電池供電時啟用閒置狀態。",
 
     "config.dynamic_fps.uncap_menu_frame_rate": "移除選單 FPS 限制",
     "config.dynamic_fps.uncap_menu_frame_rate_tooltip": "移除主選單的 60 FPS 限制。",
