@@ -4,13 +4,13 @@
     "minVersion": "0.8",
     "client": [
         "DebugScreenOverlayMixin",
+        "FramerateLimitTrackerMixin",
         "GameRendererMixin",
         "GuiMixin",
         "LoadingOverlayMixin",
         "MinecraftMixin",
         "SoundEngineMixin",
-        "ToastComponentMixin",
-        "WindowMixin",
+      "ToastManagerMixin",
         "bugfix.BlockableEventLoopMixin"
     ],
     "mixins": [],

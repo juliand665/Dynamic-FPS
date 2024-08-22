@@ -3,7 +3,7 @@
     "uncap_menu_frame_rate": false,
     "idle": {
         "timeout": 300,
-        "condition": "on_battery"
+        "condition": "vanilla"
     },
     "battery_tracker": {
         "enabled": false,

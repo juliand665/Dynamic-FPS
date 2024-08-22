@@ -1,10 +1,10 @@
 [versions]
-minecraft = "1.21"
+minecraft = "24w33a"
 
 # Platform libraries
 
 fabric_loader = "0.15.10"
-fabric_api = "0.100.1+1.21"
+fabric_api = "0.102.2+1.21.2"
 
 forge = "1.21-51.0.33"
 

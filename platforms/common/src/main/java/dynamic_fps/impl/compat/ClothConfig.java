@@ -371,6 +371,10 @@ public final class ClothConfig {
 		return localized("config", "idle_condition_" + state.toString().toLowerCase(Locale.ROOT));
 	}
 
+	private static Optional<Component[]> idleConditionTooltip(IdleCondition condition) {
+		return Optional.of(new Component[]{ localized("config", "idle_condition_" + condition.toString().toLowerCase(Locale.ROOT) + "_tooltip") });
+	}
+
 	private static Component graphicsStateMessage(Enum<GraphicsState> graphicsState) {
 		return localized("config", "graphics_state_" + graphicsState.toString().toLowerCase(Locale.ROOT));
 	}

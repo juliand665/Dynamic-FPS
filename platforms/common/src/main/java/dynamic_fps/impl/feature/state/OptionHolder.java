@@ -4,7 +4,7 @@ import dynamic_fps.impl.config.option.GraphicsState;
 import net.minecraft.client.CloudStatus;
 import net.minecraft.client.GraphicsStatus;
 import net.minecraft.client.Options;
-import net.minecraft.client.ParticleStatus;
+import net.minecraft.server.level.ParticleStatus;
 
 /*
  * Helper for saving, overriding, and re-applying vanilla options.

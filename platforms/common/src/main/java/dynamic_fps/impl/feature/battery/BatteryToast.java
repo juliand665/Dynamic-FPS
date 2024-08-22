@@ -2,9 +2,11 @@ package dynamic_fps.impl.feature.battery;
 
 import dynamic_fps.impl.util.ResourceLocations;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
-import net.minecraft.client.gui.components.toasts.ToastComponent;
+import net.minecraft.client.gui.components.toasts.ToastManager;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
@@ -17,6 +19,7 @@ public class BatteryToast implements Toast {
 	private Component title;
 	private Component description;
 	private ResourceLocation icon;
+	private Visibility visibility;
 
 	private static BatteryToast queuedToast;
 
@@ -26,6 +29,7 @@ public class BatteryToast implements Toast {
 	private BatteryToast(Component title, ResourceLocation icon) {
 		this.title = title;
 		this.icon = icon;
+		this.visibility = Visibility.SHOW;
 	}
 
 	/**
@@ -38,12 +42,28 @@ public class BatteryToast implements Toast {
 			queuedToast.icon = icon;
 		} else {
 			queuedToast = new BatteryToast(title, icon);
-			Minecraft.getInstance().getToasts().addToast(queuedToast);
+			Minecraft.getInstance().getToastManager().addToast(queuedToast);
 		}
 	}
 
 	@Override
-	public @NotNull Visibility render(GuiGraphics graphics, ToastComponent toastComponent, long currentTime) {
+	public @NotNull Visibility getWantedVisibility() {
+		return this.visibility;
+	}
+
+	@Override
+	public void update(ToastManager toastManager, long currentTime) {
+		if (this.firstRender == 0) {
+			return;
+		}
+
+		if (currentTime - this.firstRender >= 5000.0 * toastManager.getNotificationDisplayTimeMultiplier()) {
+			this.visibility = Visibility.HIDE;
+		}
+	}
+
+	@Override
+	public void render(GuiGraphics graphics, Font font, long currentTime) {
 		if (this.firstRender == 0) {
 			if (this == queuedToast) {
 				queuedToast = null;
@@ -55,14 +75,12 @@ public class BatteryToast implements Toast {
 		}
 
 		// resource, x, y, z, ?, ?, width, height, width, height
-		graphics.blit(BACKGROUND_IMAGE, 0, 0, 0, 0.0f, 0.0f, this.width(), this.height(), this.width(), this.height());
+		graphics.blit(RenderType::guiTextured, BACKGROUND_IMAGE, 0, 0, 0, 0.0f, 0, this.width(), this.height(), this.width(), this.height());
 
-		graphics.blit(MOD_ICON, 2, 2, 0, 0.0f, 0.0f, 8, 8, 8, 8);
-		graphics.blit(this.icon, 8, 8, 0, 0.0f, 0.0f, 16, 16, 16, 16);
+		graphics.blit(RenderType::guiTextured, MOD_ICON, 2, 2, 0, 0.0f, 0, 8, 8, 8, 8);
+		graphics.blit(RenderType::guiTextured, this.icon, 8, 8, 0, 0.0f, 0, 16, 16, 16, 16);
 
-		graphics.drawString(toastComponent.getMinecraft().font, this.title, 30, 7, 0x5f3315, false);
-		graphics.drawString(toastComponent.getMinecraft().font, this.description, 30, 18, -16777216, false);
-
-		return currentTime - this.firstRender >= 5000.0 * toastComponent.getNotificationDisplayTimeMultiplier() ? Toast.Visibility.HIDE : Toast.Visibility.SHOW;
+		graphics.drawString(Minecraft.getInstance().font, this.title, 30, 7, 0x5f3315, false);
+		graphics.drawString(Minecraft.getInstance().font, this.description, 30, 18, -16777216, false);
 	}
 }

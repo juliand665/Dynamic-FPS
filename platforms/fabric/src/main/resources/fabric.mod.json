@@ -70,7 +70,7 @@
     },
     "depends": {
         "fabricloader": ">=0.15.10",
-        "minecraft": ">=1.21.0-alpha.24.20.a",
+        "minecraft": ">=1.21.2-alpha.24.33.a",
         "mixinextras": ">=0.3.2",
         "fabric-resource-loader-v0": "*",
         "fabric-lifecycle-events-v1": "*"

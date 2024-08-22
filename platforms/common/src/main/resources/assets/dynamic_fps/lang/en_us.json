@@ -22,8 +22,14 @@
     "config.dynamic_fps.idle_time_tooltip": "Minutes without input until Dynamic FPS activates the Idle state while the game is focused.",
 
     "config.dynamic_fps.idle_condition": "Idle Condition",
+
     "config.dynamic_fps.idle_condition_none": "None",
+    "config.dynamic_fps.idle_condition_vanilla": "Vanilla",
     "config.dynamic_fps.idle_condition_on_battery": "While on battery",
+
+    "config.dynamic_fps.idle_condition_none_tooltip": "Always activate Idle state when inactive for too long.",
+    "config.dynamic_fps.idle_condition_vanilla_tooltip": "Disable Dynamic FPS idling. Uses the vanilla setting instead.",
+    "config.dynamic_fps.idle_condition_on_battery_tooltip": "Enable the Idle state when inactive for too long and on battery.",
 
     "config.dynamic_fps.uncap_menu_frame_rate": "Uncap Menu FPS",
     "config.dynamic_fps.uncap_menu_frame_rate_tooltip": "Remove the 60 FPS limit in the main menu.",
