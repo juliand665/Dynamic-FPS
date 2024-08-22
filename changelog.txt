@@ -1,1 +1,5 @@
-- Fix crash opening the config screen on NeoForge ([commit 7a2425](https://github.com/juliand665/Dynamic-FPS/commit/7a24257b9c5086c5e449ac5d8a681b1d1e86115d))
+- Add new default "Vanilla" idle condition ([commit 9e40c5](https://github.com/juliand665/Dynamic-FPS/commit/9e40c51329df8a4387bb332bd1011172381db930) by @LostLuma)
+  - This is exclusive to Minecraft 1.21.2 and above
+  - Use this setting to use Minecraft's new built-in progressive idle mode
+  - Switching to one of the other existing idle conditions will disable all vanilla idle-related code
+- Update Traditional Chinese translation ([PR 215](https://github.com/juliand665/Dynamic-FPS/pull/215) by @yichifauzi and @notlin4)
