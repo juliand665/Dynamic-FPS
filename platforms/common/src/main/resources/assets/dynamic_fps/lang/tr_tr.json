@@ -1,37 +1,94 @@
 {
-    "config.dynamic_fps.title": "Dinamik FPS Ayarları",
+    "config.dynamic_fps.title": "Dynamic FPS ayarları",
+
+    "config.dynamic_fps.warn_cloth_config.0": "Minecraft içinden Dynamic FPS ayarlarını değiştirmek için Cloth Config gereklidir.",
+    "config.dynamic_fps.warn_cloth_config.1": "Ya Cloth Config'i kurun ya yapılandırma dosyasını düzenleyin ya da bunların yerine varsayılan ayarları kullanın.",
 
     "config.dynamic_fps.category.general": "Genel",
-    "config.dynamic_fps.category.hovered": "Üzerinde Durulan",
+    "config.dynamic_fps.category.advanced": "Gelişmiş",
+
+    "config.dynamic_fps.category.hovered": "Üzerine gelindiğinde",
     "config.dynamic_fps.category.unfocused": "Odaklanmamış",
     "config.dynamic_fps.category.abandoned": "Boşta",
     "config.dynamic_fps.category.invisible": "Görünmez",
+    "config.dynamic_fps.category.unplugged": "Pilde",
 
-    "config.dynamic_fps.disabled": "Devre Dışı",
-    "config.dynamic_fps.minutes": "%d Dakika",
+    "config.dynamic_fps.enabled": "Etkin",
 
-    "config.dynamic_fps.idle_time": "Boşta Geçen Süre",
-    "config.dynamic_fps.idle_time_tooltip": "Oyun odaklıyken giriş olmadan geçen dakikalar boyunca Dinamik FPS'nin Boşta durumunu etkinleştirmesi.",
+    "config.dynamic_fps.disabled": "Devre dışı",
+    "config.dynamic_fps.minutes": "%d dakika",
 
-    "config.dynamic_fps.frame_rate_target": "Kare Hızı Hedefi",
-    "config.dynamic_fps.volume_multiplier": "Ses Çarpanı",
+    "config.dynamic_fps.idle_time": "Boşta kalma zaman aşımı",
+    "config.dynamic_fps.idle_time_tooltip": "Oyun odaklanmışken Dynamic FPS boşta durumunu etkinleştirene kadar girdi olmadan geçen dakika.",
 
-    "config.dynamic_fps.graphics_state": "Grafik Seçenekleri",
+    "config.dynamic_fps.idle_condition": "Boşta koşulu",
+
+    "config.dynamic_fps.idle_condition_none": "Yok",
+    "config.dynamic_fps.idle_condition_vanilla": "Vanilya",
+    "config.dynamic_fps.idle_condition_on_battery": "Pildeyken",
+
+    "config.dynamic_fps.idle_condition_none_tooltip": "Çok uzun süre etkin olmadığında daima boşta durumunu etkinleştir.",
+    "config.dynamic_fps.idle_condition_vanilla_tooltip": "Dinamik FPS boştayken çalışmasını devre dışı bırakır. Bunun yerine vanilya ayarını kullanır.",
+    "config.dynamic_fps.idle_condition_on_battery_tooltip": "Çok uzun süre etkin olmadığında ve pille çalışırken Boşta durumunu etkinleştirir.",
+
+    "config.dynamic_fps.uncap_menu_frame_rate": "Menü FPS limitini aç",
+    "config.dynamic_fps.uncap_menu_frame_rate_tooltip": "Ana menüdeki 60 FPS sınırını kaldır.",
+
+    "config.dynamic_fps.battery_tracker": "Pil takibi",
+    "config.dynamic_fps.battery_tracker_tooltip": "Pille ilgili tüm özellikleri aç veya kapat.",
+
+    "config.dynamic_fps.battery_tracker_switch_states": "Pil durumunda etkinleştir",
+    "config.dynamic_fps.battery_tracker_switch_states_tooltip": "Pildeyken pil açık durumunu otomatik olarak etkinleştirir.",
+
+    "config.dynamic_fps.battery_tracker_notifications": "Pil bildirimleri",
+    "config.dynamic_fps.battery_tracker_notifications_tooltip": "Pil durumu hakkında oyun içi bildirimler al.",
+
+    "config.dynamic_fps.battery_indicator_condition": "Pil göstergesi durumu",
+    "config.dynamic_fps.battery_indicator_condition_disabled": "Kapalı",
+    "config.dynamic_fps.battery_indicator_condition_draining": "Deşarj olurken",
+    "config.dynamic_fps.battery_indicator_condition_critical": "Kritik / < %10",
+    "config.dynamic_fps.battery_indicator_condition_constant": "Sürekli",
+
+    "config.dynamic_fps.battery_indicator_placement": "Gösterge yerleşimi",
+    "config.dynamic_fps.battery_indicator_placement_top_left": "Sol üst",
+    "config.dynamic_fps.battery_indicator_placement_top_right": "Sağ üst",
+    "config.dynamic_fps.battery_indicator_placement_bottom_left": "Sol alt",
+    "config.dynamic_fps.battery_indicator_placement_bottom_right": "Sağ alt",
+
+    "config.dynamic_fps.volume_transition_speed_up": "Yukarı doğru ses geçiş hızı",
+    "config.dynamic_fps.volume_transition_speed_down": "Aşağı doğru ses geçiş hızı",
+    "config.dynamic_fps.volume_transition_speed_instant": "Hemen",
+    "config.dynamic_fps.volume_transition_speed_tooltip": "Oyun sesinin saniye başına ayarlanacağı hızı ayarlar.",
+
+    "config.dynamic_fps.frame_rate_target": "Kare sayısı hedefi",
+    "config.dynamic_fps.volume_multiplier": "Ses düzeyi çarpanı",
+
+    "config.dynamic_fps.graphics_state": "Grafik seçenekleri",
     "config.dynamic_fps.graphics_state_default": "Varsayılan",
     "config.dynamic_fps.graphics_state_reduced": "Azaltılmış",
     "config.dynamic_fps.graphics_state_minimal": "Minimal",
-    "config.dynamic_fps.graphics_state_minimal_tooltip": "Minimal grafikler dünyanın yeniden yüklenmesine neden olur!!",
+    "config.dynamic_fps.graphics_state_minimal_tooltip": "Minimal grafikler dünyanın yeniden yüklenmesine neden olur!",
 
     "config.dynamic_fps.show_toasts": "Bilgi Pencerelerini Göster",
     "config.dynamic_fps.show_toasts_tooltip": "Bilgi pencerelerini göstermeye devam edip etmemeye veya ertelemeye karar verir",
 
-    "config.dynamic_fps.run_garbage_collector": "Garbage Collector Çalıştır",
-    "config.dynamic_fps.run_garbage_collector_tooltip": "Bu duruma geçişte kullanılmayan belleği serbest bırak",
+    "config.dynamic_fps.run_garbage_collector": "Çöp toplayıcısını çalıştr",
+    "config.dynamic_fps.run_garbage_collector_tooltip": "Boştayken kullanılmayan belleği boşaltır",
 
-    "key.dynamic_fps.toggle_forced": "Zorla Azaltılmış FPS (Aç / kapat)",
-    "key.dynamic_fps.toggle_disabled": "Dinamik FPS'yi Devre Dışı Bırak (Aç / kapat)",
-    "gui.dynamic_fps.hud.reducing": "Dinamik FPS: Azaltılmış FPS Zorlanıyor",
-    "gui.dynamic_fps.hud.disabled": "Dinamik FPS Devre Dışı Bırakıldı",
+    "config.dynamic_fps.download_natives": "Ek kütüphaneleri indir",
+    "config.dynamic_fps.download_natives_description_0": "Pil özelliklerini kullanmak için ek bir kütüphaneye ihtiyaç vardır.",
+    "config.dynamic_fps.download_natives_description_1": "Modun bu bileşeni sizin adınıza indirip indiremeyeceğini ayarlayın.",
+
+    "key.dynamic_fps.toggle_forced": "Zorla FPS'i azalt (Aç / kapat)",
+    "key.dynamic_fps.toggle_disabled": "Dynamic FPS'i devre dışı bırak (Aç / Kapat)",
+    "gui.dynamic_fps.hud.reducing": "Dynamic FPS: FPS zorla azaltılıyor",
+    "gui.dynamic_fps.hud.disabled": "Dynamic FPS devre dışı",
+
+    "toast.dynamic_fps.battery_charging": "Şarj Oluyor!",
+    "toast.dynamic_fps.battery_draining": "Deşarj Oluyor!",
+    "toast.dynamic_fps.battery_critical": "Pil Zayır!",
+
+    "toast.dynamic_fps.battery_charge": "Şu anda %d%%",
 
     "modmenu.descriptionTranslation.dynamic_fps": "Minecraft'in arka planda kaynakları tüketmemesi için FPS'yi dinamik olarak ayarlar."
 }
