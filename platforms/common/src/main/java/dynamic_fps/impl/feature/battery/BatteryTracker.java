@@ -31,15 +31,27 @@ public class BatteryTracker {
 	private static final Duration updateInterval = Duration.of(15, ChronoUnit.SECONDS);
 
 	public static int charge() {
-		return charge;
+		if (DynamicFPSConfig.INSTANCE.mockBatteryData()) {
+			return 64;
+		} else {
+			return charge;
+		}
 	}
 
 	public static State status() {
-		return status;
+		if (DynamicFPSConfig.INSTANCE.mockBatteryData()) {
+			return State.CHARGING;
+		} else {
+			return status;
+		}
 	}
 
 	public static boolean hasBatteries() {
-		return !batteries.isEmpty();
+		if (DynamicFPSConfig.INSTANCE.mockBatteryData()) {
+			return true;
+		} else {
+			return !batteries.isEmpty();
+		}
 	}
 
 	public static void init() {

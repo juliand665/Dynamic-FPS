@@ -12,6 +12,7 @@ public final class DynamicFPSConfig {
 	private BatteryTrackerConfig batteryTracker;
 	private VolumeTransitionConfig volumeTransitionSpeed;
 	private boolean downloadNatives;
+	private boolean mockBatteryData;
 
 	@SerializedName("states")
 	private Map<PowerState, Config> configs;
@@ -70,6 +71,14 @@ public final class DynamicFPSConfig {
 
 	public void setDownloadNatives(boolean value) {
 		this.downloadNatives = value;
+	}
+
+	public boolean mockBatteryData() {
+		return this.mockBatteryData;
+	}
+
+	public void setMockBatteryData(boolean value) {
+		this.mockBatteryData = value;
 	}
 
 	public void save() {

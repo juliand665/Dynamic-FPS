@@ -64,5 +64,6 @@
             "run_garbage_collector": false
         }
     },
-    "download_natives": true
+    "download_natives": true,
+    "mock_battery_data": false
 }

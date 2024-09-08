@@ -306,6 +306,16 @@ public final class ClothConfig {
 			.build()
 		);
 
+		advanced.addEntry(
+			entryBuilder.startBooleanToggle(
+				localized("config", "mock_battery_data"),
+				config.mockBatteryData()
+			)
+			.setDefaultValue(defaultConfig.mockBatteryData())
+			.setSaveConsumer(config::setMockBatteryData)
+			.build()
+		);
+
 		return builder.build();
 	}
 

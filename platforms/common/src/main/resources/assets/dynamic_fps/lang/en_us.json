@@ -79,6 +79,8 @@
     "config.dynamic_fps.download_natives_description_0": "Using the battery features requires an additional library.",
     "config.dynamic_fps.download_natives_description_1": "Set whether the mod may download this component on your behalf.",
 
+    "config.dynamic_fps.mock_battery_data": "Use mock battery data",
+
     "key.dynamic_fps.toggle_forced": "Force Unfocused Mode (Toggle)",
     "key.dynamic_fps.toggle_disabled": "Disable Dynamic FPS (Toggle)",
     "gui.dynamic_fps.hud.reducing": "Dynamic FPS: Forcing Reduced FPS",
