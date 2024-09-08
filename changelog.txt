@@ -1,5 +1,3 @@
-- Add new default "Vanilla" idle condition ([commit 9e40c5](https://github.com/juliand665/Dynamic-FPS/commit/9e40c51329df8a4387bb332bd1011172381db930) by @LostLuma)
-  - This is exclusive to Minecraft 1.21.2 and above
-  - Use this setting to use Minecraft's new built-in progressive idle mode
-  - Switching to one of the other existing idle conditions will disable all vanilla idle-related code
-- Update Traditional Chinese translation ([PR 215](https://github.com/juliand665/Dynamic-FPS/pull/215) by @yichifauzi and @notlin4)
+- Update Traditional Chinese translation ([PR 216](https://github.com/juliand665/Dynamic-FPS/pull/216) by @yichifauzi)
+- Update Turkish Translation ([PR 217](https://github.com/juliand665/Dynamic-FPS/pull/217) by @EuropaYou)
+- Fix crash rendering HUD elements on 1.20.0 and 1.20.1 (by @LostLuma)
