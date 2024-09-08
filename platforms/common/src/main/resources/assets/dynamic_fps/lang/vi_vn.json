@@ -22,8 +22,14 @@
     "config.dynamic_fps.idle_time_tooltip": "Số phút không có thao tác đến khi FPS Động kích hoạt trạng thái Nhàn rỗi trong khi trò chơi được tập trung.",
 
     "config.dynamic_fps.idle_condition": "Điều Kiện Nhàn Rỗi",
+
     "config.dynamic_fps.idle_condition_none": "Không Có",
+    "config.dynamic_fps.idle_condition_vanilla": "Vanilla",
     "config.dynamic_fps.idle_condition_on_battery": "Khi Đang Sử Dụng Pin",
+
+    "config.dynamic_fps.idle_condition_none_tooltip": "Luôn kích hoạt trạng thái Idle khi không hoạt động trong thời gian quá lâu.",
+    "config.dynamic_fps.idle_condition_vanilla_tooltip": "Tắt chế độ Idle của Dynamic FPS. Thay vào đó sử dụng cài đặt mặc định.",
+    "config.dynamic_fps.idle_condition_on_battery_tooltip": "Kích hoạt trạng thái Idle khi không hoạt động trong thời gian quá lâu và đang dùng pin.",
 
     "config.dynamic_fps.uncap_menu_frame_rate": "Bỏ giới hạn FPS của Menu",
     "config.dynamic_fps.uncap_menu_frame_rate_tooltip": "Gỡ bỏ giới hạn 60 FPS trong menu chính.",
@@ -72,6 +78,8 @@
     "config.dynamic_fps.download_natives": "Tải Thư Viện Bản Địa",
     "config.dynamic_fps.download_natives_description_0": "Sử dụng các tính năng pin cần thêm một thư viện.",
     "config.dynamic_fps.download_natives_description_1": "Đặt xem mod có thể tải thành phần này thay bạn hay không.",
+
+    "config.dynamic_fps.mock_battery_data": "Sử dụng dữ liệu pin giả lập",
 
     "key.dynamic_fps.toggle_forced": "Chế Độ Mất Tập Trung Cưỡng Chế (Bật/Tắt)",
     "key.dynamic_fps.toggle_disabled": "Tắt Dynamic FPS (Bật/Tắt)",
