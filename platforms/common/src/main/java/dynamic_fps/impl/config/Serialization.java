@@ -1,50 +1,32 @@
 package dynamic_fps.impl.config;
 
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
 import dynamic_fps.impl.Constants;
 import dynamic_fps.impl.service.Platform;
+import dynamic_fps.impl.util.JsonUtil;
 import dynamic_fps.impl.util.Logging;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.Locale;
 import java.util.Map;
 
 public class Serialization {
-	private static final Gson GSON = new GsonBuilder()
-		.setLenient()
-		.serializeNulls()
-		.setPrettyPrinting()
-		.enableComplexMapKeySerialization()
-		.registerTypeHierarchyAdapter(Enum.class, new EnumSerializer<>())
-		.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-		.create();
-
 	private static final String CONFIG_FILE = Constants.MOD_ID + ".json";
 
 	public static void save() {
-		JsonObject config = (JsonObject) GSON.toJsonTree(DynamicFPSConfig.INSTANCE);
-		JsonObject parent = (JsonObject) GSON.toJsonTree(DynamicFPSConfig.DEFAULTS);
+		JsonObject config = (JsonObject) JsonUtil.toJsonTree(DynamicFPSConfig.INSTANCE);
+		JsonObject parent = (JsonObject) JsonUtil.toJsonTree(DynamicFPSConfig.DEFAULTS);
 
-		String data = GSON.toJson(removeUnchangedFields(config, parent));
+		String data = JsonUtil.toJson(removeUnchangedFields(config, parent));
 
 		try {
 			write(data);
@@ -131,7 +113,7 @@ public class Serialization {
 		}
 
 		upgradeConfig(root);
-		return GSON.fromJson(root, DynamicFPSConfig.class); // Ignores regular constructor!
+		return JsonUtil.fromJson(root, DynamicFPSConfig.class); // Ignores regular constructor!
 	}
 
 	public static DynamicFPSConfig loadDefault() {
@@ -147,7 +129,7 @@ public class Serialization {
 			throw new RuntimeException("Failed to load Dynamic FPS config.", e);
 		}
 
-		return GSON.fromJson(new String(data, StandardCharsets.UTF_8), DynamicFPSConfig.class);
+		return JsonUtil.fromJson(new String(data, StandardCharsets.UTF_8), DynamicFPSConfig.class);
 	}
 
 	private static void upgradeConfig(JsonObject config) {
@@ -158,7 +140,7 @@ public class Serialization {
 		upgradeIdleConfig(config);
 
 		// version agnostic
-		addMissingFields(config, (JsonObject) GSON.toJsonTree(DynamicFPSConfig.DEFAULTS));
+		addMissingFields(config, (JsonObject) JsonUtil.toJsonTree(DynamicFPSConfig.DEFAULTS));
 	}
 
 	private static void addMissingFields(JsonObject config, JsonObject parent) {
@@ -252,22 +234,5 @@ public class Serialization {
 		}
 
 		return root.getAsJsonObject("states");
-	}
-
-	private static final class EnumSerializer<T extends Enum<T>> implements JsonSerializer<T>, JsonDeserializer<T> {
-		@Override
-		public JsonElement serialize(T instance, Type type, JsonSerializationContext context) {
-			return new JsonPrimitive(instance.toString().toLowerCase(Locale.ROOT));
-		}
-
-		@Override
-		public T deserialize(JsonElement element, Type type, JsonDeserializationContext context) throws JsonParseException {
-			try {
-				Class<T> class_ = (Class<T>) Class.forName(type.getTypeName());
-				return Enum.valueOf(class_, element.getAsString().toUpperCase(Locale.ROOT));
-			} catch (ClassNotFoundException | IllegalArgumentException e) {
-				throw new JsonParseException(e);
-			}
-		}
 	}
 }
