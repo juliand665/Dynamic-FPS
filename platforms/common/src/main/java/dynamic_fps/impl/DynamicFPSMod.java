@@ -173,6 +173,10 @@ public class DynamicFPSMod {
 		return config.showToasts();
 	}
 
+	public static GraphicsState graphicsState() {
+		return config.graphicsState();
+	}
+
 	public static boolean shouldShowLevels() {
 		return isDisabled() || !isLevelCoveredByOverlay();
 	}
