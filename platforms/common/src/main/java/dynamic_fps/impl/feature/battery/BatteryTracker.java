@@ -70,7 +70,7 @@ public class BatteryTracker {
 			}
 		} else {
 			manager = temp; // Keep around to allow updating batteries
-			Thread.ofVirtual().name("refresh-battery").start(BatteryTracker::updateBatteries);
+			new Thread(BatteryTracker::updateBatteries, "refresh-battery").start();
 		}
 	}
 
@@ -103,7 +103,7 @@ public class BatteryTracker {
 			changed = true;
 
 			int current = charge;
-			minecraft.schedule(() -> DynamicFPSMod.onBatteryChargeChanged(current, newCharge));
+			minecraft.tell(() -> DynamicFPSMod.onBatteryChargeChanged(current, newCharge));
 		}
 
 		if (readInitialData && status != newStatus) {
@@ -111,7 +111,7 @@ public class BatteryTracker {
 
 			State current = status;
 			State updated = newStatus;
-			minecraft.schedule(() -> DynamicFPSMod.onBatteryStatusChanged(current, updated));
+			minecraft.tell(() -> DynamicFPSMod.onBatteryStatusChanged(current, updated));
 		}
 
 		charge = newCharge;
@@ -139,7 +139,7 @@ public class BatteryTracker {
 			updateState();
 
 			try {
-				Thread.sleep(updateInterval);
+				Thread.sleep(updateInterval.toMillis());
 			} catch (InterruptedException e) {
 				active = false;
 				Thread.currentThread().interrupt();
