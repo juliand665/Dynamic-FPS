@@ -7,7 +7,7 @@ public class Threads {
 	 * Schedule a task on the main thread.
 	 */
 	public static void runOnMainThread(Runnable runnable) {
-		Minecraft.getInstance().schedule(runnable);
+		Minecraft.getInstance().tell(runnable);
 	}
 
 	/**

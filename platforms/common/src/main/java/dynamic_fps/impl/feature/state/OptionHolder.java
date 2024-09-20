@@ -1,10 +1,11 @@
 package dynamic_fps.impl.feature.state;
 
 import dynamic_fps.impl.config.option.GraphicsState;
+import net.minecraft.client.AmbientOcclusionStatus;
 import net.minecraft.client.CloudStatus;
 import net.minecraft.client.GraphicsStatus;
 import net.minecraft.client.Options;
-import net.minecraft.server.level.ParticleStatus;
+import net.minecraft.client.ParticleStatus;
 
 /*
  * Helper for saving, overriding, and re-applying vanilla options.
@@ -14,7 +15,7 @@ import net.minecraft.server.level.ParticleStatus;
 public class OptionHolder {
 	private static CloudStatus cloudStatus;
 	private static GraphicsStatus graphicsStatus;
-	private static boolean ambientOcclusion;
+	private static AmbientOcclusionStatus ambientOcclusion;
 	private static ParticleStatus particlesStatus;
 	private static boolean entityShadows;
 	private static double entityDistance;
@@ -52,7 +53,7 @@ public class OptionHolder {
 
 			if (state == GraphicsState.MINIMAL) {
 				options.graphicsMode().set(GraphicsStatus.FAST);
-				options.ambientOcclusion().set(false);
+				options.ambientOcclusion().set(AmbientOcclusionStatus.OFF);
 			}
 		}
 	}
