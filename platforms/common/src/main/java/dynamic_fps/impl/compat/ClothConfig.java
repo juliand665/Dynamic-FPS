@@ -17,8 +17,9 @@ import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import me.shedaniel.clothconfig2.impl.builders.SubCategoryBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundSource;
 
 import java.util.Locale;
@@ -64,7 +65,7 @@ public final class ClothConfig {
 		);
 
 		general.addEntry(
-			entryBuilder.startTextDescription(CommonComponents.SPACE).build()
+			entryBuilder.startTextDescription(new TextComponent(" ")).build()
 		);
 
 		general.addEntry(
@@ -94,7 +95,7 @@ public final class ClothConfig {
 		);
 
 		general.addEntry(
-			entryBuilder.startTextDescription(CommonComponents.SPACE).build()
+			entryBuilder.startTextDescription(new TextComponent(" ")).build()
 		);
 
 		VariableStepTransformer volumeTransformer = getVolumeStepTransformer();
@@ -126,7 +127,7 @@ public final class ClothConfig {
 		);
 
 		general.addEntry(
-			entryBuilder.startTextDescription(CommonComponents.SPACE).build()
+			entryBuilder.startTextDescription(new TextComponent(" ")).build()
 		);
 
 		BatteryTrackerConfig batteryTracker = config.batteryTracker();
@@ -220,7 +221,7 @@ public final class ClothConfig {
 
 			category.addEntry(
 				entryBuilder.startBooleanToggle(
-					Component.translatable("options.vsync"),
+					new TranslatableComponent("options.vsync"),
 					instance.enableVsync()
 				)
 				.setDefaultValue(standard.enableVsync())
@@ -240,7 +241,7 @@ public final class ClothConfig {
 
 				volumes.add(
 					entryBuilder.startIntSlider(
-						Component.translatable("soundCategory." + name),
+						new TranslatableComponent("soundCategory." + name),
 						(int) (instance.rawVolumeMultiplier(source) * 100),
 						0, 100
 					)
@@ -346,7 +347,7 @@ public final class ClothConfig {
 		int value = getVolumeStepTransformer().toValue(step);
 
 		if (value <= 300) {
-			return Component.literal(value + "%");
+			return new TextComponent(value + "%");
 		} else {
 			return localized("config", "volume_transition_speed_instant");
 		}
@@ -368,14 +369,14 @@ public final class ClothConfig {
 		int fps = getFpsTransformer().toValue(step);
 
 		if (fps != Constants.NO_FRAME_RATE_LIMIT) {
-			return Component.translatable("options.framerate", fps);
+			return new TranslatableComponent("options.framerate", fps);
 		} else {
-			return Component.translatable("options.framerateLimit.max");
+			return new TranslatableComponent("options.framerateLimit.max");
 		}
 	}
 
 	private static Component volumeMultiplierMessage(int value) {
-		return Component.literal(Integer.toString(value) + "%");
+		return new TextComponent(Integer.toString(value) + "%");
 	}
 
 	public static Component IdleConditionMessage(Enum<IdleCondition> state) {
