@@ -1,20 +1,21 @@
 package dynamic_fps.impl.util;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 
 public class FallbackConfigScreen extends Screen {
 	private final Screen parent;
 
-	private static final Component WARNING_0 = Component.translatable("config.dynamic_fps.warn_cloth_config.0");
-	private static final Component WARNING_1 = Component.translatable("config.dynamic_fps.warn_cloth_config.1");
+	private static final Component WARNING_0 = new TranslatableComponent("config.dynamic_fps.warn_cloth_config.0");
+	private static final Component WARNING_1 = new TranslatableComponent("config.dynamic_fps.warn_cloth_config.1");
 
 	public FallbackConfigScreen(Screen parent) {
-		super(Component.translatable("config.dynamic_fps.title"));
+		super(new TranslatableComponent("config.dynamic_fps.title"));
 
 		this.parent = parent;
 	}
@@ -27,19 +28,20 @@ public class FallbackConfigScreen extends Screen {
 		int y = this.height - height - 5;
 
 		this.addRenderableWidget(
-			Button.builder(CommonComponents.GUI_BACK, button -> this.onClose()).bounds(x, y, width, height).build()
+			new Button(x, y, width, height, CommonComponents.GUI_BACK, button -> this.onClose())
 		);
 	}
 
 	@Override
-	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-		super.render(guiGraphics, mouseX, mouseY, partialTicks);
+	public void render(PoseStack poseStack, int mouseX, int mouseY, float partialTicks) {
+		this.renderDirtBackground(0);
+		super.render(poseStack, mouseX, mouseY, partialTicks);
 
-		int width = guiGraphics.guiWidth() / 2;
-		int height = guiGraphics.guiHeight() / 3;
+		int width = this.width / 2;
+		int height = this.height / 3;
 
-		guiGraphics.drawCenteredString(this.font, WARNING_0.getVisualOrderText(), width, height, 0xFFFFFF);
-		guiGraphics.drawCenteredString(this.font, WARNING_1.getVisualOrderText(), width, height + 10, 0xFFFFFF);
+		drawCenteredString(poseStack, this.font, WARNING_0.getVisualOrderText(), width, height, 0xFFFFFF);
+		drawCenteredString(poseStack, this.font, WARNING_1.getVisualOrderText(), width, height + 10, 0xFFFFFF);
 	}
 
 	@Override
