@@ -89,6 +89,7 @@ public final class ClothConfig {
 			.setDefaultValue(defaultConfig.idle().condition())
 			.setSaveConsumer(config.idle()::setCondition)
 			.setEnumNameProvider(ClothConfig::IdleConditionMessage)
+			.setTooltipSupplier(ClothConfig::idleConditionTooltip)
 			.build()
 		);
 
