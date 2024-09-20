@@ -10,7 +10,7 @@ version = "${version}"
 displayName = "Dynamic FPS"
 authors = "juliand665 & LostLuma"
 description = "Reduce resource usage while Minecraft is in the background or idle."
-logoFile = "assets/dynamic_fps/textures/icon.png"
+logoFile = "dynamic_fps.png"
 displayTest = "IGNORE_ALL_VERSION"
 credits = """
 Thanks to:
@@ -88,6 +88,6 @@ file="META-INF/accesstransformer.cfg"
 [[dependencies.dynamic_fps]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.21.2,)"
+versionRange = "[1.19.0,1.19.2]"
 ordering = "NONE"
 side = "CLIENT"
