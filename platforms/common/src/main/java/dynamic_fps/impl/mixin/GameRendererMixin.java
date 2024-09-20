@@ -28,7 +28,7 @@ public class GameRendererMixin {
 		)
 	)
 	private boolean skipRendering(boolean original) {
-		return original || !DynamicFPSMod.renderedCurrentFrame();
+		return original || !DynamicFPSMod.checkForRender();
 	}
 
 	/**
