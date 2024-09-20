@@ -16,6 +16,6 @@ public class ErrorToast extends BaseToast {
 	 */
 	public static void queueToast(Component description) {
 		ErrorToast toast = new ErrorToast(description);
-		Minecraft.getInstance().getToastManager().addToast(toast);
+		Minecraft.getInstance().getToasts().addToast(toast);
 	}
 }
