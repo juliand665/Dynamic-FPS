@@ -3,9 +3,11 @@ package net.lostluma.dynamic_fps.impl.forge;
 import dynamic_fps.impl.Constants;
 import dynamic_fps.impl.DynamicFPSMod;
 import dynamic_fps.impl.service.Platform;
+import dynamic_fps.impl.util.HudInfoRenderer;
 import dynamic_fps.impl.util.KeyMappingHandler;
 import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -20,14 +22,14 @@ import java.util.List;
 public class DynamicFPSForgeMod {
 	private static final List<Platform.StartTickEvent> TICK_EVENT_LISTENERS = new ArrayList<>();
 
-    public DynamicFPSForgeMod(FMLJavaModLoadingContext context) {
+	public DynamicFPSForgeMod() {
 		if (FMLLoader.getDist().isDedicatedServer()) {
 			return;
 		}
 
 		DynamicFPSMod.init();
 
-		context.registerExtensionPoint(
+		ModLoadingContext.get().registerExtensionPoint(
 			ConfigScreenHandler.ConfigScreenFactory.class,
 			() -> new ConfigScreenHandler.ConfigScreenFactory(
 				(minecraft, screen) -> DynamicFPSMod.getConfigScreen(screen)
@@ -35,16 +37,14 @@ public class DynamicFPSForgeMod {
 		);
 
 		MinecraftForge.EVENT_BUS.addListener(this::onClientTick);
-		// MinecraftForge.EVENT_BUS.addListener(this::renderGuiOverlay);
+		MinecraftForge.EVENT_BUS.addListener(this::renderGuiOverlay);
 
-		context.getModEventBus().addListener(this::registerKeyMappings);
-    }
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::registerKeyMappings);
+	}
 
-	/*
 	public void renderGuiOverlay(RenderGuiOverlayEvent event) {
 		HudInfoRenderer.renderInfo(event.getGuiGraphics());
 	}
-	 */
 
 	public void registerKeyMappings(RegisterKeyMappingsEvent event) {
 		for (KeyMappingHandler handler : KeyMappingHandler.getHandlers()) {
