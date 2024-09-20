@@ -19,6 +19,8 @@ public class GameRendererMixin {
 	 * Note: Inject after the pause on lost focus check,
 	 * This allows the feature to work even at zero FPS.
 	 */
+	/*
+	Moved to individual platform impl due to old Forge versions ...
 	@ModifyExpressionValue(
 		method = "render",
 		at = @At(
@@ -30,6 +32,7 @@ public class GameRendererMixin {
 	private boolean skipRendering(boolean original) {
 		return original || !DynamicFPSMod.renderedCurrentFrame();
 	}
+	 */
 
 	/**
 	 * Cancels rendering the world if it is determined to currently not be visible.
