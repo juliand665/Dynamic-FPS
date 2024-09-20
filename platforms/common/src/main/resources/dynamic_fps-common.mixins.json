@@ -9,8 +9,9 @@
         "GuiMixin",
         "LoadingOverlayMixin",
         "MinecraftMixin",
+        "OptionsMixin",
         "SoundEngineMixin",
-      "ToastManagerMixin",
+        "ToastManagerMixin",
         "bugfix.BlockableEventLoopMixin"
     ],
     "mixins": [],
