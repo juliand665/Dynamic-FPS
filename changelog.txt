@@ -1,3 +1,4 @@
-- Update Traditional Chinese translation ([PR 216](https://github.com/juliand665/Dynamic-FPS/pull/216) by @yichifauzi)
-- Update Turkish Translation ([PR 217](https://github.com/juliand665/Dynamic-FPS/pull/217) by @EuropaYou)
-- Fix crash rendering HUD elements on 1.20.0 and 1.20.1 (by @LostLuma)
+- Update Vietnamese translation ([PR 219](https://github.com/juliand665/Dynamic-FPS/pull/219) by @godkyo98)
+- Fix crash modifying sound volumes with certain mod combinations ([PR 221](https://github.com/juliand665/Dynamic-FPS/pull/221) by @LostLuma)
+- Fix runtime modified graphics settings potentially being saved ([PR 222](https://github.com/juliand665/Dynamic-FPS/pull/222) by @LostLuma)
+- Fix idle condition tooltips not being shown ([Commit fcd5a8](https://github.com/juliand665/Dynamic-FPS/commit/fcd5a8bfa07224dcb0feb0d542727a66e5b50424) by @LostLuma)
