@@ -96,7 +96,8 @@ publishMods {
 		clientRequired = true
 		serverRequired = false
 
-		requires("qsl")
+		// requires("qsl")
+		requires("fabric-api")
 		optional("cloth-config", "modmenu")
 	}
 
@@ -109,7 +110,8 @@ publishMods {
 			end = project.property("minecraft_version_max").toString()
 		}
 
-		requires("qsl")
+		// requires("qsl")
+		requires("fabric-api")
 		optional("cloth-config", "modmenu")
 	}
 }

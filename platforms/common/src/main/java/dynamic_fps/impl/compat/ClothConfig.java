@@ -20,6 +20,8 @@ import me.shedaniel.clothconfig2.impl.builders.SubCategoryBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundSource;
 
 import java.util.Locale;
@@ -102,7 +104,7 @@ public final class ClothConfig {
 			.setDefaultValue(defaultConfig.idle().condition())
 			.setSaveConsumer(config.idle()::setCondition)
 			.setEnumNameProvider(ClothConfig::IdleConditionMessage)
-			.setTooltipSupplier(ClothConfig::idleConditionTooltip)
+			.setTooltipSupplier(value -> ClothConfig.idleConditionTooltip((IdleCondition) value))
 			.build()
 		);
 
@@ -289,7 +291,7 @@ public final class ClothConfig {
 				.setDefaultValue(standard.graphicsState())
 				.setSaveConsumer(instance::setGraphicsState)
 				.setEnumNameProvider(ClothConfig::graphicsStateMessage)
-				.setTooltipSupplier(ClothConfig::graphicsStateTooltip)
+				.setTooltipSupplier(value -> ClothConfig.graphicsStateTooltip((GraphicsState) value))
 				.build()
 			);
 

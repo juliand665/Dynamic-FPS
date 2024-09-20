@@ -1,11 +1,12 @@
 package dynamic_fps.impl.util;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import dynamic_fps.impl.config.BatteryTrackerConfig;
 import dynamic_fps.impl.config.DynamicFPSConfig;
 import dynamic_fps.impl.feature.battery.BatteryTracker;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.network.chat.Component;
 
 import net.minecraft.resources.ResourceLocation;
@@ -13,35 +14,33 @@ import net.minecraft.resources.ResourceLocation;
 import dynamic_fps.impl.DynamicFPSMod;
 
 public final class HudInfoRenderer {
-	public static void renderInfo(GuiGraphics guiGraphics) {
+	public static void renderInfo(PoseStack poseStack) {
 		Minecraft minecraft = Minecraft.getInstance();
-
 		if (minecraft.options.hideGui || minecraft.screen != null) {
 			return;
 		}
 
 		if (DynamicFPSConfig.INSTANCE.batteryTracker().enabled()) {
-			drawBatteryOverlay(guiGraphics);
+			drawBatteryOverlay(poseStack);
 		}
 
 		if (DynamicFPSMod.disabledByUser()) {
-			drawCenteredText(guiGraphics, Components.translatable("gui", "hud.disabled"));
+			drawCenteredText(poseStack, Components.translatable("gui", "hud.disabled"));
 		} else if (DynamicFPSMod.isForcingLowFPS()) {
-			drawCenteredText(guiGraphics, Components.translatable("gui", "hud.reducing"));
+			drawCenteredText(poseStack, Components.translatable("gui", "hud.reducing"));
 		}
 	}
 
-	private static void drawCenteredText(GuiGraphics guiGraphics, Component component) {
-		int width = guiGraphics.guiWidth() / 2;
+	private static void drawCenteredText(PoseStack poseStack, Component component) {
 		Minecraft minecraft = Minecraft.getInstance();
+		int width = minecraft.getWindow().getGuiScaledWidth() / 2;
 
-		guiGraphics.drawCenteredString(minecraft.font, component, width, 32, 0xFFFFFF);
+		GuiComponent.drawCenteredString(poseStack, minecraft.font, component, width, 32, 0xFFFFFF);
 	}
 
-	private static void drawBatteryOverlay(GuiGraphics graphics) {
+	private static void drawBatteryOverlay(PoseStack poseStack) {
 		Minecraft minecraft = Minecraft.getInstance();
-
-		if (minecraft.getDebugOverlay().showDebugScreen() || !BatteryTracker.hasBatteries()) {
+		if (minecraft.options.renderDebug || !BatteryTracker.hasBatteries()) {
 			return;
 		}
 
@@ -58,9 +57,10 @@ public final class HudInfoRenderer {
 		// pair of coordinates
 		int[] position = config.placement().get(minecraft.getWindow());
 
+		minecraft.getTextureManager().bind(icon);
 		// resource, x, y, z, ?, ?, width, height, width, height
-		graphics.blit(RenderType::guiTextured, icon, position[0], position[1], 0.0f, 0, 16, 16, 16, 16);
+		GuiComponent.blit(poseStack, position[0], position[1], 0, 0.0f, 0.0f, 16, 16, 16, 16);
 		// font, text, x, y, text color
-		graphics.drawString(minecraft.font, BatteryTracker.charge() + "%", position[0] + 20, position[1] + 4, 0xFFFFFF);
+		GuiComponent.drawString(poseStack, minecraft.font, BatteryTracker.charge() + "%", position[0] + 20, position[1] + 4, 0xFFFFFF);
 	}
 }
