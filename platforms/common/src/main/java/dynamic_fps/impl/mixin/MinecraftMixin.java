@@ -1,10 +1,10 @@
 package dynamic_fps.impl.mixin;
 
-import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.mojang.blaze3d.platform.Window;
-import com.mojang.blaze3d.systems.CommandEncoder;
-import com.mojang.blaze3d.textures.GpuTexture;
+import dynamic_fps.impl.Constants;
 import dynamic_fps.impl.DynamicFPSMod;
+import dynamic_fps.impl.PowerState;
+import dynamic_fps.impl.config.DynamicFPSConfig;
 import dynamic_fps.impl.feature.state.IdleHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
@@ -14,12 +14,13 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Minecraft.class)
 public class MinecraftMixin {
 	@Shadow
 	@Final
-    private Window window;
+	private Window window;
 
 	@Shadow
 	@Final
@@ -36,16 +37,31 @@ public class MinecraftMixin {
 	}
 
 	/**
-	 * Delay cleaning up the previously rendered frame until we are rendering another frame.
+	 * Conditionally bypasses the main menu frame rate limit.
+	 *
+	 * This is done in two cases:
+	 * - The window is active, and the user wants to uncap the frame rate
+	 * - The window is inactive, and the current FPS limit should be lower
 	 */
-	@WrapWithCondition(
-		method = "runTick",
-		at = @At(
-			value = "INVOKE",
-			target = "Lcom/mojang/blaze3d/systems/CommandEncoder;clearColorAndDepthTextures(Lcom/mojang/blaze3d/textures/GpuTexture;ILcom/mojang/blaze3d/textures/GpuTexture;D)V"
-		)
-	)
-	private boolean runTick(CommandEncoder instance, GpuTexture gpuTexture, int i, GpuTexture gpuTexture2, double v) {
-		return DynamicFPSMod.checkForRender();
+	@Inject(method = "getFramerateLimit", at = @At(value = "CONSTANT", args = "intValue=60"), cancellable = true)
+	private void getFramerateLimit(CallbackInfoReturnable<Integer> callbackInfo) {
+		int limit = this.window.getFramerateLimit();
+
+		if (DynamicFPSMod.powerState() != PowerState.FOCUSED) {
+			// Vanilla returns 60 here
+			// Only overwrite if our current limit is lower
+			if (limit < 60) {
+				callbackInfo.setReturnValue(limit);
+			}
+		} else if (DynamicFPSConfig.INSTANCE.uncapMenuFrameRate()) {
+			if (this.options.enableVsync) {
+				// VSync will regulate to a non-infinite value
+				callbackInfo.setReturnValue(Constants.NO_FRAME_RATE_LIMIT);
+			} else {
+				// Even though the option "uncaps" the frame rate the limit is 250 FPS.
+				// Since otherwise this will just cause coil whine with no real benefit
+				callbackInfo.setReturnValue(Math.min(limit, Constants.NO_FRAME_RATE_LIMIT - 10));
+			}
+		}
 	}
 }
