@@ -1,6 +1,7 @@
 package dynamic_fps.impl.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -13,9 +14,11 @@ import java.util.List;
 public class VariableStepTransformer {
 	private boolean unsorted;
 	private final List<Step> steps;
+	private final List<Step> reversedSteps;
 
 	public VariableStepTransformer() {
 		this.steps = new ArrayList<>();
+		this.reversedSteps = new ArrayList<>();
 	}
 
 	/**
@@ -27,6 +30,7 @@ public class VariableStepTransformer {
 	public void addStep(int change, int max) {
 		this.unsorted = true;
 		this.steps.add(new Step(change, max));
+		this.reversedSteps.add(new Step(change, max));
 	}
 
 	/**
@@ -42,7 +46,7 @@ public class VariableStepTransformer {
 		int currentChange = 0;
 		int currentValue = value;
 
-		for (Step pair : this.steps.reversed()) {
+		for (Step pair : this.reversedSteps) {
 			if (currentValue > pair.max && currentChange != 0) {
 				step += Math.floorDiv(currentValue - pair.max, currentChange);
 				currentValue = pair.max;
@@ -86,7 +90,23 @@ public class VariableStepTransformer {
 				return Integer.compare(self.max, other.max);
 			}
 		});
+
+		this.reversedSteps.sort(new Comparator<Step>() {
+			@Override
+			public int compare(Step self, Step other) {
+				return Integer.compare(self.max, other.max);
+			}
+		});
+		Collections.reverse(this.reversedSteps);
 	}
 
-	private record Step(int change, int max) {}
+	private static class Step {
+		private final int change;
+		private final int max;
+
+		private Step(int change, int max) {
+			this.change = change;
+			this.max = max;
+		}
+	}
 }

@@ -4,12 +4,13 @@ import dynamic_fps.impl.Constants;
 import dynamic_fps.impl.DynamicFPSMod;
 import dynamic_fps.impl.service.Platform;
 import dynamic_fps.impl.util.KeyMappingHandler;
-import net.minecraftforge.client.ConfigScreenHandler;
-import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.client.ClientRegistry;
+import net.minecraftforge.client.ConfigGuiHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLLoader;
 
@@ -20,35 +21,28 @@ import java.util.List;
 public class DynamicFPSForgeMod {
 	private static final List<Platform.StartTickEvent> TICK_EVENT_LISTENERS = new ArrayList<>();
 
-    public DynamicFPSForgeMod(FMLJavaModLoadingContext context) {
+	public DynamicFPSForgeMod() {
 		if (FMLLoader.getDist().isDedicatedServer()) {
 			return;
 		}
 
 		DynamicFPSMod.init();
 
-		context.registerExtensionPoint(
-			ConfigScreenHandler.ConfigScreenFactory.class,
-			() -> new ConfigScreenHandler.ConfigScreenFactory(
+		ModLoadingContext.get().registerExtensionPoint(
+			ConfigGuiHandler.ConfigGuiFactory.class,
+			() -> new ConfigGuiHandler.ConfigGuiFactory(
 				(minecraft, screen) -> DynamicFPSMod.getConfigScreen(screen)
 			)
 		);
 
 		MinecraftForge.EVENT_BUS.addListener(this::onClientTick);
-		// MinecraftForge.EVENT_BUS.addListener(this::renderGuiOverlay);
 
-		context.getModEventBus().addListener(this::registerKeyMappings);
-    }
-
-	/*
-	public void renderGuiOverlay(RenderGuiOverlayEvent event) {
-		HudInfoRenderer.renderInfo(event.getGuiGraphics());
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::registerKeyMappings);
 	}
-	 */
 
-	public void registerKeyMappings(RegisterKeyMappingsEvent event) {
+	public void registerKeyMappings(FMLClientSetupEvent event) {
 		for (KeyMappingHandler handler : KeyMappingHandler.getHandlers()) {
-			event.register(handler.keyMapping());
+			ClientRegistry.registerKeyBinding(handler.keyMapping());
 		}
 	}
 
