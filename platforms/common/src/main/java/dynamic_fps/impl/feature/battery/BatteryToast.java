@@ -22,7 +22,7 @@ public class BatteryToast extends BaseToast {
 			queuedToast.icon = icon;
 		} else {
 			queuedToast = new BatteryToast(title, icon);
-			Minecraft.getInstance().getToastManager().addToast(queuedToast);
+			Minecraft.getInstance().getToasts().addToast(queuedToast);
 		}
 	}
 

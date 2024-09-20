@@ -1,14 +1,14 @@
 [versions]
-minecraft = "1.21.5"
+minecraft = "1.19.4"
 
 # Platform libraries
 
 fabric_loader = "0.15.10"
-fabric_api = "0.118.2+1.21.5"
+fabric_api = "0.75.3+1.19.4"
 
-forge = "1.21.5-55.0.3"
+forge = "1.19.4-45.2.8"
 
-neoforge = "21.5.2-beta"
+neoforge = "20.4.237"
 
 quilt_loader = "0.25.0"
 
@@ -18,8 +18,8 @@ battery = "1.3.0"
 
 # Modding libraries
 
-modmenu = "11.0.0-beta.1"
-cloth_config = "15.0.127"
+modmenu = "6.1.0"
+cloth_config = "10.1.117"
 
 mixinextras = "0.4.1"
 
