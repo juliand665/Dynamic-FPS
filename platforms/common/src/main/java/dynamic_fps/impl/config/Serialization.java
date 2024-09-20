@@ -124,7 +124,8 @@ public class Serialization {
 				throw new IOException("Stream is null.");
 			}
 
-			data = stream.readAllBytes();
+			data = new byte[stream.available()];
+			stream.read(data, 0, stream.available());
 		} catch (IOException e) {
 			throw new RuntimeException("Failed to load Dynamic FPS config.", e);
 		}
