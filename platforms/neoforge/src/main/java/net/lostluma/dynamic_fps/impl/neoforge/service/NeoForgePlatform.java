@@ -7,8 +7,9 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.fml.loading.FMLPaths;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.fml.loading.LoadingModList;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.TickEvent;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -34,12 +35,12 @@ public class NeoForgePlatform implements Platform {
 
 	@Override
 	public boolean isDevelopmentEnvironment() {
-		return !FMLLoader.getCurrent().isProduction();
+		return !FMLLoader.isProduction();
 	}
 
 	@Override
 	public boolean isModLoaded(String modId) {
-		return FMLLoader.getCurrent().getLoadingModList().getModFileById(modId) != null;
+		return FMLLoader.getLoadingModList().getModFileById(modId) != null;
 	}
 
 	@Override
@@ -61,7 +62,7 @@ public class NeoForgePlatform implements Platform {
 
 	@Override
 	public void registerStartTickEvent(StartTickEvent event) {
-		NeoForge.EVENT_BUS.addListener(ClientTickEvent.Pre.class, (unused) -> event.onStartTick());
+		NeoForge.EVENT_BUS.addListener(TickEvent.ClientTickEvent.class, (unused) -> event.onStartTick());
 	}
 
 	private Path ensureDir(Path path) {
