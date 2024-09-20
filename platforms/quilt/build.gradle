@@ -40,6 +40,7 @@ dependencies {
     modImplementation(libs.quilt.loader)
 
 	include(libs.battery)
+	include("org.slf4j:slf4j-api:2.0.17")
 
 	common(project(path: ":platforms:common", configuration: "namedElements")) { transitive = false }
 	shadowBundle(project(path: ":platforms:common", configuration: "transformProductionQuilt")) { transitive = false }
@@ -96,7 +97,8 @@ publishMods {
 		clientRequired = true
 		serverRequired = false
 
-		requires("qsl")
+		// requires("qsl")
+		requires("fabric-api")
 		optional("cloth-config", "modmenu")
 	}
 
@@ -109,7 +111,8 @@ publishMods {
 			end = project.property("minecraft_version_max").toString()
 		}
 
-		requires("qsl")
+		// requires("qsl")
+		requires("fabric-api")
 		optional("cloth-config", "modmenu")
 	}
 }

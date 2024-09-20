@@ -39,6 +39,7 @@ dependencies {
 	modImplementation(fabricApi.module("fabric-lifecycle-events-v1", libs.versions.fabric.api.get()))
 
 	include(libs.battery)
+	include("org.slf4j:slf4j-api:2.0.17")
 
 	common(project(path: ":platforms:common", configuration: "namedElements")) { transitive = false }
 	shadowBundle(project(path: ":platforms:common", configuration: "transformProductionFabric")) { transitive = false }
