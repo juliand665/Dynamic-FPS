@@ -143,7 +143,7 @@ public class BatteryTracker {
 			updateState();
 
 			try {
-				Thread.sleep(updateInterval);
+				Thread.sleep(updateInterval.toMillis());
 			} catch (InterruptedException e) {
 				active = false;
 				Thread.currentThread().interrupt();
