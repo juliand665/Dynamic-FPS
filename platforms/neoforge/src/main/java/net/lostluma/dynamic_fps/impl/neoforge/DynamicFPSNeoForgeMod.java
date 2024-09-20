@@ -8,9 +8,9 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.loading.FMLLoader;
+import net.neoforged.neoforge.client.ConfigScreenHandler;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
-import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
 
 @Mod(Constants.MOD_ID)
@@ -23,8 +23,10 @@ public class DynamicFPSNeoForgeMod {
 		DynamicFPSMod.init();
 
 		ModLoadingContext.get().registerExtensionPoint(
-			IConfigScreenFactory.class,
-			() -> (minecraft, screen) -> DynamicFPSMod.getConfigScreen(screen)
+			ConfigScreenHandler.ConfigScreenFactory.class,
+			() -> new ConfigScreenHandler.ConfigScreenFactory(
+				(minecraft, screen) -> DynamicFPSMod.getConfigScreen(screen)
+			)
 		);
 
 		modEventBus.addListener(this::registerKeyMappings);
