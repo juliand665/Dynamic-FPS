@@ -10,16 +10,13 @@ import dynamic_fps.impl.service.ModCompat;
 import dynamic_fps.impl.feature.battery.BatteryToast;
 import dynamic_fps.impl.feature.battery.BatteryTracker;
 import dynamic_fps.impl.feature.state.IdleHandler;
-import dynamic_fps.impl.util.BatteryUtil;
-import dynamic_fps.impl.util.FallbackConfigScreen;
-import dynamic_fps.impl.util.Logging;
+import dynamic_fps.impl.util.*;
 import dynamic_fps.impl.feature.state.OptionHolder;
-import dynamic_fps.impl.util.ResourceLocations;
-import dynamic_fps.impl.util.Version;
 import dynamic_fps.impl.feature.volume.SmoothVolumeHandler;
 import dynamic_fps.impl.util.duck.DuckLoadingOverlay;
 import dynamic_fps.impl.feature.state.WindowObserver;
 import dynamic_fps.impl.service.Platform;
+import dynamic_fps.impl.util.duck.DuckScreen;
 import net.lostluma.battery.api.State;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
@@ -63,7 +60,7 @@ public class DynamicFPSMod {
 		doInit();
 
 		Platform platform = Platform.getInstance();
-		Version version = platform.getModVersion(Constants.MOD_ID).orElseThrow();
+		Version version = platform.getModVersion(Constants.MOD_ID).orElseThrow(RuntimeException::new);
 
 		Logging.getLogger().info("Dynamic FPS {} active on {}!", version, platform.getName());
 	}
@@ -178,7 +175,7 @@ public class DynamicFPSMod {
 	}
 
 	public static boolean shouldShowLevels() {
-		return isDisabled() || !isLevelCoveredByOverlay();
+		return isDisabled() || !(isLevelCoveredByScreen() || isLevelCoveredByOverlay());
 	}
 
 	public static void onBatteryChargeChanged(int before, int after) {
@@ -200,9 +197,15 @@ public class DynamicFPSMod {
 	private static void doInit() {
 		// NOTE: Init battery tracker first here
 		// Since the idle handler queries it for info
+		ModCompatHelper.init();
+
 		BatteryTracker.init();
 		IdleHandler.init();
 		SmoothVolumeHandler.init();
+	}
+
+	private static boolean isLevelCoveredByScreen() {
+		return minecraft.screen != null && ((DuckScreen) minecraft.screen).dynamic_fps$rendersBackground();
 	}
 
 	private static void showNotification(String titleTranslationKey, String iconPath) {
@@ -247,7 +250,7 @@ public class DynamicFPSMod {
 		}
 
 		// The FOCUSED config doesn't have the user's actual vsync preference sadly ...
-		boolean enableVsync = current != PowerState.FOCUSED ? config.enableVsync() : minecraft.options.enableVsync().get();
+		boolean enableVsync = current != PowerState.FOCUSED ? config.enableVsync() : minecraft.options.enableVsync;
 
 		if (enableVsync != before.enableVsync()) {
 			minecraft.getWindow().updateVsync(enableVsync);
@@ -263,7 +266,7 @@ public class DynamicFPSMod {
 			checkForStateChanges0();
 		} else {
 			// Schedule check for the beginning of the next frame
-			minecraft.schedule(DynamicFPSMod::checkForStateChanges0);
+			minecraft.tell(DynamicFPSMod::checkForStateChanges0);
 		}
 	}
 
