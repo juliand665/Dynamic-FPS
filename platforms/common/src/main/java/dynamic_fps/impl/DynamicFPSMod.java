@@ -16,6 +16,7 @@ import dynamic_fps.impl.util.Components;
 import dynamic_fps.impl.util.FallbackConfigScreen;
 import dynamic_fps.impl.util.Logging;
 import dynamic_fps.impl.feature.state.OptionHolder;
+import dynamic_fps.impl.util.ModCompatHelper;
 import dynamic_fps.impl.util.ResourceLocations;
 import dynamic_fps.impl.util.Threads;
 import dynamic_fps.impl.util.Version;
@@ -23,15 +24,16 @@ import dynamic_fps.impl.feature.volume.SmoothVolumeHandler;
 import dynamic_fps.impl.util.duck.DuckLoadingOverlay;
 import dynamic_fps.impl.feature.state.WindowObserver;
 import dynamic_fps.impl.service.Platform;
+import dynamic_fps.impl.util.duck.DuckScreen;
 import net.lostluma.battery.api.State;
+import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.LoadingOverlay;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 
-import net.minecraft.util.Util;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -183,7 +185,7 @@ public class DynamicFPSMod {
 	}
 
 	public static boolean shouldShowLevels() {
-		return isDisabled() || !isLevelCoveredByOverlay();
+		return isDisabled() || !(isLevelCoveredByScreen() || isLevelCoveredByOverlay());
 	}
 
 	public static void onBatteryChargeChanged(int before, int after) {
@@ -207,6 +209,8 @@ public class DynamicFPSMod {
 	private static void doInit() {
 		initClickHandler();
 		SmoothVolumeHandler.init();
+		// NOTE: Init battery tracker first here
+		// Since the idle handler queries it for info
 
 		if (!BatteryTracker.isFeatureEnabled()) {
 			IdleHandler.init();
@@ -220,6 +224,8 @@ public class DynamicFPSMod {
 				Threads.runOnMainThread(IdleHandler::init);
 			});
 		}
+
+		ModCompatHelper.init();
 	}
 
 	private static void initClickHandler() {
@@ -232,13 +238,19 @@ public class DynamicFPSMod {
 			clickHandler = new ClickIgnoreHandler(window.address());
 		}
 	}
+
+	private static boolean isLevelCoveredByScreen() {
+		Minecraft minecraft = Minecraft.getInstance();
+		return minecraft.screen != null && ((DuckScreen) minecraft.screen).dynamic_fps$rendersBackground();
+	}
+
 	private static void showNotification(String titleTranslationKey, String iconPath) {
 		if (!DynamicFPSConfig.INSTANCE.batteryTracker().notifications()) {
 			return;
 		}
 
 		Component title = Components.translatable("toast", titleTranslationKey);
-		Identifier icon = ResourceLocations.of("dynamic_fps", "textures/battery/toast/" + iconPath + ".png");
+		ResourceLocation icon = ResourceLocations.of("dynamic_fps", "textures/battery/toast/" + iconPath + ".png");
 
 		BatteryToast.queueToast(title, icon);
 	}
