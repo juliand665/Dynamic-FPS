@@ -70,7 +70,7 @@ public class BatteryTracker {
 			}
 		} else {
 			manager = temp; // Keep around to allow updating batteries
-			Thread.ofVirtual().name("refresh-battery").start(BatteryTracker::updateBatteries);
+			new Thread(BatteryTracker::updateBatteries, "refresh-battery").start();
 		}
 	}
 
@@ -139,7 +139,7 @@ public class BatteryTracker {
 			updateState();
 
 			try {
-				Thread.sleep(updateInterval);
+				Thread.sleep(updateInterval.toMillis());
 			} catch (InterruptedException e) {
 				active = false;
 				Thread.currentThread().interrupt();

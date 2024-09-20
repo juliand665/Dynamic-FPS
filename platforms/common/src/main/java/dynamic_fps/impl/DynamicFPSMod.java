@@ -10,16 +10,13 @@ import dynamic_fps.impl.service.ModCompat;
 import dynamic_fps.impl.feature.battery.BatteryToast;
 import dynamic_fps.impl.feature.battery.BatteryTracker;
 import dynamic_fps.impl.feature.state.IdleHandler;
-import dynamic_fps.impl.util.BatteryUtil;
-import dynamic_fps.impl.util.FallbackConfigScreen;
-import dynamic_fps.impl.util.Logging;
+import dynamic_fps.impl.util.*;
 import dynamic_fps.impl.feature.state.OptionHolder;
-import dynamic_fps.impl.util.ResourceLocations;
-import dynamic_fps.impl.util.Version;
 import dynamic_fps.impl.feature.volume.SmoothVolumeHandler;
 import dynamic_fps.impl.util.duck.DuckLoadingOverlay;
 import dynamic_fps.impl.feature.state.WindowObserver;
 import dynamic_fps.impl.service.Platform;
+import dynamic_fps.impl.util.duck.DuckScreen;
 import net.lostluma.battery.api.State;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
@@ -178,7 +175,7 @@ public class DynamicFPSMod {
 	}
 
 	public static boolean shouldShowLevels() {
-		return isDisabled() || !isLevelCoveredByOverlay();
+		return isDisabled() || !(isLevelCoveredByScreen() || isLevelCoveredByOverlay());
 	}
 
 	public static void onBatteryChargeChanged(int before, int after) {
@@ -200,9 +197,15 @@ public class DynamicFPSMod {
 	private static void doInit() {
 		// NOTE: Init battery tracker first here
 		// Since the idle handler queries it for info
+		ModCompatHelper.init();
+
 		BatteryTracker.init();
 		IdleHandler.init();
 		SmoothVolumeHandler.init();
+	}
+
+	private static boolean isLevelCoveredByScreen() {
+		return minecraft.screen != null && ((DuckScreen) minecraft.screen).dynamic_fps$rendersBackground();
 	}
 
 	private static void showNotification(String titleTranslationKey, String iconPath) {
