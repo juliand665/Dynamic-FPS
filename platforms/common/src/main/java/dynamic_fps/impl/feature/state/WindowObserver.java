@@ -7,8 +7,6 @@ import org.lwjgl.glfw.GLFWWindowIconifyCallback;
 
 import dynamic_fps.impl.DynamicFPSMod;
 
-import java.time.Instant;
-
 public class WindowObserver {
 	private final long address;
 

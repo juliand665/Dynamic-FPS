@@ -3,15 +3,15 @@
     "package": "dynamic_fps.impl.mixin",
     "minVersion": "0.8",
     "client": [
-        "DebugEntryFpsMixin",
-        "FramerateLimitTrackerMixin",
+        "DebugScreenOverlayMixin",
         "GameRendererMixin",
         "GuiMixin",
         "LoadingOverlayMixin",
         "MinecraftMixin",
         "OptionsMixin",
         "SoundEngineMixin",
-        "ToastManagerMixin",
+        "ToastComponentMixin",
+        "WindowMixin",
         "bugfix.BlockableEventLoopMixin"
     ],
     "mixins": [],
