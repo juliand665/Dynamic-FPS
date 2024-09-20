@@ -5,7 +5,6 @@ import dynamic_fps.impl.config.DynamicFPSConfig;
 import dynamic_fps.impl.feature.battery.BatteryTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 
 import net.minecraft.resources.ResourceLocation;
@@ -59,7 +58,7 @@ public final class HudInfoRenderer {
 		int[] position = config.placement().get(minecraft.getWindow());
 
 		// resource, x, y, z, ?, ?, width, height, width, height
-		graphics.blit(RenderType::guiTextured, icon, position[0], position[1], 0.0f, 0, 16, 16, 16, 16);
+		graphics.blit(icon, position[0], position[1], 0, 0.0f, 0.0f, 16, 16, 16, 16);
 		// font, text, x, y, text color
 		graphics.drawString(minecraft.font, BatteryTracker.charge() + "%", position[0] + 20, position[1] + 4, 0xFFFFFF);
 	}
