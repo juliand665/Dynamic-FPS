@@ -4,7 +4,7 @@
     "ignore_initial_click": "disabled",
     "idle": {
         "timeout": 300,
-        "condition": "vanilla"
+        "condition": "on_battery"
     },
     "battery_tracker": {
         "enabled": false,
