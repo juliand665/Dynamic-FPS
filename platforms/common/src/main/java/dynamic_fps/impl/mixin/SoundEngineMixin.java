@@ -1,12 +1,14 @@
 package dynamic_fps.impl.mixin;
 
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import dynamic_fps.impl.feature.volume.SmoothVolumeHandler;
 import net.minecraft.client.Minecraft;
 import org.jetbrains.annotations.Nullable;
-import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -37,7 +39,6 @@ public class SoundEngineMixin implements DuckSoundEngine {
 
 	@Shadow
 	@Final
-	@Mutable
 	private Map<SoundInstance, ChannelAccess.ChannelHandle> instanceToChannel;
 
 	@Shadow
@@ -47,13 +48,6 @@ public class SoundEngineMixin implements DuckSoundEngine {
 
 	@Unique
 	private static final Minecraft dynamic_fps$minecraft = Minecraft.getInstance();
-
-	@Inject(method = "<init>", at = @At("TAIL"))
-	private void init(CallbackInfo callbackInfo) {
-		// Fix crash from another unknown mod mutating this
-		// While we're iterating over it in the `dynamic_fps$updateVolume` method
-		this.instanceToChannel = new ConcurrentHashMap<>(this.instanceToChannel);
-	}
 
 	@Override
 	public void dynamic_fps$updateVolume(SoundSource source) {
