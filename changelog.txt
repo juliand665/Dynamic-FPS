@@ -1,4 +1,2 @@
-- Update Vietnamese translation ([PR 219](https://github.com/juliand665/Dynamic-FPS/pull/219) by @godkyo98)
-- Fix crash modifying sound volumes with certain mod combinations ([PR 221](https://github.com/juliand665/Dynamic-FPS/pull/221) by @LostLuma)
-- Fix runtime modified graphics settings potentially being saved ([PR 222](https://github.com/juliand665/Dynamic-FPS/pull/222) by @LostLuma)
-- Fix idle condition tooltips not being shown ([Commit fcd5a8](https://github.com/juliand665/Dynamic-FPS/commit/fcd5a8bfa07224dcb0feb0d542727a66e5b50424) by @LostLuma)
+- Revert the fix for rare crashes when modifying sound volumes ([Commit 4829e3](https://github.com/juliand665/Dynamic-FPS/commit/4829e3ffed765b0b714d8d4e8af301c038697d2e) by @LostLuma)
+  - Sadly this only caused more issues, so it'll have to be fixed in the mod causing it once that's identified
