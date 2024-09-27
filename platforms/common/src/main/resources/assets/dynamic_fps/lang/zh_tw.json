@@ -79,6 +79,8 @@
     "config.dynamic_fps.download_natives_description_0": "使用電池功能需要額外的程式庫。",
     "config.dynamic_fps.download_natives_description_1": "設定模組是否可以代表您下載這個元件。",
 
+    "config.dynamic_fps.mock_battery_data": "使用模擬電池資料",
+
     "key.dynamic_fps.toggle_forced": "強制失去焦點模式（切換）",
     "key.dynamic_fps.toggle_disabled": "停用 Dynamic FPS（切換）",
     "gui.dynamic_fps.hud.reducing": "Dynamic FPS：強制限制 FPS",
