@@ -2,15 +2,15 @@
     "config.dynamic_fps.title": "Configura Dynamic FPS",
 
     "config.dynamic_fps.warn_cloth_config.0": "Cloth Config è necessario per configurare Dynamic FPS all'interno di Minecraft.",
-    "config.dynamic_fps.warn_cloth_config.1": "Installa Cloth Config, modifica il file di configurazione o utilizza invece le impostazioni predefinite.",
+    "config.dynamic_fps.warn_cloth_config.1": "Installa Cloth Config, modifica il file di configurazione o usa le impostazioni predefinite.",
 
     "config.dynamic_fps.category.general": "Generale",
     "config.dynamic_fps.category.advanced": "Avanzato",
 
-    "config.dynamic_fps.category.hovered": "Sopra",
-    "config.dynamic_fps.category.unfocused": "Non a fuoco",
+    "config.dynamic_fps.category.hovered": "In Sovrapposizione",
+    "config.dynamic_fps.category.unfocused": "Non a Fuoco",
     "config.dynamic_fps.category.invisible": "Invisibile",
-    "config.dynamic_fps.category.unplugged": "A batteria",
+    "config.dynamic_fps.category.unplugged": "A Batteria",
     "config.dynamic_fps.category.abandoned": "Inattivo",
 
     "config.dynamic_fps.enabled": "Abilitato",
@@ -18,71 +18,79 @@
     "config.dynamic_fps.disabled": "Disabilitato",
     "config.dynamic_fps.minutes": "%d Minuto/i",
 
-    "config.dynamic_fps.idle_time": "Timeout inattività",
-    "config.dynamic_fps.idle_time_tooltip": "Minuti senza input fino a quando Dynamic FPS attiva lo stato inattivo mentre il gioco è a fuoco.",
+    "config.dynamic_fps.idle_time": "Timeout di inattività",
+    "config.dynamic_fps.idle_time_tooltip": "Minuti senza input prima che Dynamic FPS attivi lo stato di inattività mentre il gioco è attivo.",
 
-    "config.dynamic_fps.idle_condition": "Condizione inattività",
-    "config.dynamic_fps.idle_condition_none": "Nessuna",
-    "config.dynamic_fps.idle_condition_on_battery": "Mentre è a batteria",
+    "config.dynamic_fps.idle_condition": "Condizione di inattività",
 
-    "config.dynamic_fps.uncap_menu_frame_rate": "Sblocca FPS menu",
-    "config.dynamic_fps.uncap_menu_frame_rate_tooltip": "Rimuovi il limite di 60 FPS nel menu principale.",
+    "config.dynamic_fps.idle_condition_none": "Nessuno",
+    "config.dynamic_fps.idle_condition_vanilla": "Vanilla",
+    "config.dynamic_fps.idle_condition_on_battery": "Quando a batteria",
 
-    "config.dynamic_fps.battery_tracker": "Monitoraggio batteria",
-    "config.dynamic_fps.battery_tracker_tooltip": "Attiva o disattiva tutte le funzioni relative alla batteria.",
+    "config.dynamic_fps.idle_condition_none_tooltip": "Attiva sempre lo stato di inattività quando inattivo per troppo tempo.",
+    "config.dynamic_fps.idle_condition_vanilla_tooltip": "Disattiva l'inattività di Dynamic FPS. Usa invece l'impostazione vanilla.",
+    "config.dynamic_fps.idle_condition_on_battery_tooltip": "Attiva lo stato di inattività quando inattivo per troppo tempo e a batteria.",
 
-    "config.dynamic_fps.battery_tracker_switch_states": "Abilita stato a batteria",
+    "config.dynamic_fps.uncap_menu_frame_rate": "Rimuovi il limite di FPS nel Menu",
+    "config.dynamic_fps.uncap_menu_frame_rate_tooltip": "Rimuove il limite di 60 FPS nel menu principale.",
+
+    "config.dynamic_fps.battery_tracker": "Monitoraggio della Batteria",
+    "config.dynamic_fps.battery_tracker_tooltip": "Attiva o disattiva tutte le funzionalità relative alla batteria.",
+
+    "config.dynamic_fps.battery_tracker_switch_states": "Abilita Stato a Batteria",
     "config.dynamic_fps.battery_tracker_switch_states_tooltip": "Abilita automaticamente lo stato a batteria quando si è a batteria.",
 
-    "config.dynamic_fps.battery_tracker_notifications": "Notifiche batteria",
+    "config.dynamic_fps.battery_tracker_notifications": "Notifiche Batteria",
     "config.dynamic_fps.battery_tracker_notifications_tooltip": "Ricevi notifiche in-game sullo stato della batteria.",
 
-    "config.dynamic_fps.battery_indicator_condition": "Condizione indicatore batteria",
+    "config.dynamic_fps.battery_indicator_condition": "Condizione Indicatore di Batteria",
     "config.dynamic_fps.battery_indicator_condition_disabled": "Disabilitato",
-    "config.dynamic_fps.battery_indicator_condition_draining": "Durante la scarica",
+    "config.dynamic_fps.battery_indicator_condition_draining": "Durante lo scaricamento",
     "config.dynamic_fps.battery_indicator_condition_critical": "Critico / < 10%",
     "config.dynamic_fps.battery_indicator_condition_constant": "Costante",
 
-    "config.dynamic_fps.battery_indicator_placement": "Posizione indicatore",
-    "config.dynamic_fps.battery_indicator_placement_top_left": "In alto a sinistra",
-    "config.dynamic_fps.battery_indicator_placement_top_right": "In alto a destra",
-    "config.dynamic_fps.battery_indicator_placement_bottom_left": "In basso a sinistra",
-    "config.dynamic_fps.battery_indicator_placement_bottom_right": "In basso a destra",
+    "config.dynamic_fps.battery_indicator_placement": "Posizionamento Indicatore",
+    "config.dynamic_fps.battery_indicator_placement_top_left": "In Alto a Sinistra",
+    "config.dynamic_fps.battery_indicator_placement_top_right": "In Alto a Destra",
+    "config.dynamic_fps.battery_indicator_placement_bottom_left": "In Basso a Sinistra",
+    "config.dynamic_fps.battery_indicator_placement_bottom_right": "In Basso a Destra",
 
-    "config.dynamic_fps.volume_transition_speed_up": "Velocità transizione volume verso l'alto",
-    "config.dynamic_fps.volume_transition_speed_down": "Velocità transizione volume verso il basso",
+    "config.dynamic_fps.volume_transition_speed_up": "Velocità di Transizione del Volume (Aumenta)",
+    "config.dynamic_fps.volume_transition_speed_down": "Velocità di Transizione del Volume (Diminuisce)",
     "config.dynamic_fps.volume_transition_speed_instant": "Immediato",
-    "config.dynamic_fps.volume_transition_speed_tooltip": "Imposta la velocità con cui il volume del gioco sarà regolato al secondo.",
+    "config.dynamic_fps.volume_transition_speed_tooltip": "Imposta la velocità di regolazione del volume del gioco al secondo.",
 
-    "config.dynamic_fps.frame_rate_target": "Obiettivo frame rate",
-    "config.dynamic_fps.volume_multiplier": "Moltiplicatore volume",
+    "config.dynamic_fps.frame_rate_target": "Obiettivo di Frame Rate",
+    "config.dynamic_fps.volume_multiplier": "Moltiplicatore del Volume",
 
-    "config.dynamic_fps.graphics_state": "Opzioni grafiche",
+    "config.dynamic_fps.graphics_state": "Opzioni Grafiche",
     "config.dynamic_fps.graphics_state_default": "Predefinito",
     "config.dynamic_fps.graphics_state_reduced": "Ridotto",
     "config.dynamic_fps.graphics_state_minimal": "Minimale",
-    "config.dynamic_fps.graphics_state_minimal_tooltip": "La grafica minima causa il ricaricamento del mondo!",
+    "config.dynamic_fps.graphics_state_minimal_tooltip": "La grafica minimale causa il ricaricamento del mondo!",
 
-    "config.dynamic_fps.show_toasts": "Mostra toast",
-    "config.dynamic_fps.show_toasts_tooltip": "Se continuare a mostrare o ritardare le notifiche toast",
+    "config.dynamic_fps.show_toasts": "Mostra Toast",
+    "config.dynamic_fps.show_toasts_tooltip": "Decidi se continuare a mostrare o ritardare le notifiche toast",
 
-    "config.dynamic_fps.run_garbage_collector": "Esegui Garbage Collector",
+    "config.dynamic_fps.run_garbage_collector": "Invoca il Garbage Collector",
     "config.dynamic_fps.run_garbage_collector_tooltip": "Libera memoria non utilizzata quando si passa a questo stato",
 
-    "config.dynamic_fps.download_natives": "Scarica librerie native",
-    "config.dynamic_fps.download_natives_description_0": "L'utilizzo delle funzionalità della batteria richiede una libreria aggiuntiva.",
-    "config.dynamic_fps.download_natives_description_1": "Imposta se il mod può scaricare questo componente per tuo conto.",
+    "config.dynamic_fps.download_natives": "Scarica Componenti Nativi",
+    "config.dynamic_fps.download_natives_description_0": "L'uso delle funzionalità della batteria richiede una libreria aggiuntiva.",
+    "config.dynamic_fps.download_natives_description_1": "Imposta se la mod può scaricare questo componente per te.",
 
-    "key.dynamic_fps.toggle_forced": "Forza modalità non a fuoco (Toggle)",
+    "config.dynamic_fps.mock_battery_data": "Usa dati della batteria simulati",
+
+    "key.dynamic_fps.toggle_forced": "Forza Modalità Non a Fuoco (Toggle)",
     "key.dynamic_fps.toggle_disabled": "Disabilita Dynamic FPS (Toggle)",
-    "gui.dynamic_fps.hud.reducing": "Dynamic FPS: Riduzione FPS Forzata",
+    "gui.dynamic_fps.hud.reducing": "Dynamic FPS: Riduzione Forzata di FPS",
     "gui.dynamic_fps.hud.disabled": "Dynamic FPS Disabilitato",
 
-    "toast.dynamic_fps.battery_charging": "In carica!",
-    "toast.dynamic_fps.battery_draining": "In scarica!",
+    "toast.dynamic_fps.battery_charging": "In Carica!",
+    "toast.dynamic_fps.battery_draining": "Scaricamento!",
     "toast.dynamic_fps.battery_critical": "Batteria Bassa!",
 
     "toast.dynamic_fps.battery_charge": "Attualmente al %d%%",
 
-    "modmenu.descriptionTranslation.dynamic_fps": "Riduci l'uso delle risorse mentre Minecraft è in background o inattivo."
+    "modmenu.descriptionTranslation.dynamic_fps": "Riduce l'uso delle risorse mentre Minecraft è in background o inattivo."
 }
