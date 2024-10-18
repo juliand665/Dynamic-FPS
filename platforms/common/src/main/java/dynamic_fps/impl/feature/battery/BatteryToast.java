@@ -23,8 +23,8 @@ public class BatteryToast implements Toast {
 
 	private static BatteryToast queuedToast;
 
-	private static final ResourceLocation MOD_ICON = ResourceLocations.of("dynamic_fps", "textures/battery/toast/background_icon.png");
-	private static final ResourceLocation BACKGROUND_IMAGE = ResourceLocations.of("dynamic_fps", "textures/battery/toast/background.png");
+	private static final ResourceLocation MOD_ICON = ResourceLocations.of("dynamic_fps", "battery/toast/background_icon");
+	private static final ResourceLocation BACKGROUND_IMAGE = ResourceLocations.of("dynamic_fps", "battery/toast/background");
 
 	private BatteryToast(Component title, ResourceLocation icon) {
 		this.title = title;
@@ -74,11 +74,11 @@ public class BatteryToast implements Toast {
 			this.description = localized("toast", "battery_charge", BatteryTracker.charge());
 		}
 
-		// resource, x, y, z, ?, ?, width, height, width, height
-		graphics.blit(RenderType::guiTextured, BACKGROUND_IMAGE, 0, 0, 0, 0.0f, 0, this.width(), this.height(), this.width(), this.height());
+		// type, resource, x, y, width, height
+		graphics.blitSprite(RenderType::guiTextured, BACKGROUND_IMAGE, 0, 0, this.width(), this.height());
 
-		graphics.blit(RenderType::guiTextured, MOD_ICON, 2, 2, 0, 0.0f, 0, 8, 8, 8, 8);
-		graphics.blit(RenderType::guiTextured, this.icon, 8, 8, 0, 0.0f, 0, 16, 16, 16, 16);
+		graphics.blitSprite(RenderType::guiTextured, MOD_ICON, 2, 2, 8, 8);
+		graphics.blitSprite(RenderType::guiTextured, this.icon, 8, 8, 16, 16);
 
 		graphics.drawString(Minecraft.getInstance().font, this.title, 30, 7, 0x5f3315, false);
 		graphics.drawString(Minecraft.getInstance().font, this.description, 30, 18, -16777216, false);
