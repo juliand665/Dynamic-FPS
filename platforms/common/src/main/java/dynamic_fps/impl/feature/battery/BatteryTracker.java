@@ -103,7 +103,7 @@ public class BatteryTracker {
 			changed = true;
 
 			int current = charge;
-			minecraft.tell(() -> DynamicFPSMod.onBatteryChargeChanged(current, newCharge));
+			minecraft.schedule(() -> DynamicFPSMod.onBatteryChargeChanged(current, newCharge));
 		}
 
 		if (readInitialData && status != newStatus) {
@@ -111,7 +111,7 @@ public class BatteryTracker {
 
 			State current = status;
 			State updated = newStatus;
-			minecraft.tell(() -> DynamicFPSMod.onBatteryStatusChanged(current, updated));
+			minecraft.schedule(() -> DynamicFPSMod.onBatteryStatusChanged(current, updated));
 		}
 
 		charge = newCharge;

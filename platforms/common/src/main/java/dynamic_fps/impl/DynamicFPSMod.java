@@ -263,7 +263,7 @@ public class DynamicFPSMod {
 			checkForStateChanges0();
 		} else {
 			// Schedule check for the beginning of the next frame
-			minecraft.tell(DynamicFPSMod::checkForStateChanges0);
+			minecraft.schedule(DynamicFPSMod::checkForStateChanges0);
 		}
 	}
 
