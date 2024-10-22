@@ -52,13 +52,13 @@ public final class HudInfoRenderer {
 
 		int index = BatteryTracker.charge() / 10;
 		String type = BatteryUtil.isCharging(BatteryTracker.status()) ? "charging" : "draining";
-		ResourceLocation icon = ResourceLocations.of("dynamic_fps", "battery/icon/" + type + "_" + index);
+		ResourceLocation icon = ResourceLocations.of("dynamic_fps", "textures/battery/icon/" + type + "_" + index + ".png");
 
 		// pair of coordinates
 		int[] position = config.placement().get(graphics);
 
-		// type, resource, x, y, width, height
-		graphics.blitSprite(RenderType::guiTextured, icon, position[0], position[1], 16, 16);
+		// resource, x, y, z, ?, ?, width, height, width, height
+		graphics.blit(RenderType::guiTextured, icon, position[0], position[1], 0.0f, 0, 16, 16, 16, 16);
 		// font, text, x, y, text color
 		graphics.drawString(minecraft.font, BatteryTracker.charge() + "%", position[0] + 20, position[1] + 4, 0xFFFFFF);
 	}
