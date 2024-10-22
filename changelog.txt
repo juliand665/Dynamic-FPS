@@ -1,2 +1,3 @@
-- Revert the fix for rare crashes when modifying sound volumes ([Commit 4829e3](https://github.com/juliand665/Dynamic-FPS/commit/4829e3ffed765b0b714d8d4e8af301c038697d2e) by @LostLuma)
-  - Sadly this only caused more issues, so it'll have to be fixed in the mod causing it once that's identified
+- Update Traditional Chinese Translation ([PR 226](https://github.com/juliand665/Dynamic-FPS/pull/226) by @yichifauzi)
+- Update italian Translation ([PR 228](https://github.com/juliand665/Dynamic-FPS/pull/228) by @TheBossMagnus)
+- Update battery library to version 1.2.0 ([commit d99da6](https://github.com/juliand665/Dynamic-FPS/commit/d99da60dace79425fa4aca259dcd55275cad3685) by @LostLuma)
