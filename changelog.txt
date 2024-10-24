@@ -1,3 +1,1 @@
-- Update Traditional Chinese Translation ([PR 226](https://github.com/juliand665/Dynamic-FPS/pull/226) by @yichifauzi)
-- Update italian Translation ([PR 228](https://github.com/juliand665/Dynamic-FPS/pull/228) by @TheBossMagnus)
-- Update battery library to version 1.2.0 ([commit d99da6](https://github.com/juliand665/Dynamic-FPS/commit/d99da60dace79425fa4aca259dcd55275cad3685) by @LostLuma)
+- Fix crash selecting Dynamic FPS in the Forge config screen on Minecraft 1.19.0 - 1.19.2
