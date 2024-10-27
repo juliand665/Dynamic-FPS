@@ -23,8 +23,8 @@ public class BatteryToast implements Toast {
 
 	private static BatteryToast queuedToast;
 
-	private static final ResourceLocation MOD_ICON = ResourceLocations.of("dynamic_fps", "textures/battery/toast/background_icon");
-	private static final ResourceLocation BACKGROUND_IMAGE = ResourceLocations.of("dynamic_fps", "textures/battery/toast/background");
+	private static final ResourceLocation MOD_ICON = ResourceLocations.of("dynamic_fps", "textures/battery/toast/background_icon.png");
+	private static final ResourceLocation BACKGROUND_IMAGE = ResourceLocations.of("dynamic_fps", "textures/battery/toast/background.png");
 
 	private BatteryToast(Component title, ResourceLocation icon) {
 		this.title = title;

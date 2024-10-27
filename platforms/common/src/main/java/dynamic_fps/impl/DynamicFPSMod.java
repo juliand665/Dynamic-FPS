@@ -211,7 +211,7 @@ public class DynamicFPSMod {
 		}
 
 		Component title = localized("toast", titleTranslationKey);
-		ResourceLocation icon = ResourceLocations.of("dynamic_fps", "textures/battery/toast/" + iconPath);
+		ResourceLocation icon = ResourceLocations.of("dynamic_fps", "textures/battery/toast/" + iconPath + ".png");
 
 		BatteryToast.queueToast(title, icon);
 	}
