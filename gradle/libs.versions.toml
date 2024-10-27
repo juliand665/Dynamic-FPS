@@ -14,7 +14,7 @@ quilt_loader = "0.25.0"
 
 # Regular libraries
 
-battery = "1.2.0"
+battery = "1.3.0"
 
 # Modding libraries
 
