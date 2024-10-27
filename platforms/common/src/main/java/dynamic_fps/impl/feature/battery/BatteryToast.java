@@ -1,35 +1,16 @@
 package dynamic_fps.impl.feature.battery;
 
-import dynamic_fps.impl.util.ResourceLocations;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.toasts.Toast;
-import net.minecraft.client.gui.components.toasts.ToastManager;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
 
 import static dynamic_fps.impl.util.Localization.localized;
 
-public class BatteryToast implements Toast {
-	private long firstRender;
-
-	private Component title;
-	private Component description;
-	private ResourceLocation icon;
-	private Visibility visibility;
-
+public class BatteryToast extends BaseToast {
 	private static BatteryToast queuedToast;
 
-	private static final ResourceLocation MOD_ICON = ResourceLocations.of("dynamic_fps", "textures/battery/toast/background_icon.png");
-	private static final ResourceLocation BACKGROUND_IMAGE = ResourceLocations.of("dynamic_fps", "textures/battery/toast/background.png");
-
 	private BatteryToast(Component title, ResourceLocation icon) {
-		this.title = title;
-		this.icon = icon;
-		this.visibility = Visibility.SHOW;
+		super(title, Component.empty(), icon);
 	}
 
 	/**
@@ -47,39 +28,12 @@ public class BatteryToast implements Toast {
 	}
 
 	@Override
-	public @NotNull Visibility getWantedVisibility() {
-		return this.visibility;
-	}
-
-	@Override
-	public void update(ToastManager toastManager, long currentTime) {
-		if (this.firstRender == 0) {
-			return;
+	public void onFirstRender() {
+		if (this == queuedToast) {
+			queuedToast = null;
 		}
 
-		if (currentTime - this.firstRender >= 5000.0 * toastManager.getNotificationDisplayTimeMultiplier()) {
-			this.visibility = Visibility.HIDE;
-		}
-	}
-
-	@Override
-	public void render(GuiGraphics graphics, Font font, long currentTime) {
-		if (this.firstRender == 0) {
-			if (this == queuedToast) {
-				queuedToast = null;
-			}
-
-			this.firstRender = currentTime;
-			// Initialize when first rendering so the battery percentage is mostly up-to-date
-			this.description = localized("toast", "battery_charge", BatteryTracker.charge());
-		}
-		// resource, x, y, z, ?, ?, width, height, width, height
-		graphics.blit(RenderType::guiTextured, BACKGROUND_IMAGE, 0, 0, 0.0f, 0, this.width(), this.height(), this.width(), this.height());
-
-		graphics.blit(RenderType::guiTextured, MOD_ICON, 2, 2, 0.0f, 0, 8, 8, 8, 8);
-		graphics.blit(RenderType::guiTextured, this.icon, 8, 8, 0.0f, 0, 16, 16, 16, 16);
-
-		graphics.drawString(Minecraft.getInstance().font, this.title, 30, 7, 0x5f3315, false);
-		graphics.drawString(Minecraft.getInstance().font, this.description, 30, 18, -16777216, false);
+		// Initialize when first rendering so the battery percentage is mostly up-to-date
+		this.description = localized("toast", "battery_charge", BatteryTracker.charge());
 	}
 }

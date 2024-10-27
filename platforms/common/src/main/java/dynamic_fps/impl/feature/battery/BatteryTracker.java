@@ -18,6 +18,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.Collections;
 
+import static dynamic_fps.impl.util.Localization.localized;
+
 public class BatteryTracker {
 	private static boolean readInitialData = false;
 
@@ -166,6 +168,16 @@ public class BatteryTracker {
 		} catch (LibraryLoadError e) {
 			// No native backend library is available for this OS or platform
 			Logging.getLogger().warn("Battery tracker feature unavailable!");
+
+			String path;
+
+			if (DynamicFPSConfig.INSTANCE.downloadNatives()) {
+				path = "no_support";
+			} else {
+				path = "no_library";
+			}
+
+			ErrorToast.queueToast(localized("toast", path));
 		}
 
 		return result;
