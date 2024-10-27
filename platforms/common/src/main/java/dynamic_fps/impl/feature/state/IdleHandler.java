@@ -13,8 +13,6 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
-import org.lwjgl.glfw.GLFWKeyCallback;
-import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.glfw.GLFWScrollCallback;
 
 public class IdleHandler {
@@ -26,10 +24,8 @@ public class IdleHandler {
 	private static Vec3 prevPosition = Vec3.ZERO;
 	private static Vec3 prevLookAngle = Vec3.ZERO;
 
-	private static @Nullable GLFWKeyCallback previousKeyCallback;
 	private static @Nullable GLFWScrollCallback previousScrollCallback;
 	private static @Nullable GLFWCursorPosCallback previousCursorPosCallback;
-	private static @Nullable GLFWMouseButtonCallback previousMouseClickCallback;
 
 	public static void init() {
 		if (active) {
@@ -57,10 +53,7 @@ public class IdleHandler {
 
 	public static void setWindow(long address) {
 		if (active) {
-			previousKeyCallback = GLFW.glfwSetKeyCallback(address, IdleHandler::onKey);
-			previousScrollCallback = GLFW.glfwSetScrollCallback(address, IdleHandler::onScroll);
 			previousCursorPosCallback = GLFW.glfwSetCursorPosCallback(address, IdleHandler::onMove);
-			previousMouseClickCallback = GLFW.glfwSetMouseButtonCallback(address, IdleHandler::onPress);
 		}
 	}
 
@@ -111,39 +104,13 @@ public class IdleHandler {
 		prevLookAngle = lookAngle;
 	}
 
-	// Keyboard events
-
-	private static void onKey(long address, int key, int scancode, int action, int mods) {
-		onActivity();
-
-		if (previousKeyCallback != null) {
-			previousKeyCallback.invoke(address, key, scancode, action, mods);
-		}
-	}
-
 	// Mouse events
-
-	private static void onScroll(long address, double xOffset, double yOffset) {
-		onActivity();
-
-		if (previousScrollCallback != null) {
-			previousScrollCallback.invoke(address, xOffset, yOffset);
-		}
-	}
 
 	private static void onMove(long address, double x, double y) {
 		onActivity();
 
 		if (previousCursorPosCallback != null) {
 			previousCursorPosCallback.invoke(address, x, y);
-		}
-	}
-
-	private static void onPress(long address, int button, int action, int mods) {
-		onActivity();
-
-		if (previousMouseClickCallback != null) {
-			previousMouseClickCallback.invoke(address, button, action, mods);
 		}
 	}
 }
