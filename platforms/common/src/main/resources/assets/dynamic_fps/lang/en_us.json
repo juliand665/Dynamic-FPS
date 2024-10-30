@@ -86,6 +86,10 @@
     "gui.dynamic_fps.hud.reducing": "Dynamic FPS: Forcing Reduced FPS",
     "gui.dynamic_fps.hud.disabled": "Dynamic FPS Disabled",
 
+    "toast.dynamic_fps.error": "Dynamic FPS Battery Error",
+    "toast.dynamic_fps.no_support": "Computer is not supported",
+    "toast.dynamic_fps.no_library": "Library download disabled",
+
     "toast.dynamic_fps.battery_charging": "Charging!",
     "toast.dynamic_fps.battery_draining": "Discharging!",
     "toast.dynamic_fps.battery_critical": "Battery Low!",
