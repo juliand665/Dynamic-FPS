@@ -20,14 +20,14 @@ import java.util.List;
 public class DynamicFPSForgeMod {
 	private static final List<Platform.StartTickEvent> TICK_EVENT_LISTENERS = new ArrayList<>();
 
-    public DynamicFPSForgeMod() {
+    public DynamicFPSForgeMod(FMLJavaModLoadingContext context) {
 		if (FMLLoader.getDist().isDedicatedServer()) {
 			return;
 		}
 
 		DynamicFPSMod.init();
 
-		ModLoadingContext.get().registerExtensionPoint(
+		context.registerExtensionPoint(
 			ConfigScreenHandler.ConfigScreenFactory.class,
 			() -> new ConfigScreenHandler.ConfigScreenFactory(
 				(minecraft, screen) -> DynamicFPSMod.getConfigScreen(screen)
@@ -37,7 +37,7 @@ public class DynamicFPSForgeMod {
 		MinecraftForge.EVENT_BUS.addListener(this::onClientTick);
 		// MinecraftForge.EVENT_BUS.addListener(this::renderGuiOverlay);
 
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::registerKeyMappings);
+		context.getModEventBus().addListener(this::registerKeyMappings);
     }
 
 	/*

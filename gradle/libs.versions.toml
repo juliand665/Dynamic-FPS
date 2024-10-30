@@ -1,14 +1,14 @@
 [versions]
-minecraft = "1.21.2-rc1"
+minecraft = "1.21.3"
 
 # Platform libraries
 
 fabric_loader = "0.15.10"
 fabric_api = "0.102.2+1.21.2"
 
-forge = "1.21-51.0.33"
+forge = "1.21.3-53.0.7"
 
-neoforge = "21.0.143"
+neoforge = "21.3.0-beta"
 
 quilt_loader = "0.25.0"
 
