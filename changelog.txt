@@ -1,1 +1,3 @@
-- Fix crash selecting Dynamic FPS in the Forge config screen on Minecraft 1.19.0 - 1.19.2
+- Fix toast textures not resolving ([commit 5c4ef9](https://github.com/juliand665/Dynamic-FPS/commit/5c4ef924a5e324c35bf07a3f130f63361e5e794e) by @LostLuma)
+  - Toast rendering issues for versions before 1.21.2 were also resolved
+- Improve error messaging around battery features ([PR 232](https://github.com/juliand665/Dynamic-FPS/pull/232) by @LostLuma)
