@@ -46,8 +46,8 @@
     "config.dynamic_fps.battery_indicator_condition": "電池指示條件",
     "config.dynamic_fps.battery_indicator_condition_disabled": "已停用",
     "config.dynamic_fps.battery_indicator_condition_draining": "電池放電時",
-    "config.dynamic_fps.battery_indicator_condition_critical": "電池危急／少於 10%",
-    "config.dynamic_fps.battery_indicator_condition_constant": "恆定",
+    "config.dynamic_fps.battery_indicator_condition_critical": "危急/少於 10%",
+    "config.dynamic_fps.battery_indicator_condition_constant": "持續顯示",
 
     "config.dynamic_fps.battery_indicator_placement": "指示器位置",
     "config.dynamic_fps.battery_indicator_placement_top_left": "左上方",
@@ -60,10 +60,10 @@
     "config.dynamic_fps.volume_transition_speed_instant": "立即",
     "config.dynamic_fps.volume_transition_speed_tooltip": "設定每秒調整遊戲音量的速度。",
 
-    "config.dynamic_fps.frame_rate_target": "FPS 目標",
+    "config.dynamic_fps.frame_rate_target": "目標 FPS",
     "config.dynamic_fps.volume_multiplier": "音量倍率",
 
-    "config.dynamic_fps.graphics_state": "圖形選項",
+    "config.dynamic_fps.graphics_state": "顯示設定",
     "config.dynamic_fps.graphics_state_default": "預設",
     "config.dynamic_fps.graphics_state_reduced": "減少",
     "config.dynamic_fps.graphics_state_minimal": "最低",
@@ -72,7 +72,7 @@
     "config.dynamic_fps.show_toasts": "顯示提示",
     "config.dynamic_fps.show_toasts_tooltip": "是否持續顯示或延遲提示通知",
 
-    "config.dynamic_fps.run_garbage_collector": "呼叫垃圾回收器",
+    "config.dynamic_fps.run_garbage_collector": "執行垃圾回收",
     "config.dynamic_fps.run_garbage_collector_tooltip": "切換到此狀態時釋放未使用的記憶體",
 
     "config.dynamic_fps.download_natives": "下載原生程式庫",
@@ -86,9 +86,13 @@
     "gui.dynamic_fps.hud.reducing": "Dynamic FPS：強制限制 FPS",
     "gui.dynamic_fps.hud.disabled": "Dynamic FPS 已停用",
 
+    "toast.dynamic_fps.error": "Dynamic FPS 電池錯誤",
+    "toast.dynamic_fps.no_support": "電腦不支援",
+    "toast.dynamic_fps.no_library": "程式庫下載已停用",
+    
     "toast.dynamic_fps.battery_charging": "正在充電！",
     "toast.dynamic_fps.battery_draining": "正在放電！",
-    "toast.dynamic_fps.battery_critical": "電池電量偏低！",
+    "toast.dynamic_fps.battery_critical": "電量不足！",
 
     "toast.dynamic_fps.battery_charge": "目前電量為 %d%%",
 
