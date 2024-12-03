@@ -26,7 +26,7 @@ mixinextras = "0.3.5"
 architectury = "3.4.159"
 architectury_loom = "1.7.412"
 
-mod_publish = "0.6.3"
+mod_publish = "0.8.1"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
