@@ -1,6 +1,7 @@
 package dynamic_fps.impl.compat;
 
 import dynamic_fps.impl.DynamicFPSMod;
+import dynamic_fps.impl.util.Version;
 import net.minecraft.client.Minecraft;
 
 public class GLFW {
@@ -40,16 +41,16 @@ public class GLFW {
 	}
 
 	private static boolean isEnterEventBroken() {
-		int[] version = getGLFWVersion();
-		return !(version[0] > 3 || version[0] == 3 && version[1] > 3);
+		Version active = getGLFWVersion();
+		return active.compareTo(Version.of(3, 3, 0)) < 0; // Versions before 3.3.0 are broken
 	}
 
-	private static int[] getGLFWVersion() {
+	private static Version getGLFWVersion() {
 		int[] major = new int[1];
 		int[] minor = new int[1];
 		int[] patch = new int[1];
 
 		org.lwjgl.glfw.GLFW.glfwGetVersion(major, minor, patch);
-		return new int[]{major[0], minor[0], patch[0]}; // This is kinda silly ...
+		return Version.of(major[0], minor[0], patch[0]);
 	}
 }

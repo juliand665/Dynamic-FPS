@@ -25,6 +25,10 @@ public class Version implements Comparable<Version> {
 		this.buildMetadata = buildMetadata;
 	}
 
+	public static Version of(int major, int minor, int patch) {
+		return new Version(major, minor, patch, null, null);
+	}
+
 	public static Version of(String raw) throws VersionParseException {
 		Matcher matcher = VERSION_PATTERN.matcher(raw);
 
