@@ -21,12 +21,12 @@ battery = "1.3.0"
 modmenu = "11.0.0-beta.1"
 cloth_config = "15.0.127"
 
-mixinextras = "0.3.5"
+mixinextras = "0.4.1"
 
-architectury = "3.4.159"
-architectury_loom = "1.7.412"
+architectury = "3.4.161"
+architectury_loom = "1.9.426"
 
-mod_publish = "0.8.1"
+mod_publish = "0.8.4"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
