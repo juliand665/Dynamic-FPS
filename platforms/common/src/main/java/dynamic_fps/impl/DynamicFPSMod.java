@@ -307,8 +307,8 @@ public class DynamicFPSMod {
 			return false;
 		}
 
-		// Disable frame rate limiting
-		if (frameRateTarget == Constants.NO_FRAME_RATE_LIMIT) {
+		// Disable mod-side frame rate limiting
+		if (frameRateTarget >= Constants.MIN_FRAME_RATE_LIMIT) {
 			return true;
 		}
 
