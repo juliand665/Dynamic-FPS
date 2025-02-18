@@ -1,6 +1,7 @@
 package dynamic_fps.impl.compat;
 
 import dynamic_fps.impl.DynamicFPSMod;
+import dynamic_fps.impl.util.Threads;
 import dynamic_fps.impl.util.Version;
 import net.minecraft.client.Minecraft;
 
@@ -32,7 +33,7 @@ public class GLFW {
 			// Agrees that the window is focused. The mod is
 			// A little too fast for this, so we schedule it
 			// For the next client tick (before next frame).
-			minecraft.schedule(minecraft.mouseHandler::grabMouse);
+			Threads.runOnMainThread(minecraft.mouseHandler::grabMouse);
 		}
 	}
 

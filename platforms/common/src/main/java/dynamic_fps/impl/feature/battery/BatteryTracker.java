@@ -4,12 +4,12 @@ import dynamic_fps.impl.DynamicFPSMod;
 import dynamic_fps.impl.config.DynamicFPSConfig;
 import dynamic_fps.impl.service.Platform;
 import dynamic_fps.impl.util.Logging;
+import dynamic_fps.impl.util.Threads;
 import net.lostluma.battery.api.Battery;
 import net.lostluma.battery.api.Manager;
 import net.lostluma.battery.api.State;
 import net.lostluma.battery.api.exception.LibraryLoadError;
 import net.lostluma.battery.api.util.LibraryUtil;
-import net.minecraft.client.Minecraft;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
@@ -29,7 +29,6 @@ public class BatteryTracker {
 	private static @Nullable Manager manager = null;
 	private static Collection<Battery> batteries = Collections.emptyList();
 
-	private static final Minecraft minecraft = Minecraft.getInstance();
 	private static final Duration updateInterval = Duration.of(15, ChronoUnit.SECONDS);
 
 	public static int charge() {
@@ -57,7 +56,7 @@ public class BatteryTracker {
 	}
 
 	public static void init() {
-		if (manager != null || !DynamicFPSConfig.INSTANCE.batteryTracker().enabled()) {
+		if (manager != null || !isFeatureEnabled()) {
 			return;
 		}
 
@@ -72,8 +71,12 @@ public class BatteryTracker {
 			}
 		} else {
 			manager = temp; // Keep around to allow updating batteries
-			Thread.ofVirtual().name("refresh-battery").start(BatteryTracker::updateBatteries);
+			Threads.create("refresh-battery", BatteryTracker::updateBatteries);
 		}
+	}
+
+	public static boolean isFeatureEnabled() {
+		return DynamicFPSConfig.INSTANCE.batteryTracker().enabled();
 	}
 
 	private static State mergeStates(State a, State b) {
@@ -105,7 +108,7 @@ public class BatteryTracker {
 			changed = true;
 
 			int current = charge;
-			minecraft.schedule(() -> DynamicFPSMod.onBatteryChargeChanged(current, newCharge));
+			Threads.runOnMainThread(() -> DynamicFPSMod.onBatteryChargeChanged(current, newCharge));
 		}
 
 		if (readInitialData && status != newStatus) {
@@ -113,7 +116,7 @@ public class BatteryTracker {
 
 			State current = status;
 			State updated = newStatus;
-			minecraft.schedule(() -> DynamicFPSMod.onBatteryStatusChanged(current, updated));
+			Threads.runOnMainThread(() -> DynamicFPSMod.onBatteryStatusChanged(current, updated));
 		}
 
 		charge = newCharge;
@@ -177,7 +180,7 @@ public class BatteryTracker {
 				path = "no_library";
 			}
 
-			ErrorToast.queueToast(localized("toast", path));
+			Threads.runOnMainThread(() -> ErrorToast.queueToast(localized("toast", path)));
 		}
 
 		return result;
