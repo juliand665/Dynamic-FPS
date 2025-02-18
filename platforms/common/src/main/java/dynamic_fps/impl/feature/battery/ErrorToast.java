@@ -1,12 +1,11 @@
 package dynamic_fps.impl.feature.battery;
 
+import dynamic_fps.impl.util.Components;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 
-import static dynamic_fps.impl.util.Localization.localized;
-
 public class ErrorToast extends BaseToast {
-	private static final Component TITLE = localized("toast", "error");
+	private static final Component TITLE = Components.translatable("toast", "error");
 
 	private ErrorToast(Component description) {
 		super(TITLE, description, null);

@@ -10,6 +10,7 @@ import dynamic_fps.impl.config.option.GraphicsState;
 import dynamic_fps.impl.PowerState;
 import dynamic_fps.impl.config.Config;
 import dynamic_fps.impl.config.option.IdleCondition;
+import dynamic_fps.impl.util.Components;
 import dynamic_fps.impl.util.VariableStepTransformer;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
@@ -17,36 +18,33 @@ import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import me.shedaniel.clothconfig2.impl.builders.SubCategoryBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 
 import java.util.Locale;
 import java.util.Optional;
 
-import static dynamic_fps.impl.util.Localization.localized;
-
 public final class ClothConfig {
 	public static Screen genConfigScreen(Screen parent) {
 		ConfigBuilder builder = ConfigBuilder.create()
 			.setParentScreen(parent)
-			.setTitle(localized("config", "title"))
+			.setTitle(Components.translatable("config", "title"))
 			.setSavingRunnable(DynamicFPSMod::onConfigChanged);
 
 		ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
 		ConfigCategory general = builder.getOrCreateCategory(
-			localized("config", "category.general")
+			Components.translatable("config", "category.general")
 		);
 
 		DynamicFPSConfig config = DynamicFPSConfig.INSTANCE;
 		DynamicFPSConfig defaultConfig = DynamicFPSConfig.DEFAULTS;
 
-		SubCategoryBuilder misc = entryBuilder.startSubCategory(localized("config", "feature.misc"));
+		SubCategoryBuilder misc = entryBuilder.startSubCategory(Components.translatable("config", "feature.misc"));
 
 		misc.add(
 			entryBuilder.startBooleanToggle(
-				localized("config", "enabled"),
+				Components.translatable("config", "enabled"),
 				config.enabled()
 			)
 			.setDefaultValue(defaultConfig.enabled())
@@ -56,34 +54,34 @@ public final class ClothConfig {
 
 		misc.add(
 			entryBuilder.startBooleanToggle(
-				localized("config", "uncap_menu_frame_rate"),
+				Components.translatable("config", "uncap_menu_frame_rate"),
 				config.uncapMenuFrameRate()
 			)
 			.setDefaultValue(defaultConfig.uncapMenuFrameRate())
 			.setSaveConsumer(config::setUncapMenuFrameRate)
-			.setTooltip(localized("config", "uncap_menu_frame_rate_tooltip"))
+			.setTooltip(Components.translatable("config", "uncap_menu_frame_rate_tooltip"))
 			.build()
 		);
 
 		general.addEntry(misc.build());
-		SubCategoryBuilder idle = entryBuilder.startSubCategory(localized("config", "feature.idle"));
+		SubCategoryBuilder idle = entryBuilder.startSubCategory(Components.translatable("config", "feature.idle"));
 
 		idle.add(
 			entryBuilder.startIntSlider(
-				localized("config", "idle_time"),
+				Components.translatable("config", "idle_time"),
 				config.idle().timeout() / 60,
 				0, 30
 			)
 			.setDefaultValue(defaultConfig.idle().timeout() / 60)
 			.setSaveConsumer(value -> config.idle().setTimeout(value * 60))
 			.setTextGetter(ClothConfig::idleTimeMessage)
-			.setTooltip(localized("config", "idle_time_tooltip"))
+			.setTooltip(Components.translatable("config", "idle_time_tooltip"))
 			.build()
 		);
 
 		idle.add(
 			entryBuilder.startEnumSelector(
-				localized("config", "idle_condition"),
+				Components.translatable("config", "idle_condition"),
 				IdleCondition.class,
 				config.idle().condition()
 			)
@@ -95,77 +93,77 @@ public final class ClothConfig {
 		);
 
 		general.addEntry(idle.build());
-		SubCategoryBuilder volumeTransition = entryBuilder.startSubCategory(localized("config", "feature.volume_transition"));
+		SubCategoryBuilder volumeTransition = entryBuilder.startSubCategory(Components.translatable("config", "feature.volume_transition"));
 
 		VariableStepTransformer volumeTransformer = getVolumeStepTransformer();
 
 		volumeTransition.add(
 			entryBuilder.startIntSlider(
-				localized("config", "volume_transition_speed_up"),
+				Components.translatable("config", "volume_transition_speed_up"),
 				volumeTransformer.toStep((int) (config.volumeTransitionSpeed().getUp() * 100)),
 				1, 73
 			)
 			.setDefaultValue(volumeTransformer.toStep((int) (defaultConfig.volumeTransitionSpeed().getUp() * 100)))
 			.setSaveConsumer(step -> config.volumeTransitionSpeed().setUp((float) volumeTransformer.toValue(step) / 100))
 			.setTextGetter(ClothConfig::volumeTransitionMessage)
-			.setTooltip(localized("config", "volume_transition_speed_tooltip"))
+			.setTooltip(Components.translatable("config", "volume_transition_speed_tooltip"))
 			.build()
 		);
 
 		volumeTransition.add(
 			entryBuilder.startIntSlider(
-				localized("config", "volume_transition_speed_down"),
+				Components.translatable("config", "volume_transition_speed_down"),
 				volumeTransformer.toStep((int) (config.volumeTransitionSpeed().getDown() * 100)),
 				1, 73
 			)
 			.setDefaultValue(volumeTransformer.toStep((int) (defaultConfig.volumeTransitionSpeed().getDown() * 100)))
 			.setSaveConsumer(step -> config.volumeTransitionSpeed().setDown((float) volumeTransformer.toValue(step) / 100))
 			.setTextGetter(ClothConfig::volumeTransitionMessage)
-			.setTooltip(localized("config", "volume_transition_speed_tooltip"))
+			.setTooltip(Components.translatable("config", "volume_transition_speed_tooltip"))
 			.build()
 		);
 
 		general.addEntry(volumeTransition.build());
-		SubCategoryBuilder battery = entryBuilder.startSubCategory(localized("config", "feature.battery"));
+		SubCategoryBuilder battery = entryBuilder.startSubCategory(Components.translatable("config", "feature.battery"));
 
 		BatteryTrackerConfig batteryTracker = config.batteryTracker();
 
 		battery.add(
 			entryBuilder.startBooleanToggle(
-				localized("config", "battery_tracker"),
+				Components.translatable("config", "battery_tracker"),
 				batteryTracker.enabled()
 			)
 			.setDefaultValue(defaultConfig.batteryTracker().enabled())
 			.setSaveConsumer(batteryTracker::setEnabled)
-			.setTooltip(localized("config", "battery_tracker_tooltip"))
+			.setTooltip(Components.translatable("config", "battery_tracker_tooltip"))
 			.build()
 		);
 
 		battery.add(
 			entryBuilder.startBooleanToggle(
-				localized("config", "battery_tracker_switch_states"),
+				Components.translatable("config", "battery_tracker_switch_states"),
 				batteryTracker.switchStates()
 			)
 			.setDefaultValue(defaultConfig.batteryTracker().switchStates())
 			.setSaveConsumer(batteryTracker::setSwitchStates)
-			.setTooltip(localized("config", "battery_tracker_switch_states_tooltip"))
+			.setTooltip(Components.translatable("config", "battery_tracker_switch_states_tooltip"))
 			.build()
 		);
 
 		battery.add(
 			entryBuilder.startBooleanToggle(
-				localized("config", "battery_tracker_notifications"),
+				Components.translatable("config", "battery_tracker_notifications"),
 				batteryTracker.notifications()
 			)
 			.setDefaultValue(defaultConfig.batteryTracker().notifications())
 			.setSaveConsumer(batteryTracker::setNotifications)
-			.setTooltip(localized("config", "battery_tracker_notifications_tooltip"))
+			.setTooltip(Components.translatable("config", "battery_tracker_notifications_tooltip"))
 			.build()
 		);
 
 		battery.add(
 			entryBuilder.startEnumSelector(
-				localized("config", "battery_indicator_condition"),
+				Components.translatable("config", "battery_indicator_condition"),
 				BatteryIndicatorCondition.class,
 				batteryTracker.display().condition()
 			)
@@ -177,7 +175,7 @@ public final class ClothConfig {
 
 		battery.add(
 			entryBuilder.startEnumSelector(
-				localized("config", "battery_indicator_placement"),
+				Components.translatable("config", "battery_indicator_placement"),
 				BatteryIndicatorPlacement.class,
 				batteryTracker.display().placement()
 			)
@@ -201,7 +199,7 @@ public final class ClothConfig {
 			Config standard = defaultConfig.get(state);
 
 			ConfigCategory category = builder.getOrCreateCategory(
-				localized("config", "category." + state.toString().toLowerCase(Locale.ROOT))
+				Components.translatable("config", "category." + state.toString().toLowerCase(Locale.ROOT))
 			);
 
 			// Having too many possible values on our slider is hard to use, so the conversion is not linear:
@@ -209,7 +207,7 @@ public final class ClothConfig {
 			// Selecting the value all the way at the end sets no FPS limit, imitating the regular FPS slider
 			category.addEntry(
 				entryBuilder.startIntSlider(
-					localized("config", "frame_rate_target"),
+					Components.translatable("config", "frame_rate_target"),
 					fpsTransformer.toStep(instance.frameRateTarget()),
 					0, 68
 				)
@@ -221,7 +219,7 @@ public final class ClothConfig {
 
 			category.addEntry(
 				entryBuilder.startBooleanToggle(
-					Component.translatable("options.vsync"),
+					Components.translatable("options.vsync"),
 					instance.enableVsync()
 				)
 				.setDefaultValue(standard.enableVsync())
@@ -234,14 +232,14 @@ public final class ClothConfig {
 				continue;
 			}
 
-			SubCategoryBuilder volumes = entryBuilder.startSubCategory(localized("config", "volume_multiplier"));
+			SubCategoryBuilder volumes = entryBuilder.startSubCategory(Components.translatable("config", "volume_multiplier"));
 
 			for (SoundSource source : SoundSource.values()) {
 				String name = source.getName();
 
 				volumes.add(
 					entryBuilder.startIntSlider(
-						Component.translatable("soundCategory." + name),
+						Components.translatable("soundCategory." + name),
 						(int) (instance.rawVolumeMultiplier(source) * 100),
 						0, 100
 					)
@@ -256,7 +254,7 @@ public final class ClothConfig {
 
 			category.addEntry(
 				entryBuilder.startEnumSelector(
-					localized("config", "graphics_state"),
+					Components.translatable("config", "graphics_state"),
 					GraphicsState.class,
 					instance.graphicsState()
 				)
@@ -269,48 +267,48 @@ public final class ClothConfig {
 
 			category.addEntry(
 				entryBuilder.startBooleanToggle(
-					localized("config", "show_toasts"),
+					Components.translatable("config", "show_toasts"),
 					instance.showToasts()
 				)
 				.setDefaultValue(standard.showToasts())
 				.setSaveConsumer(instance::setShowToasts)
-				.setTooltip(localized("config", "show_toasts_tooltip"))
+				.setTooltip(Components.translatable("config", "show_toasts_tooltip"))
 				.build()
 			);
 
 			category.addEntry(
 				entryBuilder.startBooleanToggle(
-					localized("config", "run_garbage_collector"),
+					Components.translatable("config", "run_garbage_collector"),
 					instance.runGarbageCollector()
 				)
 				.setDefaultValue(standard.runGarbageCollector())
 				.setSaveConsumer(instance::setRunGarbageCollector)
-				.setTooltip(localized("config", "run_garbage_collector_tooltip"))
+				.setTooltip(Components.translatable("config", "run_garbage_collector_tooltip"))
 				.build()
 			);
 		}
 
 		ConfigCategory advanced = builder.getOrCreateCategory(
-			localized("config", "category.advanced")
+			Components.translatable("config", "category.advanced")
 		);
 
 		advanced.addEntry(
 			entryBuilder.startBooleanToggle(
-				localized("config", "download_natives"),
+				Components.translatable("config", "download_natives"),
 				config.downloadNatives()
 			)
 			.setDefaultValue(defaultConfig.downloadNatives())
 			.setSaveConsumer(config::setDownloadNatives)
 			.setTooltip(new Component[]{
-				localized("config", "download_natives_description_0"),
-				localized("config", "download_natives_description_1")}
+				Components.translatable("config", "download_natives_description_0"),
+				Components.translatable("config", "download_natives_description_1")}
 			)
 			.build()
 		);
 
 		advanced.addEntry(
 			entryBuilder.startBooleanToggle(
-				localized("config", "mock_battery_data"),
+				Components.translatable("config", "mock_battery_data"),
 				config.mockBatteryData()
 			)
 			.setDefaultValue(defaultConfig.mockBatteryData())
@@ -323,9 +321,9 @@ public final class ClothConfig {
 
 	private static Component idleTimeMessage(int value) {
 		if (value == 0) {
-			return localized("config", "disabled");
+			return Components.translatable("config", "disabled");
 		} else {
-			return localized("config", "minutes", value);
+			return Components.translatable("config", "minutes", value);
 		}
 	}
 
@@ -347,9 +345,9 @@ public final class ClothConfig {
 		int value = getVolumeStepTransformer().toValue(step);
 
 		if (value <= 300) {
-			return Component.literal(value + "%");
+			return Components.literal(value + "%");
 		} else {
-			return localized("config", "volume_transition_speed_instant");
+			return Components.translatable("config", "volume_transition_speed_instant");
 		}
 	}
 
@@ -369,34 +367,34 @@ public final class ClothConfig {
 		int fps = getFpsTransformer().toValue(step);
 
 		if (fps != Constants.NO_FRAME_RATE_LIMIT) {
-			return Component.translatable("options.framerate", fps);
+			return Components.translatable("options.framerate", fps);
 		} else {
-			return Component.translatable("options.framerateLimit.max");
+			return Components.translatable("options.framerateLimit.max");
 		}
 	}
 
 	private static Component volumeMultiplierMessage(int value) {
-		return Component.literal(Integer.toString(value) + "%");
+		return Components.literal(Integer.toString(value) + "%");
 	}
 
 	public static Component IdleConditionMessage(Enum<IdleCondition> state) {
-		return localized("config", "idle_condition_" + state.toString().toLowerCase(Locale.ROOT));
+		return Components.translatable("config", "idle_condition_" + state.toString().toLowerCase(Locale.ROOT));
 	}
 
 	private static Optional<Component[]> idleConditionTooltip(IdleCondition condition) {
-		return Optional.of(new Component[]{ localized("config", "idle_condition_" + condition.toString().toLowerCase(Locale.ROOT) + "_tooltip") });
+		return Optional.of(new Component[]{ Components.translatable("config", "idle_condition_" + condition.toString().toLowerCase(Locale.ROOT) + "_tooltip") });
 	}
 
 	private static Component graphicsStateMessage(Enum<GraphicsState> graphicsState) {
-		return localized("config", "graphics_state_" + graphicsState.toString().toLowerCase(Locale.ROOT));
+		return Components.translatable("config", "graphics_state_" + graphicsState.toString().toLowerCase(Locale.ROOT));
 	}
 
 	public static Component batteryIndicatorConditionMessage(Enum<BatteryIndicatorCondition> state) {
-		return localized("config", "battery_indicator_condition_" + state.toString().toLowerCase(Locale.ROOT));
+		return Components.translatable("config", "battery_indicator_condition_" + state.toString().toLowerCase(Locale.ROOT));
 	}
 
 	public static Component batteryIndicatorPlacementMessage(Enum<BatteryIndicatorPlacement> state) {
-		return localized("config", "battery_indicator_placement_" + state.toString().toLowerCase(Locale.ROOT));
+		return Components.translatable("config", "battery_indicator_placement_" + state.toString().toLowerCase(Locale.ROOT));
 	}
 
 	private static Optional<Component[]> graphicsStateTooltip(GraphicsState graphicsState) {
@@ -404,6 +402,6 @@ public final class ClothConfig {
 			return Optional.empty();
 		}
 
-		return Optional.of(new Component[]{ localized("config", "graphics_state_minimal_tooltip").withStyle(ChatFormatting.RED) });
+		return Optional.of(new Component[]{ Components.translatable("config", "graphics_state_minimal_tooltip").withStyle(ChatFormatting.RED) });
 	}
 }

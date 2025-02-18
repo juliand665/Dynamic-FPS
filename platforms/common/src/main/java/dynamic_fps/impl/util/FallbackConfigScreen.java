@@ -10,11 +10,11 @@ import net.minecraft.network.chat.Component;
 public class FallbackConfigScreen extends Screen {
 	private final Screen parent;
 
-	private static final Component WARNING_0 = Component.translatable("config.dynamic_fps.warn_cloth_config.0");
-	private static final Component WARNING_1 = Component.translatable("config.dynamic_fps.warn_cloth_config.1");
+	private static final Component WARNING_0 = Components.translatable("config.dynamic_fps.warn_cloth_config.0");
+	private static final Component WARNING_1 = Components.translatable("config.dynamic_fps.warn_cloth_config.1");
 
 	public FallbackConfigScreen(Screen parent) {
-		super(Component.translatable("config.dynamic_fps.title"));
+		super(Components.translatable("config.dynamic_fps.title"));
 
 		this.parent = parent;
 	}

@@ -6,8 +6,6 @@ import net.minecraft.client.KeyMapping;
 
 import com.mojang.blaze3d.platform.InputConstants;
 
-import static dynamic_fps.impl.util.Localization.translationKey;
-
 public final class KeyMappingHandler {
 	private final KeyMapping keyMapping;
 	private boolean isHoldingKey = false;
@@ -15,12 +13,12 @@ public final class KeyMappingHandler {
 
 	private static final KeyMappingHandler[] KEY_MAPPING_HANDLERS = {
 		new KeyMappingHandler(
-			translationKey("key", "toggle_forced"),
+			Components.translationKey("key", "toggle_forced"),
 			"key.categories.misc",
 			DynamicFPSMod::toggleForceLowFPS
 		),
 		new KeyMappingHandler(
-			translationKey("key", "toggle_disabled"),
+			Components.translationKey("key", "toggle_disabled"),
 			"key.categories.misc",
 			DynamicFPSMod::toggleDisabled
 		)

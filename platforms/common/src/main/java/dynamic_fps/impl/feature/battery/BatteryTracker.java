@@ -3,6 +3,7 @@ package dynamic_fps.impl.feature.battery;
 import dynamic_fps.impl.DynamicFPSMod;
 import dynamic_fps.impl.config.DynamicFPSConfig;
 import dynamic_fps.impl.service.Platform;
+import dynamic_fps.impl.util.Components;
 import dynamic_fps.impl.util.Logging;
 import dynamic_fps.impl.util.Threads;
 import net.lostluma.battery.api.Battery;
@@ -17,8 +18,6 @@ import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.Collections;
-
-import static dynamic_fps.impl.util.Localization.localized;
 
 public class BatteryTracker {
 	private static boolean readInitialData = false;
@@ -180,7 +179,7 @@ public class BatteryTracker {
 				path = "no_library";
 			}
 
-			Threads.runOnMainThread(() -> ErrorToast.queueToast(localized("toast", path)));
+			Threads.runOnMainThread(() -> ErrorToast.queueToast(Components.translatable("toast", path)));
 		}
 
 		return result;

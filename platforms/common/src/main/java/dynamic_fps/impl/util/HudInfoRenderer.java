@@ -8,8 +8,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 
-import static dynamic_fps.impl.util.Localization.localized;
-
 import net.minecraft.resources.ResourceLocation;
 
 import dynamic_fps.impl.DynamicFPSMod;
@@ -27,9 +25,9 @@ public final class HudInfoRenderer {
 		}
 
 		if (DynamicFPSMod.disabledByUser()) {
-			drawCenteredText(guiGraphics, localized("gui", "hud.disabled"));
+			drawCenteredText(guiGraphics, Components.translatable("gui", "hud.disabled"));
 		} else if (DynamicFPSMod.isForcingLowFPS()) {
-			drawCenteredText(guiGraphics, localized("gui", "hud.reducing"));
+			drawCenteredText(guiGraphics, Components.translatable("gui", "hud.reducing"));
 		}
 	}
 

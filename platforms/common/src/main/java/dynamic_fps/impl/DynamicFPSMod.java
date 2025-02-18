@@ -11,6 +11,7 @@ import dynamic_fps.impl.feature.battery.BatteryToast;
 import dynamic_fps.impl.feature.battery.BatteryTracker;
 import dynamic_fps.impl.feature.state.IdleHandler;
 import dynamic_fps.impl.util.BatteryUtil;
+import dynamic_fps.impl.util.Components;
 import dynamic_fps.impl.util.FallbackConfigScreen;
 import dynamic_fps.impl.util.Logging;
 import dynamic_fps.impl.feature.state.OptionHolder;
@@ -34,8 +35,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static dynamic_fps.impl.util.Localization.localized;
 
 public class DynamicFPSMod {
 	private static Config config = Config.ACTIVE;
@@ -220,7 +219,7 @@ public class DynamicFPSMod {
 			return;
 		}
 
-		Component title = localized("toast", titleTranslationKey);
+		Component title = Components.translatable("toast", titleTranslationKey);
 		ResourceLocation icon = ResourceLocations.of("dynamic_fps", "textures/battery/toast/" + iconPath + ".png");
 
 		BatteryToast.queueToast(title, icon);

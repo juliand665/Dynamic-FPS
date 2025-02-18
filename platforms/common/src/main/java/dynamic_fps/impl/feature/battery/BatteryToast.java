@@ -1,10 +1,9 @@
 package dynamic_fps.impl.feature.battery;
 
+import dynamic_fps.impl.util.Components;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-
-import static dynamic_fps.impl.util.Localization.localized;
 
 public class BatteryToast extends BaseToast {
 	private static BatteryToast queuedToast;
@@ -34,6 +33,6 @@ public class BatteryToast extends BaseToast {
 		}
 
 		// Initialize when first rendering so the battery percentage is mostly up-to-date
-		this.description = localized("toast", "battery_charge", BatteryTracker.charge());
+		this.description = Components.translatable("toast", "battery_charge", BatteryTracker.charge());
 	}
 }
