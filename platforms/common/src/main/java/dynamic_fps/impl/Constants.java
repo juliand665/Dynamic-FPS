@@ -8,7 +8,10 @@ public class Constants {
 	public static final boolean DEBUG = Platform.getInstance().isDevelopmentEnvironment();
 
 	// Miscellaneous
-	// Minecraft considers limits >=260 as infinite
+
+	// Minimum limit, for lower FPS we cancel frames
+	public static final int MIN_FRAME_RATE_LIMIT = 15;
+	// Minecraft considers limits >=260 as unlimited
 	public static final int NO_FRAME_RATE_LIMIT = 260;
 
 	// The Cloth Config mod ID has changed a few times

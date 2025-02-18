@@ -36,7 +36,7 @@ public class FramerateLimitTrackerMixin {
 		if (state != PowerState.FOCUSED) {
 			// Instruct Minecraft to render a minimum of 15 FPS
 			// Going lower here makes resuming again feel sluggish
-			callbackInfo.setReturnValue(Math.max(this.getFramerateTarget(), 15));
+			callbackInfo.setReturnValue(Math.max(this.getFramerateTarget(), Constants.MIN_FRAME_RATE_LIMIT));
 		} else {
 			IdleCondition condition = DynamicFPSConfig.INSTANCE.idle().condition();
 
