@@ -55,7 +55,7 @@ public final class HudInfoRenderer {
 		ResourceLocation icon = ResourceLocations.of("dynamic_fps", "textures/battery/icon/" + type + "_" + index + ".png");
 
 		// pair of coordinates
-		int[] position = config.placement().get(graphics);
+		int[] position = config.placement().get(minecraft.getWindow());
 
 		// resource, x, y, z, ?, ?, width, height, width, height
 		graphics.blit(RenderType::guiTextured, icon, position[0], position[1], 0.0f, 0, 16, 16, 16, 16);

@@ -1,15 +1,15 @@
 package dynamic_fps.impl.config.option;
 
-import net.minecraft.client.gui.GuiGraphics;
+import com.mojang.blaze3d.platform.Window;
 
 /**
  * Screen corner to render the battery indicator in.
  */
 public enum BatteryIndicatorPlacement {
-	TOP_LEFT(graphics -> new int[] {4, 4}),
-	TOP_RIGHT(graphics -> new int[] {graphics.guiWidth() - 47, 4}),
-	BOTTOM_LEFT(graphics -> new int[] {4, graphics.guiHeight() - 20}),
-	BOTTOM_RIGHT(graphics -> new int[] {graphics.guiWidth() - 47, graphics.guiHeight() - 20});
+	TOP_LEFT(window -> new int[] {4, 4}),
+	TOP_RIGHT(window -> new int[] {window.getGuiScaledWidth() - 47, 4}),
+	BOTTOM_LEFT(window -> new int[] {4, window.getGuiScaledHeight() - 20}),
+	BOTTOM_RIGHT(window -> new int[] {window.getGuiScaledWidth() - 47, window.getGuiScaledHeight() - 20});
 
 	private final DynamicPlacement placement;
 
@@ -17,12 +17,12 @@ public enum BatteryIndicatorPlacement {
 		this.placement = placement;
 	}
 
-	public int[] get(GuiGraphics graphics) {
-		return this.placement.get(graphics);
+	public int[] get(Window window) {
+		return this.placement.get(window);
 	}
 
 	@FunctionalInterface
 	private interface DynamicPlacement {
-		int[] get(GuiGraphics graphics);
+		int[] get(Window window);
 	}
 }
