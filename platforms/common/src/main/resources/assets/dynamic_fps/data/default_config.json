@@ -1,6 +1,7 @@
 {
     "enabled": true,
     "uncap_menu_frame_rate": false,
+    "ignore_initial_click": "disabled",
     "idle": {
         "timeout": 300,
         "condition": "vanilla"

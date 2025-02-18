@@ -11,6 +11,7 @@ import dynamic_fps.impl.PowerState;
 import dynamic_fps.impl.config.Config;
 import dynamic_fps.impl.config.option.IdleCondition;
 import dynamic_fps.impl.util.Components;
+import dynamic_fps.impl.config.option.IgnoreInitialClick;
 import dynamic_fps.impl.util.VariableStepTransformer;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
@@ -60,6 +61,19 @@ public final class ClothConfig {
 			.setDefaultValue(defaultConfig.uncapMenuFrameRate())
 			.setSaveConsumer(config::setUncapMenuFrameRate)
 			.setTooltip(Components.translatable("config", "uncap_menu_frame_rate_tooltip"))
+			.build()
+		);
+
+		misc.add(
+			entryBuilder.startEnumSelector(
+				Components.translatable("config", "ignore_initial_click"),
+				IgnoreInitialClick.class,
+				config.ignoreInitialClick()
+			)
+			.setDefaultValue(defaultConfig.ignoreInitialClick())
+			.setSaveConsumer(config::setIgnoreInitialClick)
+			.setEnumNameProvider(ClothConfig::ignoreInitialClickMessage)
+			.setTooltip(Components.translatable("config", "ignore_initial_click_tooltip"))
 			.build()
 		);
 
@@ -375,6 +389,10 @@ public final class ClothConfig {
 
 	private static Component volumeMultiplierMessage(int value) {
 		return Components.literal(Integer.toString(value) + "%");
+	}
+
+	public static Component ignoreInitialClickMessage(Enum<IdleCondition> state) {
+		return Components.translatable("config", "ignore_initial_click_" + state.toString().toLowerCase(Locale.ROOT));
 	}
 
 	public static Component IdleConditionMessage(Enum<IdleCondition> state) {

@@ -39,6 +39,13 @@
     "config.dynamic_fps.uncap_menu_frame_rate": "Uncap Menu FPS",
     "config.dynamic_fps.uncap_menu_frame_rate_tooltip": "Remove the 60 FPS limit in the main menu.",
 
+    "config.dynamic_fps.ignore_initial_click": "Ignore Initial Click",
+    "config.dynamic_fps.ignore_initial_click_tooltip": "Ignore accidental input when clicking on the unfocused game window.",
+
+    "config.dynamic_fps.ignore_initial_click_disabled": "Disabled",
+    "config.dynamic_fps.ignore_initial_click_in_world": "In World",
+    "config.dynamic_fps.ignore_initial_click_constant": "Constant",
+
     "config.dynamic_fps.battery_tracker": "Battery Tracking",
     "config.dynamic_fps.battery_tracker_tooltip": "Toggle all battery-related features on or off.",
 
