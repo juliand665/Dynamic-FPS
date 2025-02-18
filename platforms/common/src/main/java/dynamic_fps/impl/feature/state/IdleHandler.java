@@ -24,7 +24,6 @@ public class IdleHandler {
 	private static Vec3 prevPosition = Vec3.ZERO;
 	private static Vec3 prevLookAngle = Vec3.ZERO;
 
-	private static @Nullable GLFWScrollCallback previousScrollCallback;
 	private static @Nullable GLFWCursorPosCallback previousCursorPosCallback;
 
 	public static void init() {
