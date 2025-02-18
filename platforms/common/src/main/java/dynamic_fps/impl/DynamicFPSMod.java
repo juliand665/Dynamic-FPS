@@ -15,6 +15,7 @@ import dynamic_fps.impl.util.FallbackConfigScreen;
 import dynamic_fps.impl.util.Logging;
 import dynamic_fps.impl.feature.state.OptionHolder;
 import dynamic_fps.impl.util.ResourceLocations;
+import dynamic_fps.impl.util.Threads;
 import dynamic_fps.impl.util.Version;
 import dynamic_fps.impl.feature.volume.SmoothVolumeHandler;
 import dynamic_fps.impl.util.duck.DuckLoadingOverlay;
@@ -198,11 +199,20 @@ public class DynamicFPSMod {
 	// Internal logic
 
 	private static void doInit() {
-		// NOTE: Init battery tracker first here
-		// Since the idle handler queries it for info
-		BatteryTracker.init();
-		IdleHandler.init();
 		SmoothVolumeHandler.init();
+
+		if (!BatteryTracker.isFeatureEnabled()) {
+			IdleHandler.init();
+		} else {
+			// Run battery tracker init on its own thread to ensure
+			// The initial library download doesn't block rendering
+			Threads.create("init", () -> {
+				BatteryTracker.init();
+				// The idle handler must be initialized later,
+				// Since it queries whether there are batteries available
+				Threads.runOnMainThread(IdleHandler::init);
+			});
+		}
 	}
 
 	private static void showNotification(String titleTranslationKey, String iconPath) {
@@ -263,7 +273,7 @@ public class DynamicFPSMod {
 			checkForStateChanges0();
 		} else {
 			// Schedule check for the beginning of the next frame
-			minecraft.schedule(DynamicFPSMod::checkForStateChanges0);
+			Threads.runOnMainThread(DynamicFPSMod::checkForStateChanges0);
 		}
 	}
 
