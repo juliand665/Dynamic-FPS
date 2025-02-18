@@ -42,7 +42,9 @@ public final class ClothConfig {
 		DynamicFPSConfig config = DynamicFPSConfig.INSTANCE;
 		DynamicFPSConfig defaultConfig = DynamicFPSConfig.DEFAULTS;
 
-		general.addEntry(
+		SubCategoryBuilder misc = entryBuilder.startSubCategory(localized("config", "feature.misc"));
+
+		misc.add(
 			entryBuilder.startBooleanToggle(
 				localized("config", "enabled"),
 				config.enabled()
@@ -52,7 +54,7 @@ public final class ClothConfig {
 			.build()
 		);
 
-		general.addEntry(
+		misc.add(
 			entryBuilder.startBooleanToggle(
 				localized("config", "uncap_menu_frame_rate"),
 				config.uncapMenuFrameRate()
@@ -63,11 +65,10 @@ public final class ClothConfig {
 			.build()
 		);
 
-		general.addEntry(
-			entryBuilder.startTextDescription(CommonComponents.SPACE).build()
-		);
+		general.addEntry(misc.build());
+		SubCategoryBuilder idle = entryBuilder.startSubCategory(localized("config", "feature.idle"));
 
-		general.addEntry(
+		idle.add(
 			entryBuilder.startIntSlider(
 				localized("config", "idle_time"),
 				config.idle().timeout() / 60,
@@ -80,7 +81,7 @@ public final class ClothConfig {
 			.build()
 		);
 
-		general.addEntry(
+		idle.add(
 			entryBuilder.startEnumSelector(
 				localized("config", "idle_condition"),
 				IdleCondition.class,
@@ -93,13 +94,12 @@ public final class ClothConfig {
 			.build()
 		);
 
-		general.addEntry(
-			entryBuilder.startTextDescription(CommonComponents.SPACE).build()
-		);
+		general.addEntry(idle.build());
+		SubCategoryBuilder volumeTransition = entryBuilder.startSubCategory(localized("config", "feature.volume_transition"));
 
 		VariableStepTransformer volumeTransformer = getVolumeStepTransformer();
 
-		general.addEntry(
+		volumeTransition.add(
 			entryBuilder.startIntSlider(
 				localized("config", "volume_transition_speed_up"),
 				volumeTransformer.toStep((int) (config.volumeTransitionSpeed().getUp() * 100)),
@@ -112,7 +112,7 @@ public final class ClothConfig {
 			.build()
 		);
 
-		general.addEntry(
+		volumeTransition.add(
 			entryBuilder.startIntSlider(
 				localized("config", "volume_transition_speed_down"),
 				volumeTransformer.toStep((int) (config.volumeTransitionSpeed().getDown() * 100)),
@@ -125,13 +125,12 @@ public final class ClothConfig {
 			.build()
 		);
 
-		general.addEntry(
-			entryBuilder.startTextDescription(CommonComponents.SPACE).build()
-		);
+		general.addEntry(volumeTransition.build());
+		SubCategoryBuilder battery = entryBuilder.startSubCategory(localized("config", "feature.battery"));
 
 		BatteryTrackerConfig batteryTracker = config.batteryTracker();
 
-		general.addEntry(
+		battery.add(
 			entryBuilder.startBooleanToggle(
 				localized("config", "battery_tracker"),
 				batteryTracker.enabled()
@@ -142,7 +141,7 @@ public final class ClothConfig {
 			.build()
 		);
 
-		general.addEntry(
+		battery.add(
 			entryBuilder.startBooleanToggle(
 				localized("config", "battery_tracker_switch_states"),
 				batteryTracker.switchStates()
@@ -153,7 +152,7 @@ public final class ClothConfig {
 			.build()
 		);
 
-		general.addEntry(
+		battery.add(
 			entryBuilder.startBooleanToggle(
 				localized("config", "battery_tracker_notifications"),
 				batteryTracker.notifications()
@@ -164,7 +163,7 @@ public final class ClothConfig {
 			.build()
 		);
 
-		general.addEntry(
+		battery.add(
 			entryBuilder.startEnumSelector(
 				localized("config", "battery_indicator_condition"),
 				BatteryIndicatorCondition.class,
@@ -176,7 +175,7 @@ public final class ClothConfig {
 			.build()
 		);
 
-		general.addEntry(
+		battery.add(
 			entryBuilder.startEnumSelector(
 				localized("config", "battery_indicator_placement"),
 				BatteryIndicatorPlacement.class,
@@ -187,6 +186,8 @@ public final class ClothConfig {
 			.setEnumNameProvider(ClothConfig::batteryIndicatorPlacementMessage)
 			.build()
 		);
+
+		general.addEntry(battery.build());
 
 		// Used for each state's frame rate target slider below
 		VariableStepTransformer fpsTransformer = getFpsTransformer();
