@@ -40,7 +40,7 @@ public class ClickIgnoreHandler {
 			return false;
 		}
 
-		return this.focusedAt + 20 >= Instant.now().toEpochMilli();
+		return this.focusedAt + 10 >= Instant.now().toEpochMilli();
 	}
 
 	private void onFocusChanged(long address, boolean focused) {
