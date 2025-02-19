@@ -4,10 +4,12 @@ import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
 import dynamic_fps.impl.PowerState;
+import dynamic_fps.impl.config.option.IgnoreInitialClick;
 
 public final class DynamicFPSConfig {
 	private boolean enabled;
 	private boolean uncapMenuFrameRate;
+	private IgnoreInitialClick ignoreInitialClick;
 	private IdleConfig idle;
 	private BatteryTrackerConfig batteryTracker;
 	private VolumeTransitionConfig volumeTransitionSpeed;
@@ -63,6 +65,14 @@ public final class DynamicFPSConfig {
 
 	public void setUncapMenuFrameRate(boolean value) {
 		this.uncapMenuFrameRate = value;
+	}
+
+	public IgnoreInitialClick ignoreInitialClick() {
+		return this.ignoreInitialClick;
+	}
+
+	public void setIgnoreInitialClick(IgnoreInitialClick value) {
+		this.ignoreInitialClick = value;
 	}
 
 	public boolean downloadNatives() {

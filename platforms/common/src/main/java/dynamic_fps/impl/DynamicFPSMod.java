@@ -6,6 +6,7 @@ import dynamic_fps.impl.config.BatteryTrackerConfig;
 import dynamic_fps.impl.config.Config;
 import dynamic_fps.impl.config.DynamicFPSConfig;
 import dynamic_fps.impl.config.option.GraphicsState;
+import dynamic_fps.impl.feature.state.ClickIgnoreHandler;
 import dynamic_fps.impl.service.ModCompat;
 import dynamic_fps.impl.feature.battery.BatteryToast;
 import dynamic_fps.impl.feature.battery.BatteryTracker;
@@ -46,6 +47,7 @@ public class DynamicFPSMod {
 	private static final Minecraft minecraft = Minecraft.getInstance();
 
 	private static @Nullable WindowObserver window;
+	private static @Nullable ClickIgnoreHandler clickHandler;
 
 	private static long lastRender;
 
@@ -143,6 +145,8 @@ public class DynamicFPSMod {
 	public static void setWindow(long address) {
 		IdleHandler.setWindow(address);
 		window = new WindowObserver(address);
+
+		initClickHandler();
 	}
 
 	public static boolean checkForRender() {
@@ -198,6 +202,7 @@ public class DynamicFPSMod {
 	// Internal logic
 
 	private static void doInit() {
+		initClickHandler();
 		SmoothVolumeHandler.init();
 
 		if (!BatteryTracker.isFeatureEnabled()) {
@@ -214,6 +219,16 @@ public class DynamicFPSMod {
 		}
 	}
 
+	private static void initClickHandler() {
+		if (window == null || clickHandler != null) {
+			return;
+		}
+
+
+		if (ClickIgnoreHandler.isFeatureActive()) {
+			clickHandler = new ClickIgnoreHandler(window.address());
+		}
+	}
 	private static void showNotification(String titleTranslationKey, String iconPath) {
 		if (!DynamicFPSConfig.INSTANCE.batteryTracker().notifications()) {
 			return;
