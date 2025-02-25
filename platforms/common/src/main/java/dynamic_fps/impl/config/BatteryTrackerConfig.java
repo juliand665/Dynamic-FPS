@@ -6,7 +6,7 @@ import dynamic_fps.impl.config.option.BatteryIndicatorPlacement;
 public class BatteryTrackerConfig {
 	private boolean enabled;
 	private boolean switchStates;
-	private boolean notifications;
+	private NotificationConfig notifications;
 	private DisplayConfig display;
 
 	public boolean enabled() {
@@ -25,16 +25,33 @@ public class BatteryTrackerConfig {
 		this.switchStates = value;
 	}
 
-	public boolean notifications() {
+	public NotificationConfig notifications() {
 		return this.notifications;
-	}
-
-	public void setNotifications(boolean value) {
-		this.notifications = value;
 	}
 
 	public DisplayConfig display() {
 		return this.display;
+	}
+
+	public static class NotificationConfig {
+		private boolean enabled;
+		private int percent;
+
+		public boolean enabled() {
+			return this.enabled;
+		}
+
+		public void setEnabled(boolean value) {
+			this.enabled = value;
+		}
+
+		public int percent() {
+			return this.percent;
+		}
+
+		public void setPercent(int value) {
+			this.percent = value;
+		}
 	}
 
 	public static class DisplayConfig {

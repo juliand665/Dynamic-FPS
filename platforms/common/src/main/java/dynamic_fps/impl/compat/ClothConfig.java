@@ -167,11 +167,25 @@ public final class ClothConfig {
 		battery.add(
 			entryBuilder.startBooleanToggle(
 				Components.translatable("config", "battery_tracker_notifications"),
-				batteryTracker.notifications()
+				batteryTracker.notifications().enabled()
 			)
-			.setDefaultValue(defaultConfig.batteryTracker().notifications())
-			.setSaveConsumer(batteryTracker::setNotifications)
+			.setDefaultValue(defaultConfig.batteryTracker().notifications().enabled())
+			.setSaveConsumer(batteryTracker.notifications()::setEnabled)
 			.setTooltip(Components.translatable("config", "battery_tracker_notifications_tooltip"))
+			.build()
+		);
+
+		battery.add(
+			entryBuilder.startIntSlider(
+				Components.translatable("config", "battery_notification_percentage"),
+				batteryTracker.notifications().percent(),
+				1,
+				50
+			)
+			.setDefaultValue(defaultConfig.batteryTracker().notifications().percent())
+			.setSaveConsumer(batteryTracker.notifications()::setPercent)
+			.setTextGetter(ClothConfig::valueAsPercentMessage)
+			.setTooltip(Components.translatable("config", "battery_notification_percentage_tooltip"))
 			.build()
 		);
 
@@ -259,7 +273,7 @@ public final class ClothConfig {
 					)
 					.setDefaultValue((int) (standard.rawVolumeMultiplier(source) * 100))
 					.setSaveConsumer(value -> instance.setVolumeMultiplier(source, value / 100f))
-					.setTextGetter(ClothConfig::volumeMultiplierMessage)
+					.setTextGetter(ClothConfig::valueAsPercentMessage)
 					.build()
 				);
 			}
@@ -387,7 +401,7 @@ public final class ClothConfig {
 		}
 	}
 
-	private static Component volumeMultiplierMessage(int value) {
+	private static Component valueAsPercentMessage(int value) {
 		return Components.literal(Integer.toString(value) + "%");
 	}
 

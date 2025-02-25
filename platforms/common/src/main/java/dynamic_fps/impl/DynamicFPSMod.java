@@ -186,7 +186,9 @@ public class DynamicFPSMod {
 	}
 
 	public static void onBatteryChargeChanged(int before, int after) {
-		if (before > 10 && after <= 10) {
+		int percentage = DynamicFPSConfig.INSTANCE.batteryTracker().notifications().percent();
+
+		if (before > percentage && after <= percentage) {
 			showNotification("battery_critical", "reminder");
 		}
 	}
@@ -230,7 +232,7 @@ public class DynamicFPSMod {
 		}
 	}
 	private static void showNotification(String titleTranslationKey, String iconPath) {
-		if (!DynamicFPSConfig.INSTANCE.batteryTracker().notifications()) {
+		if (!DynamicFPSConfig.INSTANCE.batteryTracker().notifications().enabled()) {
 			return;
 		}
 
