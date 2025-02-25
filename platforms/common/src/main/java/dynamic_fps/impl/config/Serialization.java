@@ -217,9 +217,7 @@ public class Serialization {
 		}
 
 		JsonObject idle = new JsonObject();
-
 		idle.addProperty("timeout", timeout);
-		idle.addProperty("condition", "none");
 
 		root.add("idle", idle);
 	}
