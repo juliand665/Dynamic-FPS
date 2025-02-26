@@ -241,9 +241,9 @@ public class Serialization {
 			return;
 		}
 
-		JsonPrimitive field = battery.getAsJsonPrimitive("notifications");
+		JsonElement field = battery.get("notifications");
 
-		if (!field.isBoolean()) {
+		if (!field.isJsonPrimitive() || !field.getAsJsonPrimitive().isBoolean()) {
 			return;
 		}
 
