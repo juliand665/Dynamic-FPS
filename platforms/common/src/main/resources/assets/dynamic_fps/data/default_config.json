@@ -9,7 +9,10 @@
     "battery_tracker": {
         "enabled": false,
         "switch_states": false,
-        "notifications": true,
+        "notifications": {
+            "enabled": true,
+            "percent": 10
+        },
         "display": {
             "condition": "critical",
             "placement": "top_left"
