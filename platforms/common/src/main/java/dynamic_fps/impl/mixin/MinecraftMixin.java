@@ -1,10 +1,10 @@
 package dynamic_fps.impl.mixin;
 
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.mojang.blaze3d.platform.Window;
-import dynamic_fps.impl.Constants;
+import com.mojang.blaze3d.systems.CommandEncoder;
+import com.mojang.blaze3d.textures.GpuTexture;
 import dynamic_fps.impl.DynamicFPSMod;
-import dynamic_fps.impl.PowerState;
-import dynamic_fps.impl.config.DynamicFPSConfig;
 import dynamic_fps.impl.feature.state.IdleHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
@@ -14,7 +14,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Minecraft.class)
 public class MinecraftMixin {
@@ -36,4 +35,17 @@ public class MinecraftMixin {
 		IdleHandler.onActivity();
 	}
 
+	/**
+	 * Delay cleaning up the previously rendered frame until we are rendering another frame.
+	 */
+	@WrapWithCondition(
+		method = "runTick",
+		at = @At(
+			value = "INVOKE",
+			target = "Lcom/mojang/blaze3d/systems/CommandEncoder;clearColorAndDepthTextures(Lcom/mojang/blaze3d/textures/GpuTexture;ILcom/mojang/blaze3d/textures/GpuTexture;D)V"
+		)
+	)
+	private boolean runTick(CommandEncoder instance, GpuTexture gpuTexture, int i, GpuTexture gpuTexture2, double v) {
+		return DynamicFPSMod.checkForRender();
+	}
 }

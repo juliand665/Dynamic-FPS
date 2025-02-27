@@ -149,16 +149,24 @@ public class DynamicFPSMod {
 		initClickHandler();
 	}
 
+	static boolean renderedCurrentFrame = true;
+
 	public static boolean checkForRender() {
 		long currentTime = Util.getEpochMillis();
 		long timeSinceLastRender = currentTime - lastRender;
 
 		if (!checkForRender(timeSinceLastRender)) {
+			renderedCurrentFrame = false;
 			return false;
 		}
 
 		lastRender = currentTime;
+		renderedCurrentFrame = true;
 		return true;
+	}
+
+	public static boolean renderedCurrentFrame() {
+		return renderedCurrentFrame;
 	}
 
 	public static int targetFrameRate() {
