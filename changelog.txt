@@ -1,9 +1,1 @@
-- Add option to ignore mouse inputs while the window is unfocused ([PR 244](https://github.com/juliand665/Dynamic-FPS/pull/244) by @LostLuma)
-  - Allows clicking on the game window without punching or using your current item
-  - This option is disabled by default, and can be enabled in all situations or while in a world only
-- Organize options into collapsible groups on general options screen ([PR 242](https://github.com/juliand665/Dynamic-FPS/pull/242) by @LostLuma)
-- Fix stuttering while reducing the frame rate ([PR 241](https://github.com/juliand665/Dynamic-FPS/pull/241) by @LostLuma)
-  - This is most noticeable when setting an FPS limit for the "On Battery" state while actively playing
-- Fix rendering being blocked initially enabling the battery feature ([PR 243](https://github.com/juliand665/Dynamic-FPS/pull/243) by @LostLuma)
-- Update German translations ([PR 238](https://github.com/juliand665/Dynamic-FPS/pull/238) by @Lucanoria)
-- Update Simplified Chinese translation ([PR 239](https://github.com/juliand665/Dynamic-FPS/pull/239) by @Q2297045667)
+- Allow customizing which battery level is considered critical ([PR 247](https://github.com/juliand665/Dynamic-FPS/pull/247) by @LostLuma)
