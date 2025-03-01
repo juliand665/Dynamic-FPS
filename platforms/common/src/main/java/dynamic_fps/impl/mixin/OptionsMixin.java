@@ -32,12 +32,4 @@ public abstract class OptionsMixin {
 			OptionHolder.applyOptions(Minecraft.getInstance().options, DynamicFPSMod.graphicsState());
 		}
 	}
-
-	/**
-	 * Apply the volume multiplier to any newly-played sounds.
-	 */
-	@ModifyReturnValue(method = "getSoundSourceVolume", at = @At("RETURN"))
-	private float getSoundSourceVolume(float value, @Local(argsOnly = true) @Nullable SoundSource source) {
-		return value * SmoothVolumeHandler.volumeMultiplier(source);
-	}
 }

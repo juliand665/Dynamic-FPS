@@ -16,9 +16,11 @@ import net.neoforged.neoforge.common.NeoForge;
 @Mod(Constants.MOD_ID)
 public class DynamicFPSNeoForgeMod {
     public DynamicFPSNeoForgeMod(IEventBus modEventBus) {
-		if (FMLLoader.getCurrent().getDist().isDedicatedServer()) {
+		if (FMLLoader.getDist().isDedicatedServer()) {
 			return;
 		}
+
+		DynamicFPSMod.init();
 
 		ModLoadingContext.get().registerExtensionPoint(
 			IConfigScreenFactory.class,
