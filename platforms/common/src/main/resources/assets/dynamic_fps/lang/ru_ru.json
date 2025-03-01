@@ -39,7 +39,7 @@
     "config.dynamic_fps.battery_indicator_condition": "Отображение индикатора батареи",
     "config.dynamic_fps.battery_indicator_condition_disabled": "Отключён",
     "config.dynamic_fps.battery_indicator_condition_draining": "При разрядке",
-    "config.dynamic_fps.battery_indicator_condition_critical": "Низкий заряд | ≤10%",
+    "config.dynamic_fps.battery_indicator_condition_critical": "Низкий заряд",
     "config.dynamic_fps.battery_indicator_condition_constant": "Всегда",
 
     "config.dynamic_fps.battery_indicator_placement": "Положение индикатора",

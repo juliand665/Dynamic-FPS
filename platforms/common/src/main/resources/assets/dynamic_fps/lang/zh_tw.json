@@ -46,7 +46,7 @@
     "config.dynamic_fps.battery_indicator_condition": "電池指示條件",
     "config.dynamic_fps.battery_indicator_condition_disabled": "已停用",
     "config.dynamic_fps.battery_indicator_condition_draining": "電池放電時",
-    "config.dynamic_fps.battery_indicator_condition_critical": "危急/少於 10%",
+    "config.dynamic_fps.battery_indicator_condition_critical": "危急/少於",
     "config.dynamic_fps.battery_indicator_condition_constant": "持續顯示",
 
     "config.dynamic_fps.battery_indicator_placement": "指示器位置",
@@ -89,7 +89,7 @@
     "toast.dynamic_fps.error": "Dynamic FPS 電池錯誤",
     "toast.dynamic_fps.no_support": "電腦不支援",
     "toast.dynamic_fps.no_library": "程式庫下載已停用",
-    
+
     "toast.dynamic_fps.battery_charging": "正在充電！",
     "toast.dynamic_fps.battery_draining": "正在放電！",
     "toast.dynamic_fps.battery_critical": "電量不足！",

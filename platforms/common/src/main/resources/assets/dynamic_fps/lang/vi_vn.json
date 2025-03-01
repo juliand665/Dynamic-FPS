@@ -46,7 +46,7 @@
     "config.dynamic_fps.battery_indicator_condition": "Điều Kiện Chỉ Báo Pin",
     "config.dynamic_fps.battery_indicator_condition_disabled": "Tắt",
     "config.dynamic_fps.battery_indicator_condition_draining": "Khi Đang Xả",
-    "config.dynamic_fps.battery_indicator_condition_critical": "Nguy Kịch / < 10%",
+    "config.dynamic_fps.battery_indicator_condition_critical": "Nguy Kịch",
     "config.dynamic_fps.battery_indicator_condition_constant": "Liên Tục",
 
     "config.dynamic_fps.battery_indicator_placement": "Vị Trí Chỉ Báo",

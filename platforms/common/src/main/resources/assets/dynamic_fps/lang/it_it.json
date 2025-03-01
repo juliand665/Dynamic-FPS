@@ -46,7 +46,7 @@
     "config.dynamic_fps.battery_indicator_condition": "Condizione Indicatore di Batteria",
     "config.dynamic_fps.battery_indicator_condition_disabled": "Disabilitato",
     "config.dynamic_fps.battery_indicator_condition_draining": "Durante lo scaricamento",
-    "config.dynamic_fps.battery_indicator_condition_critical": "Critico / < 10%",
+    "config.dynamic_fps.battery_indicator_condition_critical": "Critico",
     "config.dynamic_fps.battery_indicator_condition_constant": "Costante",
 
     "config.dynamic_fps.battery_indicator_placement": "Posizionamento Indicatore",

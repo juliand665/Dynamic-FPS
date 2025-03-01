@@ -167,25 +167,25 @@ public final class ClothConfig {
 		battery.add(
 			entryBuilder.startBooleanToggle(
 				Components.translatable("config", "battery_tracker_notifications"),
-				batteryTracker.notifications().enabled()
+				batteryTracker.notifications()
 			)
-			.setDefaultValue(defaultConfig.batteryTracker().notifications().enabled())
-			.setSaveConsumer(batteryTracker.notifications()::setEnabled)
+			.setDefaultValue(defaultConfig.batteryTracker().notifications())
+			.setSaveConsumer(batteryTracker::setNotifications)
 			.setTooltip(Components.translatable("config", "battery_tracker_notifications_tooltip"))
 			.build()
 		);
 
 		battery.add(
 			entryBuilder.startIntSlider(
-				Components.translatable("config", "battery_notification_percentage"),
-				batteryTracker.notifications().percent(),
+				Components.translatable("config", "battery_critical_level"),
+				batteryTracker.criticalLevel(),
 				1,
 				50
 			)
-			.setDefaultValue(defaultConfig.batteryTracker().notifications().percent())
-			.setSaveConsumer(batteryTracker.notifications()::setPercent)
+			.setDefaultValue(defaultConfig.batteryTracker().criticalLevel())
+			.setSaveConsumer(batteryTracker::setCriticalLevel)
 			.setTextGetter(ClothConfig::valueAsPercentMessage)
-			.setTooltip(Components.translatable("config", "battery_notification_percentage_tooltip"))
+			.setTooltip(Components.translatable("config", "battery_critical_level_tooltip"))
 			.build()
 		);
 

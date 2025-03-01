@@ -46,7 +46,7 @@
     "config.dynamic_fps.battery_indicator_condition": "电池指示条件",
     "config.dynamic_fps.battery_indicator_condition_disabled": "禁用",
     "config.dynamic_fps.battery_indicator_condition_draining": "放电",
-    "config.dynamic_fps.battery_indicator_condition_critical": "临界 / < 10%",
+    "config.dynamic_fps.battery_indicator_condition_critical": "临界",
     "config.dynamic_fps.battery_indicator_condition_constant": "持续",
 
     "config.dynamic_fps.battery_indicator_placement": "指示器位置",

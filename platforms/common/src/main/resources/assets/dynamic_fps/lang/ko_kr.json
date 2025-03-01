@@ -40,7 +40,7 @@
     "config.dynamic_fps.battery_indicator_condition": "배터리 표시기 상태",
     "config.dynamic_fps.battery_indicator_condition_disabled": "비활성화",
     "config.dynamic_fps.battery_indicator_condition_draining": "방전중",
-    "config.dynamic_fps.battery_indicator_condition_critical": "위험 / < 10%",
+    "config.dynamic_fps.battery_indicator_condition_critical": "위험",
     "config.dynamic_fps.battery_indicator_condition_constant": "고정",
 
     "config.dynamic_fps.battery_indicator_placement": "표시기 배치",

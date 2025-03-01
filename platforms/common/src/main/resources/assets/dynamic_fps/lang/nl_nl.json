@@ -39,7 +39,7 @@
     "config.dynamic_fps.battery_indicator_condition": "Batterijindicator conditie",
     "config.dynamic_fps.battery_indicator_condition_disabled": "Uitgeschakeld",
     "config.dynamic_fps.battery_indicator_condition_draining": "Tijdens het ontladen",
-    "config.dynamic_fps.battery_indicator_condition_critical": "Kritisch / <= 10%",
+    "config.dynamic_fps.battery_indicator_condition_critical": "Kritisch",
     "config.dynamic_fps.battery_indicator_condition_constant": "Altijd",
 
     "config.dynamic_fps.battery_indicator_placement": "Indicator plaatsing",

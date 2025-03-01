@@ -46,7 +46,7 @@
     "config.dynamic_fps.battery_indicator_condition": "Pil göstergesi durumu",
     "config.dynamic_fps.battery_indicator_condition_disabled": "Kapalı",
     "config.dynamic_fps.battery_indicator_condition_draining": "Deşarj olurken",
-    "config.dynamic_fps.battery_indicator_condition_critical": "Kritik / < %10",
+    "config.dynamic_fps.battery_indicator_condition_critical": "Kritik",
     "config.dynamic_fps.battery_indicator_condition_constant": "Sürekli",
 
     "config.dynamic_fps.battery_indicator_placement": "Gösterge yerleşimi",

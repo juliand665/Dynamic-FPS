@@ -139,9 +139,6 @@ public class Serialization {
 		// v3.5.0
 		upgradeIdleConfig(config);
 
-		// v3.9.0
-		upgradeBatteryNotificationConfig(config);
-
 		// version agnostic
 		addMissingFields(config, (JsonObject) JsonUtil.toJsonTree(DynamicFPSConfig.DEFAULTS));
 	}
@@ -223,32 +220,6 @@ public class Serialization {
 		idle.addProperty("timeout", timeout);
 
 		root.add("idle", idle);
-	}
-
-	private static void upgradeBatteryNotificationConfig(JsonObject root) {
-		// Convert battery notification to object
-		// - { "notifications": true, ... }
-		// + { "notifications": { "enabled": true, "percent": 10 }, ... }
-		if (!root.has("battery_tracker")) {
-			return;
-		}
-
-		JsonObject battery = root.getAsJsonObject("battery_tracker");
-
-		if (!battery.has("notifications")) {
-			return;
-		}
-
-		JsonElement field = battery.get("notifications");
-
-		if (!field.isJsonPrimitive() || !field.getAsJsonPrimitive().isBoolean()) {
-			return;
-		}
-
-		JsonObject notifications = new JsonObject();
-		notifications.add("enabled", field);
-
-		battery.add("notifications", notifications);
 	}
 
 	private static @Nullable JsonObject getStatesAsObject(JsonObject root) {

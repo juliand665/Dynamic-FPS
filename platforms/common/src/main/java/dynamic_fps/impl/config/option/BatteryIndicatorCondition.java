@@ -1,5 +1,6 @@
 package dynamic_fps.impl.config.option;
 
+import dynamic_fps.impl.config.DynamicFPSConfig;
 import dynamic_fps.impl.feature.battery.BatteryTracker;
 import net.lostluma.battery.api.State;
 
@@ -18,9 +19,12 @@ public enum BatteryIndicatorCondition {
 	DRAINING(() -> BatteryTracker.status() == State.DISCHARGING),
 
 	/**
-	 * Show battery indicator when the battery is at a critical level (<= 10%).
+	 * Show battery indicator when the battery is at a critical level.
 	 */
-	CRITICAL(() -> DRAINING.isConditionMet() && BatteryTracker.charge() <= 10),
+	CRITICAL(() -> {
+		int critical = DynamicFPSConfig.INSTANCE.batteryTracker().criticalLevel();
+		return DRAINING.isConditionMet() && BatteryTracker.charge() <= critical;
+	}),
 
 	/**
 	 * Show battery indicator at all times.

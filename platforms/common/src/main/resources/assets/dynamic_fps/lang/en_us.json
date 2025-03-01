@@ -55,13 +55,13 @@
     "config.dynamic_fps.battery_tracker_notifications": "Battery Notifications",
     "config.dynamic_fps.battery_tracker_notifications_tooltip": "Receive in-game notifications about your battery status.",
 
-    "config.dynamic_fps.battery_notification_percentage": "Notification Threshold",
-    "config.dynamic_fps.battery_notification_percentage_tooltip": "Set at which battery level a charging reminder is sent.",
+    "config.dynamic_fps.battery_critical_level": "Critical Charge Threshold",
+    "config.dynamic_fps.battery_critical_level_tooltip": "Set which battery charge level is considered critical.",
 
     "config.dynamic_fps.battery_indicator_condition": "Battery Indicator Condition",
     "config.dynamic_fps.battery_indicator_condition_disabled": "Disabled",
     "config.dynamic_fps.battery_indicator_condition_draining": "While discharging",
-    "config.dynamic_fps.battery_indicator_condition_critical": "Critical / < 10%",
+    "config.dynamic_fps.battery_indicator_condition_critical": "Critical",
     "config.dynamic_fps.battery_indicator_condition_constant": "Constant",
 
     "config.dynamic_fps.battery_indicator_placement": "Indicator Placement",

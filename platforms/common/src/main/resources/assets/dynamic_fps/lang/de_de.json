@@ -46,7 +46,7 @@
     "config.dynamic_fps.battery_indicator_condition": "Akkuanzeige-Bedingung",
     "config.dynamic_fps.battery_indicator_condition_disabled": "Deaktiviert",
     "config.dynamic_fps.battery_indicator_condition_draining": "Während des Entladens",
-    "config.dynamic_fps.battery_indicator_condition_critical": "Kritisch / < 10%",
+    "config.dynamic_fps.battery_indicator_condition_critical": "Kritisch",
     "config.dynamic_fps.battery_indicator_condition_constant": "Konstant",
 
     "config.dynamic_fps.battery_indicator_placement": "Platzierung der Akkuanzeige",
