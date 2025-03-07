@@ -83,7 +83,7 @@
             },
             {
                 "id": "minecraft",
-                "versions": ">=1.21.2"
+                "versions": ">=1.21.5-alpha.25.9.a"
             },
             {
                 "id": "mixinextras",
