@@ -1,1 +1,1 @@
-- Allow customizing which battery level is considered critical ([PR 247](https://github.com/juliand665/Dynamic-FPS/pull/247) by @LostLuma)
+- Fix no FPS limit being applied in menus with certain configurations ([PR 249](https://github.com/juliand665/Dynamic-FPS/pull/249) by @LostLuma)
