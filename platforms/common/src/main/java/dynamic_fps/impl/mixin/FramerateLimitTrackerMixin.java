@@ -44,10 +44,12 @@ public class FramerateLimitTrackerMixin {
 			// Note: If Dynamic FPS thinks the user is idle the power state would be different above
 			if (condition != IdleCondition.VANILLA) {
 				// Since we're bypassing the idle checking code we also need to set the menu FPS here as it's bundled now
-				if (isInLevel() || !DynamicFPSConfig.INSTANCE.uncapMenuFrameRate()) {
+				if (isInLevel()) {
 					callbackInfo.setReturnValue(this.framerateLimit);
-				} else {
+				} else if(DynamicFPSConfig.INSTANCE.uncapMenuFrameRate()) {
 					callbackInfo.setReturnValue(this.getMenuFramerateLimit());
+				}else {
+					callbackInfo.setReturnValue(Constants.TITLE_FRAME_RATE_LIMIT);
 				}
 			}
 		}
