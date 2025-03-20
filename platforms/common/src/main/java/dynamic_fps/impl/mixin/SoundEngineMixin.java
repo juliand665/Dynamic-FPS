@@ -1,8 +1,12 @@
 package dynamic_fps.impl.mixin;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import dynamic_fps.impl.feature.volume.SmoothVolumeHandler;
+import dynamic_fps.impl.util.Logging;
 import net.minecraft.client.Minecraft;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
@@ -66,9 +70,23 @@ public class SoundEngineMixin implements DuckSoundEngine {
 		// Also fixes this compat bug: https://github.com/juliand665/Dynamic-FPS/issues/55
 		boolean isMusic = source.equals(SoundSource.MUSIC) || source.equals(SoundSource.RECORDS);
 
-		this.instanceToChannel.forEach((instance, handle) -> {
-			if (!instance.getSource().equals(source)) {
-				return;
+		// Create a copy of all currently active sounds, as iterating over this collection
+		// Can throw if a sound instance stops playing while we are updating sound volumes
+		List<SoundInstance> sounds;
+
+		try {
+			sounds = new ArrayList<>(this.instanceToChannel.keySet());
+		} catch (Throwable e) {
+			Logging.getLogger().error("Unable to update source volume!", e);
+			return;
+		}
+
+		// Using our copy should now be safe as long as we check the channel handle exists
+		for (SoundInstance instance : sounds) {
+			ChannelAccess.ChannelHandle handle = this.instanceToChannel.get(instance);
+
+			if (handle == null || !instance.getSource().equals(source)) {
+				continue;
 			}
 
 			float volume = this.calculateVolume(instance);
@@ -93,7 +111,7 @@ public class SoundEngineMixin implements DuckSoundEngine {
 					channel.setVolume(volume);
 				}
 			});
-		});
+		}
 	}
 
 	/**
