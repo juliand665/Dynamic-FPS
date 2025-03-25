@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import dynamic_fps.impl.Constants;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
@@ -24,7 +25,7 @@ public class DebugScreenOverlayMixin {
 	private List<String> getGameInformation(List<String> result) {
 		if (DynamicFPSMod.isDisabled()) {
 			String reason = DynamicFPSMod.whyIsTheModNotWorking();
-			result.add(2, this.format("§c[Dynamic FPS] Inactive! Reason: %s§r", reason));
+			result.add(2, this.dynamic_fps$format("§c[Dynamic FPS] Inactive! Reason: %s§r", reason));
 		} else {
 			PowerState status = DynamicFPSMod.powerState();
 
@@ -36,7 +37,7 @@ public class DebugScreenOverlayMixin {
 
 				result.add(
 					2,
-					this.format("§c[Dynamic FPS] FPS: %s%s P: %s§r", target, vsync, status.toString().toLowerCase(Locale.ROOT))
+					this.dynamic_fps$format("§c[Dynamic FPS] FPS: %s%s P: %s§r", target, vsync, status.toString().toLowerCase(Locale.ROOT))
 				);
 			}
 		}
@@ -44,7 +45,8 @@ public class DebugScreenOverlayMixin {
 		return result;
 	}
 
-	private String format(String template, Object... args) {
+	@Unique
+	private String dynamic_fps$format(String template, Object... args) {
 		return String.format(Locale.ROOT, template, args);
 	}
 }

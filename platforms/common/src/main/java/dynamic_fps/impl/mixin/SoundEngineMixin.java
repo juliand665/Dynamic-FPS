@@ -3,7 +3,6 @@ package dynamic_fps.impl.mixin;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import dynamic_fps.impl.feature.volume.SmoothVolumeHandler;
 import dynamic_fps.impl.util.Logging;
@@ -61,7 +60,7 @@ public class SoundEngineMixin implements DuckSoundEngine {
 
 		if (source.equals(SoundSource.MASTER)) {
 			float volume = this.options.getSoundSourceVolume(source);
-			this.listener.setGain(this.adjustVolume(volume, source));
+			this.listener.setGain(this.dynamic_fps$adjustVolume(volume, source));
 			return;
 		}
 
@@ -132,13 +131,14 @@ public class SoundEngineMixin implements DuckSoundEngine {
 	 */
 	@ModifyReturnValue(method = "getVolume", at = @At("RETURN"))
 	private float getVolume(float original, @Local(argsOnly = true) @Nullable SoundSource source) {
-		return this.adjustVolume(original, source);
+		return this.dynamic_fps$adjustVolume(original, source);
 	}
 
 	/**
 	 * Adjust the given volume with the multiplier set in the active Dynamic FPS config.
 	 */
-	private float adjustVolume(float value, @Nullable SoundSource source) {
+	@Unique
+	private float dynamic_fps$adjustVolume(float value, @Nullable SoundSource source) {
 		if (source == null) {
 			source = SoundSource.MASTER;
 		}
