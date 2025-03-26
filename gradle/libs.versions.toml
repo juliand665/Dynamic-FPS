@@ -24,7 +24,7 @@ cloth_config = "15.0.127"
 mixinextras = "0.4.1"
 
 architectury = "3.4.161"
-architectury_loom = "1.10.429"
+architectury_loom = "1.10.430"
 
 mod_publish = "0.8.4"
 
