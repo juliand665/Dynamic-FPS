@@ -44,8 +44,6 @@ public class DynamicFPSMod {
 	private static boolean isForcingLowFPS = false;
 	private static boolean isKeybindDisabled = false;
 
-	private static final Minecraft minecraft = Minecraft.getInstance();
-
 	private static @Nullable WindowObserver window;
 	private static @Nullable ClickIgnoreHandler clickHandler;
 
@@ -251,11 +249,14 @@ public class DynamicFPSMod {
 	}
 
 	private static boolean isLevelCoveredByOverlay() {
+		Minecraft minecraft = Minecraft.getInstance();
 		return OVERLAY_OPTIMIZATION_ACTIVE && minecraft.getOverlay() instanceof LoadingOverlay && ((DuckLoadingOverlay)minecraft.getOverlay()).dynamic_fps$isReloadComplete();
 	}
 
 	@SuppressWarnings("squid:S1215") // Garbage collector call
 	public static void handleStateChange(PowerState previous, PowerState current) {
+		Minecraft minecraft = Minecraft.getInstance();
+
 		if (Constants.DEBUG) {
 			Logging.getLogger().info("State changed from {} to {}.", previous, current);
 		}
@@ -289,6 +290,8 @@ public class DynamicFPSMod {
 	}
 
 	private static void checkForStateChanges() {
+		Minecraft minecraft = Minecraft.getInstance();
+
 		if (window == null) {
 			return;
 		}

@@ -6,7 +6,6 @@ import dynamic_fps.impl.util.Version;
 import net.minecraft.client.Minecraft;
 
 public class GLFW {
-	private static final Minecraft minecraft = Minecraft.getInstance();
 	private static final boolean enterEventBroken = isEnterEventBroken();
 
 	/**
@@ -18,6 +17,8 @@ public class GLFW {
 	 * Dynamic FPS releases and captures the cursor in tandem with window focus.
 	 */
 	public static void applyWorkaround() {
+		Minecraft minecraft = Minecraft.getInstance();
+
 		if (!useWorkaround()) {
 			return;
 		}
@@ -38,6 +39,7 @@ public class GLFW {
 	}
 
 	private static boolean useWorkaround() {
+		Minecraft minecraft = Minecraft.getInstance();
 		return enterEventBroken && minecraft.screen == null && !minecraft.options.pauseOnLostFocus;
 	}
 

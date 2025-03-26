@@ -8,7 +8,7 @@ fabric_api = "0.118.2+1.21.5"
 
 forge = "1.21.3-53.0.7"
 
-neoforge = "21.3.0-beta"
+neoforge = "21.5.2-beta"
 
 quilt_loader = "0.25.0"
 
@@ -24,7 +24,7 @@ cloth_config = "15.0.127"
 mixinextras = "0.4.1"
 
 architectury = "3.4.161"
-architectury_loom = "1.9.428"
+architectury_loom = "1.10.429"
 
 mod_publish = "0.8.4"
 

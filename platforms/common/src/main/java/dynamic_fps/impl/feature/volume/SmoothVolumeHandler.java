@@ -15,7 +15,6 @@ public class SmoothVolumeHandler {
 	private static boolean active = false;
 	private static boolean needsUpdating = false;
 
-	private static final Minecraft minecraft = Minecraft.getInstance();
 	private static final Map<SoundSource, Float> currentOverrides = new HashMap<>();
 
 	public static void init() {
@@ -77,6 +76,7 @@ public class SmoothVolumeHandler {
 
 	private static void updateVolume(SoundSource source) {
 		// Update volume of currently playing sounds
+		Minecraft minecraft = Minecraft.getInstance();
 		((DuckSoundEngine) minecraft.getSoundManager().soundEngine).dynamic_fps$updateVolume(source);
 	}
 }

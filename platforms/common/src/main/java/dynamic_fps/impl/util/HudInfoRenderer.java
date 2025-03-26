@@ -13,9 +13,9 @@ import net.minecraft.resources.ResourceLocation;
 import dynamic_fps.impl.DynamicFPSMod;
 
 public final class HudInfoRenderer {
-	private static final Minecraft minecraft = Minecraft.getInstance();
-
 	public static void renderInfo(GuiGraphics guiGraphics) {
+		Minecraft minecraft = Minecraft.getInstance();
+
 		if (minecraft.options.hideGui || minecraft.screen != null) {
 			return;
 		}
@@ -33,11 +33,14 @@ public final class HudInfoRenderer {
 
 	private static void drawCenteredText(GuiGraphics guiGraphics, Component component) {
 		int width = guiGraphics.guiWidth() / 2;
+		Minecraft minecraft = Minecraft.getInstance();
 
 		guiGraphics.drawCenteredString(minecraft.font, component, width, 32, 0xFFFFFF);
 	}
 
 	private static void drawBatteryOverlay(GuiGraphics graphics) {
+		Minecraft minecraft = Minecraft.getInstance();
+
 		if (minecraft.getDebugOverlay().showDebugScreen() || !BatteryTracker.hasBatteries()) {
 			return;
 		}

@@ -16,8 +16,6 @@ public class ClickIgnoreHandler {
 	private final GLFWWindowFocusCallback previousFocusCallback;
 	private final GLFWMouseButtonCallback previousClickCallback;
 
-	private static final Minecraft MINECRAFT = Minecraft.getInstance();
-
 	public ClickIgnoreHandler(long address) {
 		this.address = address;
 
@@ -30,13 +28,14 @@ public class ClickIgnoreHandler {
 	}
 
 	private boolean shouldIgnoreClick() {
+		Minecraft minecraft = Minecraft.getInstance();
 		IgnoreInitialClick config = DynamicFPSConfig.INSTANCE.ignoreInitialClick();
 
 		if (config == IgnoreInitialClick.DISABLED) {
 			return false;
 		}
 
-		if (config == IgnoreInitialClick.IN_WORLD && MINECRAFT.screen != null) {
+		if (config == IgnoreInitialClick.IN_WORLD && minecraft.screen != null) {
 			return false;
 		}
 
