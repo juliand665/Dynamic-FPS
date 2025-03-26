@@ -21,5 +21,5 @@ dependencies {
 
 	modApi(libs.modmenu)
 
-	compileOnly(project(path: ':platforms:common', configuration: 'namedElements')) { transitive false }
+	compileOnly(project(path: ':platforms:common', configuration: 'namedElements')) { transitive = false }
 }

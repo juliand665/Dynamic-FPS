@@ -41,11 +41,11 @@ dependencies {
 
 	include(libs.battery)
 
-	common(project(path: ":platforms:common", configuration: "namedElements")) { transitive false }
-	shadowBundle(project(path: ":platforms:common", configuration: "transformProductionQuilt")) { transitive false }
+	common(project(path: ":platforms:common", configuration: "namedElements")) { transitive = false }
+	shadowBundle(project(path: ":platforms:common", configuration: "transformProductionQuilt")) { transitive = false }
 
-	common(project(path: ":platforms:textile", configuration: "namedElements")) { transitive false }
-	shadowBundle(project(path: ":platforms:textile", configuration: "transformProductionQuilt")) { transitive false }
+	common(project(path: ":platforms:textile", configuration: "namedElements")) { transitive = false }
+	shadowBundle(project(path: ":platforms:textile", configuration: "transformProductionQuilt")) { transitive = false }
 }
 
 shadowJar {
