@@ -2,6 +2,7 @@ package net.lostluma.dynamic_fps.impl.neoforge.service;
 
 import com.electronwill.nightconfig.core.CommentedConfig;
 import dynamic_fps.impl.service.ModCompat;
+import dynamic_fps.impl.service.Platform;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforgespi.language.IModInfo;
 
@@ -19,7 +20,7 @@ public class NeoForgeModCompat implements ModCompat {
 
 	@Override
 	public boolean disableOverlayOptimization() {
-		return disableOverlayOptimization || ModList.get().isLoaded("rrls");
+		return disableOverlayOptimization || Platform.getInstance().isModLoaded("rrls");
 	}
 
 	private static void parseModMetadata(IModInfo modInfo) {

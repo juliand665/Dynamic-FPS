@@ -1,6 +1,7 @@
 package net.lostluma.dynamic_fps.impl.forge.service;
 
 import dynamic_fps.impl.service.ModCompat;
+import dynamic_fps.impl.service.Platform;
 import net.minecraftforge.fml.ModList;
 
 public class ForgeModCompat implements ModCompat {
@@ -11,6 +12,6 @@ public class ForgeModCompat implements ModCompat {
 
 	@Override
 	public boolean disableOverlayOptimization() {
-		return ModList.get().isLoaded("rrls");
+		return Platform.getInstance().isModLoaded("rrls");
 	}
 }
