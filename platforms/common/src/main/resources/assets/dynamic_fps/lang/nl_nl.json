@@ -7,10 +7,16 @@
     "config.dynamic_fps.category.general": "Algemeen",
     "config.dynamic_fps.category.advanced": "Geavanceerd",
 
+    "config.dynamic_fps.category.hovered": "Zwevend",
     "config.dynamic_fps.category.unfocused": "Niet gefocust",
     "config.dynamic_fps.category.invisible": "Onzichtbaar",
     "config.dynamic_fps.category.unplugged": "Op batterij",
     "config.dynamic_fps.category.abandoned": "Inactief",
+
+    "config.dynamic_fps.feature.misc": "Diversen",
+    "config.dynamic_fps.feature.volume_transition": "Volume transitie",
+    "config.dynamic_fps.feature.idle": "Inactief",
+    "config.dynamic_fps.feature.battery": "Batterij integratie",
 
     "config.dynamic_fps.enabled": "Ingeschakeld",
 
@@ -21,11 +27,24 @@
     "config.dynamic_fps.idle_time_tooltip": "Minuten zonder invoer totdat Dynamic FPS de Idle-status activeert terwijl het spel gefocust is.",
 
     "config.dynamic_fps.idle_condition": "Inactieve conditie",
+
     "config.dynamic_fps.idle_condition_none": "Geen",
+    "config.dynamic_fps.idle_condition_vanilla": "Vanilla",
     "config.dynamic_fps.idle_condition_on_battery": "Terwijl op batterij",
+
+    "config.dynamic_fps.idle_condition_none_tooltip": "Activeer altijd de inactieve status als het apparaat te lang inactief is.",
+    "config.dynamic_fps.idle_condition_vanilla_tooltip": "Schakelt de inactiviteit van Dynamic FPS uit. Gebruikt in plaats daarvan de Vanilla-instelling.",
+    "config.dynamic_fps.idle_condition_on_battery_tooltip": "Schakel de inactive status in wanneer deze te lang inactief is en op de batterij.",
 
     "config.dynamic_fps.uncap_menu_frame_rate": "Ontgrendel Menu FPS",
     "config.dynamic_fps.uncap_menu_frame_rate_tooltip": "Verwijder de limiet van 60 FPS in het hoofdmenu.",
+
+    "config.dynamic_fps.ignore_initial_click": "Negeer initiale klik",
+    "config.dynamic_fps.ignore_initial_click_tooltip": "Negeer onbedoelde invoer bij het klikken op het ongefocuste spelvenster.",
+
+    "config.dynamic_fps.ignore_initial_click_disabled": "Uitgeschakeld",
+    "config.dynamic_fps.ignore_initial_click_in_world": "In wereld",
+    "config.dynamic_fps.ignore_initial_click_constant": "Altijd",
 
     "config.dynamic_fps.battery_tracker": "Batterij bijhouden",
     "config.dynamic_fps.battery_tracker_tooltip": "Schakel alle batterijgerelateerde functies in of uit.",
@@ -36,7 +55,10 @@
     "config.dynamic_fps.battery_tracker_notifications": "Batterij notificaties",
     "config.dynamic_fps.battery_tracker_notifications_tooltip": "Krijg in-game notificaties over je batterij status.",
 
-    "config.dynamic_fps.battery_indicator_condition": "Batterijindicator conditie",
+    "config.dynamic_fps.battery_critical_level": "Kritische laadstatus",
+    "config.dynamic_fps.battery_critical_level_tooltip": "Stel in welk batterijlaadniveau als kritiek wordt beschouwd.",
+
+    "config.dynamic_fps.battery_indicator_condition": "Batterij indicator conditie",
     "config.dynamic_fps.battery_indicator_condition_disabled": "Uitgeschakeld",
     "config.dynamic_fps.battery_indicator_condition_draining": "Tijdens het ontladen",
     "config.dynamic_fps.battery_indicator_condition_critical": "Kritisch",
@@ -72,10 +94,16 @@
     "config.dynamic_fps.download_natives_description_0": "Voor het gebruik van de batterijfuncties is een extra bibliotheek nodig.",
     "config.dynamic_fps.download_natives_description_1": "Stel in of de mod dit onderdeel namens jou mag downloaden.",
 
+    "config.dynamic_fps.mock_battery_data": "Gebruik gemockte batterijgegevens",
+
     "key.dynamic_fps.toggle_forced": "Forceer de \"Niet gefocust\" modus (Toggle)",
     "key.dynamic_fps.toggle_disabled": "Schakel Dynamic FPS uit (Toggle)",
     "gui.dynamic_fps.hud.reducing": "Dynamic FPS: Verminderde FPS forceren",
-    "gui.dynamic_fps.hud.disabled": "Dynamic FPS Uitgeschakeld",
+    "gui.dynamic_fps.hud.disabled": "Dynamic FPS uitgeschakeld",
+
+    "toast.dynamic_fps.error": "Dynamic FPS batterijfout",
+    "toast.dynamic_fps.no_support": "Computer wordt niet ondersteund",
+    "toast.dynamic_fps.no_library": "Bibliotheek download uitgeschakeld",
 
     "toast.dynamic_fps.battery_charging": "Opladen!",
     "toast.dynamic_fps.battery_draining": "Ontladen!",
