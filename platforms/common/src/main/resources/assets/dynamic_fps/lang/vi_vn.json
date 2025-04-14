@@ -13,6 +13,11 @@
     "config.dynamic_fps.category.unplugged": "Đang Sử Dụng Pin",
     "config.dynamic_fps.category.abandoned": "Nhàn Rỗi",
 
+    "config.dynamic_fps.feature.misc": "Khác",
+    "config.dynamic_fps.feature.volume_transition": "Chuyển Tiếp Âm Lượng",
+    "config.dynamic_fps.feature.idle": "Chờ",
+    "config.dynamic_fps.feature.battery": "Tích Hợp Pin",
+
     "config.dynamic_fps.enabled": "Đã bật",
 
     "config.dynamic_fps.disabled": "Đã tắt",
@@ -34,6 +39,13 @@
     "config.dynamic_fps.uncap_menu_frame_rate": "Bỏ giới hạn FPS của Menu",
     "config.dynamic_fps.uncap_menu_frame_rate_tooltip": "Gỡ bỏ giới hạn 60 FPS trong menu chính.",
 
+    "config.dynamic_fps.ignore_initial_click": "Bỏ Qua Lần Nhấp Đầu Tiên",
+    "config.dynamic_fps.ignore_initial_click_tooltip": "Bỏ qua đầu vào vô tình khi nhấp vào cửa sổ trò chơi không tập trung",
+
+    "config.dynamic_fps.ignore_initial_click_disabled": "Tắt",
+    "config.dynamic_fps.ignore_initial_click_in_world": "Trong Thế Giới",
+    "config.dynamic_fps.ignore_initial_click_constant": "Liên Tục",
+
     "config.dynamic_fps.battery_tracker": "Theo Dõi Pin",
     "config.dynamic_fps.battery_tracker_tooltip": "Bật hoặc tắt tất cả các tính năng liên quan đến pin.",
 
@@ -43,10 +55,13 @@
     "config.dynamic_fps.battery_tracker_notifications": "Thông Báo Pin",
     "config.dynamic_fps.battery_tracker_notifications_tooltip": "Nhận thông báo trong game về trạng thái pin của bạn.",
 
+    "config.dynamic_fps.battery_critical_level": "Ngưỡng Pin Yếu",
+    "config.dynamic_fps.battery_critical_level_tooltip": "Đặt mức pin được coi là yếu",
+
     "config.dynamic_fps.battery_indicator_condition": "Điều Kiện Chỉ Báo Pin",
     "config.dynamic_fps.battery_indicator_condition_disabled": "Tắt",
     "config.dynamic_fps.battery_indicator_condition_draining": "Khi Đang Xả",
-    "config.dynamic_fps.battery_indicator_condition_critical": "Nguy Kịch",
+    "config.dynamic_fps.battery_indicator_condition_critical": "Nguy Kịch / < 10%",
     "config.dynamic_fps.battery_indicator_condition_constant": "Liên Tục",
 
     "config.dynamic_fps.battery_indicator_placement": "Vị Trí Chỉ Báo",
@@ -85,6 +100,10 @@
     "key.dynamic_fps.toggle_disabled": "Tắt Dynamic FPS (Bật/Tắt)",
     "gui.dynamic_fps.hud.reducing": "Dynamic FPS: Giảm FPS Cưỡng Bức",
     "gui.dynamic_fps.hud.disabled": "Dynamic FPS Đã Tắt",
+
+    "toast.dynamic_fps.error": "Lỗi Pin Dynamic FPS",
+    "toast.dynamic_fps.no_support": "Máy tính không được hỗ trợ",
+    "toast.dynamic_fps.no_library": "Đã tắt tải xuống thư viện",
 
     "toast.dynamic_fps.battery_charging": "Đang Sạc!",
     "toast.dynamic_fps.battery_draining": "Đang Xả Pin!",
