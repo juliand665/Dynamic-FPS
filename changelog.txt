@@ -1,2 +1,2 @@
-- Update Turkish Translation ([PR 252](https://github.com/juliand665/Dynamic-FPS/pull/252) by @EuropaYou)
-- Update Dutch Translation ([PR 253](https://github.com/juliand665/Dynamic-FPS/pull/253) by @stijnvdkolk)
+- Update Vietnamese Translation ([PR 254](https://github.com/juliand665/Dynamic-FPS/pull/254) by @godkyo98)
+- Update Brazilian Portuguese ([PR 258](https://github.com/juliand665/Dynamic-FPS/pull/258) by @kau19an)
