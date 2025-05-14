@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import dynamic_fps.impl.feature.volume.SmoothVolumeHandler;
+import dynamic_fps.impl.service.Platform;
 import dynamic_fps.impl.util.Logging;
+import dynamic_fps.impl.util.Version;
 import net.minecraft.client.Minecraft;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
@@ -103,7 +105,7 @@ public class SoundEngineMixin implements DuckSoundEngine {
 				} else {
 					// Only resume music if the game is not paused
 					// Because vanilla pauses music on pause screens
-					if (isMusic && !dynamic_fps$minecraft.isPaused()) {
+					if (isMusic && this.dynamic_fps$resumeMusic()) {
 						channel.unpause();
 					}
 
@@ -144,5 +146,23 @@ public class SoundEngineMixin implements DuckSoundEngine {
 		}
 
 		return value * SmoothVolumeHandler.volumeMultiplier(source);
+	}
+
+	/**
+	 * Whether music should be resumed. This changes depending on the Minecraft version.
+	 */
+	@Unique
+	private boolean dynamic_fps$resumeMusic() {
+		Version version;
+		Version minecraft;
+
+		try {
+			version = Version.of("1.21.6-alpha.25.20.a");
+		} catch (Version.VersionParseException e) {
+			throw new RuntimeException(e);
+		}
+
+		minecraft = Platform.getInstance().getModVersion("minecraft").get();
+		return minecraft.compareTo(version) >= 0 || !dynamic_fps$minecraft.isPaused();
 	}
 }

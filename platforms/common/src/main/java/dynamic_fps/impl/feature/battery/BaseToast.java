@@ -6,7 +6,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastManager;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
@@ -56,15 +56,15 @@ public class BaseToast implements Toast {
 		}
 
 		// type, resource, x, y, ?, ?, width, height, width, height
-		graphics.blit(RenderType::guiTextured, BACKGROUND_IMAGE, 0, 0, 0.0f, 0, this.width(), this.height(), this.width(), this.height());
+		graphics.blit(RenderPipelines.GUI_TEXTURED, BACKGROUND_IMAGE, 0, 0, 0.0f, 0, this.width(), this.height(), this.width(), this.height());
 
 		int x = 8;
 
 		if (this.icon != null) {
 			x += 22;
 
-			graphics.blit(RenderType::guiTextured, MOD_ICON, 2, 2, 0.0f, 0, 8, 8, 8, 8);
-			graphics.blit(RenderType::guiTextured, this.icon, 8, 8, 0.0f, 0, 16, 16, 16, 16);
+			graphics.blit(RenderPipelines.GUI_TEXTURED, MOD_ICON, 2, 2, 0.0f, 0, 8, 8, 8, 8);
+			graphics.blit(RenderPipelines.GUI_TEXTURED, this.icon, 8, 8, 0.0f, 0, 16, 16, 16, 16);
 		}
 
 		graphics.drawString(Minecraft.getInstance().font, this.title, x, 7, 0x5f3315, false);
