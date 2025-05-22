@@ -6,6 +6,7 @@ import java.lang.reflect.Type;
 import java.util.Locale;
 
 public class JsonUtil {
+	@SuppressWarnings("deprecation")
 	private static final Gson GSON = new GsonBuilder()
 		.setLenient()
 		.serializeNulls()
@@ -44,6 +45,7 @@ public class JsonUtil {
 		@Override
 		public T deserialize(JsonElement element, Type type, JsonDeserializationContext context) throws JsonParseException {
 			try {
+				@SuppressWarnings("unchecked")
 				Class<T> class_ = (Class<T>) Class.forName(type.getTypeName());
 				return Enum.valueOf(class_, element.getAsString().toUpperCase(Locale.ROOT));
 			} catch (ClassNotFoundException | IllegalArgumentException e) {
