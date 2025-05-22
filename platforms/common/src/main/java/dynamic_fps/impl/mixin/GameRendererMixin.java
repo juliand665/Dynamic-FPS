@@ -34,11 +34,7 @@ public class GameRendererMixin {
 	/**
 	 * Cancels rendering the world if it is determined to currently not be visible.
 	 */
-	@Inject(
-		method = { "renderLevel", "renderItemActivationAnimation" },
-		at = @At("HEAD"),
-		cancellable = true
-	)
+	@Inject(method = "renderLevel", at = @At("HEAD"), cancellable = true)
 	private void shouldRender(CallbackInfo callbackInfo) {
 		if (!DynamicFPSMod.shouldShowLevels()) {
 			callbackInfo.cancel();
