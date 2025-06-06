@@ -67,7 +67,7 @@ public class BaseToast implements Toast {
 			graphics.blit(RenderPipelines.GUI_TEXTURED, this.icon, 8, 8, 0.0f, 0, 16, 16, 16, 16);
 		}
 
-		graphics.drawString(Minecraft.getInstance().font, this.title, x, 7, 0x5f3315, false);
+		graphics.drawString(Minecraft.getInstance().font, this.title, x, 7, 0xff5f3315, false);
 		graphics.drawString(Minecraft.getInstance().font, this.description, x, 18, -16777216, false);
 	}
 

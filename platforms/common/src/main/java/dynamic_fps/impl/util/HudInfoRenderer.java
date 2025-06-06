@@ -35,7 +35,7 @@ public final class HudInfoRenderer {
 		int width = guiGraphics.guiWidth() / 2;
 		Minecraft minecraft = Minecraft.getInstance();
 
-		guiGraphics.drawCenteredString(minecraft.font, component, width, 32, 0xFFFFFF);
+		guiGraphics.drawCenteredString(minecraft.font, component, width, 32, -1);
 	}
 
 	private static void drawBatteryOverlay(GuiGraphics graphics) {
@@ -61,6 +61,6 @@ public final class HudInfoRenderer {
 		// resource, x, y, z, ?, ?, width, height, width, height
 		graphics.blit(RenderPipelines.GUI_TEXTURED, icon, position[0], position[1], 0.0f, 0, 16, 16, 16, 16);
 		// font, text, x, y, text color
-		graphics.drawString(minecraft.font, BatteryTracker.charge() + "%", position[0] + 20, position[1] + 4, 0xFFFFFF);
+		graphics.drawString(minecraft.font, BatteryTracker.charge() + "%", position[0] + 20, position[1] + 4, -1);
 	}
 }

@@ -38,8 +38,8 @@ public class FallbackConfigScreen extends Screen {
 		int width = guiGraphics.guiWidth() / 2;
 		int height = guiGraphics.guiHeight() / 3;
 
-		guiGraphics.drawCenteredString(this.font, WARNING_0.getVisualOrderText(), width, height, 0xFFFFFF);
-		guiGraphics.drawCenteredString(this.font, WARNING_1.getVisualOrderText(), width, height + 10, 0xFFFFFF);
+		guiGraphics.drawCenteredString(this.font, WARNING_0.getVisualOrderText(), width, height, -1);
+		guiGraphics.drawCenteredString(this.font, WARNING_1.getVisualOrderText(), width, height + 10, -1);
 	}
 
 	@Override

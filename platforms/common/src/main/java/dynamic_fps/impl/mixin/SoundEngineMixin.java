@@ -85,6 +85,7 @@ public class SoundEngineMixin implements DuckSoundEngine {
 			// This results in a less jarring experience when quickly tabbing out and back in.
 			// Also fixes this compat bug: https://github.com/juliand665/Dynamic-FPS/issues/55
 			boolean isMusic = instance.getSource().equals(SoundSource.MUSIC) || instance.getSource().equals(SoundSource.RECORDS);
+			boolean playsPaused = isMusic || instance.getSource().equals(SoundSource.UI);
 
 			handle.execute(channel -> {
 				if (volume <= 0.0f) {
@@ -97,9 +98,7 @@ public class SoundEngineMixin implements DuckSoundEngine {
 						channel.setVolume(volume);
 					}
 				} else {
-					// Only resume music if the game is not paused
-					// Because vanilla pauses music on pause screens
-					if (isMusic && this.dynamic_fps$resumeMusic()) {
+					if (playsPaused && this.dynamic_fps$resumeMusic()) {
 						channel.unpause();
 					}
 
@@ -136,7 +135,7 @@ public class SoundEngineMixin implements DuckSoundEngine {
 	}
 
 	/**
-	 * Whether music should be resumed. This changes depending on the Minecraft version.
+	 * Whether music and ui sounds should be resumed. This changes depending on the Minecraft version.
 	 */
 	@Unique
 	private boolean dynamic_fps$resumeMusic() {
