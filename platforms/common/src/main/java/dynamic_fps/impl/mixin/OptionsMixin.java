@@ -1,14 +1,10 @@
 package dynamic_fps.impl.mixin;
 
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import com.llamalad7.mixinextras.sugar.Local;
 import dynamic_fps.impl.DynamicFPSMod;
 import dynamic_fps.impl.config.option.GraphicsState;
 import dynamic_fps.impl.feature.state.OptionHolder;
-import dynamic_fps.impl.feature.volume.SmoothVolumeHandler;
-import net.minecraft.client.*;
-import net.minecraft.sounds.SoundSource;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.Options;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -30,13 +26,5 @@ public abstract class OptionsMixin {
 		if (DynamicFPSMod.graphicsState() != GraphicsState.DEFAULT) {
 			OptionHolder.applyOptions(Minecraft.getInstance().options, DynamicFPSMod.graphicsState());
 		}
-	}
-
-	/**
-	 * Apply the volume multiplier to any newly-played sounds.
-	 */
-	@ModifyReturnValue(method = "getSoundSourceVolume", at = @At("RETURN"))
-	private float getSoundSourceVolume(float value, @Local(argsOnly = true) @Nullable SoundSource source) {
-		return value * SmoothVolumeHandler.volumeMultiplier(source);
 	}
 }
