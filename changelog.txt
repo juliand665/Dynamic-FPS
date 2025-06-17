@@ -1,2 +1,2 @@
-- Update Vietnamese Translation ([PR 254](https://github.com/juliand665/Dynamic-FPS/pull/254) by @godkyo98)
-- Update Brazilian Portuguese ([PR 258](https://github.com/juliand665/Dynamic-FPS/pull/258) by @kau19an)
+- Update Simplified Chinese translation ([PR 259](https://github.com/juliand665/Dynamic-FPS/pull/259) by @Q2297045667)
+- Fix memory leak when running with MCA Reborn and Distant Horizons on Minecraft 1.20.4 and below
