@@ -92,7 +92,7 @@ public class SoundEngineMixin implements DuckSoundEngine {
 			// This results in a less jarring experience when quickly tabbing out and back in.
 			// Also fixes this compat bug: https://github.com/juliand665/Dynamic-FPS/issues/55
 			boolean isMusic = instance.getSource().equals(SoundSource.MUSIC) || instance.getSource().equals(SoundSource.RECORDS);
-			boolean playsPaused = isMusic || instance.getSource().equals(SoundSource.UI);
+			boolean playsPaused = isMusic; // || instance.getSource().equals(SoundSource.UI);
 
 			handle.execute(channel -> {
 				if (volume <= 0.0f) {
@@ -122,7 +122,7 @@ public class SoundEngineMixin implements DuckSoundEngine {
 	 * Allows pausing and resuming the sound engine without cancelling all active sounds.
 	 */
 	@Inject(method = "play", at = @At("HEAD"), cancellable = true)
-	private void play(SoundInstance instance, CallbackInfoReturnable<SoundEngine.PlayResult> callbackInfo) {
+	private void play(SoundInstance instance, CallbackInfo callbackInfo) {
 		if (SmoothVolumeHandler.volumeMultiplier(instance.getSource()) == 0.0f) {
 			callbackInfo.cancel();
 		}

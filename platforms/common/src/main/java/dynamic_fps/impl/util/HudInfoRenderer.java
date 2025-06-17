@@ -5,7 +5,7 @@ import dynamic_fps.impl.config.DynamicFPSConfig;
 import dynamic_fps.impl.feature.battery.BatteryTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 
 import net.minecraft.resources.ResourceLocation;
@@ -35,7 +35,7 @@ public final class HudInfoRenderer {
 		int width = guiGraphics.guiWidth() / 2;
 		Minecraft minecraft = Minecraft.getInstance();
 
-		guiGraphics.drawCenteredString(minecraft.font, component, width, 32, -1);
+		guiGraphics.drawCenteredString(minecraft.font, component, width, 32, 0xFFFFFF);
 	}
 
 	private static void drawBatteryOverlay(GuiGraphics graphics) {
@@ -59,8 +59,8 @@ public final class HudInfoRenderer {
 		int[] position = config.placement().get(minecraft.getWindow());
 
 		// resource, x, y, z, ?, ?, width, height, width, height
-		graphics.blit(RenderPipelines.GUI_TEXTURED, icon, position[0], position[1], 0.0f, 0, 16, 16, 16, 16);
+		graphics.blit(RenderType::guiTextured, icon, position[0], position[1], 0.0f, 0, 16, 16, 16, 16);
 		// font, text, x, y, text color
-		graphics.drawString(minecraft.font, BatteryTracker.charge() + "%", position[0] + 20, position[1] + 4, -1);
+		graphics.drawString(minecraft.font, BatteryTracker.charge() + "%", position[0] + 20, position[1] + 4, 0xFFFFFF);
 	}
 }
