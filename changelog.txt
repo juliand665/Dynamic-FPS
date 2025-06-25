@@ -1,2 +1,2 @@
-- Update Simplified Chinese translation ([PR 259](https://github.com/juliand665/Dynamic-FPS/pull/259) by @Q2297045667)
-- Fix memory leak when running with MCA Reborn and Distant Horizons on Minecraft 1.20.4 and below
+- Update Simplified and Traditional Chinese translation ([PR 261](https://github.com/juliand665/Dynamic-FPS/pull/261) by @AC19970)
+- Fix crash cancelling situational music when volume is overridden to zero ([commit 9f97903](https://github.com/juliand665/Dynamic-FPS/commit/9f97903b9be478b25a6cb4a4ca038a23463ca894) by @LostLuma)
