@@ -124,7 +124,7 @@ public class SoundEngineMixin implements DuckSoundEngine {
 	@Inject(method = "play", at = @At("HEAD"), cancellable = true)
 	private void play(SoundInstance instance, CallbackInfoReturnable<SoundEngine.PlayResult> callbackInfo) {
 		if (SmoothVolumeHandler.volumeMultiplier(instance.getSource()) == 0.0f) {
-			callbackInfo.cancel();
+			callbackInfo.setReturnValue(SoundEngine.PlayResult.NOT_STARTED);
 		}
 	}
 
