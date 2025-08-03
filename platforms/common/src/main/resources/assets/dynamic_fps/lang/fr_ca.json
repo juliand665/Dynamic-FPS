@@ -85,7 +85,7 @@
     "config.dynamic_fps.graphics_state_minimal_tooltip": "Les graphismes à l'état Minimal entraînent le rechargement du monde !",
 
     "config.dynamic_fps.show_toasts": "Afficher les notifications",
-    "config.dynamic_fps.show_toasts_tooltip": "Définir si les notifications doivent rester visibles ou être retardées.",
+    "config.dynamic_fps.show_toasts_tooltip": "Définir si les notifications doivent continuer à s'afficher ou être retardées.",
 
     "config.dynamic_fps.run_garbage_collector": "Nettoyer la mémoire",
     "config.dynamic_fps.run_garbage_collector_tooltip": "Libérer la mémoire inutilisée lors du changement d'état.",
@@ -111,5 +111,5 @@
 
     "toast.dynamic_fps.battery_charge": "Chargé à %d%%",
 
-    "modmenu.descriptionTranslation.dynamic_fps": "Réduire l'utilisation de ressources lorsque Minecraft est en arrière-plan ou inactif."
+    "modmenu.descriptionTranslation.dynamic_fps": "Réduit l'utilisation de ressources lorsque Minecraft est en arrière-plan ou inactif."
 }
