@@ -61,11 +61,7 @@ public class SoundEngineMixin implements DuckSoundEngine {
 			return;
 		}
 
-		if (source.equals(SoundSource.MASTER)) {
-			float volume = this.options.getSoundSourceVolume(source);
-			this.listener.setGain(this.dynamic_fps$adjustVolume(volume, source));
-			return;
-		}
+		boolean isMaster = source.equals(SoundSource.MASTER);
 
 		// Create a copy of all currently active sounds, as iterating over this collection
 		// Can throw if a sound instance stops playing while we are updating sound volumes
@@ -82,7 +78,7 @@ public class SoundEngineMixin implements DuckSoundEngine {
 		for (SoundInstance instance : sounds) {
 			ChannelAccess.ChannelHandle handle = this.instanceToChannel.get(instance);
 
-			if (handle == null || !instance.getSource().equals(source)) {
+			if (handle == null || (!isMaster && !instance.getSource().equals(source))) {
 				continue;
 			}
 
@@ -139,14 +135,6 @@ public class SoundEngineMixin implements DuckSoundEngine {
 		if (SmoothVolumeHandler.volumeMultiplier(instance.getSource()) == 0.0f) {
 			callbackInfo.cancel();
 		}
-	}
-
-	/**
-	 * Applies the user's requested volume multiplier to any newly played sounds.
-	 */
-	@ModifyReturnValue(method = "getVolume", at = @At("RETURN"))
-	private float getVolume(float original, @Local(argsOnly = true) @Nullable SoundSource source) {
-		return this.dynamic_fps$adjustVolume(original, source);
 	}
 
 	/**

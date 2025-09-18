@@ -1,16 +1,16 @@
 [versions]
-minecraft = "1.21.6"
+minecraft = "1.21.9-pre1"
 
 # Platform libraries
 
-fabric_loader = "0.15.10"
-fabric_api = "0.118.2+1.21.5"
+fabric_loader = "0.17.2"
+fabric_api = "0.133.7+1.21.9"
 
 forge = "1.21.5-55.0.3"
 
 neoforge = "21.6.0-beta"
 
-quilt_loader = "0.25.0"
+quilt_loader = "0.29.1"
 
 # Regular libraries
 
@@ -24,7 +24,7 @@ cloth_config = "15.0.127"
 mixinextras = "0.4.1"
 
 architectury = "3.4.161"
-architectury_loom = "1.10.430"
+architectury_loom = "1.11.440"
 
 mod_publish = "0.8.4"
 
