@@ -2,7 +2,7 @@
 
 How to install the battery library without having the mod do it on your behalf:
 
-- Visit the [releases section](https://github.com/LostLuma/battery/releases) of the library and find the right version:
+- Visit the [releases section](https://code.lostluma.net/LostLuma/battery/releases) of the library and find the right version:
   - Currently Dynamic FPS uses version 1.3.0
 - Download the correct dynamic library for your system:
   - You will want to download the file called `libbattery-jni-1.2.0+<arch>.<os>.<ext>`
