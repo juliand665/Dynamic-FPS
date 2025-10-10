@@ -7,7 +7,6 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.fml.loading.FMLPaths;
-import net.neoforged.fml.loading.LoadingModList;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.common.NeoForge;
 
@@ -35,12 +34,12 @@ public class NeoForgePlatform implements Platform {
 
 	@Override
 	public boolean isDevelopmentEnvironment() {
-		return !FMLLoader.isProduction();
+		return !FMLLoader.getCurrent().isProduction();
 	}
 
 	@Override
 	public boolean isModLoaded(String modId) {
-		return LoadingModList.get().getModFileById(modId) != null;
+		return FMLLoader.getCurrent().getLoadingModList().getModFileById(modId) != null;
 	}
 
 	@Override

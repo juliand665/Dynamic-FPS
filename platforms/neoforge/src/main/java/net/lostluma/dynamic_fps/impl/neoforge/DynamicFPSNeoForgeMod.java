@@ -16,7 +16,7 @@ import net.neoforged.neoforge.common.NeoForge;
 @Mod(Constants.MOD_ID)
 public class DynamicFPSNeoForgeMod {
     public DynamicFPSNeoForgeMod(IEventBus modEventBus) {
-		if (FMLLoader.getDist().isDedicatedServer()) {
+		if (FMLLoader.getCurrent().getDist().isDedicatedServer()) {
 			return;
 		}
 
