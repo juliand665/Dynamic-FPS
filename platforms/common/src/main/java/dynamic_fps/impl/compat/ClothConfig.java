@@ -202,6 +202,17 @@ public final class ClothConfig {
 		);
 
 		battery.add(
+			entryBuilder.startBooleanToggle(
+				Components.translatable("config", "battery_indicator_debug"),
+				batteryTracker.showWhenDebug()
+			)
+			.setDefaultValue(defaultConfig.batteryTracker().showWhenDebug())
+			.setSaveConsumer(batteryTracker::setShowWhenDebug)
+			.setTooltip(Components.translatable("config", "battery_indicator_debug_tooltip"))
+			.build()
+		);
+
+		battery.add(
 			entryBuilder.startEnumSelector(
 				Components.translatable("config", "battery_indicator_placement"),
 				BatteryIndicatorPlacement.class,

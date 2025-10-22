@@ -40,14 +40,13 @@ public final class HudInfoRenderer {
 
 	private static void drawBatteryOverlay(GuiGraphics graphics) {
 		Minecraft minecraft = Minecraft.getInstance();
+		BatteryTrackerConfig config = DynamicFPSConfig.INSTANCE.batteryTracker();
 
-		if (minecraft.getDebugOverlay().showDebugScreen() || !BatteryTracker.hasBatteries()) {
+		if ((!config.showWhenDebug() && minecraft.debugEntries.isF3Visible()) || !BatteryTracker.hasBatteries()) {
 			return;
 		}
 
-		BatteryTrackerConfig.DisplayConfig config = DynamicFPSConfig.INSTANCE.batteryTracker().display();
-
-		if (!config.condition().isConditionMet()) {
+		if (!config.display().condition().isConditionMet()) {
 			return;
 		}
 
@@ -56,7 +55,7 @@ public final class HudInfoRenderer {
 		ResourceLocation icon = ResourceLocations.of("dynamic_fps", "textures/battery/icon/" + type + "_" + index + ".png");
 
 		// pair of coordinates
-		int[] position = config.placement().get(minecraft.getWindow());
+		int[] position = config.display().placement().get(minecraft.getWindow());
 
 		// resource, x, y, z, ?, ?, width, height, width, height
 		graphics.blit(RenderPipelines.GUI_TEXTURED, icon, position[0], position[1], 0.0f, 0, 16, 16, 16, 16);

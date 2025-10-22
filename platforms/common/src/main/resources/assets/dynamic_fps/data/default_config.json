@@ -11,6 +11,7 @@
         "critical_level": 10,
         "switch_states": false,
         "notifications": true,
+        "show_when_debug": false,
         "display": {
             "condition": "critical",
             "placement": "top_left"

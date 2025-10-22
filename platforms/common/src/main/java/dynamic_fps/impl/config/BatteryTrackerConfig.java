@@ -8,6 +8,7 @@ public class BatteryTrackerConfig {
 	private int criticalLevel;
 	private boolean switchStates;
 	private boolean notifications;
+	private boolean showWhenDebug;
 	private DisplayConfig display;
 
 	public boolean enabled() {
@@ -40,6 +41,14 @@ public class BatteryTrackerConfig {
 
 	public void setNotifications(boolean value) {
 		this.notifications = value;
+	}
+
+	public boolean showWhenDebug() {
+		return this.showWhenDebug;
+	}
+
+	public void setShowWhenDebug(boolean value) {
+		this.showWhenDebug = value;
 	}
 
 	public DisplayConfig display() {

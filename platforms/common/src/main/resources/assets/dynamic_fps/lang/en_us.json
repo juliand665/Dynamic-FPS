@@ -64,6 +64,9 @@
     "config.dynamic_fps.battery_indicator_condition_critical": "Critical",
     "config.dynamic_fps.battery_indicator_condition_constant": "Constant",
 
+    "config.dynamic_fps.battery_indicator_debug": "Show with debug screen (F3)",
+    "config.dynamic_fps.battery_indicator_debug_tooltip": "Whether the battery indicator is visible while the debug overlay is open.",
+
     "config.dynamic_fps.battery_indicator_placement": "Battery Indicator Placement",
     "config.dynamic_fps.battery_indicator_placement_top_left": "Top Left",
     "config.dynamic_fps.battery_indicator_placement_top_right": "Top Right",
