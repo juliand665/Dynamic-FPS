@@ -64,7 +64,7 @@
     "config.dynamic_fps.battery_indicator_condition_critical": "Critical",
     "config.dynamic_fps.battery_indicator_condition_constant": "Constant",
 
-    "config.dynamic_fps.battery_indicator_placement": "Indicator Placement",
+    "config.dynamic_fps.battery_indicator_placement": "Battery Indicator Placement",
     "config.dynamic_fps.battery_indicator_placement_top_left": "Top Left",
     "config.dynamic_fps.battery_indicator_placement_top_right": "Top Right",
     "config.dynamic_fps.battery_indicator_placement_bottom_left": "Bottom Left",
