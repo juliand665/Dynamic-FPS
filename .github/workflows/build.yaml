@@ -28,7 +28,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v5
         with:
-          cache-read-only: ${{ github.ref != 'refs/heads/main' }}
+          cache-read-only: ${{ github.ref_name != github.event.repository.default_branch }}
       - name: Build
         run: ./gradlew build --warning-mode=all
       - name: Capture build artifacts
