@@ -1,2 +1,3 @@
-- Update Simplified and Traditional Chinese translation ([PR 261](https://github.com/juliand665/Dynamic-FPS/pull/261) by @AC19970)
-- Fix crash cancelling situational music when volume is overridden to zero ([commit 9f97903](https://github.com/juliand665/Dynamic-FPS/commit/9f97903b9be478b25a6cb4a4ca038a23463ca894) by @LostLuma)
+- Add option to show battery indicator while the debug overlay is open ([commit ede41cb492](https://github.com/juliand665/Dynamic-FPS/commit/ede41cb4929b8893b97aa0f0c27c376ebd01de2a) by @LostLuma)
+- Fix battery indicator not showing whilst one or more debug renderers are set to "always" ([commit ede41cb492](https://github.com/juliand665/Dynamic-FPS/commit/ede41cb4929b8893b97aa0f0c27c376ebd01de2a) by @LostLuma)
+- Update Dutch translation ([PR 273](https://github.com/juliand665/Dynamic-FPS/pull/273) by @stijnvdkolk)
