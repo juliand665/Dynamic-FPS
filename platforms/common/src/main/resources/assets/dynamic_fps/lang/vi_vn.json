@@ -64,7 +64,10 @@
     "config.dynamic_fps.battery_indicator_condition_critical": "Nguy Kịch / < 10%",
     "config.dynamic_fps.battery_indicator_condition_constant": "Liên Tục",
 
-    "config.dynamic_fps.battery_indicator_placement": "Vị Trí Chỉ Báo",
+    "config.dynamic_fps.battery_indicator_debug": "Hiển thị với lớp phủ gỡ lỗi (F3)",
+    "config.dynamic_fps.battery_indicator_debug_tooltip": "Chỉ báo pin có hiển thị khi lớp phủ gỡ lỗi đang mở hay không.",
+
+    "config.dynamic_fps.battery_indicator_placement": "Vị trí Chỉ báo Pin",
     "config.dynamic_fps.battery_indicator_placement_top_left": "Trên Trái",
     "config.dynamic_fps.battery_indicator_placement_top_right": "Trên Phải",
     "config.dynamic_fps.battery_indicator_placement_bottom_left": "Dưới Trái",
