@@ -64,6 +64,9 @@
     "config.dynamic_fps.battery_indicator_condition_critical": "Kritisch",
     "config.dynamic_fps.battery_indicator_condition_constant": "Altijd",
 
+    "config.dynamic_fps.battery_indicator_debug": "Weergeven met debug-overlay (F3)",
+    "config.dynamic_fps.battery_indicator_debug_tooltip": "Of de batterij-indicator zichtbaar is terwijl de debug-overlay geopend is.",
+
     "config.dynamic_fps.battery_indicator_placement": "Indicator plaatsing",
     "config.dynamic_fps.battery_indicator_placement_top_left": "Linksboven",
     "config.dynamic_fps.battery_indicator_placement_top_right": "Rechtsboven",
