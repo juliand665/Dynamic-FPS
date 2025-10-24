@@ -10,7 +10,7 @@
     "config.dynamic_fps.category.hovered": "Наведений",
     "config.dynamic_fps.category.unfocused": "Неорієнтований",
     "config.dynamic_fps.category.invisible": "Невидимий",
-    "config.dynamic_fps.category.unplugged": "Заряджається",
+    "config.dynamic_fps.category.unplugged": "Розряджається",
     "config.dynamic_fps.category.abandoned": "Не працює",
 
     "config.dynamic_fps.feature.misc": "Різне",
