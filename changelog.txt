@@ -1,3 +1,2 @@
-- Add option to show battery indicator while the debug overlay is open ([commit ede41cb492](https://github.com/juliand665/Dynamic-FPS/commit/ede41cb4929b8893b97aa0f0c27c376ebd01de2a) by @LostLuma)
-- Fix battery indicator not showing whilst one or more debug renderers are set to "always" ([commit ede41cb492](https://github.com/juliand665/Dynamic-FPS/commit/ede41cb4929b8893b97aa0f0c27c376ebd01de2a) by @LostLuma)
-- Update Dutch translation ([PR 273](https://github.com/juliand665/Dynamic-FPS/pull/273) by @stijnvdkolk)
+- Update Vietnamese translation ([PR 274](https://github.com/juliand665/Dynamic-FPS/pull/274) by @godkyo98)
+- Update Ukranian translation ([PR 275](https://github.com/juliand665/Dynamic-FPS/pull/275) by @StarmanMine142)
