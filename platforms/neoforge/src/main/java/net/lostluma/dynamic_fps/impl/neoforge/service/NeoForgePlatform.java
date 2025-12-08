@@ -34,12 +34,12 @@ public class NeoForgePlatform implements Platform {
 
 	@Override
 	public boolean isDevelopmentEnvironment() {
-		return !FMLLoader.getCurrent().isProduction();
+		return !FMLLoader.isProduction();
 	}
 
 	@Override
 	public boolean isModLoaded(String modId) {
-		return FMLLoader.getCurrent().getLoadingModList().getModFileById(modId) != null;
+		return FMLLoader.getLoadingModList().getModFileById(modId) != null;
 	}
 
 	@Override

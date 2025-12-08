@@ -3,7 +3,7 @@
     "package": "dynamic_fps.impl.mixin",
     "minVersion": "0.8",
     "client": [
-        "DebugEntryFpsMixin",
+        "DebugScreenOverlayMixin",
         "FramerateLimitTrackerMixin",
         "GameRendererMixin",
         "GuiMixin",

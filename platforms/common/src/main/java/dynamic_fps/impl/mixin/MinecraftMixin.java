@@ -28,7 +28,7 @@ public class MinecraftMixin {
 	@Inject(method = "<init>", at = @At("TAIL"))
 	private void onInit(CallbackInfo callbackInfo) {
 		DynamicFPSMod.init();
-		DynamicFPSMod.setWindow(this.window.handle());
+		DynamicFPSMod.setWindow(this.window.window);
 	}
 
 	@Inject(method = "setScreen", at = @At("HEAD"))

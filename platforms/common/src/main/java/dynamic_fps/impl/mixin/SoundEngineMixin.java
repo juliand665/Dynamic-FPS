@@ -4,11 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.sugar.Local;
+import com.mojang.blaze3d.audio.Listener;
 import dynamic_fps.impl.feature.volume.SmoothVolumeHandler;
 import dynamic_fps.impl.service.Platform;
 import dynamic_fps.impl.util.Logging;
 import dynamic_fps.impl.util.Version;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.Options;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -31,6 +36,14 @@ public class SoundEngineMixin implements DuckSoundEngine {
 
 	@Shadow
 	@Final
+	private Options options;
+
+	@Shadow
+	@Final
+	private Listener listener;
+
+	@Shadow
+	@Final
 	private Map<SoundInstance, ChannelAccess.ChannelHandle> instanceToChannel;
 
 	@Shadow
@@ -47,7 +60,11 @@ public class SoundEngineMixin implements DuckSoundEngine {
 			return;
 		}
 
-		boolean isMaster = source.equals(SoundSource.MASTER);
+		if (source.equals(SoundSource.MASTER)) {
+			float volume = this.options.getSoundSourceVolume(source);
+			this.listener.setGain(this.dynamic_fps$adjustVolume(volume, source));
+			return;
+		}
 
 		// Create a copy of all currently active sounds, as iterating over this collection
 		// Can throw if a sound instance stops playing while we are updating sound volumes
@@ -64,7 +81,7 @@ public class SoundEngineMixin implements DuckSoundEngine {
 		for (SoundInstance instance : sounds) {
 			ChannelAccess.ChannelHandle handle = this.instanceToChannel.get(instance);
 
-			if (handle == null || (!isMaster && !instance.getSource().equals(source))) {
+			if (handle == null || !instance.getSource().equals(source)) {
 				continue;
 			}
 
@@ -121,6 +138,26 @@ public class SoundEngineMixin implements DuckSoundEngine {
 		if (SmoothVolumeHandler.volumeMultiplier(instance.getSource()) == 0.0f) {
 			callbackInfo.cancel();
 		}
+	}
+
+	/**
+	 * Applies the user's requested volume multiplier to any newly played sounds.
+	 */
+	@ModifyReturnValue(method = "getVolume", at = @At("RETURN"))
+	private float getVolume(float original, @Local(argsOnly = true) @Nullable SoundSource source) {
+		return this.dynamic_fps$adjustVolume(original, source);
+	}
+
+	/**
+	 * Adjust the given volume with the multiplier set in the active Dynamic FPS config.
+	 */
+	@Unique
+	private float dynamic_fps$adjustVolume(float value, @Nullable SoundSource source) {
+		if (source == null) {
+			source = SoundSource.MASTER;
+		}
+
+		return value * SmoothVolumeHandler.volumeMultiplier(source);
 	}
 
 	/**

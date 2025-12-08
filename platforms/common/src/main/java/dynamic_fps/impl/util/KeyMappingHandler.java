@@ -14,17 +14,17 @@ public final class KeyMappingHandler {
 	private static final KeyMappingHandler[] KEY_MAPPING_HANDLERS = {
 		new KeyMappingHandler(
 			Components.translationKey("key", "toggle_forced"),
-			KeyMapping.Category.MISC,
+			"key.categories.misc",
 			DynamicFPSMod::toggleForceLowFPS
 		),
 		new KeyMappingHandler(
 			Components.translationKey("key", "toggle_disabled"),
-			KeyMapping.Category.MISC,
+			"key.categories.misc",
 			DynamicFPSMod::toggleDisabled
 		)
 	};
 
-	private KeyMappingHandler(String translationKey, KeyMapping.Category category, PressHandler pressHandler) {
+	private KeyMappingHandler(String translationKey, String category, PressHandler pressHandler) {
 		this.keyMapping = new KeyMapping(
 			translationKey,
 			InputConstants.Type.KEYSYM,

@@ -42,7 +42,7 @@ public final class HudInfoRenderer {
 		Minecraft minecraft = Minecraft.getInstance();
 		BatteryTrackerConfig config = DynamicFPSConfig.INSTANCE.batteryTracker();
 
-		if ((!config.showWhenDebug() && minecraft.debugEntries.isF3Visible()) || !BatteryTracker.hasBatteries()) {
+		if ((!config.showWhenDebug() && minecraft.getDebugOverlay().showDebugScreen()) || !BatteryTracker.hasBatteries()) {
 			return;
 		}
 
