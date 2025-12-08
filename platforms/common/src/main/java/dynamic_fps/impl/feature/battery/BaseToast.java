@@ -8,7 +8,7 @@ import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -18,12 +18,12 @@ public class BaseToast implements Toast {
 
 	protected Component title;
 	protected Component description;
-	protected @Nullable Identifier icon;
+	protected @Nullable ResourceLocation icon;
 
-	private static final Identifier MOD_ICON = ResourceLocations.of("dynamic_fps", "textures/battery/toast/background_icon.png");
-	private static final Identifier BACKGROUND_IMAGE = ResourceLocations.of("dynamic_fps", "textures/battery/toast/background.png");
+	private static final ResourceLocation MOD_ICON = ResourceLocations.of("dynamic_fps", "textures/battery/toast/background_icon.png");
+	private static final ResourceLocation BACKGROUND_IMAGE = ResourceLocations.of("dynamic_fps", "textures/battery/toast/background.png");
 
-	protected BaseToast(Component title, Component description, @Nullable Identifier icon) {
+	protected BaseToast(Component title, Component description, @Nullable ResourceLocation icon) {
 		this.title = title;
 		this.description = description;
 
