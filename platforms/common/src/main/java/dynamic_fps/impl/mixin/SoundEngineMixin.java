@@ -128,8 +128,17 @@ public class SoundEngineMixin implements DuckSoundEngine {
 	 */
 	@Unique
 	private boolean dynamic_fps$resumeMusic() {
+		if (!dynamic_fps$minecraft.isPaused()) {
+			return true;
+		}
+
+		Platform platform = Platform.getInstance();
+
+		if (platform.isModLoaded("pause_music_on_pause")) {
+			return false;
+		}
+
 		Version version;
-		Version minecraft;
 
 		try {
 			version = Version.of("1.21.6-alpha.25.20.a");
@@ -137,7 +146,6 @@ public class SoundEngineMixin implements DuckSoundEngine {
 			throw new RuntimeException(e);
 		}
 
-		minecraft = Platform.getInstance().getModVersion("minecraft").get();
-		return minecraft.compareTo(version) >= 0 || !dynamic_fps$minecraft.isPaused();
+		return platform.getModVersion("minecraft").get().compareTo(version) >= 0;
 	}
 }
