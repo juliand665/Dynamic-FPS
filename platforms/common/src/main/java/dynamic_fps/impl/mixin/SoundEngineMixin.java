@@ -4,14 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import com.llamalad7.mixinextras.sugar.Local;
 import dynamic_fps.impl.feature.volume.SmoothVolumeHandler;
 import dynamic_fps.impl.service.Platform;
 import dynamic_fps.impl.util.Logging;
 import dynamic_fps.impl.util.Version;
 import net.minecraft.client.Minecraft;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -20,10 +17,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.mojang.blaze3d.audio.Listener;
-
 import dynamic_fps.impl.util.duck.DuckSoundEngine;
-import net.minecraft.client.Options;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.ChannelAccess;
 import net.minecraft.client.sounds.SoundEngine;
@@ -33,15 +27,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(SoundEngine.class)
 public class SoundEngineMixin implements DuckSoundEngine {
 	@Shadow
-	@Final
-	private Options options;
-
-	@Shadow
 	private boolean loaded;
-
-	@Shadow
-	@Final
-	private Listener listener;
 
 	@Shadow
 	@Final
@@ -135,18 +121,6 @@ public class SoundEngineMixin implements DuckSoundEngine {
 		if (SmoothVolumeHandler.volumeMultiplier(instance.getSource()) == 0.0f) {
 			callbackInfo.cancel();
 		}
-	}
-
-	/**
-	 * Adjust the given volume with the multiplier set in the active Dynamic FPS config.
-	 */
-	@Unique
-	private float dynamic_fps$adjustVolume(float value, @Nullable SoundSource source) {
-		if (source == null) {
-			source = SoundSource.MASTER;
-		}
-
-		return value * SmoothVolumeHandler.volumeMultiplier(source);
 	}
 
 	/**
