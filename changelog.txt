@@ -1,2 +1,2 @@
-- Update Vietnamese translation ([PR 274](https://github.com/juliand665/Dynamic-FPS/pull/274) by @godkyo98)
-- Update Ukranian translation ([PR 275](https://github.com/juliand665/Dynamic-FPS/pull/275) by @StarmanMine142)
+- Fix compatibility with Pause Music on Pause ([commit 6883d6ff6f](https://github.com/juliand665/Dynamic-FPS/commit/6883d6ff6f248066cd7501517fc919c967e8d379) by @LostLuma)
+- Fix mod initialization partially failing on NeoForge ([commit 48859fe7b8](https://github.com/juliand665/Dynamic-FPS/commit/48859fe7b89966821afe526899c6397c487cb8b4) by @LostLuma)
