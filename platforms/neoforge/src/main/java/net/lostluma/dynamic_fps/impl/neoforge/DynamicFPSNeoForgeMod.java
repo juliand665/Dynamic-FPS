@@ -20,8 +20,6 @@ public class DynamicFPSNeoForgeMod {
 			return;
 		}
 
-		DynamicFPSMod.init();
-
 		ModLoadingContext.get().registerExtensionPoint(
 			IConfigScreenFactory.class,
 			() -> (minecraft, screen) -> DynamicFPSMod.getConfigScreen(screen)

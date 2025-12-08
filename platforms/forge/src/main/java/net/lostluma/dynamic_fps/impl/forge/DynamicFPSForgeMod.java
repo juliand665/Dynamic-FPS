@@ -25,8 +25,6 @@ public class DynamicFPSForgeMod {
 			return;
 		}
 
-		DynamicFPSMod.init();
-
 		context.registerExtensionPoint(
 			ConfigScreenHandler.ConfigScreenFactory.class,
 			() -> new ConfigScreenHandler.ConfigScreenFactory(

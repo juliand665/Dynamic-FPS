@@ -73,8 +73,7 @@
         "intermediate_mappings": "net.fabricmc:intermediary",
         "entrypoints": {
             "client": [
-                "net.lostluma.dynamic_fps.impl.textile.compat.FREX",
-                "net.lostluma.dynamic_fps.impl.textile.DynamicFPSTextileMod"
+                "net.lostluma.dynamic_fps.impl.textile.compat.FREX"
             ],
             "modmenu": [
                 "net.lostluma.dynamic_fps.impl.textile.compat.ModMenu"
