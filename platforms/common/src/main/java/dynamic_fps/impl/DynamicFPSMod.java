@@ -24,14 +24,14 @@ import dynamic_fps.impl.util.duck.DuckLoadingOverlay;
 import dynamic_fps.impl.feature.state.WindowObserver;
 import dynamic_fps.impl.service.Platform;
 import net.lostluma.battery.api.State;
-import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.LoadingOverlay;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 
+import net.minecraft.util.Util;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -243,7 +243,7 @@ public class DynamicFPSMod {
 		}
 
 		Component title = Components.translatable("toast", titleTranslationKey);
-		ResourceLocation icon = ResourceLocations.of("dynamic_fps", "textures/battery/toast/" + iconPath + ".png");
+		Identifier icon = ResourceLocations.of("dynamic_fps", "textures/battery/toast/" + iconPath + ".png");
 
 		BatteryToast.queueToast(title, icon);
 	}

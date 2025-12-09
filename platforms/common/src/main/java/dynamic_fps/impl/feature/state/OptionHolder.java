@@ -2,7 +2,7 @@ package dynamic_fps.impl.feature.state;
 
 import dynamic_fps.impl.config.option.GraphicsState;
 import net.minecraft.client.CloudStatus;
-import net.minecraft.client.GraphicsStatus;
+import net.minecraft.client.GraphicsPreset;
 import net.minecraft.client.Options;
 import net.minecraft.server.level.ParticleStatus;
 
@@ -13,7 +13,7 @@ import net.minecraft.server.level.ParticleStatus;
  */
 public class OptionHolder {
 	private static CloudStatus cloudStatus;
-	private static GraphicsStatus graphicsStatus;
+	private static GraphicsPreset graphicsStatus;
 	private static boolean ambientOcclusion;
 	private static ParticleStatus particlesStatus;
 	private static boolean entityShadows;
@@ -26,7 +26,7 @@ public class OptionHolder {
 	 */
 	public static void copyOptions(Options options) {
 		cloudStatus = options.getCloudsType();
-		graphicsStatus = options.graphicsMode().get();
+		graphicsStatus = options.graphicsPreset().get();
 		ambientOcclusion = options.ambientOcclusion().get();
 		particlesStatus = options.particles().get();
 		entityShadows = options.entityShadows().get();
@@ -39,7 +39,7 @@ public class OptionHolder {
 	public static void applyOptions(Options options, GraphicsState state) {
 		if (state == GraphicsState.DEFAULT) {
 			options.cloudStatus().set(cloudStatus);
-			options.graphicsMode().set(graphicsStatus);
+			options.graphicsPreset().set(graphicsStatus);
 			options.ambientOcclusion().set(ambientOcclusion);
 			options.particles().set(particlesStatus);
 			options.entityShadows().set(entityShadows);
@@ -51,7 +51,7 @@ public class OptionHolder {
 			options.entityDistanceScaling().set(0.5);
 
 			if (state == GraphicsState.MINIMAL) {
-				options.graphicsMode().set(GraphicsStatus.FAST);
+				options.graphicsPreset().set(GraphicsPreset.FAST);
 				options.ambientOcclusion().set(false);
 			}
 		}

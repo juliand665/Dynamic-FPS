@@ -3,12 +3,12 @@ package dynamic_fps.impl.feature.battery;
 import dynamic_fps.impl.util.Components;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class BatteryToast extends BaseToast {
 	private static BatteryToast queuedToast;
 
-	private BatteryToast(Component title, ResourceLocation icon) {
+	private BatteryToast(Component title, Identifier icon) {
 		super(title, Component.empty(), icon);
 	}
 
@@ -16,7 +16,7 @@ public class BatteryToast extends BaseToast {
 	 * Queue some information to be shown as a toast.
 	 * If an older toast of the same type is already queued its information will be replaced.
 	 */
-	public static void queueToast(Component title, ResourceLocation icon) {
+	public static void queueToast(Component title, Identifier icon) {
 		if (queuedToast != null) {
 			queuedToast.title = title;
 			queuedToast.icon = icon;

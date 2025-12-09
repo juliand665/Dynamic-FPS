@@ -8,7 +8,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import dynamic_fps.impl.DynamicFPSMod;
 
@@ -42,7 +42,7 @@ public final class HudInfoRenderer {
 		Minecraft minecraft = Minecraft.getInstance();
 		BatteryTrackerConfig config = DynamicFPSConfig.INSTANCE.batteryTracker();
 
-		if ((!config.showWhenDebug() && minecraft.debugEntries.isF3Visible()) || !BatteryTracker.hasBatteries()) {
+		if ((!config.showWhenDebug() && minecraft.debugEntries.isOverlayVisible()) || !BatteryTracker.hasBatteries()) {
 			return;
 		}
 
@@ -52,7 +52,7 @@ public final class HudInfoRenderer {
 
 		int index = BatteryTracker.charge() / 10;
 		String type = BatteryUtil.isCharging(BatteryTracker.status()) ? "charging" : "draining";
-		ResourceLocation icon = ResourceLocations.of("dynamic_fps", "textures/battery/icon/" + type + "_" + index + ".png");
+		Identifier icon = ResourceLocations.of("dynamic_fps", "textures/battery/icon/" + type + "_" + index + ".png");
 
 		// pair of coordinates
 		int[] position = config.display().placement().get(minecraft.getWindow());

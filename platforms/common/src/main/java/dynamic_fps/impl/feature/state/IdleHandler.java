@@ -6,14 +6,13 @@ import dynamic_fps.impl.config.option.IdleCondition;
 import dynamic_fps.impl.feature.battery.BatteryTracker;
 import dynamic_fps.impl.service.Platform;
 import net.lostluma.battery.api.State;
-import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.Util;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
-import org.lwjgl.glfw.GLFWScrollCallback;
 
 public class IdleHandler {
 	private static boolean active = false;

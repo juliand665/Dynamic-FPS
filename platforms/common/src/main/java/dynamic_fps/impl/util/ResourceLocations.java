@@ -1,9 +1,9 @@
 package dynamic_fps.impl.util;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class ResourceLocations {
-	public static ResourceLocation of(String namespace, String path) {
-		return ResourceLocation.fromNamespaceAndPath(namespace, path);
+	public static Identifier of(String namespace, String path) {
+		return Identifier.fromNamespaceAndPath(namespace, path);
 	}
 }
