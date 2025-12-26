@@ -1,1 +1,2 @@
-- Fix NeoForge build not working ([commit 3c8dc8854f](https://github.com/juliand665/Dynamic-FPS/commit/3c8dc8854f8fce152e6e026cdc15cd1493237341) by @LostLuma)
+- Fix changing graphics options on state change causing a crash
+  - This is fixed by building the mod for 1.21.11, no codes changes were necessary
