@@ -105,6 +105,7 @@
     "gui.dynamic_fps.hud.disabled": "Dynamic FPS Disabled",
 
     "toast.dynamic_fps.error": "Dynamic FPS Battery Error",
+    "toast.dynamic_fps.http_error": "Library download failed",
     "toast.dynamic_fps.no_support": "Computer is not supported",
     "toast.dynamic_fps.no_library": "Library download disabled",
 

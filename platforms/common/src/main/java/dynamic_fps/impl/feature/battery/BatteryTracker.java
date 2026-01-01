@@ -10,6 +10,7 @@ import net.lostluma.battery.api.Battery;
 import net.lostluma.battery.api.Manager;
 import net.lostluma.battery.api.State;
 import net.lostluma.battery.api.exception.LibraryLoadError;
+import net.lostluma.battery.api.exception.NetworkError;
 import net.lostluma.battery.api.util.Library;
 import net.lostluma.battery.api.util.Testing;
 import org.jetbrains.annotations.Nullable;
@@ -180,7 +181,9 @@ public class BatteryTracker {
 
 			String path;
 
-			if (DynamicFPSConfig.INSTANCE.downloadNatives()) {
+			if (e instanceof NetworkError) {
+				path = "http_error";
+			} else if (DynamicFPSConfig.INSTANCE.downloadNatives()) {
 				path = "no_support";
 			} else {
 				path = "no_library";
