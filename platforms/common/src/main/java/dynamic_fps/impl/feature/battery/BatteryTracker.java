@@ -11,6 +11,7 @@ import net.lostluma.battery.api.Manager;
 import net.lostluma.battery.api.State;
 import net.lostluma.battery.api.exception.LibraryLoadError;
 import net.lostluma.battery.api.util.Library;
+import net.lostluma.battery.api.util.Testing;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
@@ -28,34 +29,32 @@ public class BatteryTracker {
 	private static @Nullable Manager manager = null;
 	private static Collection<Battery> batteries = Collections.emptyList();
 
+	private static boolean threadStarted = false;
 	private static final Duration updateInterval = Duration.of(15, ChronoUnit.SECONDS);
 
 	public static int charge() {
-		if (DynamicFPSConfig.INSTANCE.mockBatteryData()) {
-			return 64;
-		} else {
-			return charge;
-		}
+		return charge;
 	}
 
 	public static State status() {
-		if (DynamicFPSConfig.INSTANCE.mockBatteryData()) {
-			return State.CHARGING;
-		} else {
-			return status;
-		}
+		return status;
 	}
 
 	public static boolean hasBatteries() {
-		if (DynamicFPSConfig.INSTANCE.mockBatteryData()) {
-			return true;
-		} else {
-			return !batteries.isEmpty();
-		}
+		return !batteries.isEmpty();
 	}
 
 	public static void init() {
-		if (manager != null || !isFeatureEnabled()) {
+		// Close previous manager to free up
+		// Any underlying, active resources.
+		if (manager != null) {
+			manager.close();
+
+			manager = null;
+			batteries = Collections.emptyList();
+		}
+
+		if (!isFeatureEnabled()) {
 			return;
 		}
 
@@ -70,7 +69,11 @@ public class BatteryTracker {
 			}
 		} else {
 			manager = temp; // Keep around to allow updating batteries
-			Threads.create("refresh-battery", BatteryTracker::updateBatteries);
+
+			if (!threadStarted) {
+				threadStarted = true;
+				Threads.create("refresh-battery", BatteryTracker::updateBatteries);
+			}
 		}
 	}
 
@@ -164,7 +167,11 @@ public class BatteryTracker {
 		Manager result = null;
 
 		try {
-			result = Manager.create();
+			if (!DynamicFPSConfig.INSTANCE.mockBatteryData()) {
+				result = Manager.create();
+			} else {
+				result = Testing.mockManager();
+			}
 		} catch (IOException e) {
 			Logging.getLogger().warn("Failed to create battery manager!", e);
 		} catch (LibraryLoadError e) {
