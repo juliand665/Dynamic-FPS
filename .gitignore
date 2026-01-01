@@ -1,5 +1,6 @@
 .architectury-transformer/
 .gradle/
 .idea/
+bin/
 build/
 run/
