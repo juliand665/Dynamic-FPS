@@ -97,15 +97,22 @@ public class BatteryTracker {
 	private static void updateState() {
 		boolean changed = false;
 
-		float aggregate = 0.0f;
+		// Add up percentages from multiple batteries based on capacity
+		// (capacity0 * percent0 + capacity1 * percent1 ...) / (capacity0 + capacity1 ...)
+		float total_joules = 0.0F;
+		float total_percent = 0.0F;
+
 		State newStatus = State.UNKNOWN;
 
 		for (Battery battery : batteries) {
-			aggregate += battery.stateOfCharge().percent();
+			float capacity = battery.energyFull().joules();
 			newStatus = mergeStates(newStatus, battery.state());
+
+			total_joules += capacity;
+			total_percent += capacity * battery.stateOfCharge().percent();
 		}
 
-		int newCharge = Math.round(aggregate / batteries.size());
+		int newCharge = Math.round(total_percent / total_joules);
 
 		if (readInitialData && charge != newCharge) {
 			changed = true;
