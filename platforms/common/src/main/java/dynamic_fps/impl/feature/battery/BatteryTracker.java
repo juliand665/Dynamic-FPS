@@ -10,7 +10,7 @@ import net.lostluma.battery.api.Battery;
 import net.lostluma.battery.api.Manager;
 import net.lostluma.battery.api.State;
 import net.lostluma.battery.api.exception.LibraryLoadError;
-import net.lostluma.battery.api.util.LibraryUtil;
+import net.lostluma.battery.api.util.Library;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
@@ -97,7 +97,7 @@ public class BatteryTracker {
 		State newStatus = State.UNKNOWN;
 
 		for (Battery battery : batteries) {
-			aggregate += battery.stateOfCharge();
+			aggregate += battery.stateOfCharge().percent();
 			newStatus = mergeStates(newStatus, battery.state());
 		}
 
@@ -156,8 +156,8 @@ public class BatteryTracker {
 	}
 
 	private static void customizeInstallation() {
-		LibraryUtil.setCacheDir(Platform.getInstance().getCacheDir());
-		LibraryUtil.setAllowDownloads(DynamicFPSConfig.INSTANCE.downloadNatives());
+		Library.setCacheDir(Platform.getInstance().getCacheDir());
+		Library.setAllowDownloads(DynamicFPSConfig.INSTANCE.downloadNatives());
 	}
 
 	private static Manager createManager() {
