@@ -1,2 +1,6 @@
-- Fix changing graphics options on state change causing a crash
-  - This is fixed by building the mod for 1.21.11, no codes changes were necessary
+- Update Spanish Translations ([Issue 279](https://github.com/juliand665/Dynamic-FPS/issues/279) by @pilahito)
+- Fix battery charge display not accounting for multiple batteries ([commit c2c32379ea](https://github.com/juliand665/Dynamic-FPS/commit/c2c32379ea1fa02be8c4f607562b779412a942d4) by @LostLuma)
+- Fix the loading overlay fading to a black screen while inside a world ([PR 282](https://github.com/juliand665/Dynamic-FPS/pull/282) by @LostLuma)
+  - Dynamic FPS skips rendering the world while resources are reloading, but did so too eagerly before
+- Update battery library to 2.0.0 ([commit a76cd4a069](https://github.com/juliand665/Dynamic-FPS/commit/a76cd4a069a14d6cc8cf9e0dc55d9a8ef1d03062) by @LostLuma)
+  - There is now another error toast when enabling the feature fails ([commit 535fe9c2f8](https://github.com/juliand665/Dynamic-FPS/commit/535fe9c2f8b6385e5b145d71bcb044839af0b4b3) by @LostLuma)
