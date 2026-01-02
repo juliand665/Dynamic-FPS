@@ -250,7 +250,7 @@ public class DynamicFPSMod {
 
 	private static boolean isLevelCoveredByOverlay() {
 		Minecraft minecraft = Minecraft.getInstance();
-		return OVERLAY_OPTIMIZATION_ACTIVE && minecraft.getOverlay() instanceof LoadingOverlay && ((DuckLoadingOverlay)minecraft.getOverlay()).dynamic_fps$isReloadComplete();
+		return OVERLAY_OPTIMIZATION_ACTIVE && minecraft.getOverlay() instanceof LoadingOverlay && !((DuckLoadingOverlay)minecraft.getOverlay()).dynamic_fps$isReloadComplete();
 	}
 
 	@SuppressWarnings("squid:S1215") // Garbage collector call
