@@ -34,7 +34,7 @@
 
     "config.dynamic_fps.idle_condition_none_tooltip": "Завжди вмикати режим очікування, якщо він неактивний протягом тривалого часу.",
     "config.dynamic_fps.idle_condition_vanilla_tooltip": "Вимкніть Dynamic FPS під час очікування. Замість цього використовуються усталені налаштування.",
-    "config.dynamic_fps.idle_condition_on_battery_tooltip": "Умикати стан очікування, якщо довгий час немає дій та пристрій працює від батареї.",
+    "config.dynamic_fps.idle_condition_on_battery_tooltip": "Умикає стан очікування, якщо довгий час немає дій та пристрій працює від батареї.",
 
     "config.dynamic_fps.uncap_menu_frame_rate": "Безлімітна частота кадрів",
     "config.dynamic_fps.uncap_menu_frame_rate_tooltip": "Видаляє ліміт в 60 кадрів в головному меню.",
@@ -56,7 +56,7 @@
     "config.dynamic_fps.battery_tracker_notifications_tooltip": "Умикає отримання сповіщення в грі про стан заряду батареї.",
 
     "config.dynamic_fps.battery_critical_level": "Поріг критичного заряду",
-    "config.dynamic_fps.battery_critical_level_tooltip": "Визначає, який рівень заряду батареї вважається критичним.",
+    "config.dynamic_fps.battery_critical_level_tooltip": "Керує тим, який рівень заряду батареї вважається критичним.",
 
     "config.dynamic_fps.battery_indicator_condition": "Стан індикатора батареї",
     "config.dynamic_fps.battery_indicator_condition_disabled": "ВИМК.",
@@ -91,13 +91,13 @@
     "config.dynamic_fps.show_toasts_tooltip": "Продовжувати показувати сповіщення або відкласти їх.",
 
     "config.dynamic_fps.run_garbage_collector": "Викликати збірник сміття",
-    "config.dynamic_fps.run_garbage_collector_tooltip": "Звільнити невикористану пам'ять при переході в цей статус.",
+    "config.dynamic_fps.run_garbage_collector_tooltip": "Звільняє невикористану пам'ять при переході в цей статус.",
 
     "config.dynamic_fps.download_natives": "Завантажити бібліотеку",
     "config.dynamic_fps.download_natives_description_0": "Для використання функцій батареї потрібна додаткова бібліотека.",
     "config.dynamic_fps.download_natives_description_1": "Укажіть, чи може мод завантажувати цей компонент від вашого імені.",
 
-    "config.dynamic_fps.mock_battery_data": "Використовувати фіктивні дані акумулятора",
+    "config.dynamic_fps.mock_battery_data": "Використовувати фіктивні дані батареї",
 
     "key.dynamic_fps.toggle_forced": "Перемкнути примус. режим без фокусу",
     "key.dynamic_fps.toggle_disabled": "Перемкнути Dynamic FPS",
@@ -105,6 +105,7 @@
     "gui.dynamic_fps.hud.disabled": "Dynamic FPS вимкнено",
 
     "toast.dynamic_fps.error": "Помилка батареї Dynamic FPS",
+    "toast.dynamic_fps.http_error": "Не вдалося завантажити бібліотеку",
     "toast.dynamic_fps.no_support": "ПК не підтримується",
     "toast.dynamic_fps.no_library": "Завантаження бібліотеки вимкнено",
 
@@ -112,7 +113,7 @@
     "toast.dynamic_fps.battery_draining": "Розряджається!",
     "toast.dynamic_fps.battery_critical": "Низький заряд!",
 
-    "toast.dynamic_fps.battery_charge": "Зараз на %d%%",
+    "toast.dynamic_fps.battery_charge": "Наразі %d%%",
 
-    "modmenu.descriptionTranslation.dynamic_fps": "Зменшує використання ресурсів, коли Minecraft працює у тловому режимі або при бездіяльности"
+    "modmenu.descriptionTranslation.dynamic_fps": "Зменшує використання ресурсів, коли Minecraft працює у тловому режимі або при бездіяльности."
 }
