@@ -61,11 +61,6 @@ public class DynamicFPSMod {
 
 	public static void init() {
 		doInit();
-
-		Platform platform = Platform.getInstance();
-		Version version = platform.getModVersion(Constants.MOD_ID).orElseThrow();
-
-		Logging.getLogger().info("Dynamic FPS {} active on {}!", version, platform.getName());
 	}
 
 	public static boolean disabledByUser() {
