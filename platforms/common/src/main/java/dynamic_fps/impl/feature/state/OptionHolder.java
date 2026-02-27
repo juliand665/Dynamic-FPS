@@ -60,12 +60,12 @@ public class OptionHolder {
 			options.improvedTransparency().set(improvedTransparency);
 			options.weatherRadius().set(weatherRadius);
 		} else { // state == GraphicsState.REDUCED
-			options.cloudRange().set(0);
+			options.cloudRange().set(2);
 			options.cloudStatus().set(CloudStatus.OFF);
 			options.particles().set(ParticleStatus.MINIMAL);
 			options.entityShadows().set(false);
 			options.entityDistanceScaling().set(0.5);
-			options.weatherRadius().set(0);
+			options.weatherRadius().set(3);
 
 			if (state == GraphicsState.MINIMAL) {
 				options.biomeBlendRadius().set(0);
