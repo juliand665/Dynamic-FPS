@@ -12,22 +12,26 @@ import java.time.Instant;
 public class WindowObserver {
 	private final long address;
 
-	private boolean isFocused = true;
+	private boolean isFocused;
 	private final GLFWWindowFocusCallback previousFocusCallback;
 
-	private boolean isHovered = true;
+	private boolean isHovered;
 	private final GLFWCursorEnterCallback previousMouseCallback;
 
-	private boolean isIconified = false;
+	private boolean isIconified;
 	private final GLFWWindowIconifyCallback previousIconifyCallback;
 
 	public WindowObserver(long address) {
 		this.address = address;
 
+		this.isFocused = GLFW.glfwGetWindowAttrib(this.address, GLFW.GLFW_FOCUSED) != 0;
 		this.previousFocusCallback = GLFW.glfwSetWindowFocusCallback(this.address, this::onFocusChanged);
+
+		this.isHovered = GLFW.glfwGetWindowAttrib(this.address, GLFW.GLFW_HOVERED) != 0;
 		this.previousMouseCallback = GLFW.glfwSetCursorEnterCallback(this.address, this::onMouseChanged);
 
 		// Vanilla doesn't use this (currently), other mods might register this callback though ...
+		this.isIconified = GLFW.glfwGetWindowAttrib(this.address, GLFW.GLFW_ICONIFIED) != 0;
 		this.previousIconifyCallback = GLFW.glfwSetWindowIconifyCallback(this.address, this::onIconifyChanged);
 	}
 

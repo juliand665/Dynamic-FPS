@@ -140,6 +140,7 @@ public class DynamicFPSMod {
 		window = new WindowObserver(address);
 
 		initClickHandler();
+		checkForStateChanges();
 	}
 
 	static boolean renderedCurrentFrame = true;
