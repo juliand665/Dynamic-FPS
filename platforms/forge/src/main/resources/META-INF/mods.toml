@@ -86,8 +86,7 @@ config = "dynamic_fps.mixins.json"
 [[mixins]]
 config = "dynamic_fps-common.mixins.json"
 
-[[accessTransformers]]
-file="META-INF/accesstransformer.cfg"
+accessTransformers = ["META-INF/accesstransformer.cfg"]
 
 [[dependencies.dynamic_fps]]
 modId = "minecraft"
