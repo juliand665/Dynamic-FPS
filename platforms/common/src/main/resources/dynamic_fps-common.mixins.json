@@ -12,7 +12,8 @@
         "OptionsMixin",
         "SoundEngineMixin",
         "ToastManagerMixin",
-        "bugfix.BlockableEventLoopMixin"
+        "bugfix.BlockableEventLoopMixin",
+        "bugfix.DebugScreenEntryListMixin"
     ],
     "mixins": [],
     "server": [],
