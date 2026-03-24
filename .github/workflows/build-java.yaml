@@ -32,7 +32,7 @@ jobs:
       - name: Build
         run: ./gradlew build --warning-mode=all
       - name: Capture build artifacts
-        if: ${{ runner.os == 'Linux' && matrix.java == '21' }} # Upload artifacts from one job, ignore the rest
+        if: ${{ runner.os == 'Linux' }}
         uses: actions/upload-artifact@v4
         with:
           name: dynamic-fps-artifacts
