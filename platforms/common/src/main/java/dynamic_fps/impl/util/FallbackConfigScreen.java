@@ -1,7 +1,7 @@
 package dynamic_fps.impl.util;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
@@ -32,14 +32,14 @@ public class FallbackConfigScreen extends Screen {
 	}
 
 	@Override
-	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-		super.render(guiGraphics, mouseX, mouseY, partialTicks);
+	public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTicks) {
+		super.extractRenderState(guiGraphics, mouseX, mouseY, partialTicks);
 
 		int width = guiGraphics.guiWidth() / 2;
 		int height = guiGraphics.guiHeight() / 3;
 
-		guiGraphics.drawCenteredString(this.font, WARNING_0.getVisualOrderText(), width, height, -1);
-		guiGraphics.drawCenteredString(this.font, WARNING_1.getVisualOrderText(), width, height + 10, -1);
+		guiGraphics.centeredText(this.font, WARNING_0.getVisualOrderText(), width, height, -1);
+		guiGraphics.centeredText(this.font, WARNING_1.getVisualOrderText(), width, height + 10, -1);
 	}
 
 	@Override

@@ -1,30 +1,22 @@
+import org.gradle.accessors.dm.LibrariesForLibs
+
 plugins {
-    id("base")
+	id("base")
 }
 
-val baseName = project.property("archives_name").toString()
+val libs = the<LibrariesForLibs>()
 
-val mavenGroup = project.property("maven_group").toString()
+val minecraft = libs.versions.minecraft.get()
 val modVersion = project.property("mod_version").toString()
 
-base {
-    archivesName = baseName
-}
-
-group = mavenGroup
-version = modVersion
-
-if (project.hasProperty("loom.platform")) {
-    val platform = project.property("loom.platform")
-    val minecraft = project.property("minecraft_version")
-
-    version = "${modVersion}+minecraft-${minecraft}-${platform}"
-}
+group = "net.lostluma"
+base.archivesName = "dynamic-fps"
+version = "${modVersion}+minecraft-${minecraft}-${project.name}"
 
 tasks.withType<ProcessResources> {
-    inputs.property("version", modVersion)
+	inputs.property("version", modVersion)
 
-    filesMatching(listOf("fabric.mod.json", "META-INF/mods.toml", "META-INF/neoforge.mods.toml", "quilt.mod.json")) {
-        expand(inputs.properties)
-    }
+	filesMatching(listOf("fabric.mod.json", "META-INF/neoforge.mods.toml")) {
+		expand(inputs.properties)
+	}
 }

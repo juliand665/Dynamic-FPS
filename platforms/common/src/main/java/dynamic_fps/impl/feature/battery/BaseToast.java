@@ -1,9 +1,8 @@
 package dynamic_fps.impl.feature.battery;
 
 import dynamic_fps.impl.util.ResourceLocations;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -49,7 +48,7 @@ public class BaseToast implements Toast {
 	}
 
 	@Override
-	public void render(GuiGraphics graphics, Font font, long currentTime) {
+	public void extractRenderState(GuiGraphicsExtractor graphics, Font font, long currentTime) {
 		if (this.firstRender == 0) {
 			this.onFirstRender();
 			this.firstRender = currentTime;
@@ -67,8 +66,8 @@ public class BaseToast implements Toast {
 			graphics.blit(RenderPipelines.GUI_TEXTURED, this.icon, 8, 8, 0.0f, 0, 16, 16, 16, 16);
 		}
 
-		graphics.drawString(Minecraft.getInstance().font, this.title, x, 7, 0xff5f3315, false);
-		graphics.drawString(Minecraft.getInstance().font, this.description, x, 18, -16777216, false);
+		graphics.text(font, this.title, x, 7, 0xff5f3315, false);
+		graphics.text(font, this.description, x, 18,  -16777216,false);
 	}
 
 	public void onFirstRender() {}

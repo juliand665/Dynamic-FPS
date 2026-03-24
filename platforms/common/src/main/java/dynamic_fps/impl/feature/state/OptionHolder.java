@@ -32,7 +32,7 @@ public class OptionHolder {
 	public static void copyOptions(Options options) {
 		biomeBlendRadius = options.biomeBlendRadius().get();
 		cloudRange = options.cloudRange().get();
-		cloudStatus = options.getCloudsType();
+		cloudStatus = options.cloudStatus().get();
 		graphicsStatus = options.graphicsPreset().get();
 		ambientOcclusion = options.ambientOcclusion().get();
 		particlesStatus = options.particles().get();

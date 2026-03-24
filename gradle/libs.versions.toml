@@ -1,16 +1,13 @@
 [versions]
-minecraft = "1.21.11"
+minecraft = "26.1-rc-3"
 
 # Platform libraries
 
-fabric_loader = "0.17.2"
-fabric_api = "0.133.7+1.21.9"
+fabric_loader = "0.18.4"
+fabric_api = "0.143.14+26.1"
 
 forge = "1.21.5-55.0.3"
-
 neoforge = "21.11.0-beta"
-
-quilt_loader = "0.29.1"
 
 # Regular libraries
 
@@ -18,15 +15,11 @@ battery = "2.0.0"
 
 # Modding libraries
 
-modmenu = "11.0.0-beta.1"
+modmenu = "18.0.0-alpha.6"
 cloth_config = "15.0.127"
 
-mixinextras = "0.4.1"
-
-architectury = "3.4.161"
-architectury_loom = "1.13.467"
-
-mod_publish = "0.8.4"
+loom = "1.15.5"
+mod_publish = "1.1.0"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
@@ -34,13 +27,9 @@ minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
 # Platform libraries
 
 fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_loader" }
-# fabric_api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric_api" }
 
 forge = { module = "net.minecraftforge:forge", version.ref = "forge" }
-
 neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
-
-quilt_loader = { module = "org.quiltmc:quilt-loader", version.ref = "quilt_loader" }
 
 # Regular libraries
 
@@ -51,13 +40,6 @@ battery = { module = "net.lostluma:battery", version.ref = "battery" }
 modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
 cloth_config = { module = "me.shedaniel.cloth:cloth-config", version.ref = "cloth_config" }
 
-mixinextras_common = { module = "io.github.llamalad7:mixinextras-common", version.ref = "mixinextras" }
-mixinextras_forge = { module = "io.github.llamalad7:mixinextras-forge", version.ref = "mixinextras" }
-
-architectury_plugin = { module = "architectury-plugin:architectury-plugin.gradle.plugin", version.ref = "architectury" }
-architectury_loom = { module = "dev.architectury.loom:dev.architectury.loom.gradle.plugin", version.ref = "architectury_loom" }
-
 [plugins]
-shadow = { id = "com.github.johnrengelman.shadow", version = "8.1.1" }
-architectury_loom = { id = "dev.architectury.loom", version.ref = "architectury_loom" }
-mod_publish_plugin = { id = "me.modmuss50.mod-publish-plugin", version.ref = "mod_publish" }
+loom = { id = "net.fabricmc.fabric-loom", version.ref = "loom" }
+mod_publish = { id = "me.modmuss50.mod-publish-plugin", version.ref = "mod_publish" }

@@ -13,10 +13,12 @@ import dynamic_fps.impl.config.option.IdleCondition;
 import dynamic_fps.impl.util.Components;
 import dynamic_fps.impl.config.option.IgnoreInitialClick;
 import dynamic_fps.impl.util.VariableStepTransformer;
+/*
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import me.shedaniel.clothconfig2.impl.builders.SubCategoryBuilder;
+ */
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -27,6 +29,7 @@ import java.util.Optional;
 
 public final class ClothConfig {
 	public static Screen genConfigScreen(Screen parent) {
+		/*
 		ConfigBuilder builder = ConfigBuilder.create()
 			.setParentScreen(parent)
 			.setTitle(Components.translatable("config", "title"))
@@ -356,6 +359,8 @@ public final class ClothConfig {
 		);
 
 		return builder.build();
+		 */
+		return null;
 	}
 
 	private static Component idleTimeMessage(int value) {

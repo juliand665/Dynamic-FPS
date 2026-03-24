@@ -1,11 +1,8 @@
 plugins {
-	id("dynamic_fps.module")
-}
-
-val platforms = project.property("enabled_platforms").toString()
-
-architectury {
-	common(platforms.split(","))
+	id("dynamic_fps.base")
+	id("dynamic_fps.java")
+	id("dynamic_fps.common")
+	alias(libs.plugins.loom)
 }
 
 loom {
@@ -13,7 +10,11 @@ loom {
 }
 
 dependencies {
-    modImplementation(libs.cloth.config)
-    // Note: This is only here for the @Environment annotation, do not use!
-	modImplementation(libs.fabric.loader)
+	minecraft(libs.minecraft)
+
+	implementation(libs.battery)
+	// implementation(libs.cloth.config) // TODO
+
+	// Note: This is only here for the @Environment annotation, do not use!
+	implementation(libs.fabric.loader)
 }

@@ -1,19 +1,19 @@
 plugins {
-    id("java")
+	id("java")
 }
 
 java {
-    withSourcesJar()
+	withSourcesJar()
 
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(25)
+	}
 }
 
 tasks.withType<JavaCompile> {
-    options.encoding = "UTF-8"
+	options.encoding = "UTF-8"
 
-    javaCompiler = javaToolchains.compilerFor {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
+	javaCompiler = javaToolchains.compilerFor {
+		languageVersion = JavaLanguageVersion.of(25)
+	}
 }

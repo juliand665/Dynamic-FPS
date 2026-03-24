@@ -69,16 +69,15 @@
     "environment": "client",
     "entrypoints": {
         "client": [
-            "net.lostluma.dynamic_fps.impl.textile.compat.FREX"
+            "net.lostluma.dynamic_fps.impl.fabric.compat.FREX"
         ],
         "modmenu": [
-            "net.lostluma.dynamic_fps.impl.textile.compat.ModMenu"
+            "net.lostluma.dynamic_fps.impl.fabric.compat.ModMenu"
         ]
     },
     "depends": {
-        "fabricloader": ">=0.15.10",
-        "minecraft": ">=1.21.9-beta.1",
-        "mixinextras": ">=0.3.2",
+        "fabricloader": ">=0.18.4",
+        "minecraft": ">=21.6.0-rc.3",
         "fabric-resource-loader-v0": "*",
         "fabric-lifecycle-events-v1": "*"
     },
@@ -91,9 +90,6 @@
         "cloth-config": "*"
     },
     "mixins": [
-        "dynamic_fps.mixins.json",
-        "dynamic_fps-common.mixins.json",
-        "dynamic_fps-textile.mixins.json"
-    ],
-    "accessWidener": "dynamic_fps.accesswidener"
+        "dynamic_fps.fabric.mixins.json"
+    ]
 }

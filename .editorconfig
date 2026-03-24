@@ -13,7 +13,7 @@ trim_trailing_whitespace = true
 [*.yaml]
 indent_size = 2
 
-[*.{gradle,java}]
+[*.{java,kts}]
 indent_style = tab
 
 [*.md]

@@ -1,0 +1,16 @@
+{
+    "schemaVersion": 1,
+    "id": "dynamic_fps_common",
+    "version": "${version}",
+    "name": "Dynamic FPS Common",
+    "environment": "client",
+    "mixins": [
+        "dynamic_fps.common.mixins.json"
+    ],
+    "accessWidener": "dynamic_fps.accesswidener",
+    "custom": {
+        "modmenu": {
+            "parent": "dynamic_fps"
+        }
+    }
+}

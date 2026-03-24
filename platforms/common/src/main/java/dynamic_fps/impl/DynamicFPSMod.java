@@ -18,7 +18,6 @@ import dynamic_fps.impl.util.Logging;
 import dynamic_fps.impl.feature.state.OptionHolder;
 import dynamic_fps.impl.util.ResourceLocations;
 import dynamic_fps.impl.util.Threads;
-import dynamic_fps.impl.util.Version;
 import dynamic_fps.impl.feature.volume.SmoothVolumeHandler;
 import dynamic_fps.impl.util.duck.DuckLoadingOverlay;
 import dynamic_fps.impl.feature.state.WindowObserver;

@@ -1,3 +1,3 @@
 plugins {
-    alias(libs.plugins.architectury.loom).apply(false)
+	alias(libs.plugins.loom).apply(false)
 }
