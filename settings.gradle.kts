@@ -21,4 +21,4 @@ includeBuild("build-logic")
 
 include(":platforms:common")
 include(":platforms:fabric")
-// include(":platforms:neoforge")
+include(":platforms:neoforge")

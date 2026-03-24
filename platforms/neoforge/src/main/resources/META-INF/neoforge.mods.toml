@@ -82,17 +82,11 @@ displayURL = "https://dapprgames.com/mods"
 updateJSONURL = "https://api.lostluma.net/updates/dynamic-fps?platform=neoforge"
 
 [[mixins]]
-config = "dynamic_fps.mixins.json"
-
-[[mixins]]
-config = "dynamic_fps-common.mixins.json"
-
-[[accessTransformers]]
-file="META-INF/accesstransformer.cfg"
+config = "dynamic_fps.neoforge.mixins.json"
 
 [[dependencies.dynamic_fps]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.21.9,)"
+versionRange = "[26.1,)"
 ordering = "NONE"
 side = "CLIENT"

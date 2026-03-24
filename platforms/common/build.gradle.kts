@@ -16,5 +16,5 @@ dependencies {
 	// implementation(libs.cloth.config) // TODO
 
 	// Note: This is only here for the @Environment annotation, do not use!
-	implementation(libs.fabric.loader)
+	compileOnly(libs.fabric.loader)
 }

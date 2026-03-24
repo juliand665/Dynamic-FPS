@@ -1,0 +1,23 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+license = "MIT"
+
+[[mods]]
+modId = "dynamic_fps_common"
+namespace = "net.lostluma"
+version = "${version}"
+displayName = "Dynamic FPS Common"
+displayTest = "IGNORE_ALL_VERSION"
+
+[[mixins]]
+config = "dynamic_fps.common.mixins.json"
+
+[[accessTransformers]]
+file="META-INF/accesstransformer.cfg"
+
+[[dependencies.dynamic_fps_common]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[26.1,)"
+ordering = "NONE"
+side = "CLIENT"
