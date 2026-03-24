@@ -6,7 +6,6 @@ minecraft = "26.1"
 fabric_loader = "0.18.4"
 fabric_api = "0.143.14+26.1"
 
-forge = "1.21.5-55.0.3"
 neoforge = "21.11.0-beta"
 
 # Regular libraries
@@ -28,7 +27,6 @@ minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
 
 fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_loader" }
 
-forge = { module = "net.minecraftforge:forge", version.ref = "forge" }
 neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
 
 # Regular libraries
