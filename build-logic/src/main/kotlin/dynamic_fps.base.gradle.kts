@@ -6,8 +6,8 @@ plugins {
 
 val libs = the<LibrariesForLibs>()
 
-val minecraft = libs.versions.minecraft.get()
 val modVersion = project.property("mod_version").toString()
+val minecraft = project.property("minecraft_version").toString()
 
 group = "net.lostluma"
 base.archivesName = "dynamic-fps"
