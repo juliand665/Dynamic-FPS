@@ -87,6 +87,6 @@ config = "dynamic_fps.neoforge.mixins.json"
 [[dependencies.dynamic_fps]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[26.1,)"
+versionRange = "[26.1.0,)"
 ordering = "NONE"
 side = "CLIENT"
