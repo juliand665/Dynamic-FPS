@@ -7,7 +7,7 @@ repositories {
 			}
 		}
 		filter {
-			includeGroup("me.shedaniel")
+			includeGroup("me.shedaniel.cloth")
 		}
 	}
 	exclusiveContent {

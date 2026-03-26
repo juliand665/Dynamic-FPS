@@ -15,7 +15,7 @@ battery = "2.0.0"
 # Modding libraries
 
 modmenu = "18.0.0-alpha.6"
-cloth_config = "15.0.127"
+cloth_config = "26.1.154"
 
 loom = "1.15.5"
 moddev = "2.0.141"

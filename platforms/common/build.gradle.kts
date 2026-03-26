@@ -13,7 +13,7 @@ dependencies {
 	minecraft(libs.minecraft)
 
 	implementation(libs.battery)
-	// implementation(libs.cloth.config) // TODO
+	implementation(libs.cloth.config) { isTransitive = false }
 
 	// Note: This is only here for the @Environment annotation, do not use!
 	compileOnly(libs.fabric.loader)
