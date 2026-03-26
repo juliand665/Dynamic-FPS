@@ -1,10 +1,1 @@
-- Update Ukrainian Translation ([PR 293](https://github.com/juliand665/Dynamic-FPS/issues/293) by @Energobro)
-- Fix initial window state not being adhered to ([PR 290](https://github.com/juliand665/Dynamic-FPS/pull/290) by @LostLuma)
-  - Reported by @lyuwenhan in [Issue 289](https://github.com/juliand665/Dynamic-FPS/issues/289)
-  - This might not work properly on Windows, but should not have any adverse effects. If it does please open a bug report!
-- Fix crash calculating GPU utilization while not rendering any frames ([PR 295](https://github.com/juliand665/Dynamic-FPS/pull/295) by @LostLuma)
-  - Reported by Plasma-O in [Issue 288](https://github.com/juliand665/Dynamic-FPS/issues/288)
-- Fix options being set below their allowed bounds, generating warnings ([commit 39c9cb9e50](https://github.com/juliand665/Dynamic-FPS/commit/39c9cb9e50893c890fd1590ea9ba35399ebab61c) by @LostLuma)
-
-Note: As Cloth Config is not available for 26.1 it's not possible to configure Dynamic FPS from within Minecraft.
-Once Cloth Config is available a new Dynamic FPS version will be published which will include this functionality as per usual.
+- Enable Cloth Config integration on 26.1.0 ([commit 98d482a027](https://github.com/juliand665/Dynamic-FPS/commit/98d482a0276b2b32e1c92e45f84f1cb3142eba47) by @LostLuma)
