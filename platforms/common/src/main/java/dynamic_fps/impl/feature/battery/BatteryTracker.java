@@ -6,8 +6,8 @@ import dynamic_fps.impl.service.Platform;
 import dynamic_fps.impl.util.Components;
 import dynamic_fps.impl.util.Logging;
 import dynamic_fps.impl.util.Threads;
-import net.lostluma.battery.api.Battery;
 import net.lostluma.battery.api.Manager;
+import net.lostluma.battery.api.MultiBatteryView;
 import net.lostluma.battery.api.State;
 import net.lostluma.battery.api.exception.LibraryLoadError;
 import net.lostluma.battery.api.exception.NetworkError;
@@ -18,8 +18,6 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
-import java.util.Collection;
-import java.util.Collections;
 
 public class BatteryTracker {
 	private static boolean readInitialData = false;
@@ -28,7 +26,7 @@ public class BatteryTracker {
 	private static volatile State status = State.UNKNOWN;
 
 	private static @Nullable Manager manager = null;
-	private static Collection<Battery> batteries = Collections.emptyList();
+	private static @Nullable MultiBatteryView view = null;
 
 	private static boolean threadStarted = false;
 	private static final Duration updateInterval = Duration.of(15, ChronoUnit.SECONDS);
@@ -42,7 +40,7 @@ public class BatteryTracker {
 	}
 
 	public static boolean hasBatteries() {
-		return !batteries.isEmpty();
+		return view != null;
 	}
 
 	public static void init() {
@@ -51,8 +49,8 @@ public class BatteryTracker {
 		if (manager != null) {
 			manager.close();
 
+			view = null;
 			manager = null;
-			batteries = Collections.emptyList();
 		}
 
 		if (!isFeatureEnabled()) {
@@ -62,9 +60,9 @@ public class BatteryTracker {
 		customizeInstallation();
 
 		Manager temp = createManager();
-		batteries = getBatteries(temp);
+		view = getSystemBatteryView(temp);
 
-		if (batteries.isEmpty()) {
+		if (view == null) {
 			if (temp != null) {
 				temp.close();
 			}
@@ -82,37 +80,15 @@ public class BatteryTracker {
 		return DynamicFPSConfig.INSTANCE.batteryTracker().enabled();
 	}
 
-	private static State mergeStates(State a, State b) {
-		if (a == b) {
-			return a;
-		} else if (a == State.CHARGING || b == State.CHARGING) {
-			return State.CHARGING;
-		} else if (a == State.DISCHARGING || b == State.DISCHARGING) {
-			return State.DISCHARGING;
-		} else {
-			return a == State.UNKNOWN ? b : a;
-		}
-	}
-
 	private static void updateState() {
+		if (view == null) {
+			throw new RuntimeException("view is unset");
+		}
+
 		boolean changed = false;
 
-		// Add up percentages from multiple batteries based on capacity
-		// (capacity0 * percent0 + capacity1 * percent1 ...) / (capacity0 + capacity1 ...)
-		float total_joules = 0.0F;
-		float total_percent = 0.0F;
-
-		State newStatus = State.UNKNOWN;
-
-		for (Battery battery : batteries) {
-			float capacity = battery.energyFull().joules();
-			newStatus = mergeStates(newStatus, battery.state());
-
-			total_joules += capacity;
-			total_percent += capacity * battery.stateOfCharge().percent();
-		}
-
-		int newCharge = Math.round(total_percent / total_joules);
+		State newStatus = view.state();
+		int newCharge = Math.round(view.stateOfCharge().percent());
 
 		if (readInitialData && charge != newCharge) {
 			changed = true;
@@ -143,15 +119,15 @@ public class BatteryTracker {
 		boolean active = true;
 
 		while (active) {
-			for (Battery battery : batteries) {
+			if (view != null) {
 				try {
-					battery.update();
+					view.update();
 				} catch (IOException e) {
-					Logging.getLogger().warn("Failed to update battery!", e);
+					Logging.getLogger().warn("Failed to update batteries!", e);
 				}
-			}
 
-			updateState();
+				updateState();
+			}
 
 			try {
 				Thread.sleep(updateInterval);
@@ -202,15 +178,15 @@ public class BatteryTracker {
 		return result;
 	}
 
-	private static Collection<Battery> getBatteries(@Nullable Manager manager) {
-		Collection<Battery> result = Collections.emptyList();
-
+	private static @Nullable MultiBatteryView getSystemBatteryView(@Nullable Manager manager) {
 		if (manager == null) {
-			return result;
+			return null;
 		}
 
+		MultiBatteryView result = null;
+
 		try {
-			result = manager.batteries();
+			result = manager.view().orElse(null);
 		} catch (IOException e) {
 			Logging.getLogger().warn("Failed to query system batteries!", e);
 		}

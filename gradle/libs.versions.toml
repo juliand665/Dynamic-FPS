@@ -10,7 +10,7 @@ neoforge = "26.1.0.1-beta"
 
 # Regular libraries
 
-battery = "2.0.0"
+battery = "2.1.0"
 
 # Modding libraries
 
