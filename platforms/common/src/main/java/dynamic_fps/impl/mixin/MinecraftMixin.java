@@ -3,8 +3,10 @@ package dynamic_fps.impl.mixin;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.mojang.blaze3d.platform.Window;
+import dynamic_fps.impl.Constants;
 import dynamic_fps.impl.DynamicFPSMod;
 import dynamic_fps.impl.feature.state.IdleHandler;
+import net.minecraft.client.FramerateLimiter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import org.spongepowered.asm.mixin.Final;
@@ -42,6 +44,7 @@ public abstract class MinecraftMixin {
 	private void renderFrame(boolean advanceGameTime, Operation<Void> original) {
 		if (!DynamicFPSMod.checkForRender()) {
 			this.pauseIfInactive();
+			FramerateLimiter.limitDisplayFPS(Constants.MIN_FRAME_RATE_LIMIT);
 		} else {
 			original.call(advanceGameTime);
 		}
