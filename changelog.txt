@@ -1,1 +1,3 @@
-- Enable Cloth Config integration on 26.1.0 ([commit 98d482a027](https://github.com/juliand665/Dynamic-FPS/commit/98d482a0276b2b32e1c92e45f84f1cb3142eba47) by @LostLuma)
+- Fix game loop not being properly slowed down in some cases ([commit b0b2d6a1ad](https://github.com/juliand665/Dynamic-FPS/commit/b0b2d6a1ad6f6335bb93c00a99b4195dc5558183) by @LostLuma)
+  - This regression was introduced in the 26.1.0 port, prior Minecraft versions are unaffected
+- Update battery to 2.1.0 ([commit 71036a1ed0](https://github.com/juliand665/Dynamic-FPS/commit/71036a1ed06d56b680a375cf54fc1a8827780008) by @LostLuma)
