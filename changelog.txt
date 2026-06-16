@@ -1,2 +1,1 @@
-- Fix invalid mod metadata on the Forge 1.21.2 - 1.21.4 build
-  - Reported by @Fealtous in [Issue 306](https://github.com/juliand665/Dynamic-FPS/issues/306)
+- Fix background tasks not being shut down, causing the game to crash when quitting
