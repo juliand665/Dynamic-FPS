@@ -17,9 +17,9 @@ battery = "2.1.0"
 modmenu = "18.0.0-alpha.6"
 cloth_config = "26.1.154"
 
-loom = "1.15.5"
+loom = "1.17.11"
 moddev = "2.0.141"
-mod_publish = "1.1.0"
+mod_publish = "2.0.0"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
