@@ -7,6 +7,7 @@ import com.mojang.blaze3d.platform.Window;
 import dynamic_fps.impl.Constants;
 import dynamic_fps.impl.DynamicFPSMod;
 import dynamic_fps.impl.PowerState;
+import dynamic_fps.impl.feature.battery.BatteryTracker;
 import net.minecraft.client.FramerateLimiter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.OptionInstance;
@@ -64,5 +65,10 @@ public abstract class MinecraftMixin {
 		} else {
 			return DynamicFPSMod.enableVsync();
 		}
+	}
+
+	@Inject(method = "close", at = @At("HEAD"))
+	private void close(CallbackInfo callbackInfo) {
+		BatteryTracker.close();
 	}
 }

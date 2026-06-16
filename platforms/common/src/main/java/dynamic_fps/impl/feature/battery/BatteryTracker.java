@@ -28,7 +28,7 @@ public class BatteryTracker {
 	private static @Nullable Manager manager = null;
 	private static @Nullable MultiBatteryView view = null;
 
-	private static boolean threadStarted = false;
+	private static @Nullable Thread updateThread = null;
 	private static final Duration updateInterval = Duration.of(15, ChronoUnit.SECONDS);
 
 	public static int charge() {
@@ -69,10 +69,15 @@ public class BatteryTracker {
 		} else {
 			manager = temp; // Keep around to allow updating batteries
 
-			if (!threadStarted) {
-				threadStarted = true;
-				Threads.create("refresh-battery", BatteryTracker::updateBatteries);
+			if (updateThread == null) {
+				updateThread = Threads.create("refresh-battery", BatteryTracker::updateBatteries);
 			}
+		}
+	}
+
+	public static void close() {
+		if (updateThread != null) {
+			updateThread.interrupt();
 		}
 	}
 
