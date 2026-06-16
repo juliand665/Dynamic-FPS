@@ -1,10 +1,10 @@
 [versions]
-minecraft = "26.1"
+minecraft = "26.2-rc-2"
 
 # Platform libraries
 
-fabric_loader = "0.18.4"
-fabric_api = "0.143.14+26.1"
+fabric_loader = "0.19.3"
+fabric_api = "0.152.1+26.2"
 
 neoforge = "26.1.0.1-beta"
 

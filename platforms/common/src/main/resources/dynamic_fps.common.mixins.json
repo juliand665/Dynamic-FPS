@@ -6,6 +6,7 @@
         "DebugEntryFpsMixin",
         "FramerateLimitTrackerMixin",
         "GuiMixin",
+        "HudMixin",
         "LoadingOverlayMixin",
         "MinecraftMixin",
         "OptionsMixin",

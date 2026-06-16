@@ -16,7 +16,7 @@ public final class HudInfoRenderer {
 	public static void renderInfo(GuiGraphicsExtractor guiGraphics) {
 		Minecraft minecraft = Minecraft.getInstance();
 
-		if (minecraft.options.hideGui || minecraft.screen != null) {
+		if (minecraft.gui.hud.isHidden() || minecraft.gui.screen() != null) {
 			return;
 		}
 

@@ -44,6 +44,6 @@ public class FallbackConfigScreen extends Screen {
 
 	@Override
 	public void onClose() {
-		Minecraft.getInstance().setScreen(this.parent);
+		Minecraft.getInstance().setScreenAndShow(this.parent);
 	}
 }

@@ -40,7 +40,7 @@ public class GLFW {
 
 	private static boolean useWorkaround() {
 		Minecraft minecraft = Minecraft.getInstance();
-		return enterEventBroken && minecraft.screen == null && !minecraft.options.pauseOnLostFocus;
+		return enterEventBroken && minecraft.gui.screen() == null && !minecraft.options.pauseOnLostFocus;
 	}
 
 	private static boolean isEnterEventBroken() {

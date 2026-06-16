@@ -245,7 +245,7 @@ public class DynamicFPSMod {
 
 	private static boolean isLevelCoveredByOverlay() {
 		Minecraft minecraft = Minecraft.getInstance();
-		return OVERLAY_OPTIMIZATION_ACTIVE && minecraft.getOverlay() instanceof LoadingOverlay && !((DuckLoadingOverlay)minecraft.getOverlay()).dynamic_fps$isReloadComplete();
+		return OVERLAY_OPTIMIZATION_ACTIVE && minecraft.gui.overlay() instanceof LoadingOverlay && !((DuckLoadingOverlay)minecraft.gui.overlay()).dynamic_fps$isReloadComplete();
 	}
 
 	@SuppressWarnings("squid:S1215") // Garbage collector call
@@ -280,7 +280,7 @@ public class DynamicFPSMod {
 		boolean enableVsync = current != PowerState.FOCUSED ? config.enableVsync() : minecraft.options.enableVsync().get();
 
 		if (enableVsync != before.enableVsync()) {
-			minecraft.getWindow().updateVsync(enableVsync);
+			minecraft.invalidateSurfaceConfiguration(); // New vsync preference is applied in MinecraftMixin
 		}
 	}
 

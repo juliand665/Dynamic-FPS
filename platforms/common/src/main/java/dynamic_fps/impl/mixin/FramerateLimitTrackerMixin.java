@@ -96,6 +96,6 @@ public class FramerateLimitTrackerMixin {
 
 	@Unique
 	private boolean isInLevel() {
-		return this.minecraft.level != null || this.minecraft.screen == null && this.minecraft.getOverlay() == null;
+		return this.minecraft.level != null || this.minecraft.gui.screen() == null && this.minecraft.gui.overlay() == null;
 	}
 }

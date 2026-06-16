@@ -35,7 +35,7 @@ public class ClickIgnoreHandler {
 			return false;
 		}
 
-		if (config == IgnoreInitialClick.IN_WORLD && minecraft.screen != null) {
+		if (config == IgnoreInitialClick.IN_WORLD && minecraft.gui.screen() != null) {
 			return false;
 		}
 
