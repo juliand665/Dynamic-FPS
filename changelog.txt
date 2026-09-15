@@ -1,1 +1,1 @@
-- Fix background tasks not being shut down, causing the game to crash when quitting
+- Update Spanish translation ([PR 315](https://github.com/juliand665/Dynamic-FPS/pull/315) by @Texaliuz)
