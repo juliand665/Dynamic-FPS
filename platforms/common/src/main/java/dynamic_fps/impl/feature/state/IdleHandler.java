@@ -10,9 +10,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.Util;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.Nullable;
-import org.lwjgl.glfw.GLFW;
-import org.lwjgl.glfw.GLFWCursorPosCallback;
 
 public class IdleHandler {
 	private static boolean active = false;
@@ -22,8 +19,6 @@ public class IdleHandler {
 
 	private static Vec3 prevPosition = Vec3.ZERO;
 	private static Vec3 prevLookAngle = Vec3.ZERO;
-
-	private static @Nullable GLFWCursorPosCallback previousCursorPosCallback;
 
 	public static void init() {
 		if (active) {
@@ -41,18 +36,7 @@ public class IdleHandler {
 		}
 
 		active = true;
-
-		if (DynamicFPSMod.getWindow() != null) {
-			setWindow(DynamicFPSMod.getWindow().address());
-		}
-
 		Platform.getInstance().registerStartTickEvent(IdleHandler::checkActivity);
-	}
-
-	public static void setWindow(long address) {
-		if (active) {
-			previousCursorPosCallback = GLFW.glfwSetCursorPosCallback(address, IdleHandler::onMove);
-		}
 	}
 
 	public static void onActivity() {
@@ -104,6 +88,8 @@ public class IdleHandler {
 
 	// Mouse events
 
+	/*
+	Moved to WindowObserver in 26.3
 	private static void onMove(long address, double x, double y) {
 		onActivity();
 
@@ -111,4 +97,5 @@ public class IdleHandler {
 			previousCursorPosCallback.invoke(address, x, y);
 		}
 	}
+	 */
 }

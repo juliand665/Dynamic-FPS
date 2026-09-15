@@ -44,10 +44,14 @@ public class GLFW {
 	}
 
 	private static boolean isEnterEventBroken() {
+		/*
 		Version active = getGLFWVersion();
 		return active.compareTo(Version.of(3, 3, 0)) < 0; // Versions before 3.3.0 are broken
+		 */
+		return false;
 	}
 
+	/*
 	private static Version getGLFWVersion() {
 		int[] major = new int[1];
 		int[] minor = new int[1];
@@ -56,4 +60,5 @@ public class GLFW {
 		org.lwjgl.glfw.GLFW.glfwGetVersion(major, minor, patch);
 		return Version.of(major[0], minor[0], patch[0]);
 	}
+	 */
 }

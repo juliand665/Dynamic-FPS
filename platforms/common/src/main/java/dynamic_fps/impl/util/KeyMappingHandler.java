@@ -27,7 +27,7 @@ public final class KeyMappingHandler {
 	private KeyMappingHandler(String translationKey, KeyMapping.Category category, PressHandler pressHandler) {
 		this.keyMapping = new KeyMapping(
 			translationKey,
-			InputConstants.Type.KEYSYM,
+			InputConstants.Type.KEYBOARD,
 			InputConstants.UNKNOWN.getValue(),
 			category
 		);

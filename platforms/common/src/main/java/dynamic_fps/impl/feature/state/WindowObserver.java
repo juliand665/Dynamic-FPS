@@ -1,90 +1,73 @@
 package dynamic_fps.impl.feature.state;
 
-import org.lwjgl.glfw.GLFW;
-import org.lwjgl.glfw.GLFWCursorEnterCallback;
-import org.lwjgl.glfw.GLFWWindowFocusCallback;
-import org.lwjgl.glfw.GLFWWindowIconifyCallback;
-
 import dynamic_fps.impl.DynamicFPSMod;
 
-import java.time.Instant;
+import org.lwjgl.sdl.SDLEvents;
+import org.lwjgl.sdl.SDLVideo;
+import org.lwjgl.sdl.SDL_Event;
 
 public class WindowObserver {
-	private final long address;
-
 	private boolean isFocused;
-	private final GLFWWindowFocusCallback previousFocusCallback;
-
 	private boolean isHovered;
-	private final GLFWCursorEnterCallback previousMouseCallback;
-
 	private boolean isIconified;
-	private final GLFWWindowIconifyCallback previousIconifyCallback;
 
 	public WindowObserver(long address) {
-		this.address = address;
+		long flags = SDLVideo.SDL_GetWindowFlags(address);
 
-		this.isFocused = GLFW.glfwGetWindowAttrib(this.address, GLFW.GLFW_FOCUSED) != 0;
-		this.previousFocusCallback = GLFW.glfwSetWindowFocusCallback(this.address, this::onFocusChanged);
-
-		this.isHovered = GLFW.glfwGetWindowAttrib(this.address, GLFW.GLFW_HOVERED) != 0;
-		this.previousMouseCallback = GLFW.glfwSetCursorEnterCallback(this.address, this::onMouseChanged);
-
-		// Vanilla doesn't use this (currently), other mods might register this callback though ...
-		this.isIconified = GLFW.glfwGetWindowAttrib(this.address, GLFW.GLFW_ICONIFIED) != 0;
-		this.previousIconifyCallback = GLFW.glfwSetWindowIconifyCallback(this.address, this::onIconifyChanged);
-	}
-
-	private boolean isCurrentWindow(long address) {
-		return address == this.address;
-	}
-
-	public long address() {
-		return this.address;
+		this.isFocused = (flags & SDLVideo.SDL_WINDOW_INPUT_FOCUS) != 0;
+		this.isHovered = (flags & SDLVideo.SDL_WINDOW_MOUSE_FOCUS) != 0;
+		this.isIconified = (flags & SDLVideo.SDL_WINDOW_MINIMIZED) != 0 || (flags & SDLVideo.SDL_WINDOW_OCCLUDED) != 0;
 	}
 
 	public boolean isFocused() {
 		return this.isFocused;
 	}
 
-	private void onFocusChanged(long address, boolean focused) {
-		if (this.isCurrentWindow(address)) {
-			this.isFocused = focused;
-			DynamicFPSMod.onStatusChanged(true);
-		}
-
-		if (this.previousFocusCallback != null) {
-			this.previousFocusCallback.invoke(address, focused);
-		}
-	}
-
 	public boolean isHovered() {
 		return this.isHovered;
-	}
-
-	private void onMouseChanged(long address, boolean hovered) {
-		if (this.isCurrentWindow(address)) {
-			this.isHovered = hovered;
-			DynamicFPSMod.onStatusChanged(true);
-		}
-
-		if (this.previousMouseCallback != null) {
-			this.previousMouseCallback.invoke(address, hovered);
-		}
 	}
 
 	public boolean isIconified() {
 		return this.isIconified;
 	}
 
-	private void onIconifyChanged(long address, boolean iconified) {
-		if (this.isCurrentWindow(address)) {
-			this.isIconified = iconified;
-			DynamicFPSMod.onStatusChanged(true);
-		}
+	public void onEvent(final SDL_Event event) {
+		switch (event.type()) {
+			case SDLEvents.SDL_EVENT_WINDOW_FOCUS_GAINED -> {
+				this.isFocused = true;
+				DynamicFPSMod.onStatusChanged(true);
 
-		if (this.previousIconifyCallback != null) {
-			this.previousIconifyCallback.invoke(address, iconified);
+				ClickIgnoreHandler handler = DynamicFPSMod.getClickHandler();
+
+				if (handler != null) {
+					handler.onFocused();
+				}
+			}
+			case SDLEvents.SDL_EVENT_WINDOW_FOCUS_LOST -> {
+				this.isFocused = false;
+				DynamicFPSMod.onStatusChanged(true);
+			}
+			case SDLEvents.SDL_EVENT_WINDOW_MOUSE_ENTER -> {
+				this.isHovered = true;
+				DynamicFPSMod.onStatusChanged(true);
+			}
+			case SDLEvents.SDL_EVENT_WINDOW_MOUSE_LEAVE -> {
+				this.isHovered = false;
+				DynamicFPSMod.onStatusChanged(true);
+			}
+			case SDLEvents.SDL_EVENT_WINDOW_OCCLUDED, SDLEvents.SDL_EVENT_WINDOW_MINIMIZED, SDLEvents.SDL_EVENT_WINDOW_HIDDEN -> {
+				this.isIconified = true;
+				DynamicFPSMod.onStatusChanged(true);
+			}
+			case SDLEvents.SDL_EVENT_WINDOW_EXPOSED, SDLEvents.SDL_EVENT_WINDOW_RESTORED, SDLEvents.SDL_EVENT_WINDOW_SHOWN -> {
+				this.isIconified = false;
+				DynamicFPSMod.onStatusChanged(true);
+			}
+			case SDLEvents.SDL_EVENT_MOUSE_BUTTON_DOWN, SDLEvents.SDL_EVENT_MOUSE_MOTION, SDLEvents.SDL_EVENT_MOUSE_WHEEL,
+				 SDLEvents.SDL_EVENT_JOYSTICK_AXIS_MOTION, SDLEvents.SDL_EVENT_JOYSTICK_BALL_MOTION, SDLEvents.SDL_EVENT_JOYSTICK_BUTTON_DOWN,
+				 SDLEvents.SDL_EVENT_GAMEPAD_AXIS_MOTION, SDLEvents.SDL_EVENT_GAMEPAD_BUTTON_DOWN, SDLEvents.SDL_EVENT_GAMEPAD_TOUCHPAD_DOWN, SDLEvents.SDL_EVENT_GAMEPAD_TOUCHPAD_MOTION -> {
+				IdleHandler.onActivity();
+			}
 		}
 	}
 }
