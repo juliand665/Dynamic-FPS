@@ -4,9 +4,9 @@ minecraft = "26.3"
 # Platform libraries
 
 fabric_loader = "0.19.5"
-fabric_api = "0.160.4+26.3"
+fabric_api = "0.161.0+26.3"
 
-neoforge = "26.3.0.1-beta"
+neoforge = "26.3.0.31-beta"
 
 # Regular libraries
 
@@ -14,12 +14,12 @@ battery = "2.1.0"
 
 # Modding libraries
 
-modmenu = "18.0.0-alpha.6"
-cloth_config = "26.1.154"
+modmenu = "20.0.3"
+cloth_config = "26.3.159"
 
-loom = "1.17.11"
+loom = "1.18.2"
 moddev = "2.0.147"
-mod_publish = "2.0.0"
+mod_publish = "2.2.1"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
