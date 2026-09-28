@@ -8,13 +8,6 @@ plugins {
 	alias(libs.plugins.mod.publish)
 }
 
-repositories {
-	maven {
-		name = "Terraformers"
-		url = uri("https://maven.terraformersmc.com/")
-	}
-}
-
 dependencies {
 	minecraft(libs.minecraft)
 	implementation(libs.fabric.loader)
